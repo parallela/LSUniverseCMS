@@ -1,6 +1,7 @@
 import React from "react";
 
-const Navbar = () => {
+
+const Navbar = props => {
     return (
         <>
             <div className="site-mobile-menu">
@@ -34,7 +35,7 @@ const Navbar = () => {
                                                 </div>
                                                 <div className="d-none d-lg-block">
                                                     <span
-                                                        className="d-block text-gray-500 text-uppercase">24/7 Support</span>
+                                                        className="d-block text-gray-500 text-uppercase">{props.t('home.247-support')}</span>
                                                     <span className="h6">1-800-200-3911</span>
                                                 </div>
                                             </div>
@@ -49,7 +50,7 @@ const Navbar = () => {
                                                     <span className="fl-bigmug-line-email64 h5"></span>
                                                 </div>
                                                 <div className="d-none d-lg-block">
-                                                    <span className="d-block text-gray-500 text-uppercase">Email</span>
+                                                    <span className="d-block text-gray-500 text-uppercase">{props.t('home.email')}</span>
                                                     <span className="h6">mail@domain.com</span>
                                                 </div>
                                             </div>
@@ -64,8 +65,8 @@ const Navbar = () => {
                                                 </div>
                                                 <div className="d-none d-lg-block">
                                                     <span
-                                                        className="d-block text-gray-500 text-uppercase">Live Chat</span>
-                                                    <span className="h6">Chat With Us Now</span>
+                                                        className="d-block text-gray-500 text-uppercase">{props.t('home.live')}</span>
+                                                    <span className="h6">{props.t('home.live-chat-text')}</span>
                                                 </div>
                                             </div>
                                         </a>
@@ -92,39 +93,37 @@ const Navbar = () => {
 
                                     <ul className="site-menu js-clone-nav d-none d-lg-block">
                                         <li className="active">
-                                            <a href="index.html">Home</a>
+                                            <a href="">{props.t('home.nav-home')}</a>
                                         </li>
                                         <li><a href="domain.html">Domain</a></li>
-                                        <li className="has-children">
-                                            <a href="hosting.html">Hosting</a>
-                                            <ul className="dropdown arrow-top">
-                                                <li><a href="#">Shared Hosting</a></li>
-                                                <li><a href="#">Dedicated Hosting</a></li>
-                                                <li><a href="#">Premium Hosting</a></li>
-                                                <li><a href="#">Cloud Hosting</a></li>
-                                                <li className="has-children">
-                                                    <a href="#">Sub Menu</a>
-                                                    <ul className="dropdown">
-                                                        <li><a href="#">Menu One</a></li>
-                                                        <li><a href="#">Menu Two</a></li>
-                                                        <li><a href="#">Menu Three</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        {/*<li className="has-children">*/}
+                                        {/*    <a href="hosting.html">Hosting</a>*/}
+                                        {/*    <ul className="dropdown arrow-top">*/}
+                                        {/*        <li><a href="#">Shared Hosting</a></li>*/}
+                                        {/*        <li><a href="#">Dedicated Hosting</a></li>*/}
+                                        {/*        <li><a href="#">Premium Hosting</a></li>*/}
+                                        {/*        <li><a href="#">Cloud Hosting</a></li>*/}
+                                        {/*        <li className="has-children">*/}
+                                        {/*            <a href="#">Sub Menu</a>*/}
+                                        {/*            <ul className="dropdown">*/}
+                                        {/*                <li><a href="#">Menu One</a></li>*/}
+                                        {/*                <li><a href="#">Menu Two</a></li>*/}
+                                        {/*                <li><a href="#">Menu Three</a></li>*/}
+                                        {/*            </ul>*/}
+                                        {/*        </li>*/}
+                                        {/*    </ul>*/}
+                                        {/*</li>*/}
+                                        {/*<li><a href="blog.html">Blog</a></li>*/}
+                                        {/*<li><a href="contact.html">Contact</a></li>*/}
                                     </ul>
                                 </nav>
                             </div>
                             <div className="col-8 col-md-8 col-lg-4 text-right">
+                                <a href="#"
+                                   className="btn btn-primary btn-outline-primary rounded-0 text-white py-2 px-4">{props.t('home.register')}</a>
                                 <a href="register.html"
-                                   className="btn btn-primary btn-outline-primary rounded-0 text-white py-2 px-4">Register</a>
-                                <a href="register.html"
-                                   className="btn btn-primary btn-primary rounded-0 py-2 px-4">Login</a>
+                                   className="btn btn-primary btn-primary rounded-0 py-2 px-4">{props.t('home.login')}</a>
                             </div>
-
-
                         </div>
                     </div>
                 </div>

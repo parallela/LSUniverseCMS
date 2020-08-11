@@ -16,12 +16,6 @@ const SiteSection = props => (
 
                             <div className="d-flex align-items-center mb-3 unit-3-heading">
                                 <div className="unit-3-icon-wrap mr-4">
-                                    <svg className="unit-3-svg" xmlns="http://www.w3.org/2000/svg" width="59px"
-                                         height="68px">
-                                        <path fill-rule="evenodd" stroke-width="2px" stroke-linecap="butt"
-                                              stroke-linejoin="miter" fill="none"
-                                              d="M29.000,66.000 L1.012,49.750 L1.012,17.250 L29.000,1.000 L56.988,17.250 L56.988,49.750 L29.000,66.000 Z"></path>
-                                    </svg>
                                     <span className="unit-3-icon icon fl-bigmug-line-equalization3"></span>
                                 </div>
                                 <h2 className="h5">High Quality Hardware</h2>
@@ -39,12 +33,6 @@ const SiteSection = props => (
 
                             <div className="d-flex align-items-center mb-3 unit-3-heading">
                                 <div className="unit-3-icon-wrap mr-4">
-                                    <svg className="unit-3-svg" xmlns="http://www.w3.org/2000/svg" width="59px"
-                                         height="68px">
-                                        <path fill-rule="evenodd" stroke-width="2px" stroke-linecap="butt"
-                                              stroke-linejoin="miter" fill="none"
-                                              d="M29.000,66.000 L1.012,49.750 L1.012,17.250 L29.000,1.000 L56.988,17.250 L56.988,49.750 L29.000,66.000 Z"></path>
-                                    </svg>
                                     <span className="unit-3-icon icon fl-bigmug-line-cube29"></span>
                                 </div>
                                 <h2 className="h5">Top Data Centers</h2>
@@ -62,12 +50,6 @@ const SiteSection = props => (
 
                             <div className="d-flex align-items-center mb-3 unit-3-heading">
                                 <div className="unit-3-icon-wrap mr-4">
-                                    <svg className="unit-3-svg" xmlns="http://www.w3.org/2000/svg" width="59px"
-                                         height="68px">
-                                        <path fill-rule="evenodd" stroke-width="2px" stroke-linecap="butt"
-                                              stroke-linejoin="miter" fill="none"
-                                              d="M29.000,66.000 L1.012,49.750 L1.012,17.250 L29.000,1.000 L56.988,17.250 L56.988,49.750 L29.000,66.000 Z"></path>
-                                    </svg>
                                     <span className="unit-3-icon icon fl-bigmug-line-airplane86"></span>
                                 </div>
                                 <h2 className="h5">Outstanding Speed</h2>
@@ -86,12 +68,6 @@ const SiteSection = props => (
 
                             <div className="d-flex align-items-center mb-3 unit-3-heading">
                                 <div className="unit-3-icon-wrap mr-4">
-                                    <svg className="unit-3-svg" xmlns="http://www.w3.org/2000/svg" width="59px"
-                                         height="68px">
-                                        <path fill-rule="evenodd" stroke-width="2px" stroke-linecap="butt"
-                                              stroke-linejoin="miter" fill="none"
-                                              d="M29.000,66.000 L1.012,49.750 L1.012,17.250 L29.000,1.000 L56.988,17.250 L56.988,49.750 L29.000,66.000 Z"></path>
-                                    </svg>
                                     <span className="unit-3-icon icon fl-bigmug-line-hot67"></span>
                                 </div>
                                 <h2 className="h5">Amazing Uptime</h2>
@@ -109,12 +85,6 @@ const SiteSection = props => (
 
                             <div className="d-flex align-items-center mb-3 unit-3-heading">
                                 <div className="unit-3-icon-wrap mr-4">
-                                    <svg className="unit-3-svg" xmlns="http://www.w3.org/2000/svg" width="59px"
-                                         height="68px">
-                                        <path fill-rule="evenodd" stroke-width="2px" stroke-linecap="butt"
-                                              stroke-linejoin="miter" fill="none"
-                                              d="M29.000,66.000 L1.012,49.750 L1.012,17.250 L29.000,1.000 L56.988,17.250 L56.988,49.750 L29.000,66.000 Z"></path>
-                                    </svg>
                                     <span className="unit-3-icon icon fl-bigmug-line-headphones32"></span>
                                 </div>
                                 <h2 className="h5">Best Support</h2>
@@ -132,12 +102,6 @@ const SiteSection = props => (
 
                             <div className="d-flex align-items-center mb-3 unit-3-heading">
                                 <div className="unit-3-icon-wrap mr-4">
-                                    <svg className="unit-3-svg" xmlns="http://www.w3.org/2000/svg" width="59px"
-                                         height="68px">
-                                        <path fill-rule="evenodd" stroke-width="2px" stroke-linecap="butt"
-                                              stroke-linejoin="miter" fill="none"
-                                              d="M29.000,66.000 L1.012,49.750 L1.012,17.250 L29.000,1.000 L56.988,17.250 L56.988,49.750 L29.000,66.000 Z"></path>
-                                    </svg>
                                     <span className="unit-3-icon icon fl-bigmug-line-user143"></span>
                                 </div>
                                 <h2 className="h5">Client Reviews</h2>
