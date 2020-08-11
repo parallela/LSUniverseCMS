@@ -12,6 +12,12 @@
         "live-chat-text": "Chat With Us Now",
         "template-made": "This template is made with",
         "by": "by",
-        "live": "Live chat"
+        "live": "Live chat",
+        "auth": "Register / Login",
+        "forget-password": "Forget password",
+        "remember-me": "Remember me",
+        "full-name": "Full name",
+        "password": "Password",
+        "re-password": "Re-type Password" 
     }
 }

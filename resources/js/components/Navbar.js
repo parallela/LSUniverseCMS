@@ -1,5 +1,6 @@
 import React from "react";
-
+import { getLanguage } from "react-multi-lang";
+import { Link } from "react-router-dom";
 
 const Navbar = props => {
     return (
@@ -17,16 +18,17 @@ const Navbar = props => {
                 <div className="site-navbar-top">
                     <div className="container py-2">
                         <div className="row align-items-center">
-
                             <div className="col-6 col-md-6 col-lg-2">
-                                <a href="index.html" className="d-flex align-items-center site-logo">
-                                    <img src={'images/logo.png'}/>
+                                <a
+                                    href="index.html"
+                                    className="d-flex align-items-center site-logo"
+                                >
+                                    <img src={"images/logo.png"} />
                                 </a>
                             </div>
 
                             <div className="col-6 col-md-6 col-lg-10">
                                 <ul className="unit-4 ml-auto text-right">
-
                                     <li className="text-left">
                                         <a href="#">
                                             <div className="d-flex align-items-center block-unit">
@@ -34,14 +36,18 @@ const Navbar = props => {
                                                     <span className="fl-bigmug-line-headphones32 h3"></span>
                                                 </div>
                                                 <div className="d-none d-lg-block">
-                                                    <span
-                                                        className="d-block text-gray-500 text-uppercase">{props.t('home.247-support')}</span>
-                                                    <span className="h6">1-800-200-3911</span>
+                                                    <span className="d-block text-gray-500 text-uppercase">
+                                                        {props.t(
+                                                            "home.247-support"
+                                                        )}
+                                                    </span>
+                                                    <span className="h6">
+                                                        1-800-200-3911
+                                                    </span>
                                                 </div>
                                             </div>
                                         </a>
                                     </li>
-
 
                                     <li className="text-left">
                                         <a href="#">
@@ -50,8 +56,12 @@ const Navbar = props => {
                                                     <span className="fl-bigmug-line-email64 h5"></span>
                                                 </div>
                                                 <div className="d-none d-lg-block">
-                                                    <span className="d-block text-gray-500 text-uppercase">{props.t('home.email')}</span>
-                                                    <span className="h6">mail@domain.com</span>
+                                                    <span className="d-block text-gray-500 text-uppercase">
+                                                        {props.t("home.email")}
+                                                    </span>
+                                                    <span className="h6">
+                                                        mail@domain.com
+                                                    </span>
                                                 </div>
                                             </div>
                                         </a>
@@ -64,38 +74,49 @@ const Navbar = props => {
                                                     <span className="fl-bigmug-line-chat55 h2"></span>
                                                 </div>
                                                 <div className="d-none d-lg-block">
-                                                    <span
-                                                        className="d-block text-gray-500 text-uppercase">{props.t('home.live')}</span>
-                                                    <span className="h6">{props.t('home.live-chat-text')}</span>
+                                                    <span className="d-block text-gray-500 text-uppercase">
+                                                        {props.t("home.live")}
+                                                    </span>
+                                                    <span className="h6">
+                                                        {props.t(
+                                                            "home.live-chat-text"
+                                                        )}
+                                                    </span>
                                                 </div>
                                             </div>
                                         </a>
                                     </li>
-
-
                                 </ul>
                             </div>
-
-
                         </div>
-
                     </div>
                 </div>
                 <div className="site-navbar bg-dark">
                     <div className="container py-1">
                         <div className="row align-items-center">
-
                             <div className="col-4 col-md-4 col-lg-8">
-                                <nav className="site-navigation text-left" role="navigation">
-                                    <div className="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#"
-                                                                                                      className="site-menu-toggle js-menu-toggle text-white"><span
-                                        className="icon-menu h3"></span></a></div>
+                                <nav
+                                    className="site-navigation text-left"
+                                    role="navigation"
+                                >
+                                    <div className="d-inline-block d-lg-none ml-md-0 mr-auto py-3">
+                                        <a
+                                            href="#"
+                                            className="site-menu-toggle js-menu-toggle text-white"
+                                        >
+                                            <span className="icon-menu h3"></span>
+                                        </a>
+                                    </div>
 
                                     <ul className="site-menu js-clone-nav d-none d-lg-block">
                                         <li className="active">
-                                            <a href="">{props.t('home.nav-home')}</a>
+                                            <Link to={'/'}>
+                                                {props.t("home.nav-home")}
+                                            </Link>
                                         </li>
-                                        <li><a href="domain.html">Domain</a></li>
+                                        <li>
+                                            <a href="domain.html">Domain</a>
+                                        </li>
                                         {/*<li className="has-children">*/}
                                         {/*    <a href="hosting.html">Hosting</a>*/}
                                         {/*    <ul className="dropdown arrow-top">*/}
@@ -119,10 +140,12 @@ const Navbar = props => {
                                 </nav>
                             </div>
                             <div className="col-8 col-md-8 col-lg-4 text-right">
-                                <a href="#"
-                                   className="btn btn-primary btn-outline-primary rounded-0 text-white py-2 px-4">{props.t('home.register')}</a>
-                                <a href="register.html"
-                                   className="btn btn-primary btn-primary rounded-0 py-2 px-4">{props.t('home.login')}</a>
+                                <Link
+                                    to={"/auth"}
+                                    className="btn btn-primary btn-outline-primary rounded-0 text-white py-2 px-4"
+                                >
+                                    {props.t("home.register")}
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -130,5 +153,5 @@ const Navbar = props => {
             </div>
         </>
     );
-}
+};
 export default Navbar;

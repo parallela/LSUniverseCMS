@@ -16,7 +16,7 @@ const Layout = ({children}) => {
         setTranslations({en,bg});
 
 
-        const fetchData = async () => {
+        const fetchData = () => {
             try {
                 if(localStorage.getItem('lang') === null) {
                     localStorage.setItem('lang','en');
