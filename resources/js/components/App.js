@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import en from "../lang/en.json";
 import bg from "../lang/bg.json";
 import { setDefaultLanguage, setTranslations } from "react-multi-lang";
+import AuthRoute from "./AuthRoute";
 
 const App = () => {
     useEffect(() => {
@@ -28,7 +29,7 @@ const App = () => {
     return (
         <main>
             <Router>
-                <Route path={"/"} exact component={Home} />
+                <AuthRoute path={"/"} exact component={Home} />
                 <Route path={"/auth"} component={Auth} />
             </Router>
         </main>

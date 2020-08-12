@@ -2,10 +2,13 @@ import React from "react";
 import { getLanguage } from "react-multi-lang";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-multi-lang";
+import { Authenticator, UserData } from "../services/Authenticator";
 
 const Navbar = props => {
     const t = useTranslation();
     const location = useLocation();
+    const auth = Authenticator();
+    const user = UserData();
 
     const isActive = path => {
         if (path == location.pathname) {
@@ -150,12 +153,20 @@ const Navbar = props => {
                                 </nav>
                             </div>
                             <div className="col-8 col-md-8 col-lg-4 text-right">
-                                <Link
-                                    to={"/auth"}
-                                    className="btn btn-primary btn-outline-primary rounded-0 text-white py-2 px-4"
-                                >
-                                    {t("home.register")}
-                                </Link>
+                                {auth && (
+                                   <button  
+                                        className="btn btn-primary btn-outline-primary rounded-0 text-white py-2 px-4">
+                                            {user.name}
+                                        </button>
+                                )}
+                                {!auth && (
+                                    <Link
+                                        to={"/auth"}
+                                        className="btn btn-primary btn-outline-primary rounded-0 text-white py-2 px-4"
+                                    >
+                                        {t("home.register")}
+                                    </Link>
+                                )}
                             </div>
                         </div>
                     </div>

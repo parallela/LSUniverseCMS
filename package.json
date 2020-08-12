@@ -25,6 +25,7 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+        "jsonwebtoken": "^8.5.1",
         "moment": "^2.27.0",
         "prop-types": "^15.7.2",
         "react-multi-lang": "^2.1.1",
