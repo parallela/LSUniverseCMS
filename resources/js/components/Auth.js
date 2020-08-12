@@ -1,9 +1,9 @@
 import React from "react";
 import Layout from "./Layout";
-
+import { useTranslation } from "react-multi-lang";
 
 const Auth = props => {
-    const t = useTranslation();
+   const t = useTranslation();
 
     return (
         <Layout>
@@ -30,7 +30,7 @@ const Auth = props => {
                                                 className="font-weight-bold"
                                                 htmlFor="fullname"
                                             >
-                                                {t('home.full-name')}
+                                                {t("home.full-name")}
                                             </label>
                                             <input
                                                 type="text"
@@ -45,7 +45,7 @@ const Auth = props => {
                                                 className="font-weight-bold"
                                                 htmlFor="email"
                                             >
-                                                {t('home.email')}
+                                                {t("home.email")}
                                             </label>
                                             <input
                                                 type="email"
@@ -60,7 +60,7 @@ const Auth = props => {
                                                 className="font-weight-bold"
                                                 htmlFor="password"
                                             >
-                                                {t('home.password')}
+                                                {t("home.password")}
                                             </label>
                                             <input
                                                 type="password"
@@ -75,7 +75,7 @@ const Auth = props => {
                                                 className="font-weight-bold"
                                                 htmlFor="password2"
                                             >
-                                                {t('home.re-password')}
+                                                {t("home.re-password")}
                                             </label>
                                             <input
                                                 type="password"
@@ -89,7 +89,7 @@ const Auth = props => {
                                         <div className="col-md-12">
                                             <input
                                                 type="submit"
-                                                value={t('home.register')}
+                                                value={t("home.register")}
                                                 className="btn btn-primary  py-2 px-4 rounded-0"
                                             />
                                         </div>
@@ -109,7 +109,7 @@ const Auth = props => {
                                                 className="font-weight-bold"
                                                 htmlFor="email2"
                                             >
-                                                {t('home.email')}
+                                                {t("home.email")}
                                             </label>
                                             <input
                                                 type="email"
@@ -124,7 +124,7 @@ const Auth = props => {
                                                 className="font-weight-bold"
                                                 htmlFor="password"
                                             >
-                                               {t('home.password')} 
+                                                {t("home.password")}
                                             </label>
                                             <input
                                                 type="password"
@@ -162,7 +162,7 @@ const Auth = props => {
                                         <div className="col-md-12">
                                             <input
                                                 type="submit"
-                                                value={t('home.login')}
+                                                value={t("home.login")}
                                                 className="btn btn-primary  py-2 px-4 rounded-0"
                                             />
                                         </div>

@@ -1,8 +1,19 @@
 import React from "react";
 import { getLanguage } from "react-multi-lang";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useTranslation } from "react-multi-lang";
 
 const Navbar = props => {
+    const t = useTranslation();
+    const location = useLocation();
+
+    const isActive = path => {
+        if (path == location.pathname) {
+            return true;
+        }
+        return false;
+    };
+
     return (
         <>
             <div className="site-mobile-menu">
@@ -37,9 +48,7 @@ const Navbar = props => {
                                                 </div>
                                                 <div className="d-none d-lg-block">
                                                     <span className="d-block text-gray-500 text-uppercase">
-                                                        {props.t(
-                                                            "home.247-support"
-                                                        )}
+                                                        {t("home.247-support")}
                                                     </span>
                                                     <span className="h6">
                                                         1-800-200-3911
@@ -57,7 +66,7 @@ const Navbar = props => {
                                                 </div>
                                                 <div className="d-none d-lg-block">
                                                     <span className="d-block text-gray-500 text-uppercase">
-                                                        {props.t("home.email")}
+                                                        {t("home.email")}
                                                     </span>
                                                     <span className="h6">
                                                         mail@domain.com
@@ -75,10 +84,10 @@ const Navbar = props => {
                                                 </div>
                                                 <div className="d-none d-lg-block">
                                                     <span className="d-block text-gray-500 text-uppercase">
-                                                        {props.t("home.live")}
+                                                        {t("home.live")}
                                                     </span>
                                                     <span className="h6">
-                                                        {props.t(
+                                                        {t(
                                                             "home.live-chat-text"
                                                         )}
                                                     </span>
@@ -109,13 +118,14 @@ const Navbar = props => {
                                     </div>
 
                                     <ul className="site-menu js-clone-nav d-none d-lg-block">
-                                        <li className="active">
-                                            <Link to={'/'}>
-                                                {props.t("home.nav-home")}
+                                        <li
+                                            className={
+                                                isActive("/") ? "active" : ""
+                                            }
+                                        >
+                                            <Link to={"/"}>
+                                                {t("home.nav-home")}
                                             </Link>
-                                        </li>
-                                        <li>
-                                            <a href="domain.html">Domain</a>
                                         </li>
                                         {/*<li className="has-children">*/}
                                         {/*    <a href="hosting.html">Hosting</a>*/}
@@ -144,7 +154,7 @@ const Navbar = props => {
                                     to={"/auth"}
                                     className="btn btn-primary btn-outline-primary rounded-0 text-white py-2 px-4"
                                 >
-                                    {props.t("home.register")}
+                                    {t("home.register")}
                                 </Link>
                             </div>
                         </div>
