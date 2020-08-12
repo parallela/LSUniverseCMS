@@ -17,7 +17,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $fillable = [
         'name', 'email', 'password',
-        'verified', 'balance', 'isAdmin'
+        'verified', 'balance', 'isAdmin',
     ];
 
     /**
@@ -26,9 +26,9 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'verified'
+        'password', 'verified',
     ];
-    
+
     /**
      * getJWTCustomClaims
      *
@@ -38,7 +38,7 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-    
+
     /**
      * getJWTIdentifier
      *
@@ -47,5 +47,15 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTIdentifier()
     {
         return $this->key;
+    }
+    
+    /**
+     * RelationShip between user, and user activation token
+     *
+     * @return void
+     */
+    public function verifyToken()
+    {
+        return $this->hasOne(UserVerification::class);
     }
 }

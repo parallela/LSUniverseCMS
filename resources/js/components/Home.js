@@ -10,9 +10,9 @@ const Home = props => {
 
     return (
         <Layout>
-            <MainImage t={t} />
-            <Section t={t} />
-            <SiteSection t={t} />
+            <MainImage />
+            <Section />
+            <SiteSection />
         </Layout>
     );
 };

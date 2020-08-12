@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use App\UserVerification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -29,31 +30,36 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'name' => ['required'],
-            'email' => ['email','required','unique:users'],
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'min:4'],
+            'email' => ['email', 'required', 'unique:users'],
             'password' => ['required', 'regex:/^(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/'],
-            're_password' => ['required','same:password'],
+            're_password' => ['required', 'same:password'],
         ]);
 
-        if($validator->fails()) {
-           return response()->json(['error'=>$validator], 400); 
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first()], 400);
         }
 
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => $request->input('password'),
+            'password' => Hash::make($request->input('password')),
             'isAdmin' => 0,
             'balance' => 0.00,
             'verified' => 0,
         ]);
 
         if ($user) {
+            UserVerification::create([
+                'user_id' => $user->id,
+                'token' => md5("$user->id $user->email" . sha1(time())),
+            ]);
+
             return response()->json(['message' => 'Created'], 201);
         }
 
-        return response()->json(['error'=>'Failed'], 400);
+        return response()->json(['error' => 'Failed'], 400);
 
     }
 
@@ -70,9 +76,13 @@ class AuthController extends Controller
         ]);
 
         $credentials = request(['email', 'password']);
-
-        if (!$token = Auth::attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        $verified = User::where('email', $credentials['email'])->first()->verified;
+        if ($verified == 1) {
+            if (!$token = auth('api')->attempt($credentials)) {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
+        } else {
+            return response()->json(['error'=>'Not verified'], 401);
         }
 
         return $this->respondWithToken($token);

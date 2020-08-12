@@ -19,5 +19,8 @@
         "full-name": "Full name",
         "password": "Password",
         "re-password": "Re-type Password" 
+    },
+    "auth": {
+        "success": "Your account was created successfully. Please confirm your E-Mail address to continue."
     }
 }

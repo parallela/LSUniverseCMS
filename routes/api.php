@@ -22,3 +22,9 @@ Route::group(['middleware'=>'api','prefix'=>'auth'], function($router) {
     Route::post('logout', 'Backend\AuthController@logout');
 
 });
+Route::group(['middleware'=>'api','prefix'=>'user'], function($router) {
+
+    Route::get('verify/{token}', 'Backend\VerificationController@verify');
+
+
+});
