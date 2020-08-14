@@ -8,6 +8,10 @@ use App\UserVerification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -19,7 +23,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' =>['login','register','verify']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'verify']]);
     }
 
     /**
@@ -82,7 +86,7 @@ class AuthController extends Controller
                 return response()->json(['error' => 'Unauthorized'], 401);
             }
         } else {
-            return response()->json(['error'=>'Not verified'], 401);
+            return response()->json(['error' => 'Not verified'], 401);
         }
 
         return $this->respondWithToken($token);

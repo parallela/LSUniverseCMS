@@ -18,7 +18,8 @@ export async function getUserData() {
         const rawResponse = await fetch("api/auth/me", {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token")
+                Authorization: "Bearer " + localStorage.getItem("token"),
+                Accept: "application/json"
             }
         });
 
@@ -30,12 +31,16 @@ export async function getUserData() {
 
 export async function getUserDataResult() {
     const userData = await getUserData();
-    
+
     return userData;
 }
 
 export async function UserData() {
     let data = await getUserDataResult();
-    console.log(data);
+    if (data.email === undefined) {
+        localStorage.removeItem("token");
+        window.location.href = "/auth";
+        return;
+    }
     return data;
 }

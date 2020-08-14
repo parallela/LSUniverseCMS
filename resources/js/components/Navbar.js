@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from "react";
-import { getLanguage } from "react-multi-lang";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-multi-lang";
 import { Authenticator, UserData } from "../services/Authenticator";
@@ -7,17 +6,15 @@ import { Authenticator, UserData } from "../services/Authenticator";
 const Navbar = props => {
     const t = useTranslation();
     const location = useLocation();
+    const [user,setUser] = useState({name: 'firstname'});
     const auth = Authenticator();
-    const [user, setUser] = useState({});
-    const userData = async () => {
+    const setUserdata = async () => {
         setUser(await UserData());
-    };
-
+    }
 
     useEffect(() => {
-        userData();
+        setUserdata();      
     }, []);
-
 
 
     const isActive = path => {
