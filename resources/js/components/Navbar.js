@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { getLanguage } from "react-multi-lang";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-multi-lang";
@@ -8,7 +8,17 @@ const Navbar = props => {
     const t = useTranslation();
     const location = useLocation();
     const auth = Authenticator();
-    const user = UserData();
+    const [user, setUser] = useState({});
+    const userData = async () => {
+        setUser(await UserData());
+    };
+
+
+    useEffect(() => {
+        userData();
+    }, []);
+
+
 
     const isActive = path => {
         if (path == location.pathname) {

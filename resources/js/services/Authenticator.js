@@ -6,18 +6,19 @@ export function Authenticator() {
     var decodedToken = decode(token, { complete: true });
 
     if (decodedToken === null) {
-        localStorage.removeItem('token');
+        localStorage.removeItem("token");
         return false;
     }
 
     return true;
 }
 
-export async function UserData() {
-    if(Authenticator()) {
-        const rawResponse = await fetch('api/auth/me?token='+localStorage.getItem('token'),{
+export async function getUserData() {
+    if (Authenticator()) {
+        const rawResponse = await fetch("api/auth/me", {
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token")
             }
         });
 
@@ -25,4 +26,16 @@ export async function UserData() {
 
         return jsonResponse;
     }
+}
+
+export async function getUserDataResult() {
+    const userData = await getUserData();
+    
+    return userData;
+}
+
+export async function UserData() {
+    let data = await getUserDataResult();
+    console.log(data);
+    return data;
 }
