@@ -95,7 +95,7 @@ const Login = props => {
                         <div className="col-md-12">
                             <label
                                 className="font-weight-bold"
-                                htmlFor="email2"
+                                htmlFor="email"
                             >
                                 {t("home.email")}
                             </label>

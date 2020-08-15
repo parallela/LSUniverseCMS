@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-multi-lang";
-import { Authenticator, UserData } from "../services/Authenticator";
+import { UserData } from "../services/Authenticator";
 
 const Navbar = props => {
     const t = useTranslation();
     const location = useLocation();
     const [user,setUser] = useState({name: 'firstname'});
-    const auth = Authenticator();
     const setUserdata = async () => {
         setUser(await UserData());
     }
@@ -160,13 +159,13 @@ const Navbar = props => {
                                 </nav>
                             </div>
                             <div className="col-8 col-md-8 col-lg-4 text-right">
-                                {auth && (
+                                {localStorage.getItem('token') !== null && (
                                    <button  
                                         className="btn btn-primary btn-outline-primary rounded-0 text-white py-2 px-4">
                                             {user.name}
                                         </button>
                                 )}
-                                {!auth && (
+                                {localStorage.getItem('token') === null && (
                                     <Link
                                         to={"/auth"}
                                         className="btn btn-primary btn-outline-primary rounded-0 text-white py-2 px-4"

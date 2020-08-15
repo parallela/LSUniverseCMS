@@ -3,14 +3,13 @@ import Layout from "./Layout";
 import { useTranslation } from "react-multi-lang";
 import Register from "./Register";
 import Login from "./Login";
-import { Authenticator } from "../services/Authenticator";
+import { UserData } from "../services/Authenticator";
 import { Redirect } from "react-router-dom";
 
 const Auth = props => {
     const t = useTranslation();
-    const auth = Authenticator();
 
-    if (auth) {
+    if (localStorage.getItem('token') !== null) {
         return <Redirect to={"/"} />;
     }
 
