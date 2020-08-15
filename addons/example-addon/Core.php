@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Addons\ExampleAddon;
+namespace LSUniverse\Addons\ExampleAddon;
 
-use App\Addons\LSUniverseAddon;
+use LSUniverse\Addons\LSUniverseAddon;
 
 
 class Core implements LSUniverseAddon {

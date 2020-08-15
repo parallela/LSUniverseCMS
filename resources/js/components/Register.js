@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-multi-lang";
 import Messages from "./Messages";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Register = props => {
     const t = useTranslation();
@@ -13,6 +14,11 @@ const Register = props => {
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
     const [showForm, setShowForm] = useState(true);
+    const [reCaptcha, setRecaptcha] = useState(false);
+
+    const _reCaptchaConfirmation = value => {
+        setRecaptcha(true);
+    };
 
     const loaderStatus = status => {
         setTimeout(() => {
@@ -27,6 +33,12 @@ const Register = props => {
     const _handleSubmit = async e => {
         e.preventDefault();
 
+        if (!reCaptcha) {
+            setError(t("auth.reCaptcha"));
+            loaderStatus(false);
+            return false;
+        }
+
         let data = {
             name: name,
             email: email,
@@ -37,7 +49,7 @@ const Register = props => {
         const rawResponse = await fetch("api/auth/register", {
             method: "POST",
             headers: {
-                "Accept": "application/json",
+                Accept: "application/json",
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(data)
@@ -48,10 +60,14 @@ const Register = props => {
             setShowForm(false);
             loaderStatus(false);
             setMessage(t("auth.success"));
+
+            return true;
         } else if (jsonResponse.error) {
             setShowForm(true);
             loaderStatus(false);
             setError(jsonResponse.error);
+
+            return false;
         }
     };
 
@@ -131,7 +147,16 @@ const Register = props => {
                             />
                         </div>
                     </div>
-
+                    <div className="row form-group">
+                        <div className="col-md-12">
+                            <ReCAPTCHA
+                                sitekey={
+                                    "6Lc8LL8ZAAAAAAOp8OPeGrbaUnp76x9A2sXM6Uv0"
+                                }
+                                onChange={_reCaptchaConfirmation}
+                            />
+                        </div>
+                    </div>
                     <div className="row form-group">
                         <div className="col-md-12">
                             {loading && <i className="fas fa-sync fa-spin"></i>}

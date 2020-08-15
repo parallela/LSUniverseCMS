@@ -22,6 +22,8 @@
     },
     "auth": {
         "success": "Your account was created successfully. Please confirm your E-Mail address to continue.",
-        "login-success": "You are logged in, successfully!"
+        "login-success": "You are logged in, successfully!",
+        "reCaptcha": "Please confirm reCaptcha to continue!",
+        "tooManyAttempts": "Too many login attempts, please try again later or reset your password from the buttom link"
     }
 }

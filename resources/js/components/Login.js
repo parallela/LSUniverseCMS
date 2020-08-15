@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-multi-lang";
 import { useState, useEffect } from "react";
 import Messages from "./Messages";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Login = props => {
     const [email, setEmail] = useState("");
@@ -11,7 +12,12 @@ const Login = props => {
     const [error, setError] = useState("");
     const [message, setMessage] = useState("");
     const [showForm, setShowForm] = useState(true);
-    
+    const [reCaptcha, setRecaptcha] = useState(false);
+    /*
+     *  userLA = User Login Attempts
+     */
+    const [userLA, setUserLA] = useState(0);
+
     const loaderStatus = status => {
         setTimeout(() => {
             setLoading(status);
@@ -21,6 +27,11 @@ const Login = props => {
             setMessage("");
         }, 5000);
     };
+
+    const _reCaptchaConfirmation = value => {
+        setRecaptcha(true);
+    };
+
     const _handleSubmit = async e => {
         e.preventDefault();
 
@@ -28,6 +39,18 @@ const Login = props => {
             email: email,
             password: password
         };
+        if (userLA > 5) {
+            setError(t("auth.tooManyAttempts"));
+
+            return false;
+        }
+
+        if (!reCaptcha) {
+            setError(t("auth.reCaptcha"));
+            loaderStatus(false);
+
+            return false;
+        }
 
         const rawResponse = await fetch("api/auth/login", {
             method: "POST",
@@ -46,11 +69,16 @@ const Login = props => {
             setMessage(t("auth.login-success"));
             loaderStatus(false);
             setShowForm(false);
-            window.location.href = '/';
+            window.location.href = "/";
+
+            return true;
         } else if (jsonResponse.error) {
             setError(jsonResponse.error);
             loaderStatus(false);
+            setUserLA(userLA + 1);
             setShowForm(true);
+
+            return false;
         }
     };
 
@@ -95,6 +123,17 @@ const Login = props => {
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
                                 className="form-control rounded-0"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="row form-group">
+                        <div className="col-md-12">
+                            <ReCAPTCHA
+                                sitekey={
+                                    "6Lc8LL8ZAAAAAAOp8OPeGrbaUnp76x9A2sXM6Uv0"
+                                }
+                                onChange={_reCaptchaConfirmation}
                             />
                         </div>
                     </div>

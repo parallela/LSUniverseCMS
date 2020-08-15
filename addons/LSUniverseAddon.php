@@ -1,5 +1,5 @@
 <?php
-namespace App\Addons;
+namespace LSUniverse\Addons;
 
 interface LSUniverseAddon {
     public function onSuccess();
