@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-multi-lang";
 import Messages from "./Messages";
 import ReCAPTCHA from "react-google-recaptcha";
+import { registerValidation } from "../services/Authenticator";
 
 const Register = props => {
     const t = useTranslation();
@@ -45,6 +46,7 @@ const Register = props => {
             password: password,
             re_password: confirmPassword
         };
+
         setLoading(true);
         const rawResponse = await fetch("api/auth/register", {
             method: "POST",
@@ -76,7 +78,7 @@ const Register = props => {
             {error != "" && <Messages type={"danger"} message={error} />}
             {message != "" && <Messages type={"success"} message={message} />}
             {showForm && (
-                <form action="#" className="p-5 bg-white">
+                <form action="#" onSubmit={_handleSubmit} className="p-5 bg-white">
                     <h2 className="mb-4 text-black">{t("home.register")}</h2>
                     <div className="row form-group">
                         <div className="col-md-12 mb-3 mb-md-0">
@@ -90,6 +92,7 @@ const Register = props => {
                                 type="text"
                                 id="fullname"
                                 value={name}
+                                required
                                 onChange={e => {
                                     setName(e.target.value);
                                 }}
@@ -105,6 +108,7 @@ const Register = props => {
                             <input
                                 type="email"
                                 id="email"
+                                required
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
                                 className="form-control rounded-0"
@@ -122,6 +126,8 @@ const Register = props => {
                             <input
                                 type="password"
                                 id="password"
+                                required
+                                minLength="8"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
                                 className="form-control rounded-0"
@@ -139,6 +145,8 @@ const Register = props => {
                             <input
                                 type="password"
                                 id="password2"
+                                required
+                                minLength="8"
                                 value={confirmPassword}
                                 onChange={e => {
                                     setConfirmPassword(e.target.value);
@@ -165,7 +173,6 @@ const Register = props => {
                                     type="submit"
                                     value={t("home.register")}
                                     className="btn btn-primary  py-2 px-4 rounded-0"
-                                    onClick={_handleSubmit}
                                 />
                             )}
                         </div>

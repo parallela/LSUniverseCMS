@@ -39,6 +39,7 @@ const Login = props => {
             email: email,
             password: password
         };
+
         if (userLA > 5) {
             setError(t("auth.tooManyAttempts"));
 
@@ -87,7 +88,7 @@ const Login = props => {
             {error != "" && <Messages type={"danger"} message={error} />}
             {message != "" && <Messages type={"success"} message={message} />}
             {showForm && (
-                <form action="#" className="p-5 bg-white">
+                <form action="#" onSubmit={_handleSubmit} className="p-5 bg-white">
                     <h2 className="mb-4 text-black">{t("home.login")}</h2>
 
                     <div className="row form-group">
@@ -105,6 +106,8 @@ const Login = props => {
                                 onChange={e => {
                                     setEmail(e.target.value);
                                 }}
+                                required
+                                minLength={4}
                                 className="form-control rounded-0"
                             />
                         </div>
@@ -123,6 +126,8 @@ const Login = props => {
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
                                 className="form-control rounded-0"
+                                required
+                                minLength="8"
                             />
                         </div>
                     </div>
@@ -154,7 +159,6 @@ const Login = props => {
                                 <input
                                     type="submit"
                                     value={t("home.login")}
-                                    onClick={_handleSubmit}
                                     className="btn btn-primary  py-2 px-4 rounded-0"
                                 />
                             )}

@@ -1,9 +1,8 @@
 import React from "react";
 import { decode } from "jsonwebtoken";
-import { useTranslation } from "react-multi-lang";
 
 const emailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-const t = useTranslation();
+// const t = useTranslation();
 
 export function Authenticator() {
     const token = localStorage.getItem("token");
@@ -47,26 +46,4 @@ export async function UserData() {
         return;
     }
     return data;
-}
-
-export function loginValidation(data) {
-    if (!emailRegex.test(String(data.email).toLowerCase())) {
-    }
-    if(data.password < 8) {
-
-    }
-}
-
-export function registerValidation(data) {
-    if (data.name < 4) {
-    }
-
-    if (data.password < 8) {
-    }
-
-    if (data.password != data.re_password) {
-    }
-
-    if (!emailRegex.test(String(data.email).toLowerCase())) {
-    }
 }

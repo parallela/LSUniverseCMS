@@ -24,6 +24,11 @@
         "success": "Your account was created successfully. Please confirm your E-Mail address to continue.",
         "login-success": "You are logged in, successfully!",
         "reCaptcha": "Please confirm reCaptcha to continue!",
-        "tooManyAttempts": "Too many login attempts, please try again later or reset your password from the buttom link"
+        "tooManyAttempts": "Too many login attempts, please try again later or reset your password from the buttom link",
+        "invalid-email": "The email you provided, is not valid",
+        "invalid-password": "The password lenght must be 8 character long or greater",
+        "invalid-repassword": "The password you provided is not the same as main password",
+        "invalid-name": "The name is invalid",
+        "field-required": "This field is required!"
     }
 }
