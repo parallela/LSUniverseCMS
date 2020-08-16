@@ -168,7 +168,7 @@ const Navbar = props => {
                                 {localStorage.getItem('token') === null && (
                                     <Link
                                         to={"/auth"}
-                                        className="btn btn-primary btn-outline-primary rounded-0 text-white py-2 px-4"
+                                        className="btn btn-primary btn-outline-default rounded-0 text-white py-2 px-4"
                                     >
                                         {t("home.register")}
                                     </Link>

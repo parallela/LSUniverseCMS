@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./Home";
 import Auth from "./Auth";
+import User from "./User";
 import { useEffect, useState } from "react";
 import en from "../lang/en.json";
 import bg from "../lang/bg.json";
@@ -31,6 +32,7 @@ const App = () => {
             <Router>
                 <Route path={"/"} exact component={Home} />
                 <Route path={"/auth"} component={Auth} />
+                <Route path={'/my'} component={User} />
             </Router>
         </main>
     );

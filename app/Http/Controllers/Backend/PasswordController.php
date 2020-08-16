@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Validator;
 
 class PasswordController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['forget_change', 'forget_generate', 'forget_check']]);
+    }
+
     /**
      * forget_password_generate
      *
@@ -29,8 +34,8 @@ class PasswordController extends Controller
 
         $email = $request->only('email');
         $user = User::where('email', $email)->first();
-        if($user === null) {
-            return response()->json(['error'=>"User not found"], 400);
+        if ($user === null) {
+            return response()->json(['error' => "User not found"], 400);
         }
         User::createForgetPasswordToken($user->id);
 
@@ -73,8 +78,8 @@ class PasswordController extends Controller
 
         $userData = User::userByForgetPasswordToken($request->input('token'))->first();
 
-        if($userData === null) {
-            return response()->json(['error'=>'invalid user, or token'], 400);
+        if ($userData === null) {
+            return response()->json(['error' => 'invalid user, or token'], 400);
         }
 
         if (Hash::check($request->input('password'), $userData->password)) {
@@ -87,5 +92,39 @@ class PasswordController extends Controller
         DB::table('forget_passwords')->where('reset_token', $request->input('token'))->delete();
 
         return response()->json(['message' => 'success'], 200);
+    }
+    
+    /**
+     * change_password
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function change_password(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'password' => ['required', 'regex:/^(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/'],
+            're_password' => ['required', 'same:password'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first()], 400);
+        }
+
+        if($request->input('old_password') == $request->input('password')) {
+            return response()->json(['error'=>"The password must be not the same as new one"], 400);
+        }
+
+        $user = auth()->user();
+        $old_password_check = Hash::check($request->input('old_password'), $user->password);
+        if ($old_password_check) {
+            $user->update([
+                'password' => Hash::make($request->input('password')),
+            ]);
+            return response()->json(['message' => 'Your password was updated successfuly'], 200);
+        }
+
+        return response()->json(['error' => 'Wrongh old password, please try again.'], 403);
     }
 }
