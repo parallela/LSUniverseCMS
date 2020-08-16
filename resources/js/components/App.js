@@ -8,12 +8,14 @@ import { useEffect, useState } from "react";
 import en from "../lang/en.json";
 import bg from "../lang/bg.json";
 import { setDefaultLanguage, setTranslations } from "react-multi-lang";
-
+import { UserData } from "../services/Authenticator";
 
 const App = () => {
     useEffect(() => {
         setTranslations({ en, bg });
+        UserData();
 
+        console.log(JSON.parse(localStorage.getItem("lsU_userData")).isAdmin);
         const setLanguage = () => {
             try {
                 if (localStorage.getItem("lang") === null) {
@@ -32,7 +34,7 @@ const App = () => {
             <Router>
                 <Route path={"/"} exact component={Home} />
                 <Route path={"/auth"} component={Auth} />
-                <Route path={'/my'} component={User} />
+                <Route path={"/my"} component={User} />
             </Router>
         </main>
     );

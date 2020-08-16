@@ -3,6 +3,7 @@ import { useTranslation } from "react-multi-lang";
 import { useState, useEffect } from "react";
 import Messages from "./Messages";
 import ReCAPTCHA from "react-google-recaptcha";
+import { UserData } from "../services/Authenticator";
 
 const Login = props => {
     const [email, setEmail] = useState("");
@@ -70,7 +71,11 @@ const Login = props => {
             setMessage(t("auth.login-success"));
             loaderStatus(false);
             setShowForm(false);
-            window.location.href = "/";
+            UserData();
+            
+            setTimeout(() => {
+                window.location.href = "/";
+            }, 1500);
 
             return true;
         } else if (jsonResponse.error) {
@@ -88,15 +93,16 @@ const Login = props => {
             {error != "" && <Messages type={"danger"} message={error} />}
             {message != "" && <Messages type={"success"} message={message} />}
             {showForm && (
-                <form action="#" onSubmit={_handleSubmit} className="p-5 bg-white">
+                <form
+                    action="#"
+                    onSubmit={_handleSubmit}
+                    className="p-5 bg-white"
+                >
                     <h2 className="mb-4 text-black">{t("home.login")}</h2>
 
                     <div className="row form-group">
                         <div className="col-md-12">
-                            <label
-                                className="font-weight-bold"
-                                htmlFor="email"
-                            >
+                            <label className="font-weight-bold" htmlFor="email">
                                 {t("home.email")}
                             </label>
                             <input

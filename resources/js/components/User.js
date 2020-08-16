@@ -7,17 +7,13 @@ import UserCard from "./UserCard";
 
 const User = props => {
     let history = useHistory();
-    const [user, setUser] = useState([]);
-    const setUserData = async () => {
-        setUser(await UserData());
-    };
-    useEffect(() => {
-        setUserData();
-    }, []);
+    const user = JSON.parse(localStorage.getItem("lsU_userData"));
 
-    if (user.error) {
-        history.push("/auth");
-        return false;
+    if(user.error) {
+        localStorage.removeItem('lsU_userData');
+        localStorage.removeItem('token');
+
+        history.push('/auth');
     }
 
     return (

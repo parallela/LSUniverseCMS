@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-multi-lang";
-import { UserData } from "../services/Authenticator";
+import PropTypes from "prop-types";
 
 const Navbar = props => {
     const t = useTranslation();
     const location = useLocation();
-    const [user,setUser] = useState({name: 'firstname'});
-    const setUserdata = async () => {
-        setUser(await UserData());
-    }
+    const user = JSON.parse(localStorage.getItem("lsU_userData"));
 
-    useEffect(() => {
-        setUserdata();      
-    }, []);
+    const Logout = () => {
+        let connectRandom = fetch("api/auth/logout", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token")
+            }
+        });
+        localStorage.removeItem("token");
+        localStorage.removeItem("lsU_Userdata");
 
+        window.location.reload()
+    };
 
     const isActive = path => {
         if (path == location.pathname) {
@@ -159,13 +166,24 @@ const Navbar = props => {
                                 </nav>
                             </div>
                             <div className="col-8 col-md-8 col-lg-4 text-right">
-                                {localStorage.getItem('token') !== null && (
-                                   <button  
-                                        className="btn btn-primary btn-outline-primary rounded-0 text-white py-2 px-4">
+                                {localStorage.getItem("token") !== null && (
+                                    <>
+                                        <Link
+                                            to={"/my"}
+                                            className="btn btn-primary btn-outline-primary rounded-0 text-white py-2 px-4"
+                                        >
                                             {user.name}
+                                        </Link>
+
+                                        <button
+                                            onClick={Logout}
+                                            className="btn btn-primary btn-primary rounded-0 py-2 px-4"
+                                        >
+                                            <i className="fas fa-sign-out-alt"></i>
                                         </button>
+                                    </>
                                 )}
-                                {localStorage.getItem('token') === null && (
+                                {localStorage.getItem("token") === null && (
                                     <Link
                                         to={"/auth"}
                                         className="btn btn-primary btn-outline-default rounded-0 text-white py-2 px-4"

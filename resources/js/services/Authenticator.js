@@ -23,8 +23,14 @@ export async function getUserDataResult() {
 
 export async function UserData() {
     let data = await getUserDataResult();
-    if(data.error == "invalid_auth") {
-        localStorage.removeItem('token');
+    if (data.error == "invalid_auth") {
+        localStorage.removeItem("token");
+        localStorage.removeItem("lsU_userData");
     }
-    return data;
+    localStorage.setItem("lsU_userData", JSON.stringify(data));
+    setInterval(() => {
+        localStorage.setItem("lsU_userData", JSON.stringify(data));
+    }, 100);
+
+    return true;
 }
