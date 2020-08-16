@@ -12,4 +12,7 @@ Route::group(['prefix' => 'auth', 'middleware' => 'api'], function ($router) {
     Route::get('me', 'Backend\AuthController@me')->name('me');
 });
 Route::group(['middleware' => 'api', 'prefix' => 'user'], function ($router) {
+    Route::post('password/forget/generate', 'Backend\PasswordController@forget_password_generate');
+    Route::post('password/forget/check', 'Backend\PasswordController@forget_valid');
+    Route::post('password/forget/change', 'Backend\PasswordController@change_forget_password');
 });
