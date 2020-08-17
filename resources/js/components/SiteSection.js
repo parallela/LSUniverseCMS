@@ -5,12 +5,12 @@ const SiteSection = props => (
         <div className="site-section">
             <div className="container">
                 <div className="row justify-content-center text-center mb-5">
-                    <div className="col-md-6" data-aos="fade">
+                    <div className="col-md-6">
                         <h2>Why Choose Us</h2>
                     </div>
                 </div>
                 <div className="row hosting">
-                    <div className="col-md-6 col-lg-4 mb-5 mb-lg-4" data-aos="fade" data-aos-delay="100">
+                    <div className="col-md-6 col-lg-4 mb-5 mb-lg-4" >
 
                         <div className="unit-3 h-100 bg-white">
 
@@ -27,7 +27,7 @@ const SiteSection = props => (
                         </div>
 
                     </div>
-                    <div className="col-md-6 col-lg-4 mb-5 mb-lg-4" data-aos="fade" data-aos-delay="200">
+                    <div className="col-md-6 col-lg-4 mb-5 mb-lg-4" >
 
                         <div className="unit-3 h-100 bg-white">
 
@@ -44,7 +44,7 @@ const SiteSection = props => (
                         </div>
 
                     </div>
-                    <div className="col-md-6 col-lg-4 mb-5 mb-lg-4" data-aos="fade" data-aos-delay="300">
+                    <div className="col-md-6 col-lg-4 mb-5 mb-lg-4" >
 
                         <div className="unit-3 h-100 bg-white">
 
@@ -62,7 +62,7 @@ const SiteSection = props => (
 
                     </div>
 
-                    <div className="col-md-6 col-lg-4 mb-5 mb-lg-4" data-aos="fade" data-aos-delay="400">
+                    <div className="col-md-6 col-lg-4 mb-5 mb-lg-4" >
 
                         <div className="unit-3 h-100 bg-white">
 
@@ -79,7 +79,7 @@ const SiteSection = props => (
                         </div>
 
                     </div>
-                    <div className="col-md-6 col-lg-4 mb-5 mb-lg-4" data-aos="fade" data-aos-delay="500">
+                    <div className="col-md-6 col-lg-4 mb-5 mb-lg-4" >
 
                         <div className="unit-3 h-100 bg-white">
 
@@ -96,7 +96,7 @@ const SiteSection = props => (
                         </div>
 
                     </div>
-                    <div className="col-md-6 col-lg-4 mb-5 mb-lg-4" data-aos="fade" data-aos-delay="600">
+                    <div className="col-md-6 col-lg-4 mb-5 mb-lg-4" >
 
                         <div className="unit-3 h-100 bg-white">
 

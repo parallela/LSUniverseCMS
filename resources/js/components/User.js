@@ -6,24 +6,20 @@ import { useHistory } from "react-router-dom";
 import UserCard from "./UserCard";
 
 const User = props => {
-    let history = useHistory();
     const user = JSON.parse(localStorage.getItem("lsU_userData"));
 
-    if(user.error) {
-        localStorage.removeItem('lsU_userData');
-        localStorage.removeItem('token');
+    if (user == null || user.error != null) {
+        window.location.href = "/auth";
 
-        history.push('/auth');
+        return <div>Unauthorized</div>;
     }
 
     return (
-        <Layout>
-            <div className="container mt-4 mb-4 justify-content-center ">
-                <div className="row">
-                    <UserCard />
-                </div>
+        <div className="container mt-4 mb-4 justify-content-center ">
+            <div className="row">
+                <UserCard />
             </div>
-        </Layout>
+        </div>
     );
 };
 

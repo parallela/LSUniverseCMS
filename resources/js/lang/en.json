@@ -15,10 +15,15 @@
         "live": "Live chat",
         "auth": "Register / Login",
         "forget-password": "Forget password",
+        "auth_text": "Login / Register",
         "remember-me": "Remember me",
         "full-name": "Full name",
         "password": "Password",
-        "re-password": "Re-type Password" 
+        "first_step_forget_password": "First step of resetting password",
+        "second_step_forget_password": "Second step of resseting password",
+        "third_step_forget_password": "Third step of resseting password",
+        "re-password": "Re-type Password",
+        "confirm": "Confirm"
     },
     "auth": {
         "success": "Your account was created successfully. Please confirm your E-Mail address to continue.",
@@ -29,6 +34,14 @@
         "invalid-password": "The password lenght must be 8 character long or greater",
         "invalid-repassword": "The password you provided is not the same as main password",
         "invalid-name": "The name is invalid",
-        "field-required": "This field is required!"
+        "field-required": "This field is required!",
+        "reset-button": "Reset password",
+        "reset-password-failed": "We can't recover your password right now! Please try again later.",
+        "reset-password-success": "We've send you an email with instructions, how to recover your password!",
+        "reset-key": "Enter your key from the email",
+        "reset-key-valid": "Your key is valid, you'll be redirected to reset password page any moment!",
+        "reset-key-invalid": "Your key is invalid, please make sure you copied it correctly!",
+        "password-changed": "Password was changed, successfully",
+        "password-notchanged": "We have a problem with changing your password, please try again later!"
     }
 }

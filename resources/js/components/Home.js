@@ -9,11 +9,11 @@ const Home = props => {
     const t = useTranslation();
 
     return (
-        <Layout>
+        <div id="home">
             <MainImage />
             <Section />
             <SiteSection />
-        </Layout>
+        </div>
     );
 };
 export default Home;

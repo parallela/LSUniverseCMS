@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Messages from "./Messages";
 import ReCAPTCHA from "react-google-recaptcha";
 import { UserData } from "../services/Authenticator";
+import { useHistory } from "react-router-dom";
 
 const Login = props => {
     const [email, setEmail] = useState("");
@@ -18,6 +19,7 @@ const Login = props => {
      *  userLA = User Login Attempts
      */
     const [userLA, setUserLA] = useState(0);
+    const h = useHistory();
 
     const loaderStatus = status => {
         setTimeout(() => {
@@ -27,6 +29,15 @@ const Login = props => {
             setError("");
             setMessage("");
         }, 5000);
+    };
+
+    const change_password = e => {
+        e.preventDefault();
+        h.push("/password/reset?step=1");
+    };
+
+    const _reCaptchaCancel = value => {
+        setRecaptcha(false);
     };
 
     const _reCaptchaConfirmation = value => {
@@ -72,7 +83,7 @@ const Login = props => {
             loaderStatus(false);
             setShowForm(false);
             UserData();
-            
+
             setTimeout(() => {
                 window.location.href = "/";
             }, 1500);
@@ -144,6 +155,7 @@ const Login = props => {
                                 sitekey={
                                     "6Lc8LL8ZAAAAAAOp8OPeGrbaUnp76x9A2sXM6Uv0"
                                 }
+                                onExpired={_reCaptchaCancel}
                                 onChange={_reCaptchaConfirmation}
                             />
                         </div>
@@ -153,7 +165,9 @@ const Login = props => {
                         <div className="col-md-12">
                             <p>
                                 {t("home.forget-password")}?{" "}
-                                <a href="#">click here</a>
+                                <a href="#" onClick={change_password}>
+                                    click here
+                                </a>
                             </p>
                         </div>
                     </div>

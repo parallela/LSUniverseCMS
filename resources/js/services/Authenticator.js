@@ -2,7 +2,7 @@ import React from "react";
 import { decode } from "jsonwebtoken";
 
 export async function getUserData() {
-    const rawResponse = await fetch("api/auth/me", {
+    const rawResponse = await fetch("/api/auth/me", {
         headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + localStorage.getItem("token"),
@@ -26,6 +26,8 @@ export async function UserData() {
     if (data.error == "invalid_auth") {
         localStorage.removeItem("token");
         localStorage.removeItem("lsU_userData");
+
+        return false;
     }
     localStorage.setItem("lsU_userData", JSON.stringify(data));
     setInterval(() => {

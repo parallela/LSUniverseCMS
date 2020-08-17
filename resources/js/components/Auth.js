@@ -1,5 +1,4 @@
 import React from "react";
-import Layout from "./Layout";
 import { useTranslation } from "react-multi-lang";
 import Register from "./Register";
 import Login from "./Login";
@@ -9,12 +8,7 @@ import { Redirect } from "react-router-dom";
 const Auth = props => {
     const t = useTranslation();
 
-    if (localStorage.getItem('token') !== null) {
-        return <Redirect to={"/"} />;
-    }
-
     return (
-        <Layout>
             <main>
                 <div
                     className="unit-5 overlay"
@@ -33,7 +27,6 @@ const Auth = props => {
                     </div>
                 </div>
             </main>
-        </Layout>
     );
 };
 export default Auth;

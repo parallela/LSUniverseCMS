@@ -83,7 +83,7 @@ class AuthController extends Controller
         $verified = User::where('email', $credentials['email'])->first()->verified;
         if ($verified == 1) {
             if (!$token = auth('api')->attempt($credentials)) {
-                return response()->json(['error' => 'Unauthorized'], 401);
+                return response()->json(['error' => 'Invalid Credentials'], 400);
             }
         } else {
             return response()->json(['error' => 'Not verified'], 401);

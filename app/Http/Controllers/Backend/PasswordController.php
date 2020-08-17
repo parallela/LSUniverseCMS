@@ -13,7 +13,7 @@ class PasswordController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['forget_change', 'forget_generate', 'forget_check']]);
+        $this->middleware('auth:api', ['except' => ['forget_password_generate', 'forget_valid', 'change_forget_password']]);
     }
 
     /**

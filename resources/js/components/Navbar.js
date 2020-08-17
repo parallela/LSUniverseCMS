@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import { useTranslation } from "react-multi-lang";
 import PropTypes from "prop-types";
 
@@ -7,9 +7,11 @@ const Navbar = props => {
     const t = useTranslation();
     const location = useLocation();
     const user = JSON.parse(localStorage.getItem("lsU_userData"));
+    const history = useHistory();
+    const logo = document.querySelector('meta[name="navbar-logo"]').content;
 
     const Logout = () => {
-        let connectRandom = fetch("api/auth/logout", {
+        let connectRandom = fetch("/api/auth/logout", {
             method: "POST",
             headers: {
                 Accept: "application/json",
@@ -20,7 +22,9 @@ const Navbar = props => {
         localStorage.removeItem("token");
         localStorage.removeItem("lsU_Userdata");
 
-        window.location.reload()
+        window.location.href = '/auth';
+        
+        return true;
     };
 
     const isActive = path => {
@@ -47,10 +51,10 @@ const Navbar = props => {
                         <div className="row align-items-center">
                             <div className="col-6 col-md-6 col-lg-2">
                                 <a
-                                    href="index.html"
+                                    href="/"
                                     className="d-flex align-items-center site-logo"
                                 >
-                                    <img src={"images/logo.png"} />
+                                    <img src={logo} />
                                 </a>
                             </div>
 
@@ -188,7 +192,7 @@ const Navbar = props => {
                                         to={"/auth"}
                                         className="btn btn-primary btn-outline-default rounded-0 text-white py-2 px-4"
                                     >
-                                        {t("home.register")}
+                                        {t("home.auth_text")}
                                     </Link>
                                 )}
                             </div>

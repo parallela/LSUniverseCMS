@@ -5,6 +5,8 @@
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="navbar-logo" content="{{ asset('images/logo.png') }}" />
+
 
     <title>LSUniverse | Automatic Billing system for game hosting</title>
 
@@ -23,7 +25,6 @@
     <link rel="stylesheet" href="{{ asset('fonts/flaticon/font/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('css/fl-bigmug-line.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('css/aos.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
@@ -45,7 +46,6 @@
 <script src="{{ asset('js/jquery.countdown.min.js') }}"></script>
 <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
-<script src="{{ asset('js/aos.js') }}"></script>
 
 <script src="{{ asset('js/main.js') }}"></script>
 

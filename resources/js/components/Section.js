@@ -5,12 +5,12 @@ const Section = props => (
         <div className="site-section bg-light">
             <div className="container">
                 <div className="row justify-content-center text-center mb-5">
-                    <div className="col-md-6" data-aos="fade">
+                    <div className="col-md-6" >
                         <h2>Different hosting platforms to suit every need!</h2>
                     </div>
                 </div>
                 <div className="row hosting">
-                    <div className="col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
+                    <div className="col-md-6 col-lg-4 mb-5 mb-lg-0" >
 
                         <div className="unit-2 text-center border py-5 h-100 bg-white">
                             <span className="icon fl-bigmug-line-paper122 text-primary"></span>
@@ -20,7 +20,7 @@ const Section = props => (
                         </div>
 
                     </div>
-                    <div className="col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
+                    <div className="col-md-6 col-lg-4 mb-5 mb-lg-0" >
 
                         <div className="unit-2 text-center border py-5 h-100 bg-white">
                             <span className="icon fl-bigmug-line-airplane86 text-primary"></span>
@@ -30,7 +30,7 @@ const Section = props => (
                         </div>
 
                     </div>
-                    <div className="col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="300">
+                    <div className="col-md-6 col-lg-4 mb-5 mb-lg-0" >
 
                         <div className="unit-2 text-center border py-5 h-100 bg-white">
                             <span className="icon fl-bigmug-line-hot67 text-primary"></span>

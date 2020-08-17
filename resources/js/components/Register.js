@@ -17,6 +17,10 @@ const Register = props => {
     const [showForm, setShowForm] = useState(true);
     const [reCaptcha, setRecaptcha] = useState(false);
 
+    const _reCaptchaCancel = value => {
+        setRecaptcha(false);
+    };
+
     const _reCaptchaConfirmation = value => {
         setRecaptcha(true);
     };
@@ -78,7 +82,11 @@ const Register = props => {
             {error != "" && <Messages type={"danger"} message={error} />}
             {message != "" && <Messages type={"success"} message={message} />}
             {showForm && (
-                <form action="#" onSubmit={_handleSubmit} className="p-5 bg-white">
+                <form
+                    action="#"
+                    onSubmit={_handleSubmit}
+                    className="p-5 bg-white"
+                >
                     <h2 className="mb-4 text-black">{t("home.register")}</h2>
                     <div className="row form-group">
                         <div className="col-md-12 mb-3 mb-md-0">
@@ -161,6 +169,7 @@ const Register = props => {
                                 sitekey={
                                     "6Lc8LL8ZAAAAAAOp8OPeGrbaUnp76x9A2sXM6Uv0"
                                 }
+                                onExpired={_reCaptchaCancel}
                                 onChange={_reCaptchaConfirmation}
                             />
                         </div>
