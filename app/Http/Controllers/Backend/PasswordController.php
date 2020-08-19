@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\UserForgetPassword;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class PasswordController extends Controller
@@ -37,7 +39,8 @@ class PasswordController extends Controller
         if ($user === null) {
             return response()->json(['error' => "User not found"], 400);
         }
-        User::createForgetPasswordToken($user->id);
+        $token = User::createForgetPasswordToken($user->id);
+        Mail::to($user->email)->send(new UserForgetPassword($token, $user));
 
         return response()->json(['message' => 'valid']);
     }

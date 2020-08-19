@@ -23,7 +23,16 @@
         "second_step_forget_password": "Second step of resseting password",
         "third_step_forget_password": "Third step of resseting password",
         "re-password": "Re-type Password",
-        "confirm": "Confirm"
+        "confirm": "Confirm",
+        "please-wait": "Please wait...",
+        "city": "City",
+        "region": "Region",
+        "zipcode": "Zipcode",
+        "mailing_list": "Mail ads",
+        "subscribed": "Subscribed",
+        "unsubscribed": "Unsubscribed",
+        "submit": "Submit",
+        "something-wr": "Something went wrong! Please try again later..."
     },
     "auth": {
         "success": "Your account was created successfully. Please confirm your E-Mail address to continue.",
@@ -42,6 +51,22 @@
         "reset-key-valid": "Your key is valid, you'll be redirected to reset password page any moment!",
         "reset-key-invalid": "Your key is invalid, please make sure you copied it correctly!",
         "password-changed": "Password was changed, successfully",
-        "password-notchanged": "We have a problem with changing your password, please try again later!"
+        "password-notchanged": "We have a problem with changing your password, please try again later!",
+        "account-verified": "Account was verified successfuly!",
+        "account-verification-failed": "Account was not verified, please try again!"
+    },
+    "user": {
+        "user-info": "User Information",
+        "user-billing-details": "User Billing Details",
+        "welcome": "Welcome again, ",
+        "active-services": "Active Services",
+        "tickets": "Tickets",
+        "invoices": "Invoices",
+        "last-tickets": "Last Tickets",
+        "balance": "Balance",
+        "user-address-1": "Address 1",
+        "user-address-2": "Address 2",
+        "phone": "Phone number",
+        "success-updated": "Your information was updated successfully!"
     }
 }

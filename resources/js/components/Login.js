@@ -118,7 +118,7 @@ const Login = props => {
                             </label>
                             <input
                                 type="email"
-                                id="email"
+                                id="email_login"
                                 value={email}
                                 onChange={e => {
                                     setEmail(e.target.value);
@@ -139,7 +139,7 @@ const Login = props => {
                             </label>
                             <input
                                 type="password"
-                                id="password"
+                                id="password_login"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
                                 className="form-control rounded-0"

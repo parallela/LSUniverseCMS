@@ -1,30 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import { useTranslation } from "react-multi-lang";
-import PropTypes from "prop-types";
+import {logout_user, User} from "../services/Authenticator";
 
 const Navbar = props => {
     const t = useTranslation();
     const location = useLocation();
-    const user = JSON.parse(localStorage.getItem("lsU_userData"));
+    const user = User();
     const history = useHistory();
     const logo = document.querySelector('meta[name="navbar-logo"]').content;
 
     const Logout = () => {
-        let connectRandom = fetch("/api/auth/logout", {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token")
-            }
-        });
-        localStorage.removeItem("token");
-        localStorage.removeItem("lsU_Userdata");
-
-        window.location.href = '/auth';
-        
-        return true;
+        logout_user();
     };
 
     const isActive = path => {
@@ -173,7 +160,7 @@ const Navbar = props => {
                                 {localStorage.getItem("token") !== null && (
                                     <>
                                         <Link
-                                            to={"/my"}
+                                            to={"/my?page=main"}
                                             className="btn btn-primary btn-outline-primary rounded-0 text-white py-2 px-4"
                                         >
                                             {user.name}

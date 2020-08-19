@@ -12,11 +12,15 @@ import { UserData } from "../services/Authenticator";
 import { AnimatedSwitch, spring } from "react-router-transition";
 import Layout from "./Layout";
 import ChangePassword from "./ChangePassword";
+import Verififaction from "./Verification";
 
 const App = () => {
     useEffect(() => {
         setTranslations({ en, bg });
         UserData();
+        setInterval(() => {
+            UserData();
+        }, 10000)
 
         const setLanguage = () => {
             try {
@@ -75,6 +79,7 @@ const App = () => {
                         <Route path={"/auth"} component={Auth} />
                         <Route path={"/my"} component={User} />
                         <Route path={"/password/reset"} component={ChangePassword} />
+                        <Route path={"/verify"} component={Verififaction}/>
                     </AnimatedSwitch>
                 </Layout>
             </Router>

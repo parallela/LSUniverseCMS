@@ -16,4 +16,8 @@ Route::group(['middleware' => 'api', 'prefix' => 'user'], function ($router) {
     Route::post('password/forget/check', 'Backend\PasswordController@forget_valid')->name('forget_check');
     Route::post('password/forget/change', 'Backend\PasswordController@change_forget_password')->name('forget_change');
     Route::post('password/change', 'Backend\PasswordController@change_password')->name('change_password');
+
+   Route::group(['middleware'=>'api', 'prefix'=>'update'] , function ($router) {
+      Route::post('/details', 'Backend\UserController@update_user_details');
+   });
 });

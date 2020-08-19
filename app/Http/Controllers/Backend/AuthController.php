@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\UserVerify;
 use App\User;
 use App\UserVerification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
@@ -60,6 +62,8 @@ class AuthController extends Controller
                 'token' => md5("$user->id $user->email" . sha1(time())),
             ]);
 
+            Mail::to($user->email)->send(new UserVerify($user));
+
             return response()->json(['message' => 'Created'], 201);
         }
 
@@ -99,7 +103,8 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        $user = User::with('details')->find(auth()->id());
+        return response()->json($user);
     }
 
     /**

@@ -1,14 +1,11 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { UserData } from "../services/Authenticator";
-import Layout from "./Layout";
-import { useHistory } from "react-router-dom";
 import UserCard from "./UserCard";
+import {User as UD} from "../services/Authenticator";
 
 const User = props => {
-    const user = JSON.parse(localStorage.getItem("lsU_userData"));
+    const user = UD();
 
-    if (user == null || user.error != null) {
+    if (localStorage.getItem('token') === null) {
         window.location.href = "/auth";
 
         return <div>Unauthorized</div>;

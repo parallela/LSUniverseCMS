@@ -62,10 +62,18 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function details()
+    {
+        return $this->hasOne(UserDetails::class);
+    }
+
+    /**
      * Helper for creating user forget password token
      *
-     * @param  int $user_id
-     * @return void
+     * @param int $user_id
+     * @return object
      */
     public static function createForgetPasswordToken($user_id)
     {
@@ -79,14 +87,15 @@ class User extends Authenticatable implements JWTSubject
             $existed_data->delete();
         }
 
+        $token_string = md5(time() . sha1($user_id));
         $create_token = DB::table('forget_passwords')->insert(
             [
                 'user_id' => $user_id,
-                'reset_token' => md5(time() . sha1($user_id)),
+                'reset_token' => $token_string,
             ]
         );
 
-        return $create_token;
+        return $token_string;
     }
 
     /**

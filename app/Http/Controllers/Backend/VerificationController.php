@@ -7,15 +7,6 @@ use App\UserVerification;
 
 class VerificationController extends Controller
 {        
-    /**
-     * VerificationController instance
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth:api',['except'=>['verify','verify/*']]);
-    }
 
     /**
      * Verify user by email
@@ -35,6 +26,6 @@ class VerificationController extends Controller
             return response()->json(['error'=>'Invalid validation token'], 400);
         }
 
-        return response()->json(['messasge' => 'Verified']);
+        return response()->json(['message' => 'Verified']);
     }
 }

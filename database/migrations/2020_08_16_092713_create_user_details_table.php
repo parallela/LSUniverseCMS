@@ -16,12 +16,12 @@ class CreateUserDetailsTable extends Migration
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('street_adress_1');
-            $table->string('street_adress_2');
-            $table->string('phone_number');
-            $table->string('city');
-            $table->string('region');
-            $table->string('zipcode');
+            $table->string('street_address_1')->nullable();
+            $table->string('street_address_2')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('city')->nullable();
+            $table->string('region')->nullable();
+            $table->string('zipcode')->nullable();
             $table->boolean('mailing_list');
         });
         Schema::table('user_details', function(Blueprint $table) {
