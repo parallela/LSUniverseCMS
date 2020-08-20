@@ -20,4 +20,16 @@ Route::group(['middleware' => 'api', 'prefix' => 'user'], function ($router) {
    Route::group(['middleware'=>'api', 'prefix'=>'update'] , function ($router) {
       Route::post('/details', 'Backend\UserController@update_user_details');
    });
+
+   Route::group(['middleware'=>'api', 'prefix'=>'tickets'], function ($router) {
+      Route::post('/create', 'Backend\TicketsController@create');
+      Route::post('/delete/{id}', 'Backend\TicketsController@delete');
+      Route::post('/update/{id}', 'Backend\TicketsController@update');
+      Route::post('/create/{id}', 'Backend\TicketsController@add_answer');
+      Route::get('/show/{id}', 'Backend\TicketsController@show');
+      Route::get('/', 'Backend\TicketsController@list');
+
+   });
+
+   Route::get('services', 'Backend\UserController@get_user_services');
 });

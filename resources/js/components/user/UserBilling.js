@@ -121,9 +121,9 @@ const UserBilling = props => {
 
                 <div className="form-group col-md-6">
                     <label htmlFor="mailing">{t("home.mailing_list")}</label>
-                    <select id="mailing" onChange={e => setMailList(e.target.value)} className="form-control">
-                        <option value="1" defaultChecked={mailList === 1}>Yes</option>
-                        <option value="0" defaultChecked={mailList === 0}>No</option>
+                    <select id="mailing" value={mailList}  onChange={e => setMailList(e.target.value)} className="form-control">
+                        <option value="1" >Yes</option>
+                        <option value="0" >No</option>
                     </select>
                 </div>
 

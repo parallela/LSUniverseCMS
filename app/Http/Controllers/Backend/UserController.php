@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Order;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -48,5 +50,24 @@ class UserController extends Controller
 
         return response()->json(['message' => 'Details was updated'], 200);
 
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function get_user_services()
+    {
+        $orders = Order::with('service')->where('user_id', auth()->id())->get()->toArray();
+
+        $custom_service_array = [];
+
+        for ($i = 0; $i < count($orders); $i++) {
+            $custom_service_array[$i]['name'] = $orders[$i]['service']['name'];
+            $custom_service_array[$i]['price'] = $orders[$i]['service']['price'];
+            $custom_service_array[$i]['created_at'] = $orders[$i]['created_at'];
+            $custom_service_array[$i]['order_id'] = $orders[$i]['id'];
+            $custom_service_array[$i]['expire_at'] = $orders[$i]['expire_at'];
+        }
+        return response()->json($custom_service_array, 200);
     }
 }

@@ -35,7 +35,8 @@ export async function updateUserCookie() {
     cookies.set('user', JSON.stringify(data), {path: '/', sameSite: 'strict', expires: data.expires_in});
 }
 export function User() {
-    return cookies.get('user') === null ? logout_user() : cookies.get('user');
+    let user = cookies.get('user');
+    return user === undefined ? localStorage.removeItem('token') : user;
 }
 
 export function logout_user() {

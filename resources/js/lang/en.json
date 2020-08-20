@@ -67,6 +67,16 @@
         "user-address-1": "Address 1",
         "user-address-2": "Address 2",
         "phone": "Phone number",
-        "success-updated": "Your information was updated successfully!"
+        "success-updated": "Your information was updated successfully!",
+        "service-name": "Service name",
+        "service-price": "Service price",
+        "service-purchased": "Service purchased at",
+        "order-id": "Order ID",
+        "service-expire_at": "Service Expire at",
+        "ticket-name": "Ticket Name",
+        "ticket-created": "Ticket Created At",
+        "ticket-status": "Ticket Status",
+        "ticket-last-activity": "Ticket Last Activity",
+        "open-tickets": "Open tickets"
     }
 }

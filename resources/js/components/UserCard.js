@@ -4,6 +4,8 @@ import UserInfo from "./user/UserInfo";
 import {useEffect} from "react";
 import {useHistory} from "react-router-dom";
 import UserBilling from "./user/UserBilling";
+import UserServices from "./user/UserServices";
+import UserTickets from "./user/UserTickets";
 
 const UserCard = props => {
     const t = useTranslation();
@@ -20,9 +22,9 @@ const UserCard = props => {
         return false;
     }
 
-   const _changePage = (to_url) => {
+    const _changePage = (to_url) => {
         h.push(`/my?page=${to_url}`);
-   }
+    }
 
     useEffect(() => {
         if (page === null || page === undefined) {
@@ -36,30 +38,38 @@ const UserCard = props => {
                 <div className="card-header">
                     <ul className="nav nav-tabs card-header-tabs">
                         <li className="nav-item">
-                            <a className={isActive("main") ? "nav-link active" : "nav-link"} onClick={() => {_changePage("main")}}>
+                            <a className={isActive("main") ? "nav-link active" : "nav-link"} onClick={() => {
+                                _changePage("main")
+                            }} href="#">
                                 {t("user.user-info")}
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className={isActive("details") ? "nav-link active" : "nav-link"} onClick={() => {_changePage("details")}}>
+                            <a className={isActive("details") ? "nav-link active" : "nav-link"} onClick={() => {
+                                _changePage("details")
+                            }} href="#">
                                 {t('user.user-billing-details')}
                             </a>
                         </li>
 
                         <li className="nav-item">
-                            <a className={isActive("services") ? "nav-link active": "nav-link"} href="#">
+                            <a className={isActive("services") ? "nav-link active" : "nav-link"} onClick={() => {
+                                _changePage("services")
+                            }} href="#">
                                 {t('user.active-services')}
                             </a>
                         </li>
 
                         <li className="nav-item">
-                            <a className={isActive("tickets") ? "nav-link active": "nav-link"} href="#">
+                            <a className={isActive("tickets") ? "nav-link active" : "nav-link"} onClick={() => {
+                                _changePage('tickets')
+                            }} href="#">
                                 {t('user.tickets')}
                             </a>
                         </li>
 
                         <li className="nav-item">
-                            <a className={isActive('invoices') ? "nav-link active": "nav-link"} href="#">
+                            <a className={isActive('invoices') ? "nav-link active" : "nav-link"} href="#">
                                 {t('user.invoices')}
                             </a>
                         </li>
@@ -67,8 +77,10 @@ const UserCard = props => {
                     </ul>
                 </div>
                 <div className="card-body">
-                        {page == "main" && <UserInfo/>}
-                        {page == "details" && <UserBilling/>}
+                    {page == "main" && <UserInfo/>}
+                    {page == "details" && <UserBilling/>}
+                    {page == "services" && <UserServices/>}
+                    {page == "tickets" && <UserTickets/>}
                 </div>
             </div>
         </div>
