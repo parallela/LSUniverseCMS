@@ -68,7 +68,6 @@ class TicketsController extends Controller
     {
         $ticket = Ticket::with('answers')->where('id', $id)->where('user_id', auth()->id())->firstOrFail();
 
-
         return response()->json($ticket, 200);
     }
 

@@ -32,7 +32,10 @@
         "subscribed": "Subscribed",
         "unsubscribed": "Unsubscribed",
         "submit": "Submit",
-        "something-wr": "Something went wrong! Please try again later..."
+        "open": "Open",
+        "closed": "Closed",
+        "something-wr": "Something went wrong! Please try again later...",
+        "you": "You"
     },
     "auth": {
         "success": "Your account was created successfully. Please confirm your E-Mail address to continue.",

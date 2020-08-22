@@ -15,6 +15,8 @@ class TicketAnswer extends Model
         'content', 'ticket_id', 'user_id'
     ];
 
+    protected $with = ['user'];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

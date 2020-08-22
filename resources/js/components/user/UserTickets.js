@@ -5,14 +5,18 @@ import {Link} from "react-router-dom";
 import DataTable from "react-data-table-component";
 import Modal from "../modals/Modal";
 import AddTicketForm from "./AddTicketForm";
+import TicketPage from "./TicketPage";
 
 const UserTickets = props => {
-    const t = useTranslation();
+    let search = window.location.search;
+    let params = new URLSearchParams(search);
 
+
+    const ticketPage = params.get('showTicket');
+    const t = useTranslation();
     const [data, setData] = useState([]);
     const [departments, setDepartments] = useState([]);
     const [showTicketModal, setShowTicketModal] = useState(false);
-
     const columns = [
         {
             name: t("user.ticket-name"),
@@ -53,6 +57,7 @@ const UserTickets = props => {
         setShowTicketModal(false)
     }
 
+
     useEffect(() => {
         _getUserTickets();
         setInterval(() => {
@@ -62,22 +67,28 @@ const UserTickets = props => {
 
 
     return (
-
-
-        <div id="tickets">
-            {showTicketModal &&
-            <Modal title={t("user.add-ticket")} body={<AddTicketForm closeModalHandler={_closeModalHandler}/>} closeModalHandler={_closeModalHandler}/>
-            }
-            <div className="text-left">
-                <button className="btn btn-success  btn-outline-primary" onClick={() => setShowTicketModal(true)}>
-                    {t("user.add-ticket")}
-                </button>
-
+        <div id="ticket_content">
+            {ticketPage !== null &&
+            <div id="display-ticket">
+                <TicketPage ticketID={ticketPage}/>
             </div>
-            <div className="text-center">
-                <h3 className="mt-4">Tickets</h3>
-                <h5>{Object.keys(data).length}</h5>
-                <DataTable columns={columns} data={data} paginationPerPage={10}/>
+            }
+            <div style={{visibility: ticketPage === null ? 'visible' : 'hidden'}} id="tickets">
+                {showTicketModal &&
+                <Modal title={t("user.add-ticket")} body={<AddTicketForm closeModalHandler={_closeModalHandler}/>}
+                       closeModalHandler={_closeModalHandler}/>
+                }
+                <div className="text-left">
+                    <button className="btn btn-success  btn-outline-primary" onClick={() => setShowTicketModal(true)}>
+                        {t("user.add-ticket")}
+                    </button>
+
+                </div>
+                <div className="text-center">
+                    <h3 className="mt-4">Tickets</h3>
+                    <h5>{Object.keys(data).length}</h5>
+                    <DataTable columns={columns} data={data} paginationPerPage={10}/>
+                </div>
             </div>
         </div>
     )
