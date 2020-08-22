@@ -33,3 +33,5 @@ Route::group(['middleware' => 'api', 'prefix' => 'user'], function ($router) {
 
    Route::get('services', 'Backend\UserController@get_user_services');
 });
+
+Route::get('departments/list', 'Backend\DepartmentsController@list')->middleware('api');

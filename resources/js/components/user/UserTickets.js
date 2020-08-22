@@ -3,12 +3,15 @@ import {useEffect, useState} from "react";
 import {useTranslation} from "react-multi-lang";
 import {Link} from "react-router-dom";
 import DataTable from "react-data-table-component";
+import Modal from "../modals/Modal";
+import AddTicketForm from "./AddTicketForm";
 
 const UserTickets = props => {
     const t = useTranslation();
 
     const [data, setData] = useState([]);
-
+    const [departments, setDepartments] = useState([]);
+    const [showTicketModal, setShowTicketModal] = useState(false);
 
     const columns = [
         {
@@ -33,7 +36,6 @@ const UserTickets = props => {
         }
     ]
 
-
     const _getUserTickets = async () => {
         const rawResponse = await fetch('/api/user/tickets', {
             method: 'GET',
@@ -47,17 +49,36 @@ const UserTickets = props => {
         setData(await rawResponse.json());
     }
 
+    const _closeModalHandler = () => {
+        setShowTicketModal(false)
+    }
+
     useEffect(() => {
         _getUserTickets();
+        setInterval(() => {
+            _getUserTickets();
+        }, 5000);
     }, []);
 
+
     return (
-        <div className="text-center">
 
-            <h3 className="mt-4">Tickets</h3>
-            <h5>{Object.keys(data).length}</h5>
-            <DataTable columns={columns} data={data} paginationPerPage={10}/>
 
+        <div id="tickets">
+            {showTicketModal &&
+            <Modal title={t("user.add-ticket")} body={<AddTicketForm closeModalHandler={_closeModalHandler}/>} closeModalHandler={_closeModalHandler}/>
+            }
+            <div className="text-left">
+                <button className="btn btn-success  btn-outline-primary" onClick={() => setShowTicketModal(true)}>
+                    {t("user.add-ticket")}
+                </button>
+
+            </div>
+            <div className="text-center">
+                <h3 className="mt-4">Tickets</h3>
+                <h5>{Object.keys(data).length}</h5>
+                <DataTable columns={columns} data={data} paginationPerPage={10}/>
+            </div>
         </div>
     )
 }

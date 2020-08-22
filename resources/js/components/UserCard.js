@@ -33,7 +33,7 @@ const UserCard = props => {
     }, [])
 
     return (
-        <div className="col-md-12">
+        <div className="col-md-12 mb-5 mt-4">
             <div className="card text-center">
                 <div className="card-header">
                     <ul className="nav nav-tabs card-header-tabs">

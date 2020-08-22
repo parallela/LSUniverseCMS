@@ -12,7 +12,7 @@ const User = props => {
     }
 
     return (
-        <div className="container mt-4 mb-4 justify-content-center ">
+        <div className="container-fluid ">
             <div className="row">
                 <UserCard />
             </div>

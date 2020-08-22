@@ -32,14 +32,14 @@ class TicketsController extends Controller
     {
         $current_tickets = Ticket::where('user_id', auth()->id())->where('status', 'open')->get()->toArray();
 
-        if (count($current_tickets) > 5) {
+        if (count($current_tickets) >= 5) {
             return response()->json(['error' => 'Too many open tickets. Max open tickets: 5'], 400);
         }
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:4',
             'content' => 'required',
-            'department' => 'required|min:3',
+            'department' => 'required|integer',
         ]);
 
         if ($validator->fails()) {
@@ -49,7 +49,7 @@ class TicketsController extends Controller
         $ticket = Ticket::create([
             'name' => $request->input('name'),
             'user_id' => auth()->id(),
-            'department' => $request->input('department'),
+            'department_id' => $request->input('department'),
             'status' => 'open'
         ]);
 

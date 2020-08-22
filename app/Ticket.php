@@ -8,7 +8,7 @@ class Ticket extends Model
 {
     protected $fillable = [
         'name', 'content',
-        'user_id', 'department',
+        'user_id', 'department_id',
         'status'
     ];
 
@@ -31,5 +31,13 @@ class Ticket extends Model
     public function answers()
     {
         return $this->hasMany(TicketAnswer::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function department()
+    {
+        return $this->hasOne(Department::class);
     }
 }

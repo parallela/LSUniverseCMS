@@ -77,6 +77,13 @@
         "ticket-created": "Ticket Created At",
         "ticket-status": "Ticket Status",
         "ticket-last-activity": "Ticket Last Activity",
-        "open-tickets": "Open tickets"
+        "open-tickets": "Open tickets",
+        "ticket-topic": "Ticket topic",
+        "department": "For department",
+        "select-department": "Select department",
+        "topic-description": "Topic Description:",
+        "add-ticket": "Add Ticket",
+        "ticket-pending": "Ticket was successfully added to our queue!",
+        "ticket-failed": "We can't add your ticket right now! Please try again later."
     }
 }
