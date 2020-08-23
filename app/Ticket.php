@@ -12,6 +12,8 @@ class Ticket extends Model
         'status'
     ];
 
+    protected $with = ['answers'];
+
     protected $casts = [
         'created_at' => 'datetime:Y-m-d h:i:s',
         'updated_at' => 'datetime:Y-m-d h:i:s'

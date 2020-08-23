@@ -6,6 +6,7 @@ import DataTable from "react-data-table-component";
 import Modal from "../modals/Modal";
 import AddTicketForm from "./AddTicketForm";
 import TicketPage from "./TicketPage";
+import Messages from "../Messages";
 
 const UserTickets = props => {
     let search = window.location.search;
@@ -16,17 +17,16 @@ const UserTickets = props => {
     const t = useTranslation();
     const [data, setData] = useState([]);
     const [departments, setDepartments] = useState([]);
+    const [error, setError] = useState("");
     const [showTicketModal, setShowTicketModal] = useState(false);
     const columns = [
         {
             name: t("user.ticket-name"),
             cell: row => <div><Link to={`/my?page=tickets&showTicket=${row.id}`}>{row.name}</Link></div>,
-            sortable: true
         },
         {
             name: t("user.ticket-status"),
             cell: row => <div>{row.status === 'open' ? 'Open' : 'Closed'}</div>,
-            sortable: true
         },
         {
             name: t("user.ticket-last-activity"),
@@ -37,8 +37,34 @@ const UserTickets = props => {
             name: t("user.ticket-created"),
             selector: 'created_at',
             sortable: true
+        },
+        {
+            name: t("user.action"),
+            cell: row => <div><a href="#" onClick={e =>{_deleteTicket(e,row.id)}}>{t("user.delete")}</a></div>
         }
     ]
+
+    const _deleteTicket = async (e,ticket_id) => {
+        e.preventDefault();
+        
+        const rawResponse = await fetch(`/api/user/tickets/delete/${ticket_id}`, {
+            method: 'POST',
+            headers: {
+                'Accept': "application/json",
+                'Content-Type': "application/json",
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        });
+
+        const jsonResponse = await rawResponse.json();
+
+        if(jsonResponse.message) {
+            _getUserTickets();
+        } else if(jsonResponse.error) {
+            setError(jsonResponse.error);
+        }
+
+    }
 
     const _getUserTickets = async () => {
         const rawResponse = await fetch('/api/user/tickets', {
@@ -62,7 +88,7 @@ const UserTickets = props => {
         _getUserTickets();
         setInterval(() => {
             _getUserTickets();
-        }, 5000);
+        }, 10000);
     }, []);
 
 
@@ -74,6 +100,7 @@ const UserTickets = props => {
             </div>
             }
             <div style={{visibility: ticketPage === null ? 'visible' : 'hidden'}} id="tickets">
+                {error != "" && <Messages type={"danger"} message={error}/>}
                 {showTicketModal &&
                 <Modal title={t("user.add-ticket")} body={<AddTicketForm closeModalHandler={_closeModalHandler}/>}
                        closeModalHandler={_closeModalHandler}/>

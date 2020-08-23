@@ -87,6 +87,9 @@
         "topic-description": "Topic Description:",
         "add-ticket": "Add Ticket",
         "ticket-pending": "Ticket was successfully added to our queue!",
-        "ticket-failed": "We can't add your ticket right now! Please try again later."
+        "ticket-failed": "We can't add your ticket right now! Please try again later.",
+        "ticket-answer-problem": "We have problem with adding your answer.",
+        "action": "Action",
+        "delete": "Delete"
     }
 }

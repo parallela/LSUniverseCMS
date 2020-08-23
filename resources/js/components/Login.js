@@ -84,6 +84,7 @@ const Login = props => {
             setShowForm(false);
             UserData();
 
+
             setTimeout(() => {
                 window.location.href = "/";
             }, 1500);

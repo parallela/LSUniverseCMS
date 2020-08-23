@@ -8686,7 +8686,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".overflowA {\n    overflow-x: hidden;\n    overflow-y: scroll;\n    height: 50vh;\n}\n", ""]);
+exports.push([module.i, ".overflowA {\n    overflow-x: hidden;\n    overflow-y: auto;\n    height: 50vh;\n}\n", ""]);
 
 // exports
 
@@ -104560,7 +104560,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var Messages = function Messages(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "alert alert-" + props.type
+    className: "mt-1 mb-1 alert alert-" + props.type
   }, props.message);
 };
 
@@ -106511,6 +106511,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TicketAnswers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TicketAnswers */ "./resources/js/components/user/TicketAnswers.js");
 /* harmony import */ var _css_ticket_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../css/ticket.css */ "./resources/js/components/css/ticket.css");
 /* harmony import */ var _css_ticket_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_css_ticket_css__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _Messages__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Messages */ "./resources/js/components/Messages.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -106536,6 +106537,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var TicketPage = function TicketPage(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -106547,54 +106549,129 @@ var TicketPage = function TicketPage(props) {
       loading = _useState4[0],
       setLoading = _useState4[1];
 
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+      _useState6 = _slicedToArray(_useState5, 2),
+      error = _useState6[0],
+      setError = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+      _useState8 = _slicedToArray(_useState7, 2),
+      ticketReply = _useState8[0],
+      setTicketReply = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState10 = _slicedToArray(_useState9, 2),
+      buttonStatus = _useState10[0],
+      setButtonStatus = _useState10[1];
+
+  var overflowContainerRef = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])(null);
   var t = Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_2__["useTranslation"])();
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    var _getAnswers = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var rawResponse;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return fetch("/api/user/tickets/show/".concat(props.ticketID), {
-                  method: 'GET',
-                  headers: {
-                    'Accept': "application/json",
-                    'Content-Type': "application/json",
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-                  }
-                });
 
-              case 2:
-                rawResponse = _context.sent;
-                _context.t0 = setTicket;
-                _context.next = 6;
-                return rawResponse.json();
+  var _handleSubmitTicket = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+      var data, rawResponse, jsonResponse;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              e.preventDefault();
+              data = {
+                content: ticketReply
+              };
+              _context.next = 4;
+              return fetch("/api/user/tickets/create/".concat(props.ticketID), {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+                body: JSON.stringify(data)
+              });
 
-              case 6:
-                _context.t1 = _context.sent;
-                (0, _context.t0)(_context.t1);
-                setLoading(false);
+            case 4:
+              rawResponse = _context.sent;
+              _context.next = 7;
+              return rawResponse.json();
 
-              case 9:
-              case "end":
-                return _context.stop();
-            }
+            case 7:
+              jsonResponse = _context.sent;
+
+              if (jsonResponse.message) {
+                setTicketReply("");
+
+                _getAnswers();
+              } else if (jsonResponse.error) {
+                setError(t("user.ticket-answer-problem") + " Server message: ".concat(jsonResponse.error));
+                setButtonStatus(false);
+                setTimeout(function () {
+                  setButtonStatus(true);
+                }, 60000);
+
+                _getAnswers();
+              }
+
+            case 9:
+            case "end":
+              return _context.stop();
           }
-        }, _callee);
-      }));
+        }
+      }, _callee);
+    }));
 
-      return function _getAnswers() {
-        return _ref.apply(this, arguments);
-      };
-    }();
+    return function _handleSubmitTicket(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
 
+  var scrollToBottom = function scrollToBottom() {
+    overflowContainerRef.current.scrollTop = overflowContainerRef.current.scrollHeight;
+  };
+
+  var _getAnswers = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var rawResponse;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return fetch("/api/user/tickets/show/".concat(props.ticketID), {
+                method: 'GET',
+                headers: {
+                  'Accept': "application/json",
+                  'Content-Type': "application/json",
+                  'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+              });
+
+            case 2:
+              rawResponse = _context2.sent;
+              _context2.t0 = setTicket;
+              _context2.next = 6;
+              return rawResponse.json();
+
+            case 6:
+              _context2.t1 = _context2.sent;
+              (0, _context2.t0)(_context2.t1);
+              setLoading(false);
+              scrollToBottom();
+
+            case 10:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function _getAnswers() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     _getAnswers();
-
-    setInterval(function () {
-      _getAnswers();
-    }, 5000);
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     id: "ticket-page",
@@ -106602,14 +106679,18 @@ var TicketPage = function TicketPage(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "card mt-2 mb-2 col-md-12",
     id: "tickets_content_display "
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
+  }, error != "" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    type: "danger",
+    message: error
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
     className: "card-title mt-2"
-  }, ticket.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", {
+  }, ticket.name, "  "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", {
     className: "text-muted"
   }, ticket.created_at, " | ", ticket.status == "open" ? t("home.open") : t("home.closed")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "overflowA"
+    className: "overflowA",
+    ref: overflowContainerRef
   }, !loading ? Object.entries(ticket.answers).map(function (ans, id) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TicketAnswers__WEBPACK_IMPORTED_MODULE_4__["default"], {
       key: id,
@@ -106617,19 +106698,25 @@ var TicketPage = function TicketPage(props) {
     });
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "fas fa-spinner fa-pulse mb-2 mt-2"
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+    onSubmit: _handleSubmitTicket,
     className: "col-md-12  ",
     id: "text-area"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
     className: "form-control",
+    onChange: function onChange(e) {
+      return setTicketReply(e.target.value);
+    },
+    value: ticketReply,
     id: "reply_textarea"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     className: "btn btn-success btn-outline-primary",
-    type: "submit"
+    type: "submit",
+    disabled: !buttonStatus
   }, "Reply")))));
 };
 
@@ -107188,6 +107275,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modals_Modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../modals/Modal */ "./resources/js/components/modals/Modal.js");
 /* harmony import */ var _AddTicketForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./AddTicketForm */ "./resources/js/components/user/AddTicketForm.js");
 /* harmony import */ var _TicketPage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./TicketPage */ "./resources/js/components/user/TicketPage.js");
+/* harmony import */ var _Messages__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Messages */ "./resources/js/components/Messages.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -107215,6 +107303,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var UserTickets = function UserTickets(props) {
   var search = window.location.search;
   var params = new URLSearchParams(search);
@@ -107231,10 +107320,15 @@ var UserTickets = function UserTickets(props) {
       departments = _useState4[0],
       setDepartments = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState6 = _slicedToArray(_useState5, 2),
-      showTicketModal = _useState6[0],
-      setShowTicketModal = _useState6[1];
+      error = _useState6[0],
+      setError = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      showTicketModal = _useState8[0],
+      setShowTicketModal = _useState8[1];
 
   var columns = [{
     name: t("user.ticket-name"),
@@ -107242,14 +107336,12 @@ var UserTickets = function UserTickets(props) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
         to: "/my?page=tickets&showTicket=".concat(row.id)
       }, row.name));
-    },
-    sortable: true
+    }
   }, {
     name: t("user.ticket-status"),
     cell: function cell(row) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, row.status === 'open' ? 'Open' : 'Closed');
-    },
-    sortable: true
+    }
   }, {
     name: t("user.ticket-last-activity"),
     selector: 'updated_at',
@@ -107258,16 +107350,71 @@ var UserTickets = function UserTickets(props) {
     name: t("user.ticket-created"),
     selector: 'created_at',
     sortable: true
+  }, {
+    name: t("user.action"),
+    cell: function cell(row) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        href: "#",
+        onClick: function onClick(e) {
+          _deleteTicket(e, row.id);
+        }
+      }, t("user.delete")));
+    }
   }];
 
-  var _getUserTickets = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var rawResponse;
+  var _deleteTicket = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e, ticket_id) {
+      var rawResponse, jsonResponse;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              e.preventDefault();
+              _context.next = 3;
+              return fetch("/api/user/tickets/delete/".concat(ticket_id), {
+                method: 'POST',
+                headers: {
+                  'Accept': "application/json",
+                  'Content-Type': "application/json",
+                  'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+              });
+
+            case 3:
+              rawResponse = _context.sent;
+              _context.next = 6;
+              return rawResponse.json();
+
+            case 6:
+              jsonResponse = _context.sent;
+
+              if (jsonResponse.message) {
+                _getUserTickets();
+              } else if (jsonResponse.error) {
+                setError(jsonResponse.error);
+              }
+
+            case 8:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function _deleteTicket(_x, _x2) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  var _getUserTickets = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var rawResponse;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
               return fetch('/api/user/tickets', {
                 method: 'GET',
                 headers: {
@@ -107278,25 +107425,25 @@ var UserTickets = function UserTickets(props) {
               });
 
             case 2:
-              rawResponse = _context.sent;
-              _context.t0 = setData;
-              _context.next = 6;
+              rawResponse = _context2.sent;
+              _context2.t0 = setData;
+              _context2.next = 6;
               return rawResponse.json();
 
             case 6:
-              _context.t1 = _context.sent;
-              (0, _context.t0)(_context.t1);
+              _context2.t1 = _context2.sent;
+              (0, _context2.t0)(_context2.t1);
 
             case 8:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee);
+      }, _callee2);
     }));
 
     return function _getUserTickets() {
-      return _ref.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     };
   }();
 
@@ -107309,7 +107456,7 @@ var UserTickets = function UserTickets(props) {
 
     setInterval(function () {
       _getUserTickets();
-    }, 5000);
+    }, 10000);
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     id: "ticket_content"
@@ -107322,7 +107469,10 @@ var UserTickets = function UserTickets(props) {
       visibility: ticketPage === null ? 'visible' : 'hidden'
     },
     id: "tickets"
-  }, showTicketModal && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_modals_Modal__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, error != "" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    type: "danger",
+    message: error
+  }), showTicketModal && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_modals_Modal__WEBPACK_IMPORTED_MODULE_5__["default"], {
     title: t("user.add-ticket"),
     body: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_AddTicketForm__WEBPACK_IMPORTED_MODULE_6__["default"], {
       closeModalHandler: _closeModalHandler
@@ -107368,7 +107518,7 @@ module.exports = JSON.parse("{\"home\":{\"nav-home\":\"Home\",\"contacts\":\"Con
 /*! exports provided: home, auth, user, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"home\":{\"nav-home\":\"Home\",\"contacts\":\"Contacts\",\"quick-menu\":\"Quick Menu\",\"all-rights-reserved\":\"All Rights Reserved\",\"register\":\"Register\",\"login\":\"Login\",\"247-support\":\"24/7 SUPPORT\",\"email\":\"Email\",\"live-chat\":\"Live Chat\",\"live-chat-text\":\"Chat With Us Now\",\"template-made\":\"This template is made with\",\"by\":\"by\",\"live\":\"Live chat\",\"auth\":\"Register / Login\",\"forget-password\":\"Forget password\",\"auth_text\":\"Login / Register\",\"remember-me\":\"Remember me\",\"full-name\":\"Full name\",\"password\":\"Password\",\"first_step_forget_password\":\"First step of resetting password\",\"second_step_forget_password\":\"Second step of resseting password\",\"third_step_forget_password\":\"Third step of resseting password\",\"re-password\":\"Re-type Password\",\"confirm\":\"Confirm\",\"please-wait\":\"Please wait...\",\"city\":\"City\",\"region\":\"Region\",\"zipcode\":\"Zipcode\",\"mailing_list\":\"Mail ads\",\"subscribed\":\"Subscribed\",\"unsubscribed\":\"Unsubscribed\",\"submit\":\"Submit\",\"open\":\"Open\",\"closed\":\"Closed\",\"something-wr\":\"Something went wrong! Please try again later...\",\"you\":\"You\"},\"auth\":{\"success\":\"Your account was created successfully. Please confirm your E-Mail address to continue.\",\"login-success\":\"You are logged in, successfully!\",\"reCaptcha\":\"Please confirm reCaptcha to continue!\",\"tooManyAttempts\":\"Too many login attempts, please try again later or reset your password from the buttom link\",\"invalid-email\":\"The email you provided, is not valid\",\"invalid-password\":\"The password lenght must be 8 character long or greater\",\"invalid-repassword\":\"The password you provided is not the same as main password\",\"invalid-name\":\"The name is invalid\",\"field-required\":\"This field is required!\",\"reset-button\":\"Reset password\",\"reset-password-failed\":\"We can't recover your password right now! Please try again later.\",\"reset-password-success\":\"We've send you an email with instructions, how to recover your password!\",\"reset-key\":\"Enter your key from the email\",\"reset-key-valid\":\"Your key is valid, you'll be redirected to reset password page any moment!\",\"reset-key-invalid\":\"Your key is invalid, please make sure you copied it correctly!\",\"password-changed\":\"Password was changed, successfully\",\"password-notchanged\":\"We have a problem with changing your password, please try again later!\",\"account-verified\":\"Account was verified successfuly!\",\"account-verification-failed\":\"Account was not verified, please try again!\"},\"user\":{\"user-info\":\"User Information\",\"user-billing-details\":\"User Billing Details\",\"welcome\":\"Welcome again, \",\"active-services\":\"Active Services\",\"tickets\":\"Tickets\",\"invoices\":\"Invoices\",\"last-tickets\":\"Last Tickets\",\"balance\":\"Balance\",\"user-address-1\":\"Address 1\",\"user-address-2\":\"Address 2\",\"phone\":\"Phone number\",\"success-updated\":\"Your information was updated successfully!\",\"service-name\":\"Service name\",\"service-price\":\"Service price\",\"service-purchased\":\"Service purchased at\",\"order-id\":\"Order ID\",\"service-expire_at\":\"Service Expire at\",\"ticket-name\":\"Ticket Name\",\"ticket-created\":\"Ticket Created At\",\"ticket-status\":\"Ticket Status\",\"ticket-last-activity\":\"Ticket Last Activity\",\"open-tickets\":\"Open tickets\",\"ticket-topic\":\"Ticket topic\",\"department\":\"For department\",\"select-department\":\"Select department\",\"topic-description\":\"Topic Description:\",\"add-ticket\":\"Add Ticket\",\"ticket-pending\":\"Ticket was successfully added to our queue!\",\"ticket-failed\":\"We can't add your ticket right now! Please try again later.\"}}");
+module.exports = JSON.parse("{\"home\":{\"nav-home\":\"Home\",\"contacts\":\"Contacts\",\"quick-menu\":\"Quick Menu\",\"all-rights-reserved\":\"All Rights Reserved\",\"register\":\"Register\",\"login\":\"Login\",\"247-support\":\"24/7 SUPPORT\",\"email\":\"Email\",\"live-chat\":\"Live Chat\",\"live-chat-text\":\"Chat With Us Now\",\"template-made\":\"This template is made with\",\"by\":\"by\",\"live\":\"Live chat\",\"auth\":\"Register / Login\",\"forget-password\":\"Forget password\",\"auth_text\":\"Login / Register\",\"remember-me\":\"Remember me\",\"full-name\":\"Full name\",\"password\":\"Password\",\"first_step_forget_password\":\"First step of resetting password\",\"second_step_forget_password\":\"Second step of resseting password\",\"third_step_forget_password\":\"Third step of resseting password\",\"re-password\":\"Re-type Password\",\"confirm\":\"Confirm\",\"please-wait\":\"Please wait...\",\"city\":\"City\",\"region\":\"Region\",\"zipcode\":\"Zipcode\",\"mailing_list\":\"Mail ads\",\"subscribed\":\"Subscribed\",\"unsubscribed\":\"Unsubscribed\",\"submit\":\"Submit\",\"open\":\"Open\",\"closed\":\"Closed\",\"something-wr\":\"Something went wrong! Please try again later...\",\"you\":\"You\"},\"auth\":{\"success\":\"Your account was created successfully. Please confirm your E-Mail address to continue.\",\"login-success\":\"You are logged in, successfully!\",\"reCaptcha\":\"Please confirm reCaptcha to continue!\",\"tooManyAttempts\":\"Too many login attempts, please try again later or reset your password from the buttom link\",\"invalid-email\":\"The email you provided, is not valid\",\"invalid-password\":\"The password lenght must be 8 character long or greater\",\"invalid-repassword\":\"The password you provided is not the same as main password\",\"invalid-name\":\"The name is invalid\",\"field-required\":\"This field is required!\",\"reset-button\":\"Reset password\",\"reset-password-failed\":\"We can't recover your password right now! Please try again later.\",\"reset-password-success\":\"We've send you an email with instructions, how to recover your password!\",\"reset-key\":\"Enter your key from the email\",\"reset-key-valid\":\"Your key is valid, you'll be redirected to reset password page any moment!\",\"reset-key-invalid\":\"Your key is invalid, please make sure you copied it correctly!\",\"password-changed\":\"Password was changed, successfully\",\"password-notchanged\":\"We have a problem with changing your password, please try again later!\",\"account-verified\":\"Account was verified successfuly!\",\"account-verification-failed\":\"Account was not verified, please try again!\"},\"user\":{\"user-info\":\"User Information\",\"user-billing-details\":\"User Billing Details\",\"welcome\":\"Welcome again, \",\"active-services\":\"Active Services\",\"tickets\":\"Tickets\",\"invoices\":\"Invoices\",\"last-tickets\":\"Last Tickets\",\"balance\":\"Balance\",\"user-address-1\":\"Address 1\",\"user-address-2\":\"Address 2\",\"phone\":\"Phone number\",\"success-updated\":\"Your information was updated successfully!\",\"service-name\":\"Service name\",\"service-price\":\"Service price\",\"service-purchased\":\"Service purchased at\",\"order-id\":\"Order ID\",\"service-expire_at\":\"Service Expire at\",\"ticket-name\":\"Ticket Name\",\"ticket-created\":\"Ticket Created At\",\"ticket-status\":\"Ticket Status\",\"ticket-last-activity\":\"Ticket Last Activity\",\"open-tickets\":\"Open tickets\",\"ticket-topic\":\"Ticket topic\",\"department\":\"For department\",\"select-department\":\"Select department\",\"topic-description\":\"Topic Description:\",\"add-ticket\":\"Add Ticket\",\"ticket-pending\":\"Ticket was successfully added to our queue!\",\"ticket-failed\":\"We can't add your ticket right now! Please try again later.\",\"ticket-answer-problem\":\"We have problem with adding your answer.\",\"action\":\"Action\",\"delete\":\"Delete\"}}");
 
 /***/ }),
 
@@ -107400,6 +107550,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var cookies = new universal_cookie__WEBPACK_IMPORTED_MODULE_2__["default"]();
+var time = new Date();
+var cookie_expires_in = 3600;
 function getUserData() {
   return _getUserData.apply(this, arguments);
 }
@@ -107445,7 +107597,7 @@ function UserData() {
 
 function _UserData() {
   _UserData = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-    var data;
+    var data, userData;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
@@ -107466,14 +107618,15 @@ function _UserData() {
             return _context2.abrupt("return", false);
 
           case 7:
-            cookies.set('user', JSON.stringify(data), {
+            userData = JSON.stringify(data);
+            cookies.set('user', userData, {
               path: '/',
               sameSite: 'strict',
-              expires: data.expires_in
+              expires: new Date(time.getTime() + cookie_expires_in * 1000)
             });
             return _context2.abrupt("return", true);
 
-          case 9:
+          case 10:
           case "end":
             return _context2.stop();
         }
@@ -107502,7 +107655,7 @@ function _updateUserCookie() {
             cookies.set('user', JSON.stringify(data), {
               path: '/',
               sameSite: 'strict',
-              expires: data.expires_in
+              expires: new Date(time.getTime() + cookie_expires_in * 1000)
             });
 
           case 4:

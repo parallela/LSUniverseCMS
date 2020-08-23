@@ -2,6 +2,8 @@ import React from "react";
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
+const time = new Date();
+const cookie_expires_in = 3600;
 
 export async function getUserData() {
     const rawResponse = await fetch("/api/auth/me", {
@@ -26,13 +28,15 @@ export async function UserData() {
 
         return false;
     }
-    cookies.set('user', JSON.stringify(data),{path: '/', sameSite: 'strict', expires: data.expires_in});
+    const userData = JSON.stringify(data);
+
+    cookies.set('user', userData,{path: '/', sameSite: 'strict', expires: new Date(time.getTime() + cookie_expires_in * 1000) });
 
     return true;
 }
 export async function updateUserCookie() {
     let data = await getUserData();
-    cookies.set('user', JSON.stringify(data), {path: '/', sameSite: 'strict', expires: data.expires_in});
+    cookies.set('user', JSON.stringify(data), {path: '/', sameSite: 'strict', expires: new Date(time.getTime() + cookie_expires_in * 1000)});
 }
 export function User() {
     let user = cookies.get('user');

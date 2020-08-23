@@ -80,8 +80,8 @@ class TicketsController extends Controller
             'status' => 'required'
         ]);
 
-        if($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()->first()], 400);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first()], 400);
         }
 
         $ticket = Ticket::find('id', $id);
@@ -92,10 +92,10 @@ class TicketsController extends Controller
                 'department' => $request->input('department'),
                 'status' => $request->input('status')
             ]);
-            return response()->json(['message'=> 'Updated'], 200);
+            return response()->json(['message' => 'Updated'], 200);
         }
 
-        return response()->json(['message'=>'Invalid privileges'], 403);
+        return response()->json(['message' => 'Invalid privileges'], 403);
     }
 
     /**
@@ -111,7 +111,7 @@ class TicketsController extends Controller
 
     public function add_answer(Request $request, $id)
     {
-        $current_ticket = Ticket::where('id',$id)->where('user_id',auth()->id());
+        $current_ticket = Ticket::where('id', $id)->where('user_id', auth()->id());
         $ticket = $current_ticket->firstOrFail();
         $current_ticket->update([
             'updated_at' => Carbon::now()
@@ -121,9 +121,14 @@ class TicketsController extends Controller
             'content' => 'required',
         ]);
 
+        $last_ticket = TicketAnswer::where('user_id', auth()->id())->where('ticket_id', $id)->latest('created_at')->first();
+        if ($last_ticket->created_at->diffInMinutes() < 1) {
+            return response()->json(['error' => 'Please wait 1 minute, before another reply.'], 400);
+        }
 
-        if($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()->first()], 400);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first()], 400);
         }
 
         $answer = TicketAnswer::create([
@@ -132,6 +137,6 @@ class TicketsController extends Controller
             'ticket_id' => $ticket->id
         ]);
 
-        return response()->json(['message'=>'Created'], 200);
+        return response()->json(['message' => 'Created'], 200);
     }
 }
