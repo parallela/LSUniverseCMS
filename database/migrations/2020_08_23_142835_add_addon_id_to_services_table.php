@@ -14,7 +14,10 @@ class AddAddonIdToServicesTable extends Migration
     public function up()
     {
         Schema::table('services', function (Blueprint $table) {
-            //
+            $table->unsignedBigInteger('addon_id');
+        });
+        Schema::table('services', function(Blueprint $table) {
+            $table->foreign('addon_id')->references('id')->on('addons')->onDelete('cascade');
         });
     }
 
@@ -26,7 +29,7 @@ class AddAddonIdToServicesTable extends Migration
     public function down()
     {
         Schema::table('services', function (Blueprint $table) {
-            //
+           $table->removeColumn('addon_id');
         });
     }
 }

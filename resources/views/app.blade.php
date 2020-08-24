@@ -5,10 +5,20 @@
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="navbar-logo" content="{{ asset('images/logo.png') }}" />
+    <meta name="navbar-logo" content="{{ asset($s['logo']) }}" />
+    <meta property="og:title" content="{{ $s['og:title'] }}" />
+    <meta property="og:type" content="{{ $s['og:type'] }}" />
+    <meta property="og:url" content="{{ $s['og:url'] }}" />
+    <meta property="og:image" content="{{ $s['og:image'] }}" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="{{ $s['twitter:title'] }}" />
+    <meta name="twitter:description" content="{{ $s['twitter:description'] }}" />
+    <meta name="twitter:image" content="{{ asset($s['twitter:image']) }}" />
+    <meta name="description" content="{{ $s['description'] }}" />
+    <meta name="keywords" content="{{ $s['keywords'] }}" />
+    <meta property="fb:app_id" content="{{ $s['fbapp_id'] }}" />
 
-
-    <title>LSUniverse | Automatic Billing system for game hosting</title>
+    <title>{{ $s['title'] }}</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Roboto+Mono:300,400,500">
     <link rel="stylesheet" href="{{ asset('fonts/icomoon/style.css') }}">
