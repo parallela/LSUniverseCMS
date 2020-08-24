@@ -1,2 +1,2 @@
 require('./bootstrap');
-require('./components/App');
+require('../../lsuniverse/Themes/Default/components/App');
