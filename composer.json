@@ -13,6 +13,7 @@
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^7.0",
+        "haydenpierce/class-finder": "^0.4.2",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "propaganistas/laravel-phone": "^4.2",
@@ -38,12 +39,13 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "LSUniverse\\": "lsuniverse/"
         },
         "classmap": [
             "database/seeds",
             "database/factories",
-            "addons/"
+            "lsuniverse/Addons/"
         ]
     },
     "autoload-dev": {

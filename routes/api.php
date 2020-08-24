@@ -33,5 +33,9 @@ Route::group(['middleware' => 'api', 'prefix' => 'user'], function ($router) {
 
    Route::get('services', 'Backend\UserController@get_user_services');
 });
+Route::group(['middleware' => ['api','isadmin'], 'prefix'=>'admin'], function ($router) {
+    Route::post('addons/create', 'Backend\Admin\AddonController@create');
+    Route::get('addons/list', 'Backend\Admin\AddonController@list');
+});
 
 Route::get('departments/list', 'Backend\DepartmentsController@list')->middleware('api');
