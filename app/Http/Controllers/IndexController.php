@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class IndexController extends Controller
 {
@@ -12,14 +13,19 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $settings = Setting::all()->toArray();
-        $s = [];
+        Cache::remember('settings', 30, function () {
+            $settings = Setting::all()->toArray();
+            $s = [];
 
-        foreach ($settings as $k => $v) {
-            $s[$v['key']] = $v['value'];
-        }
+            foreach ($settings as $k => $v) {
+                $s[$v['key']] = $v['value'];
+            }
+
+            return $s;
+        });
+        $s = Cache::get('settings');
 
 
-        return view('app',compact('s'));
+        return view('app', compact('s'));
     }
 }
