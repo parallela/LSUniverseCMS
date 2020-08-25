@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useTranslation } from "react-multi-lang";
+import React, {useEffect} from "react";
+import {useTranslation} from "react-multi-lang";
 
 const Verififaction = props => {
     let search = window.location.search;
@@ -10,7 +10,7 @@ const Verififaction = props => {
     const VerifyUser = async () => {
         if (token === null || token === undefined) {
             localStorage.removeItem("verified");
-            window.location.href='/auth';
+            window.location.href = '/auth';
 
             return false;
         }
@@ -24,17 +24,24 @@ const Verififaction = props => {
         });
         const jsonResponse = await rawResponse.json();
 
-        if (jsonResponse.message == "Verified") {
-            localStorage.setItem("verified", "verified");
-            window.location.href = "/auth";
 
-            return true;
-        } else if (jsonResponse.error) {
+        if (rawResponse.status === 500) {
+            return false;
+        }
+
+        if (rawResponse.status !== 200 || rawResponse.status !== 201) {
+
             localStorage.setItem("verified", "not_verified");
             window.location.href = "/auth";
 
             return false;
         }
+
+        localStorage.setItem("verified", "verified");
+        window.location.href = "/auth";
+
+        return true;
+
     };
 
     setTimeout(() => {

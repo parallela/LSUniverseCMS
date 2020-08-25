@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import { useTranslation } from "react-multi-lang";
+import React, {useState} from "react";
+import {useTranslation} from "react-multi-lang";
 import Messages from "../Messages";
 import ReCAPTCHA from "react-google-recaptcha";
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 const SecondStep = props => {
     const t = useTranslation();
     const h = useHistory();
     const [key, setKey] = useState("");
-    const [error, setError] = useState("");
+    const [error, setError] = useState(false);
+    const [errorMessages, setErrorMessages] = useState([]);
     const [message, setMessage] = useState("");
     const [reCaptcha, setRecaptcha] = useState(false);
 
@@ -16,11 +17,11 @@ const SecondStep = props => {
     const _pushToFinalStep = () => {
         setTimeout(() => {
             h.push('/password/reset?step=3');
-        },2000)
-        
+        }, 2000)
+
         return true;
     }
-    
+
     const _reCaptchaCancel = value => {
         setRecaptcha(false);
     };
@@ -37,7 +38,9 @@ const SecondStep = props => {
         };
 
         if (!reCaptcha) {
-            setError(t("auth.reCaptcha"));
+            setError(true);
+            setErrorMessages({"auth": t("auth.reCaptcha")});
+
             return false;
         }
 
@@ -53,21 +56,28 @@ const SecondStep = props => {
 
         const jsonResponse = await rawResponse.json();
 
-        if(jsonResponse.message) {
-            setError("");
-            setMessage(t('auth.reset-key-valid') + `  
-            
-            Server Message: ${jsonResponse.message}
-            `);
-            _pushToFinalStep();
-            localStorage.setItem('reset_password_token', key);
 
-            return true;
-        } else if(jsonResponse.error) {
-            setError(t('auth.reset-key-invalid'))
+        if (rawResponse.status === 500) {
             return false;
         }
-        
+
+        if (rawResponse.status !== 200 && rawResponse.status !== 201) {
+            setErrorMessages({"failed": t('auth.reset-key-invalid')})
+            setError(true);
+            return false;
+        }
+
+        setError(false);
+        setMessage(t('auth.reset-key-valid') + `
+
+            Server Message: ${jsonResponse.message}
+            `);
+        _pushToFinalStep();
+        localStorage.setItem('reset_password_token', key);
+
+        return true;
+
+
     };
 
     return (
@@ -76,11 +86,17 @@ const SecondStep = props => {
                 <h5 className="card-title">
                     {t("home.second_step_forget_password")}
                 </h5>
-                <hr />
+                <hr/>
 
-                {error != "" && <Messages type={"danger"} message={error} />}
+                {error &&
+                Object.entries(errorMessages).map((value, key) => (
+                        <Messages key={key} type={"danger"} message={value[1].toString()}/>
+                    )
+                )}
+
+
                 {message != "" && (
-                    <Messages type={"success"} message={message} />
+                    <Messages type={"success"} message={message}/>
                 )}
 
                 <form onSubmit={_handleSubmit}>

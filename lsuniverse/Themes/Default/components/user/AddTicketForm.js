@@ -77,7 +77,6 @@ const AddTicketForm = props => {
         setMessage(t("user.ticket-pending"));
         setError(false);
         props.closeModalHandler();
-        _getDepartments();
 
         loaderStatus(false);
     }

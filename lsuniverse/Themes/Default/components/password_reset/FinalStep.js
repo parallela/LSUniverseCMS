@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import { useTranslation } from "react-multi-lang";
+import React, {useState} from "react";
+import {useTranslation} from "react-multi-lang";
 import Messages from "../Messages";
 import ReCAPTCHA from "react-google-recaptcha";
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 const FinalStep = props => {
     const t = useTranslation();
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [error, setError] = useState("");
+    const [error, setError] = useState(false);
+    const [errorMessages, setErrorMessages] = useState([]);
     const [message, setMessage] = useState("");
     const [reCaptcha, setRecaptcha] = useState(false);
 
@@ -16,11 +17,11 @@ const FinalStep = props => {
     const _pushToAuth = () => {
         setTimeout(() => {
             window.location.href = '/auth';
-        },2000)
-        
+        }, 2000)
+
         return true;
     }
-    
+
     const _reCaptchaCancel = value => {
         setRecaptcha(false);
     };
@@ -39,7 +40,9 @@ const FinalStep = props => {
         };
 
         if (!reCaptcha) {
-            setError(t("auth.reCaptcha"));
+            setError(true);
+            setErrorMessages({"auth": t("auth.reCaptcha")});
+
             return false;
         }
 
@@ -55,21 +58,25 @@ const FinalStep = props => {
 
         const jsonResponse = await rawResponse.json();
 
-        if(jsonResponse.message) {
-            setMessage(t('auth.password-changed'));
-            setError("");
-            _pushToAuth();
-            
-            return true;
-        } else if(jsonResponse.error) {
-            setMessage("");
-            setError(t('auth.password-notchanged') + `
-                Server Message: ${jsonResponse.error}
-            `)
 
+        if (rawResponse.status === 500) {
             return false;
         }
-        
+
+        if (rawResponse.status !== 200 && rawResponse.status !== 201) {
+            setError(true);
+            setErrorMessages(jsonResponse.errors);
+
+            return false;
+
+        }
+
+        setMessage(t('auth.password-changed'));
+        setError(false);
+        _pushToAuth();
+
+        return true;
+
     };
 
     return (
@@ -78,11 +85,16 @@ const FinalStep = props => {
                 <h5 className="card-title">
                     {t("home.third_step_forget_password")}
                 </h5>
-                <hr />
+                <hr/>
 
-                {error != "" && <Messages type={"danger"} message={error} />}
+                {error &&
+                Object.entries(errorMessages).map((value, key) => (
+                        <Messages key={key} type={"danger"} message={value[1].toString()}/>
+                    )
+                )}
+
                 {message != "" && (
-                    <Messages type={"success"} message={message} />
+                    <Messages type={"success"} message={message}/>
                 )}
 
                 <form onSubmit={_handleSubmit}>
@@ -115,7 +127,6 @@ const FinalStep = props => {
                             placeholder={t("home.re-password")}
                         />
                     </div>
-
 
 
                     <div className="form-group">
