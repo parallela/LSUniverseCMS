@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\UserVerification;
 
 class VerificationController extends Controller
-{        
+{
 
     /**
      * Verify user by email
@@ -23,7 +23,7 @@ class VerificationController extends Controller
             ]);
             $data->delete();
         } else {
-            return response()->json(['error'=>'Invalid validation token'], 400);
+            return response()->json(['errors'=>["inv_val_token"=>'Invalid validation token']], 400);
         }
 
         return response()->json(['message' => 'Verified']);

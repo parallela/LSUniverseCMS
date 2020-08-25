@@ -36,7 +36,7 @@ class AddonController extends Controller
         $addon_check = Addon::where('namespace', $request->input('namespace'))->first();
 
         if ($addon_check !== null) {
-            return response()->json(['error' => 'This addon with that namespace already exist'], 400);
+            return response()->json(['errors' => ['addon_exist'=>'This addon with that namespace already exist']], 400);
         }
         Addon::create([
             'namespace' => $request->input('namespace'),

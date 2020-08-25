@@ -1,20 +1,21 @@
 import React from "react";
-import { useTranslation } from "react-multi-lang";
-import { useState, useEffect } from "react";
+import {useTranslation} from "react-multi-lang";
+import {useState, useEffect} from "react";
 import Messages from "./Messages";
 import ReCAPTCHA from "react-google-recaptcha";
-import { UserData } from "../services/Authenticator";
-import { useHistory } from "react-router-dom";
+import {UserData} from "../services/Authenticator";
+import {useHistory} from "react-router-dom";
 
 const Login = props => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const t = useTranslation();
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
+    const [error, setError] = useState(false);
+    const [errorMessages, setErrorMessages] = useState([]);
     const [message, setMessage] = useState("");
     const [showForm, setShowForm] = useState(true);
-    const [reCaptcha, setRecaptcha] = useState(false);
+    const [reCaptcha, setRecaptcha] = useState(true); // TODO: Return it to false;
     /*
      *  userLA = User Login Attempts
      */
@@ -53,14 +54,16 @@ const Login = props => {
         };
 
         if (userLA > 5) {
-            setError(t("auth.tooManyAttempts"));
+            setError(true);
+            setErrorMessages({"tooManyAttempts": t("auth.tooManyAttempts")});
 
             return false;
         }
 
         if (!reCaptcha) {
-            setError(t("auth.reCaptcha"));
             loaderStatus(false);
+            setError(true);
+            setErrorMessages({"auth": t("auth.reCaptcha")});
 
             return false;
         }
@@ -77,6 +80,21 @@ const Login = props => {
         loaderStatus(true);
         const jsonResponse = await rawResponse.json();
 
+        if(rawResponse.status === 500) {
+            return false;
+        }
+
+        if (rawResponse.status !== 200 && rawResponse.status !== 201) {
+            setError(true);
+            setErrorMessages(jsonResponse.errors);
+            loaderStatus(false);
+            setUserLA(userLA + 1);
+            setShowForm(true);
+
+            return false;
+
+        }
+
         if (jsonResponse.access_token) {
             localStorage.setItem("token", jsonResponse.access_token);
             setMessage(t("auth.login-success"));
@@ -90,20 +108,18 @@ const Login = props => {
             }, 1500);
 
             return true;
-        } else if (jsonResponse.error) {
-            setError(jsonResponse.error);
-            loaderStatus(false);
-            setUserLA(userLA + 1);
-            setShowForm(true);
-
-            return false;
         }
     };
 
     return (
         <div className="col-md-12 col-lg-6 mb-5">
-            {error != "" && <Messages type={"danger"} message={error} />}
-            {message != "" && <Messages type={"success"} message={message} />}
+            {error &&
+            Object.entries(errorMessages).map((value, key) => (
+                    <Messages key={key} type={"danger"} message={value[1].toString()}/>
+                )
+            )}
+
+            {message != "" && <Messages type={"success"} message={message}/>}
             {showForm && (
                 <form
                     action="#"
@@ -152,13 +168,13 @@ const Login = props => {
 
                     <div className="row form-group">
                         <div className="col-md-12">
-                            <ReCAPTCHA
-                                sitekey={
-                                    "6Lc8LL8ZAAAAAAOp8OPeGrbaUnp76x9A2sXM6Uv0"
-                                }
-                                onExpired={_reCaptchaCancel}
-                                onChange={_reCaptchaConfirmation}
-                            />
+                            {/*<ReCAPTCHA*/}
+                            {/*    sitekey={*/}
+                            {/*        "6Lc8LL8ZAAAAAAOp8OPeGrbaUnp76x9A2sXM6Uv0"*/}
+                            {/*    }*/}
+                            {/*    onExpired={_reCaptchaCancel}*/}
+                            {/*    onChange={_reCaptchaConfirmation}*/}
+                            {/*/>*/}
                         </div>
                     </div>
 

@@ -9,7 +9,8 @@ import Messages from "../Messages";
 const TicketPage = props => {
     const [ticket, setTicket] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
+    const [error, setError] = useState(false);
+    const [errorMessages, setErrorMessages] = useState([]);
     const [ticketReply, setTicketReply] = useState("");
     const [buttonStatus, setButtonStatus] = useState(true);
     const overflowContainerRef = useRef(null);
@@ -33,17 +34,24 @@ const TicketPage = props => {
         });
         const jsonResponse = await rawResponse.json();
 
-        if (jsonResponse.message) {
-            setTicketReply("");
-            _getAnswers();
-        } else if (jsonResponse.error) {
-            setError(t("user.ticket-answer-problem") + ` Server message: ${jsonResponse.error}`);
+        if (rawResponse.status === 500) {
+            return false;
+        }
+
+        if (rawResponse.status !== 200 && rawResponse.status !== 201) {
+            setError(true);
+            setErrorMessages(jsonResponse.errors);
             setButtonStatus(false);
             setTimeout(() => {
                 setButtonStatus(true);
             }, 60000)
             _getAnswers();
+
+            return false;
         }
+
+        setTicketReply("");
+        _getAnswers();
 
     }
 
@@ -74,7 +82,11 @@ const TicketPage = props => {
     return (
         <div id="ticket-page" className="container-fluid">
             <div className="card mt-2 mb-2 col-md-12" id="tickets_content_display ">
-                {error != "" && <Messages type={"danger"} message={error}/>}
+                {error &&
+                Object.entries(errorMessages).map((value, key) => (
+                        <Messages key={key} type={"danger"} message={value[1].toString()}/>
+                    )
+                )}
 
                 <h5 className="card-title mt-2">{ticket.name}  </h5>
                 <h6 className="text-muted">{ticket.created_at} | {ticket.status == "open" ? t("home.open") : t("home.closed")}</h6>
@@ -93,7 +105,7 @@ const TicketPage = props => {
                     </div>
                     <div className="form-group">
                         <button className="btn btn-success btn-outline-primary" type="submit"
-                                disabled={!buttonStatus}>Reply
+                                disabled={!buttonStatus}>{t("home.reply")}
                         </button>
                     </div>
                 </form>

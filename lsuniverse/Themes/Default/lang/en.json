@@ -35,7 +35,8 @@
         "open": "Open",
         "closed": "Closed",
         "something-wr": "Something went wrong! Please try again later...",
-        "you": "You"
+        "you": "You",
+        "reply": "Reply"
     },
     "auth": {
         "success": "Your account was created successfully. Please confirm your E-Mail address to continue.",

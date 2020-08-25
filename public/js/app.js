@@ -547,34 +547,40 @@ var Login = function Login(props) {
       loading = _useState6[0],
       setLoading = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState8 = _slicedToArray(_useState7, 2),
       error = _useState8[0],
       setError = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState10 = _slicedToArray(_useState9, 2),
-      message = _useState10[0],
-      setMessage = _useState10[1];
+      errorMessages = _useState10[0],
+      setErrorMessages = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState12 = _slicedToArray(_useState11, 2),
-      showForm = _useState12[0],
-      setShowForm = _useState12[1];
+      message = _useState12[0],
+      setMessage = _useState12[1];
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
       _useState14 = _slicedToArray(_useState13, 2),
-      reCaptcha = _useState14[0],
-      setRecaptcha = _useState14[1];
+      showForm = _useState14[0],
+      setShowForm = _useState14[1];
+
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState16 = _slicedToArray(_useState15, 2),
+      reCaptcha = _useState16[0],
+      setRecaptcha = _useState16[1]; // TODO: Return it to false;
+
   /*
    *  userLA = User Login Attempts
    */
 
 
-  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
-      _useState16 = _slicedToArray(_useState15, 2),
-      userLA = _useState16[0],
-      setUserLA = _useState16[1];
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+      _useState18 = _slicedToArray(_useState17, 2),
+      userLA = _useState18[0],
+      setUserLA = _useState18[1];
 
   var h = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["useHistory"])();
 
@@ -615,25 +621,31 @@ var Login = function Login(props) {
               };
 
               if (!(userLA > 5)) {
-                _context.next = 5;
+                _context.next = 6;
                 break;
               }
 
-              setError(t("auth.tooManyAttempts"));
+              setError(true);
+              setErrorMessages({
+                "tooManyAttempts": t("auth.tooManyAttempts")
+              });
               return _context.abrupt("return", false);
 
-            case 5:
+            case 6:
               if (reCaptcha) {
-                _context.next = 9;
+                _context.next = 11;
                 break;
               }
 
-              setError(t("auth.reCaptcha"));
               loaderStatus(false);
+              setError(true);
+              setErrorMessages({
+                "auth": t("auth.reCaptcha")
+              });
               return _context.abrupt("return", false);
 
-            case 9:
-              _context.next = 11;
+            case 11:
+              _context.next = 13;
               return fetch("api/auth/login", {
                 method: "POST",
                 headers: {
@@ -643,17 +655,38 @@ var Login = function Login(props) {
                 body: JSON.stringify(data)
               });
 
-            case 11:
+            case 13:
               rawResponse = _context.sent;
               loaderStatus(true);
-              _context.next = 15;
+              _context.next = 17;
               return rawResponse.json();
 
-            case 15:
+            case 17:
               jsonResponse = _context.sent;
 
+              if (!(rawResponse.status === 500)) {
+                _context.next = 20;
+                break;
+              }
+
+              return _context.abrupt("return", false);
+
+            case 20:
+              if (!(rawResponse.status !== 200 && rawResponse.status !== 201)) {
+                _context.next = 27;
+                break;
+              }
+
+              setError(true);
+              setErrorMessages(jsonResponse.errors);
+              loaderStatus(false);
+              setUserLA(userLA + 1);
+              setShowForm(true);
+              return _context.abrupt("return", false);
+
+            case 27:
               if (!jsonResponse.access_token) {
-                _context.next = 26;
+                _context.next = 35;
                 break;
               }
 
@@ -667,19 +700,7 @@ var Login = function Login(props) {
               }, 1500);
               return _context.abrupt("return", true);
 
-            case 26:
-              if (!jsonResponse.error) {
-                _context.next = 32;
-                break;
-              }
-
-              setError(jsonResponse.error);
-              loaderStatus(false);
-              setUserLA(userLA + 1);
-              setShowForm(true);
-              return _context.abrupt("return", false);
-
-            case 32:
+            case 35:
             case "end":
               return _context.stop();
           }
@@ -694,9 +715,12 @@ var Login = function Login(props) {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-md-12 col-lg-6 mb-5"
-  }, error != "" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    type: "danger",
-    message: error
+  }, error && Object.entries(errorMessages).map(function (value, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      key: key,
+      type: "danger",
+      message: value[1].toString()
+    });
   }), message != "" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: "success",
     message: message
@@ -744,11 +768,7 @@ var Login = function Login(props) {
     className: "row form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-md-12"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_google_recaptcha__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    sitekey: "6Lc8LL8ZAAAAAAOp8OPeGrbaUnp76x9A2sXM6Uv0",
-    onExpired: _reCaptchaCancel,
-    onChange: _reCaptchaConfirmation
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "row form-group mb-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-md-12"
@@ -1077,20 +1097,26 @@ var Register = function Register(props) {
       message = _useState12[0],
       setMessage = _useState12[1];
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState14 = _slicedToArray(_useState13, 2),
       error = _useState14[0],
       setError = _useState14[1];
 
-  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState16 = _slicedToArray(_useState15, 2),
-      showForm = _useState16[0],
-      setShowForm = _useState16[1];
+      errorMessages = _useState16[0],
+      setErrorMessages = _useState16[1];
 
-  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
       _useState18 = _slicedToArray(_useState17, 2),
-      reCaptcha = _useState18[0],
-      setRecaptcha = _useState18[1];
+      showForm = _useState18[0],
+      setShowForm = _useState18[1];
+
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState20 = _slicedToArray(_useState19, 2),
+      reCaptcha = _useState20[0],
+      setRecaptcha = _useState20[1]; // TODO: back value to false;
+
 
   var _reCaptchaCancel = function _reCaptchaCancel(value) {
     setRecaptcha(false);
@@ -1105,7 +1131,7 @@ var Register = function Register(props) {
       setLoading(status);
     }, 1200);
     setTimeout(function () {
-      setError("");
+      setError(false);
       setMessage("");
     }, 5000);
   };
@@ -1120,15 +1146,18 @@ var Register = function Register(props) {
               e.preventDefault();
 
               if (reCaptcha) {
-                _context.next = 5;
+                _context.next = 6;
                 break;
               }
 
-              setError(t("auth.reCaptcha"));
               loaderStatus(false);
+              setError(true);
+              setErrorMessages({
+                "auth": t("auth.reCaptcha")
+              });
               return _context.abrupt("return", false);
 
-            case 5:
+            case 6:
               data = {
                 name: name,
                 email: email,
@@ -1136,7 +1165,7 @@ var Register = function Register(props) {
                 re_password: confirmPassword
               };
               setLoading(true);
-              _context.next = 9;
+              _context.next = 10;
               return fetch("api/auth/register", {
                 method: "POST",
                 headers: {
@@ -1146,36 +1175,40 @@ var Register = function Register(props) {
                 body: JSON.stringify(data)
               });
 
-            case 9:
+            case 10:
               rawResponse = _context.sent;
-              _context.next = 12;
+              _context.next = 13;
               return rawResponse.json();
 
-            case 12:
+            case 13:
               jsonResponse = _context.sent;
 
-              if (!jsonResponse.message) {
-                _context.next = 20;
+              if (!(rawResponse.status === 500)) {
+                _context.next = 16;
                 break;
               }
 
-              setShowForm(false);
-              loaderStatus(false);
-              setMessage(t("auth.success"));
-              return _context.abrupt("return", true);
+              return _context.abrupt("return", false);
 
-            case 20:
-              if (!jsonResponse.error) {
-                _context.next = 25;
+            case 16:
+              if (!(rawResponse.status !== 200 && rawResponse.status !== 201)) {
+                _context.next = 22;
                 break;
               }
 
               setShowForm(true);
               loaderStatus(false);
-              setError(jsonResponse.error);
+              setErrorMessages(jsonResponse.errors);
+              setError(true);
               return _context.abrupt("return", false);
 
-            case 25:
+            case 22:
+              setShowForm(false);
+              loaderStatus(false);
+              setMessage(t("auth.success"));
+              return _context.abrupt("return", true);
+
+            case 26:
             case "end":
               return _context.stop();
           }
@@ -1190,9 +1223,12 @@ var Register = function Register(props) {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-md-12 col-lg-6 mb-5"
-  }, error != "" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    type: "danger",
-    message: error
+  }, error && Object.entries(errorMessages).map(function (value, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      key: key,
+      type: "danger",
+      message: value[1].toString()
+    });
   }), message != "" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: "success",
     message: message
@@ -1272,11 +1308,7 @@ var Register = function Register(props) {
     className: "row form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-md-12"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_google_recaptcha__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    sitekey: "6Lc8LL8ZAAAAAAOp8OPeGrbaUnp76x9A2sXM6Uv0",
-    onExpired: _reCaptchaCancel,
-    onChange: _reCaptchaConfirmation
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "row form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-md-12"
@@ -2515,20 +2547,25 @@ var AddTicketForm = function AddTicketForm(props) {
       topicDep = _useState8[0],
       setTopicDep = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState10 = _slicedToArray(_useState9, 2),
       error = _useState10[0],
       setError = _useState10[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState12 = _slicedToArray(_useState11, 2),
-      message = _useState12[0],
-      setMessage = _useState12[1];
+      errorMessages = _useState12[0],
+      setErrorMessages = _useState12[1];
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState14 = _slicedToArray(_useState13, 2),
-      loading = _useState14[0],
-      setLoading = _useState14[1];
+      message = _useState14[0],
+      setMessage = _useState14[1];
+
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState16 = _slicedToArray(_useState15, 2),
+      loading = _useState16[0],
+      setLoading = _useState16[1];
 
   var t = Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_2__["useTranslation"])();
   var prepareOptions = [];
@@ -2581,7 +2618,6 @@ var AddTicketForm = function AddTicketForm(props) {
   var loaderStatus = function loaderStatus(status) {
     setTimeout(function () {
       setLoading(status);
-      props.closeModalHandler();
     }, 3000);
   };
 
@@ -2618,15 +2654,33 @@ var AddTicketForm = function AddTicketForm(props) {
               jsonResponse = _context2.sent;
               setLoading(true);
 
-              if (jsonResponse.message) {
-                setMessage(t("user.ticket-pending"));
-                loaderStatus(false);
-              } else if (jsonResponse.error) {
-                setError(t("user.ticket-failed") + " Server Message: ".concat(jsonResponse.error));
-                loaderStatus(false);
+              if (!(rawResponse.status === 500)) {
+                _context2.next = 11;
+                break;
               }
 
-            case 10:
+              return _context2.abrupt("return", false);
+
+            case 11:
+              if (!(rawResponse.status !== 200 && rawResponse.status !== 201)) {
+                _context2.next = 15;
+                break;
+              }
+
+              setError(true);
+              setErrorMessages(jsonResponse.errors);
+              return _context2.abrupt("return", false);
+
+            case 15:
+              setMessage(t("user.ticket-pending"));
+              setError(false);
+              props.closeModalHandler();
+
+              _getDepartments();
+
+              loaderStatus(false);
+
+            case 20:
             case "end":
               return _context2.stop();
           }
@@ -2651,10 +2705,13 @@ var AddTicketForm = function AddTicketForm(props) {
     onSubmit: _handleSubmit
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "col-md-12"
-  }, error != "" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    type: "danger",
-    message: error
-  }), message != "" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, error && Object.entries(errorMessages).map(function (value, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      key: key,
+      type: "danger",
+      message: value[1].toString()
+    });
+  }), message !== "" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_5__["default"], {
     type: "success",
     message: message
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -2818,20 +2875,25 @@ var TicketPage = function TicketPage(props) {
       loading = _useState4[0],
       setLoading = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState6 = _slicedToArray(_useState5, 2),
       error = _useState6[0],
       setError = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState8 = _slicedToArray(_useState7, 2),
-      ticketReply = _useState8[0],
-      setTicketReply = _useState8[1];
+      errorMessages = _useState8[0],
+      setErrorMessages = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState10 = _slicedToArray(_useState9, 2),
-      buttonStatus = _useState10[0],
-      setButtonStatus = _useState10[1];
+      ticketReply = _useState10[0],
+      setTicketReply = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState12 = _slicedToArray(_useState11, 2),
+      buttonStatus = _useState12[0],
+      setButtonStatus = _useState12[1];
 
   var overflowContainerRef = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])(null);
   var t = Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_2__["useTranslation"])();
@@ -2866,21 +2928,36 @@ var TicketPage = function TicketPage(props) {
             case 7:
               jsonResponse = _context.sent;
 
-              if (jsonResponse.message) {
-                setTicketReply("");
-
-                _getAnswers();
-              } else if (jsonResponse.error) {
-                setError(t("user.ticket-answer-problem") + " Server message: ".concat(jsonResponse.error));
-                setButtonStatus(false);
-                setTimeout(function () {
-                  setButtonStatus(true);
-                }, 60000);
-
-                _getAnswers();
+              if (!(rawResponse.status === 500)) {
+                _context.next = 10;
+                break;
               }
 
-            case 9:
+              return _context.abrupt("return", false);
+
+            case 10:
+              if (!(rawResponse.status !== 200 && rawResponse.status !== 201)) {
+                _context.next = 17;
+                break;
+              }
+
+              setError(true);
+              setErrorMessages(jsonResponse.errors);
+              setButtonStatus(false);
+              setTimeout(function () {
+                setButtonStatus(true);
+              }, 60000);
+
+              _getAnswers();
+
+              return _context.abrupt("return", false);
+
+            case 17:
+              setTicketReply("");
+
+              _getAnswers();
+
+            case 19:
             case "end":
               return _context.stop();
           }
@@ -2948,9 +3025,12 @@ var TicketPage = function TicketPage(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "card mt-2 mb-2 col-md-12",
     id: "tickets_content_display "
-  }, error != "" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    type: "danger",
-    message: error
+  }, error && Object.entries(errorMessages).map(function (value, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      key: key,
+      type: "danger",
+      message: value[1].toString()
+    });
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
     className: "card-title mt-2"
   }, ticket.name, "  "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h6", {
@@ -2986,7 +3066,7 @@ var TicketPage = function TicketPage(props) {
     className: "btn btn-success btn-outline-primary",
     type: "submit",
     disabled: !buttonStatus
-  }, "Reply")))));
+  }, t("home.reply"))))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (TicketPage);
@@ -3082,20 +3162,25 @@ var UserBilling = function UserBilling(props) {
       message = _useState16[0],
       setMessage = _useState16[1];
 
-  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState18 = _slicedToArray(_useState17, 2),
       error = _useState18[0],
       setError = _useState18[1];
 
-  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState20 = _slicedToArray(_useState19, 2),
-      loading = _useState20[0],
-      setLoading = _useState20[1];
+      errorMessages = _useState20[0],
+      setErrorMessages = _useState20[1];
+
+  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState22 = _slicedToArray(_useState21, 2),
+      loading = _useState22[0],
+      setLoading = _useState22[1];
 
   var loaderStatus = function loaderStatus(status) {
     setLoading(status);
     setTimeout(function () {
-      setError("");
+      setError(status);
       setMessage("");
     }, 5000);
   };
@@ -3137,18 +3222,31 @@ var UserBilling = function UserBilling(props) {
             case 8:
               jsonResponse = _context.sent;
 
-              if (jsonResponse.message) {
-                Object(_services_Authenticator__WEBPACK_IMPORTED_MODULE_3__["updateUserCookie"])();
-                setTimeout(function () {
-                  loaderStatus(false);
-                }, 3000);
-                setMessage(t("user.success-updated"));
-              } else if (jsonResponse.error) {
-                loaderStatus(false);
-                setError(t("home.something-wr") + " Server Message: ".concat(jsonResponse.error));
+              if (!(rawResponse.status === 500)) {
+                _context.next = 11;
+                break;
               }
 
-            case 10:
+              return _context.abrupt("return", false);
+
+            case 11:
+              if (!(rawResponse.status !== 200 && rawResponse.status !== 201)) {
+                _context.next = 15;
+                break;
+              }
+
+              setError(true);
+              setErrorMessages(jsonResponse.errors);
+              return _context.abrupt("return", false);
+
+            case 15:
+              Object(_services_Authenticator__WEBPACK_IMPORTED_MODULE_3__["updateUserCookie"])();
+              setTimeout(function () {
+                loaderStatus(false);
+              }, 3000);
+              setMessage(t("user.success-updated"));
+
+            case 18:
             case "end":
               return _context.stop();
           }
@@ -3163,10 +3261,13 @@ var UserBilling = function UserBilling(props) {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "text-center"
-  }, error != "" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    type: "danger",
-    message: error
-  }), message != "" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, error && Object.entries(errorMessages).map(function (value, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      key: key,
+      type: "danger",
+      message: value[1].toString()
+    });
+  }), message !== "" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_4__["default"], {
     type: "success",
     message: message
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
@@ -3787,7 +3888,7 @@ module.exports = JSON.parse("{\"home\":{\"nav-home\":\"Home\",\"contacts\":\"Con
 /*! exports provided: home, auth, user, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"home\":{\"nav-home\":\"Home\",\"contacts\":\"Contacts\",\"quick-menu\":\"Quick Menu\",\"all-rights-reserved\":\"All Rights Reserved\",\"register\":\"Register\",\"login\":\"Login\",\"247-support\":\"24/7 SUPPORT\",\"email\":\"Email\",\"live-chat\":\"Live Chat\",\"live-chat-text\":\"Chat With Us Now\",\"template-made\":\"This template is made with\",\"by\":\"by\",\"live\":\"Live chat\",\"auth\":\"Register / Login\",\"forget-password\":\"Forget password\",\"auth_text\":\"Login / Register\",\"remember-me\":\"Remember me\",\"full-name\":\"Full name\",\"password\":\"Password\",\"first_step_forget_password\":\"First step of resetting password\",\"second_step_forget_password\":\"Second step of resseting password\",\"third_step_forget_password\":\"Third step of resseting password\",\"re-password\":\"Re-type Password\",\"confirm\":\"Confirm\",\"please-wait\":\"Please wait...\",\"city\":\"City\",\"region\":\"Region\",\"zipcode\":\"Zipcode\",\"mailing_list\":\"Mail ads\",\"subscribed\":\"Subscribed\",\"unsubscribed\":\"Unsubscribed\",\"submit\":\"Submit\",\"open\":\"Open\",\"closed\":\"Closed\",\"something-wr\":\"Something went wrong! Please try again later...\",\"you\":\"You\"},\"auth\":{\"success\":\"Your account was created successfully. Please confirm your E-Mail address to continue.\",\"login-success\":\"You are logged in, successfully!\",\"reCaptcha\":\"Please confirm reCaptcha to continue!\",\"tooManyAttempts\":\"Too many login attempts, please try again later or reset your password from the buttom link\",\"invalid-email\":\"The email you provided, is not valid\",\"invalid-password\":\"The password lenght must be 8 character long or greater\",\"invalid-repassword\":\"The password you provided is not the same as main password\",\"invalid-name\":\"The name is invalid\",\"field-required\":\"This field is required!\",\"reset-button\":\"Reset password\",\"reset-password-failed\":\"We can't recover your password right now! Please try again later.\",\"reset-password-success\":\"We've send you an email with instructions, how to recover your password!\",\"reset-key\":\"Enter your key from the email\",\"reset-key-valid\":\"Your key is valid, you'll be redirected to reset password page any moment!\",\"reset-key-invalid\":\"Your key is invalid, please make sure you copied it correctly!\",\"password-changed\":\"Password was changed, successfully\",\"password-notchanged\":\"We have a problem with changing your password, please try again later!\",\"account-verified\":\"Account was verified successfuly!\",\"account-verification-failed\":\"Account was not verified, please try again!\"},\"user\":{\"user-info\":\"User Information\",\"user-billing-details\":\"User Billing Details\",\"welcome\":\"Welcome again, \",\"active-services\":\"Active Services\",\"tickets\":\"Tickets\",\"invoices\":\"Invoices\",\"last-tickets\":\"Last Tickets\",\"balance\":\"Balance\",\"user-address-1\":\"Address 1\",\"user-address-2\":\"Address 2\",\"phone\":\"Phone number\",\"success-updated\":\"Your information was updated successfully!\",\"service-name\":\"Service name\",\"service-price\":\"Service price\",\"service-purchased\":\"Service purchased at\",\"order-id\":\"Order ID\",\"service-expire_at\":\"Service Expire at\",\"ticket-name\":\"Ticket Name\",\"ticket-created\":\"Ticket Created At\",\"ticket-status\":\"Ticket Status\",\"ticket-last-activity\":\"Ticket Last Activity\",\"open-tickets\":\"Open tickets\",\"ticket-topic\":\"Ticket topic\",\"department\":\"For department\",\"select-department\":\"Select department\",\"topic-description\":\"Topic Description:\",\"add-ticket\":\"Add Ticket\",\"ticket-pending\":\"Ticket was successfully added to our queue!\",\"ticket-failed\":\"We can't add your ticket right now! Please try again later.\",\"ticket-answer-problem\":\"We have problem with adding your answer.\",\"action\":\"Action\",\"delete\":\"Delete\"}}");
+module.exports = JSON.parse("{\"home\":{\"nav-home\":\"Home\",\"contacts\":\"Contacts\",\"quick-menu\":\"Quick Menu\",\"all-rights-reserved\":\"All Rights Reserved\",\"register\":\"Register\",\"login\":\"Login\",\"247-support\":\"24/7 SUPPORT\",\"email\":\"Email\",\"live-chat\":\"Live Chat\",\"live-chat-text\":\"Chat With Us Now\",\"template-made\":\"This template is made with\",\"by\":\"by\",\"live\":\"Live chat\",\"auth\":\"Register / Login\",\"forget-password\":\"Forget password\",\"auth_text\":\"Login / Register\",\"remember-me\":\"Remember me\",\"full-name\":\"Full name\",\"password\":\"Password\",\"first_step_forget_password\":\"First step of resetting password\",\"second_step_forget_password\":\"Second step of resseting password\",\"third_step_forget_password\":\"Third step of resseting password\",\"re-password\":\"Re-type Password\",\"confirm\":\"Confirm\",\"please-wait\":\"Please wait...\",\"city\":\"City\",\"region\":\"Region\",\"zipcode\":\"Zipcode\",\"mailing_list\":\"Mail ads\",\"subscribed\":\"Subscribed\",\"unsubscribed\":\"Unsubscribed\",\"submit\":\"Submit\",\"open\":\"Open\",\"closed\":\"Closed\",\"something-wr\":\"Something went wrong! Please try again later...\",\"you\":\"You\",\"reply\":\"Reply\"},\"auth\":{\"success\":\"Your account was created successfully. Please confirm your E-Mail address to continue.\",\"login-success\":\"You are logged in, successfully!\",\"reCaptcha\":\"Please confirm reCaptcha to continue!\",\"tooManyAttempts\":\"Too many login attempts, please try again later or reset your password from the buttom link\",\"invalid-email\":\"The email you provided, is not valid\",\"invalid-password\":\"The password lenght must be 8 character long or greater\",\"invalid-repassword\":\"The password you provided is not the same as main password\",\"invalid-name\":\"The name is invalid\",\"field-required\":\"This field is required!\",\"reset-button\":\"Reset password\",\"reset-password-failed\":\"We can't recover your password right now! Please try again later.\",\"reset-password-success\":\"We've send you an email with instructions, how to recover your password!\",\"reset-key\":\"Enter your key from the email\",\"reset-key-valid\":\"Your key is valid, you'll be redirected to reset password page any moment!\",\"reset-key-invalid\":\"Your key is invalid, please make sure you copied it correctly!\",\"password-changed\":\"Password was changed, successfully\",\"password-notchanged\":\"We have a problem with changing your password, please try again later!\",\"account-verified\":\"Account was verified successfuly!\",\"account-verification-failed\":\"Account was not verified, please try again!\"},\"user\":{\"user-info\":\"User Information\",\"user-billing-details\":\"User Billing Details\",\"welcome\":\"Welcome again, \",\"active-services\":\"Active Services\",\"tickets\":\"Tickets\",\"invoices\":\"Invoices\",\"last-tickets\":\"Last Tickets\",\"balance\":\"Balance\",\"user-address-1\":\"Address 1\",\"user-address-2\":\"Address 2\",\"phone\":\"Phone number\",\"success-updated\":\"Your information was updated successfully!\",\"service-name\":\"Service name\",\"service-price\":\"Service price\",\"service-purchased\":\"Service purchased at\",\"order-id\":\"Order ID\",\"service-expire_at\":\"Service Expire at\",\"ticket-name\":\"Ticket Name\",\"ticket-created\":\"Ticket Created At\",\"ticket-status\":\"Ticket Status\",\"ticket-last-activity\":\"Ticket Last Activity\",\"open-tickets\":\"Open tickets\",\"ticket-topic\":\"Ticket topic\",\"department\":\"For department\",\"select-department\":\"Select department\",\"topic-description\":\"Topic Description:\",\"add-ticket\":\"Add Ticket\",\"ticket-pending\":\"Ticket was successfully added to our queue!\",\"ticket-failed\":\"We can't add your ticket right now! Please try again later.\",\"ticket-answer-problem\":\"We have problem with adding your answer.\",\"action\":\"Action\",\"delete\":\"Delete\"}}");
 
 /***/ }),
 

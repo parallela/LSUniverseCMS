@@ -33,7 +33,7 @@ class AuthController extends Controller
     /**
      * Register the user with requested credentials
      *
-     * @param  mixed $request
+     * @param mixed $request
      * @return void
      */
     public function register(Register $request)
@@ -58,7 +58,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'Created'], 201);
         }
 
-        return response()->json(['error' => 'Failed'], 400);
+        return response()->json(['errors' => ['auth' => 'Failed']], 400);
 
     }
 
@@ -73,10 +73,10 @@ class AuthController extends Controller
         $verified = User::where('email', $credentials['email'])->first()->verified;
         if ($verified == 1) {
             if (!$token = auth('api')->attempt($credentials)) {
-                return response()->json(['error' => 'Invalid Credentials'], 400);
+                return response()->json(['errors' => ['auth' => 'Invalid Credentials']], 400);
             }
         } else {
-            return response()->json(['error' => 'Not verified'], 401);
+            return response()->json(['errors' => ['auth' => 'Not verified']], 401);
         }
 
         return $this->respondWithToken($token);
@@ -117,7 +117,7 @@ class AuthController extends Controller
     /**
      * respondWithToken
      *
-     * @param  mixed $token
+     * @param mixed $token
      * @return void
      */
     protected function respondWithToken($token)

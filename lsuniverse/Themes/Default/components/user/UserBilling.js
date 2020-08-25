@@ -16,13 +16,15 @@ const UserBilling = props => {
     const [zipcode, setZipcode] = useState(userDetails.zipcode);
     const [mailList, setMailList] = useState(userDetails.mailing_list);
     const [message, setMessage] = useState("");
-    const [error, setError] = useState("");
+    const [error, setError] = useState(false);
+    const [errorMessages, setErrorMessages] = useState([]);
+
     const [loading, setLoading] = useState(false);
 
     const loaderStatus = status => {
         setLoading(status);
         setTimeout(() => {
-            setError("");
+            setError(status);
             setMessage("")
         }, 5000);
     }
@@ -53,23 +55,34 @@ const UserBilling = props => {
 
         const jsonResponse = await rawResponse.json();
 
-        if (jsonResponse.message) {
-            updateUserCookie();
-            setTimeout(() => {
-                loaderStatus(false)
-            }, 3000)
-            setMessage(t("user.success-updated"));
-        } else if (jsonResponse.error) {
-            loaderStatus(false);
-            setError(t("home.something-wr") + ` Server Message: ${jsonResponse.error}`);
+        if(rawResponse.status === 500) {
+            return false;
         }
+
+        if (rawResponse.status !== 200 && rawResponse.status !== 201) {
+            setError(true);
+            setErrorMessages(jsonResponse.errors);
+
+            return false;
+        }
+
+        updateUserCookie();
+        setTimeout(() => {
+            loaderStatus(false)
+        }, 3000)
+        setMessage(t("user.success-updated"));
+
     }
 
     return (
         <div className="text-center">
+            {error &&
+            Object.entries(errorMessages).map((value, key) => (
+                    <Messages key={key} type={"danger"} message={value[1].toString()}/>
+                )
+            )}
+            {message !== "" && <Messages type={"success"} message={message}/>}
 
-            {error != "" && <Messages type={"danger"} message={error}/>}
-            {message != "" && <Messages type={"success"} message={message}/>}
             <form className="row" onSubmit={_handleSubmit}>
                 <div className="form-group col-md-6">
                     <label htmlFor="address-1">{t("user.user-address-1")}</label>

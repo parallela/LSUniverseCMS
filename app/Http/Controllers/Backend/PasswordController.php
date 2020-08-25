@@ -21,7 +21,7 @@ class PasswordController extends Controller
     /**
      * forget_password_generate
      *
-     * @param  mixed $request
+     * @param mixed $request
      * @return void
      */
     public function forget_password_generate(Request $request)
@@ -48,7 +48,7 @@ class PasswordController extends Controller
     /**
      * forget
      *
-     * @param  mixed $request
+     * @param mixed $request
      * @return void
      */
     public function forget_valid(Request $request)
@@ -58,13 +58,13 @@ class PasswordController extends Controller
         if ($token !== null) {
             return response()->json(['message' => 'token_valid']);
         }
-        return response()->json(['error' => 'invalid_token'], 400);
+        return response()->json(['errors' => ['inv_token' => 'invalid_token']], 400);
     }
 
     /**
      * change_forget_password
      *
-     * @param  mixed $request
+     * @param mixed $request
      * @return void
      */
     public function change_forget_password(Request $request)
@@ -75,18 +75,18 @@ class PasswordController extends Controller
             're_password' => ['required', 'same:password'],
         ]);
 
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 400);
+//        if ($validator->fails()) {
+//            return response()->json(['error' => $validator->errors()->first()], 400);
+//        }
+// DJeki e tuka
+        $user_data = User::userByForgetPasswordToken($request->input('token'))->first();
+
+        if ($user_data === null) {
+            return response()->json(['errors' => ['inv_usr_or_token' => 'invalid user, or token']], 400);
         }
 
-        $userData = User::userByForgetPasswordToken($request->input('token'))->first();
-
-        if ($userData === null) {
-            return response()->json(['error' => 'invalid user, or token'], 400);
-        }
-
-        if (Hash::check($request->input('password'), $userData->password)) {
-            return response()->json(['error' => 'Password must be not the same as previous password'], 400);
+        if (Hash::check($request->input('password'), $user_data->password)) {
+            return response()->json(['errors' => ['not_the_same' => 'Password must be not the same as previous password']], 400);
         }
 
         User::userByForgetPasswordToken($request->input('token'))->update([
@@ -96,11 +96,11 @@ class PasswordController extends Controller
 
         return response()->json(['message' => 'success'], 200);
     }
-    
+
     /**
      * change_password
      *
-     * @param  mixed $request
+     * @param mixed $request
      * @return void
      */
     public function change_password(Request $request)
@@ -111,12 +111,13 @@ class PasswordController extends Controller
             're_password' => ['required', 'same:password'],
         ]);
 
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 400);
-        }
+//        if ($validator->fails()) {
+//            return response()->json(['errors' => ['val'=>$validator->errors()->first()]], 400);
+//        }
+        // DJEKI tuk ti oprai requestite
 
-        if($request->input('old_password') == $request->input('password')) {
-            return response()->json(['error'=>"The password must be not the same as new one"], 400);
+        if ($request->input('old_password') == $request->input('password')) {
+            return response()->json(['errors' => ["not-same"=>"The password must be not the same as new one"]], 400);
         }
 
         $user = auth()->user();
@@ -128,6 +129,6 @@ class PasswordController extends Controller
             return response()->json(['message' => 'Your password was updated successfuly'], 200);
         }
 
-        return response()->json(['error' => 'Wrongh old password, please try again.'], 403);
+        return response()->json(['errors' => ['wrong-old-password'=>'Wrongh old password, please try again.']], 403);
     }
 }

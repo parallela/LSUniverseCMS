@@ -36,7 +36,7 @@ class TicketsController extends Controller
         $current_tickets = Ticket::where('user_id', auth()->id())->where('status', 'open')->get()->toArray();
 
         if (count($current_tickets) >= 5) {
-            return response()->json(['error' => 'Too many open tickets. Max open tickets: 5'], 400);
+            return response()->json(['errors' => ['manyattempts'=>'Too many open tickets. Max open tickets: 5']], 400);
         }
 
         $ticket = Ticket::create([
@@ -99,7 +99,7 @@ class TicketsController extends Controller
 
         $lastTicketAnswer = $ticket->answers()->latest()->first();
         if ($lastTicketAnswer->created_at->diffInMinutes() < 1) {
-            return response()->json(['error' => 'Please wait 1 minute, before another reply.'], 400);
+            return response()->json(['errors' => ['delay'=>'Please wait 1 minute, before another reply.']], 400);
         }
 
         $ticket->answers()->create([

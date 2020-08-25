@@ -10,7 +10,8 @@ const AddTicketForm = props => {
     const [topic, setTopic] = useState("");
     const [topicDesc, setTopicDesc] = useState("");
     const [topicDep, setTopicDep] = useState("");
-    const [error, setError] = useState("");
+    const [error, setError] = useState(false);
+    const [errorMessages, setErrorMessages] = useState([]);
     const [message, setMessage] = useState("");
 
     const [loading, setLoading] = useState(true);
@@ -36,7 +37,6 @@ const AddTicketForm = props => {
     const loaderStatus = status => {
         setTimeout(() => {
             setLoading(status);
-            props.closeModalHandler();
         }, 3000);
     }
 
@@ -59,17 +59,27 @@ const AddTicketForm = props => {
             body: JSON.stringify(data)
         });
 
-        const jsonResponse = await rawResponse.json();
 
+        const jsonResponse = await rawResponse.json();
         setLoading(true);
 
-        if (jsonResponse.message) {
-            setMessage(t("user.ticket-pending"));
-            loaderStatus(false);
-        } else if (jsonResponse.error) {
-            setError(t("user.ticket-failed") + ` Server Message: ${jsonResponse.error}`);
-            loaderStatus(false);
+        if(rawResponse.status === 500) {
+            return false;
         }
+
+        if (rawResponse.status !== 200 && rawResponse.status !== 201) {
+            setError(true);
+            setErrorMessages(jsonResponse.errors);
+
+            return false;
+        }
+
+        setMessage(t("user.ticket-pending"));
+        setError(false);
+        props.closeModalHandler();
+        _getDepartments();
+
+        loaderStatus(false);
     }
 
     useEffect(() => {
@@ -81,8 +91,12 @@ const AddTicketForm = props => {
         <div id="ticket-form">
             <form className="row" onSubmit={_handleSubmit}>
                 <div className="col-md-12">
-                    {error != "" && <Messages type={"danger"} message={error}/>}
-                    {message != "" && <Messages type={"success"} message={message}/>}
+                    {error &&
+                    Object.entries(errorMessages).map((value, key) => (
+                            <Messages key={key} type={"danger"} message={value[1].toString()}/>
+                        )
+                    )}
+                    {message !== "" && <Messages type={"success"} message={message}/>}
                 </div>
                 <div className="col-md-6 text-center">
                     <div className="form-group">

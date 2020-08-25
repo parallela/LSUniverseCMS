@@ -1,9 +1,9 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-multi-lang";
+import {useEffect, useState} from "react";
+import {useTranslation} from "react-multi-lang";
 import Messages from "./Messages";
 import ReCAPTCHA from "react-google-recaptcha";
-import { registerValidation } from "../services/Authenticator";
+import {registerValidation} from "../services/Authenticator";
 
 const Register = props => {
     const t = useTranslation();
@@ -13,9 +13,10 @@ const Register = props => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
-    const [error, setError] = useState("");
+    const [error, setError] = useState(false);
+    const [errorMessages, setErrorMessages] = useState([]);
     const [showForm, setShowForm] = useState(true);
-    const [reCaptcha, setRecaptcha] = useState(false);
+    const [reCaptcha, setRecaptcha] = useState(true); // TODO: back value to false;
 
     const _reCaptchaCancel = value => {
         setRecaptcha(false);
@@ -30,7 +31,7 @@ const Register = props => {
             setLoading(status);
         }, 1200);
         setTimeout(() => {
-            setError("");
+            setError(false);
             setMessage("");
         }, 5000);
     };
@@ -39,10 +40,13 @@ const Register = props => {
         e.preventDefault();
 
         if (!reCaptcha) {
-            setError(t("auth.reCaptcha"));
             loaderStatus(false);
+            setError(true);
+            setErrorMessages({"auth": t("auth.reCaptcha")});
+
             return false;
         }
+
 
         let data = {
             name: name,
@@ -62,25 +66,37 @@ const Register = props => {
         });
         const jsonResponse = await rawResponse.json();
 
-        if (jsonResponse.message) {
-            setShowForm(false);
-            loaderStatus(false);
-            setMessage(t("auth.success"));
-
-            return true;
-        } else if (jsonResponse.error) {
-            setShowForm(true);
-            loaderStatus(false);
-            setError(jsonResponse.error);
-
+        if (rawResponse.status === 500) {
             return false;
         }
+
+        if (rawResponse.status !== 200 && rawResponse.status !== 201) {
+            setShowForm(true);
+            loaderStatus(false);
+            setErrorMessages(jsonResponse.errors);
+            setError(true);
+
+            return false;
+
+
+        }
+
+        setShowForm(false);
+        loaderStatus(false);
+        setMessage(t("auth.success"));
+
+        return true;
     };
 
     return (
         <div className="col-md-12 col-lg-6 mb-5">
-            {error != "" && <Messages type={"danger"} message={error} />}
-            {message != "" && <Messages type={"success"} message={message} />}
+            {error &&
+            Object.entries(errorMessages).map((value, key) => (
+                    <Messages key={key} type={"danger"} message={value[1].toString()}/>
+                )
+            )}
+
+            {message != "" && <Messages type={"success"} message={message}/>}
             {showForm && (
                 <form
                     action="#"
@@ -165,13 +181,13 @@ const Register = props => {
                     </div>
                     <div className="row form-group">
                         <div className="col-md-12">
-                            <ReCAPTCHA
-                                sitekey={
-                                    "6Lc8LL8ZAAAAAAOp8OPeGrbaUnp76x9A2sXM6Uv0"
-                                }
-                                onExpired={_reCaptchaCancel}
-                                onChange={_reCaptchaConfirmation}
-                            />
+                            {/*<ReCAPTCHA*/}
+                            {/*    sitekey={*/}
+                            {/*        "6Lc8LL8ZAAAAAAOp8OPeGrbaUnp76x9A2sXM6Uv0"*/}
+                            {/*    }*/}
+                            {/*    onExpired={_reCaptchaCancel}*/}
+                            {/*    onChange={_reCaptchaConfirmation}*/}
+                            {/*/>*/}
                         </div>
                     </div>
                     <div className="row form-group">
