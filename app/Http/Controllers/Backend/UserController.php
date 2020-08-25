@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateUserDetails;
 use App\Order;
 use App\User;
 use Carbon\Carbon;
@@ -20,24 +21,9 @@ class UserController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update_user_details(Request $request)
+    public function update_user_details(UpdateUserDetails $request)
     {
-		// testtststststtstts
         $user = User::find(auth()->id());
-
-        $validator = Validator::make($request->all(), [
-            'address_1' => 'required',
-            'address_2' => 'required',
-            'phone_number' => 'required|phone:AUTO,BG',
-            'city' => 'required',
-            'region' => 'required',
-            'zipcode' => 'required|integer',
-            'mailing_list' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 400);
-        }
 
         $user->details()->update([
             'street_address_1' => $request->input('address_1'),

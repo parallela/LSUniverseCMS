@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth;
+use App\Http\Requests\Register;
 use App\Mail\UserVerify;
 use App\User;
 use App\UserVerification;
@@ -34,19 +36,8 @@ class AuthController extends Controller
      * @param  mixed $request
      * @return void
      */
-    public function register(Request $request)
+    public function register(Register $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => ['required', 'min:4'],
-            'email' => ['email', 'required', 'unique:users'],
-            'password' => ['required', 'regex:/^(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/'],
-            're_password' => ['required', 'same:password'],
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 400);
-        }
-
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
@@ -76,13 +67,8 @@ class AuthController extends Controller
      *
      * @return mixed
      */
-    public function login(Request $request)
+    public function login(Auth $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
         $credentials = request(['email', 'password']);
         $verified = User::where('email', $credentials['email'])->first()->verified;
         if ($verified == 1) {

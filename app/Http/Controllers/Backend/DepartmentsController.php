@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Backend;
 
 use App\Department;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class DepartmentsController extends Controller
 {
