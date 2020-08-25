@@ -22,6 +22,7 @@ class UserController extends Controller
      */
     public function update_user_details(Request $request)
     {
+		// testtststststtstts
         $user = User::find(auth()->id());
 
         $validator = Validator::make($request->all(), [
