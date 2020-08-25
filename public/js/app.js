@@ -1715,18 +1715,16 @@ var Verififaction = function Verififaction(props) {
             case 9:
               jsonResponse = _context.sent;
 
-              if (!(jsonResponse.message == "Verified")) {
-                _context.next = 16;
+              if (!(rawResponse.status === 500)) {
+                _context.next = 12;
                 break;
               }
 
-              localStorage.setItem("verified", "verified");
-              window.location.href = "/auth";
-              return _context.abrupt("return", true);
+              return _context.abrupt("return", false);
 
-            case 16:
-              if (!jsonResponse.error) {
-                _context.next = 20;
+            case 12:
+              if (!(rawResponse.status !== 200 || rawResponse.status !== 201)) {
+                _context.next = 16;
                 break;
               }
 
@@ -1734,7 +1732,12 @@ var Verififaction = function Verififaction(props) {
               window.location.href = "/auth";
               return _context.abrupt("return", false);
 
-            case 20:
+            case 16:
+              localStorage.setItem("verified", "verified");
+              window.location.href = "/auth";
+              return _context.abrupt("return", true);
+
+            case 19:
             case "end":
               return _context.stop();
           }
@@ -1918,20 +1921,25 @@ var FinalStep = function FinalStep(props) {
       confirmPassword = _useState4[0],
       setConfirmPassword = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState6 = _slicedToArray(_useState5, 2),
       error = _useState6[0],
       setError = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState8 = _slicedToArray(_useState7, 2),
-      message = _useState8[0],
-      setMessage = _useState8[1];
+      errorMessages = _useState8[0],
+      setErrorMessages = _useState8[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState10 = _slicedToArray(_useState9, 2),
-      reCaptcha = _useState10[0],
-      setRecaptcha = _useState10[1];
+      message = _useState10[0],
+      setMessage = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      reCaptcha = _useState12[0],
+      setRecaptcha = _useState12[1];
 
   var _pushToAuth = function _pushToAuth() {
     setTimeout(function () {
@@ -1963,15 +1971,18 @@ var FinalStep = function FinalStep(props) {
               };
 
               if (reCaptcha) {
-                _context.next = 5;
+                _context.next = 6;
                 break;
               }
 
-              setError(t("auth.reCaptcha"));
+              setError(true);
+              setErrorMessages({
+                "auth": t("auth.reCaptcha")
+              });
               return _context.abrupt("return", false);
 
-            case 5:
-              _context.next = 7;
+            case 6:
+              _context.next = 8;
               return fetch('/api/user/password/forget/change', {
                 method: 'POST',
                 headers: {
@@ -1981,35 +1992,38 @@ var FinalStep = function FinalStep(props) {
                 body: JSON.stringify(data)
               });
 
-            case 7:
+            case 8:
               rawResponse = _context.sent;
-              _context.next = 10;
+              _context.next = 11;
               return rawResponse.json();
 
-            case 10:
+            case 11:
               jsonResponse = _context.sent;
 
-              if (!jsonResponse.message) {
+              if (!(rawResponse.status === 500)) {
+                _context.next = 14;
+                break;
+              }
+
+              return _context.abrupt("return", false);
+
+            case 14:
+              if (!(rawResponse.status !== 200 && rawResponse.status !== 201)) {
                 _context.next = 18;
                 break;
               }
 
+              setError(true);
+              setErrorMessages(jsonResponse.errors);
+              return _context.abrupt("return", false);
+
+            case 18:
               setMessage(t('auth.password-changed'));
-              setError("");
+              setError(false);
 
               _pushToAuth();
 
               return _context.abrupt("return", true);
-
-            case 18:
-              if (!jsonResponse.error) {
-                _context.next = 22;
-                break;
-              }
-
-              setMessage("");
-              setError(t('auth.password-notchanged') + "\n                Server Message: ".concat(jsonResponse.error, "\n            "));
-              return _context.abrupt("return", false);
 
             case 22:
             case "end":
@@ -2030,9 +2044,12 @@ var FinalStep = function FinalStep(props) {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
     className: "card-title"
-  }, t("home.third_step_forget_password")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), error != "" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    type: "danger",
-    message: error
+  }, t("home.third_step_forget_password")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), error && Object.entries(errorMessages).map(function (value, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      key: key,
+      type: "danger",
+      message: value[1].toString()
+    });
   }), message != "" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: "success",
     message: message
@@ -2135,7 +2152,7 @@ var FirstStep = function FirstStep(props) {
       email = _useState2[0],
       setEmail = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState4 = _slicedToArray(_useState3, 2),
       error = _useState4[0],
       setError = _useState4[1];
@@ -2145,10 +2162,15 @@ var FirstStep = function FirstStep(props) {
       message = _useState6[0],
       setMessage = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState8 = _slicedToArray(_useState7, 2),
-      reCaptcha = _useState8[0],
-      setRecaptcha = _useState8[1];
+      errorMessages = _useState8[0],
+      setErrorMessages = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      reCaptcha = _useState10[0],
+      setRecaptcha = _useState10[1];
 
   var _reCaptchaCancel = function _reCaptchaCancel(value) {
     setRecaptcha(false);
@@ -2177,15 +2199,18 @@ var FirstStep = function FirstStep(props) {
               };
 
               if (reCaptcha) {
-                _context.next = 5;
+                _context.next = 6;
                 break;
               }
 
-              setError(t('auth.reCaptcha'));
+              setError(true);
+              setErrorMessages({
+                "auth": t("auth.reCaptcha")
+              });
               return _context.abrupt("return", false);
 
-            case 5:
-              _context.next = 7;
+            case 6:
+              _context.next = 8;
               return fetch("/api/user/password/forget/generate", {
                 method: "POST",
                 headers: {
@@ -2195,36 +2220,42 @@ var FirstStep = function FirstStep(props) {
                 body: JSON.stringify(data)
               });
 
-            case 7:
+            case 8:
               rawResponse = _context.sent;
-              _context.next = 10;
+              _context.next = 11;
               return rawResponse.json();
 
-            case 10:
+            case 11:
               jsonResponse = _context.sent;
 
-              if (!jsonResponse.message) {
+              if (!(rawResponse.status === 500)) {
+                _context.next = 14;
+                break;
+              }
+
+              return _context.abrupt("return", false);
+
+            case 14:
+              if (!(rawResponse.status !== 200 && rawResponse.status !== 201)) {
                 _context.next = 18;
                 break;
               }
 
-              setError("");
-              setMessage(t("auth.reset-password-success") + " \n            Server Message: ".concat(jsonResponse.message, "\n            "));
+              setError(true);
+              setErrorMessages({
+                "failed": t("auth.reset-password-failed")
+              });
+              return _context.abrupt("return", false);
+
+            case 18:
+              setError(false);
+              setMessage(t("auth.reset-password-success") + "\n            Server Message: ".concat(jsonResponse.message, "\n            "));
 
               _pushToSecondStep();
 
               return _context.abrupt("return", true);
 
-            case 18:
-              if (!jsonResponse.error) {
-                _context.next = 21;
-                break;
-              }
-
-              setError(t("auth.reset-password-failed") + "\n            \n            Server Error Message: ".concat(jsonResponse.error, "\n            "));
-              return _context.abrupt("return", false);
-
-            case 21:
+            case 22:
             case "end":
               return _context.stop();
           }
@@ -2243,9 +2274,12 @@ var FirstStep = function FirstStep(props) {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
     className: "card-title"
-  }, t("home.first_step_forget_password")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), error != "" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    type: "danger",
-    message: error
+  }, t("home.first_step_forget_password")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), error && Object.entries(errorMessages).map(function (value, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      key: key,
+      type: "danger",
+      message: value[1].toString()
+    });
   }), message != "" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: "success",
     message: message
@@ -2333,20 +2367,25 @@ var SecondStep = function SecondStep(props) {
       key = _useState2[0],
       setKey = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState4 = _slicedToArray(_useState3, 2),
       error = _useState4[0],
       setError = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState6 = _slicedToArray(_useState5, 2),
-      message = _useState6[0],
-      setMessage = _useState6[1];
+      errorMessages = _useState6[0],
+      setErrorMessages = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState8 = _slicedToArray(_useState7, 2),
-      reCaptcha = _useState8[0],
-      setRecaptcha = _useState8[1];
+      message = _useState8[0],
+      setMessage = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      reCaptcha = _useState10[0],
+      setRecaptcha = _useState10[1];
 
   var _pushToFinalStep = function _pushToFinalStep() {
     setTimeout(function () {
@@ -2376,15 +2415,18 @@ var SecondStep = function SecondStep(props) {
               };
 
               if (reCaptcha) {
-                _context.next = 5;
+                _context.next = 6;
                 break;
               }
 
-              setError(t("auth.reCaptcha"));
+              setError(true);
+              setErrorMessages({
+                "auth": t("auth.reCaptcha")
+              });
               return _context.abrupt("return", false);
 
-            case 5:
-              _context.next = 7;
+            case 6:
+              _context.next = 8;
               return fetch('/api/user/password/forget/check', {
                 method: 'POST',
                 headers: {
@@ -2394,37 +2436,43 @@ var SecondStep = function SecondStep(props) {
                 body: JSON.stringify(data)
               });
 
-            case 7:
+            case 8:
               rawResponse = _context.sent;
-              _context.next = 10;
+              _context.next = 11;
               return rawResponse.json();
 
-            case 10:
+            case 11:
               jsonResponse = _context.sent;
 
-              if (!jsonResponse.message) {
-                _context.next = 19;
+              if (!(rawResponse.status === 500)) {
+                _context.next = 14;
                 break;
               }
 
-              setError("");
-              setMessage(t('auth.reset-key-valid') + "  \n            \n            Server Message: ".concat(jsonResponse.message, "\n            "));
+              return _context.abrupt("return", false);
+
+            case 14:
+              if (!(rawResponse.status !== 200 && rawResponse.status !== 201)) {
+                _context.next = 18;
+                break;
+              }
+
+              setErrorMessages({
+                "failed": t('auth.reset-key-invalid')
+              });
+              setError(true);
+              return _context.abrupt("return", false);
+
+            case 18:
+              setError(false);
+              setMessage(t('auth.reset-key-valid') + "\n\n            Server Message: ".concat(jsonResponse.message, "\n            "));
 
               _pushToFinalStep();
 
               localStorage.setItem('reset_password_token', key);
               return _context.abrupt("return", true);
 
-            case 19:
-              if (!jsonResponse.error) {
-                _context.next = 22;
-                break;
-              }
-
-              setError(t('auth.reset-key-invalid'));
-              return _context.abrupt("return", false);
-
-            case 22:
+            case 23:
             case "end":
               return _context.stop();
           }
@@ -2443,9 +2491,12 @@ var SecondStep = function SecondStep(props) {
     className: "card-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
     className: "card-title"
-  }, t("home.second_step_forget_password")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), error != "" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    type: "danger",
-    message: error
+  }, t("home.second_step_forget_password")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), error && Object.entries(errorMessages).map(function (value, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      key: key,
+      type: "danger",
+      message: value[1].toString()
+    });
   }), message != "" && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Messages__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: "success",
     message: message
@@ -2675,12 +2726,9 @@ var AddTicketForm = function AddTicketForm(props) {
               setMessage(t("user.ticket-pending"));
               setError(false);
               props.closeModalHandler();
-
-              _getDepartments();
-
               loaderStatus(false);
 
-            case 20:
+            case 19:
             case "end":
               return _context2.stop();
           }

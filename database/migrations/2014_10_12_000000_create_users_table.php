@@ -17,10 +17,10 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->boolean('verified');
+            $table->boolean('verified')->default(0);
             $table->string('password');
-            $table->boolean('isAdmin');
-            $table->integer('balance');
+            $table->boolean('isAdmin')->default(0);
+            $table->integer('balance')->default(0.00);
             $table->timestamps();
         });
     }
