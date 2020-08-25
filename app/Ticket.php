@@ -19,6 +19,11 @@ class Ticket extends Model
         'updated_at' => 'datetime:Y-m-d h:i:s'
     ];
 
+    public function scopeOpen($query)
+    {
+        return $query->where('status', 'open');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
