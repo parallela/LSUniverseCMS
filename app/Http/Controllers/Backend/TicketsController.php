@@ -10,6 +10,7 @@ use App\Ticket;
 use App\TicketAnswer;
 use Carbon\Carbon;
 use http\Env\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\User;
 use Illuminate\Http\Request;
@@ -36,7 +37,7 @@ class TicketsController extends Controller
         $current_tickets = Ticket::where('user_id', auth()->id())->where('status', 'open')->get()->toArray();
 
         if (count($current_tickets) >= 5) {
-            return response()->json(['errors' => ['manyattempts'=>'Too many open tickets. Max open tickets: 5']], 400);
+            return response()->json(['errors' => ['manyattempts' => 'Too many open tickets. Max open tickets: 5']], 400);
         }
 
         $ticket = Ticket::create([
@@ -58,7 +59,9 @@ class TicketsController extends Controller
 
     public function show($id)
     {
-        $ticket = Ticket::with('answers')->where('id', $id)->where('user_id', auth()->id())->firstOrFail();
+        $ticket = Ticket::with('answers')->where('id', $id);
+
+        $this->authorize('view', $ticket);
 
         return response()->json($ticket, 200);
     }
@@ -67,16 +70,14 @@ class TicketsController extends Controller
     {
         $ticket = Ticket::find('id', $id);
 
-        if (auth()->user()->isAdmin === 1) {
-            Ticket::update([
-                'name' => $request->input('name'),
-                'department' => $request->input('department'),
-                'status' => $request->input('status')
-            ]);
-            return response()->json(['message' => 'Updated'], 200);
-        }
+        $this->authorize('update', $ticket);
 
-        return response()->json(['message' => 'Invalid privileges'], 403);
+        Ticket::update([
+            'name' => $request->input('name'),
+            'department' => $request->input('department'),
+            'status' => $request->input('status')
+        ]);
+        return response()->json(['message' => 'Updated'], 200);
     }
 
     /**
@@ -85,21 +86,26 @@ class TicketsController extends Controller
      */
     public function delete($id)
     {
-        $ticket = Ticket::where('id', $id)->where('user_id', auth()->id())->delete();
+        $ticket = Ticket::where('id', $id)->get();
+
+        $this->authorize('delete', $ticket);
 
         return response()->json(['message' => 'Deleted'], 200);
     }
 
     public function add_answer(StoreAnswer $request, $id)
     {
-        $ticket = Ticket::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
+        $ticket = Ticket::where('id', $id)->firstOrFail();
+
+        $this->authorize('addAnswer', $ticket);
+
         $ticket->update([
             'updated_at' => Carbon::now()
         ]);
 
         $lastTicketAnswer = $ticket->answers()->latest()->first();
         if ($lastTicketAnswer->created_at->diffInMinutes() < 1) {
-            return response()->json(['errors' => ['delay'=>'Please wait 1 minute, before another reply.']], 400);
+            return response()->json(['errors' => ['delay' => 'Please wait 1 minute, before another reply.']], 400);
         }
 
         $ticket->answers()->create([
