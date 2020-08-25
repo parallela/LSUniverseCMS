@@ -13,7 +13,7 @@ class CreateAddonsTable extends Migration
      */
     public function up()
     {
-        Schema::create('Addons', function (Blueprint $table) {
+        Schema::create('addons', function (Blueprint $table) {
             $table->id();
             $table->string('namespace');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateAddonsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Addons');
+        Schema::dropIfExists('addons');
     }
 }

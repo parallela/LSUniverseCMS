@@ -59,16 +59,16 @@ class TicketsController extends Controller
 
     public function show($id)
     {
-        $ticket = Ticket::with('answers')->where('id', $id);
+        $ticket = Ticket::with('answers')->where('id', $id)->firstOrFail();
 
-        $this->authorize('view', $ticket);
+        //$this->authorize('view', $ticket);
 
         return response()->json($ticket, 200);
     }
 
     public function update(UpdateTicket $request, $id)
     {
-        $ticket = Ticket::find('id', $id);
+        $ticket = Ticket::where('id', $id)->firstOrFail();
 
         $this->authorize('update', $ticket);
 
@@ -86,7 +86,7 @@ class TicketsController extends Controller
      */
     public function delete($id)
     {
-        $ticket = Ticket::where('id', $id)->get();
+        $ticket = Ticket::where('id', $id)->firstOrFail();
 
         $this->authorize('delete', $ticket);
 
