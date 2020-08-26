@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\UserDetails;
 use App\UserVerification;
 
 class VerificationController extends Controller
@@ -21,6 +22,11 @@ class VerificationController extends Controller
             $data->user()->update([
                 'verified' => '1',
             ]);
+
+            UserDetails::create([
+                'user_id' => $data->user->id,
+            ]);
+
             $data->delete();
         } else {
             return response()->json(['errors'=>["inv_val_token"=>'Invalid validation token']], 400);

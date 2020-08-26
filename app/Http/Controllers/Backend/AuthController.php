@@ -70,8 +70,13 @@ class AuthController extends Controller
     public function login(Auth $request)
     {
         $credentials = request(['email', 'password']);
-        $verified = User::where('email', $credentials['email'])->first()->verified;
-        if ($verified == 1) {
+        $verified = User::where('email', $credentials['email'])->first();
+
+        if(empty($verified)) {
+            return response()->json(["errors"=>["auth"=>"We can't find that user, Do you try to register?"]], 403);
+        }
+
+        if ($verified->verified == 1) {
             if (!$token = auth('api')->attempt($credentials)) {
                 return response()->json(['errors' => ['auth' => 'Invalid Credentials']], 400);
             }

@@ -22,7 +22,7 @@ class CreateUserDetailsTable extends Migration
             $table->string('city')->nullable();
             $table->string('region')->nullable();
             $table->string('zipcode')->nullable();
-            $table->boolean('mailing_list');
+            $table->boolean('mailing_list')->default(0);
         });
         Schema::table('user_details', function(Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

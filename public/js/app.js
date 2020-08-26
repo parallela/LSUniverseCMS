@@ -136,10 +136,13 @@ var App = function App() {
       en: _lang_en_json__WEBPACK_IMPORTED_MODULE_6__,
       bg: _lang_bg_json__WEBPACK_IMPORTED_MODULE_7__
     });
-    Object(_services_Authenticator__WEBPACK_IMPORTED_MODULE_9__["UserData"])();
-    setInterval(function () {
+
+    if (localStorage.getItem('token')) {
       Object(_services_Authenticator__WEBPACK_IMPORTED_MODULE_9__["UserData"])();
-    }, 10000);
+      setInterval(function () {
+        Object(_services_Authenticator__WEBPACK_IMPORTED_MODULE_9__["UserData"])();
+      }, 10000);
+    }
 
     var setLanguage = function setLanguage() {
       try {
@@ -1723,7 +1726,7 @@ var Verififaction = function Verififaction(props) {
               return _context.abrupt("return", false);
 
             case 12:
-              if (!(rawResponse.status !== 200 || rawResponse.status !== 201)) {
+              if (!(rawResponse.status !== 200 && rawResponse.status !== 201)) {
                 _context.next = 16;
                 break;
               }

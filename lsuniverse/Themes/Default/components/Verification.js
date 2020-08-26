@@ -29,7 +29,7 @@ const Verififaction = props => {
             return false;
         }
 
-        if (rawResponse.status !== 200 || rawResponse.status !== 201) {
+        if (rawResponse.status !== 200 && rawResponse.status !== 201) {
 
             localStorage.setItem("verified", "not_verified");
             window.location.href = "/auth";
