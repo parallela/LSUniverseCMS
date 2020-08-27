@@ -15,6 +15,7 @@ const Footer = props => {
     }
 
     const t = useTranslation();
+    const settings = window._settings;
 
     return (
         <footer className="site-footer">
@@ -42,11 +43,11 @@ const Footer = props => {
                             <div className="col-md-12"><h3
                                 className="footer-heading mb-4">{t('home.contacts')}</h3></div>
                             <div className="col-md-6">
-                                <p>London - 2398 <br/> 10 Japson Street</p>
+                                <p>{settings['str_address']}</p>
                             </div>
                             <div className="col-md-6">
                                 Tel. + (123) 3240-345-9348 <br/>
-                                Mail. europe@youdomain.com
+                                Mail. {settings['contact-email']}
                             </div>
                         </div>
                     </div>
@@ -58,7 +59,7 @@ const Footer = props => {
                             <a href="#" onClick={_handleLanguageChange}
                                className="btn btn-primary btn-outline-primary rounded-0 py-2 px-4">{(getLanguage())}</a>
                             <br/>
-                            Copyright &copy; {`Name`} <br/> {`firmCreatedYear - ${moment(new Date()).format('YYYY')}`}
+                            Copyright &copy; {`Name`} <br/> {`${settings['year']} - ${moment(new Date()).format('YYYY')}`}
                             <br/>
                             {t('home.all-rights-reserved')}
                             <br/> {t('home.template-made')} <i className="icon-heart text-danger"

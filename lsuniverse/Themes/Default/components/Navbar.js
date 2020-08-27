@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation, useHistory } from "react-router-dom";
-import { useTranslation } from "react-multi-lang";
+import React, {useState, useEffect} from "react";
+import {Link, useLocation, useHistory} from "react-router-dom";
+import {useTranslation} from "react-multi-lang";
 import {logout_user, User} from "../services/Authenticator";
 
 const Navbar = props => {
     const t = useTranslation();
+    const settings = window._settings;
     const location = useLocation();
     const user = User();
     const history = useHistory();
@@ -41,7 +42,7 @@ const Navbar = props => {
                                     href="/"
                                     className="d-flex align-items-center site-logo"
                                 >
-                                    <img src={logo} />
+                                    <img src={logo}/>
                                 </a>
                             </div>
 
@@ -58,7 +59,7 @@ const Navbar = props => {
                                                         {t("home.247-support")}
                                                     </span>
                                                     <span className="h6">
-                                                        1-800-200-3911
+                                                        {settings['247-support-num']}
                                                     </span>
                                                 </div>
                                             </div>
@@ -76,27 +77,7 @@ const Navbar = props => {
                                                         {t("home.email")}
                                                     </span>
                                                     <span className="h6">
-                                                        mail@domain.com
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-
-                                    <li className="text-left">
-                                        <a href="#">
-                                            <div className="d-flex align-items-center block-unit">
-                                                <div className="icon mr-0 mr-md-4">
-                                                    <span className="fl-bigmug-line-chat55 h2"></span>
-                                                </div>
-                                                <div className="d-none d-lg-block">
-                                                    <span className="d-block text-gray-500 text-uppercase">
-                                                        {t("home.live")}
-                                                    </span>
-                                                    <span className="h6">
-                                                        {t(
-                                                            "home.live-chat-text"
-                                                        )}
+                                                        {settings['contact-email']}
                                                     </span>
                                                 </div>
                                             </div>

@@ -15,16 +15,16 @@ import ChangePassword from "./ChangePassword";
 import Verififaction from "./Verification";
 
 const App = () => {
+
     useEffect(() => {
         setTranslations({en, bg});
-
         if (localStorage.getItem('token')) {
             UserData();
             setInterval(() => {
                 UserData();
             }, 10000)
         }
-        
+
         const setLanguage = () => {
             try {
                 if (localStorage.getItem("lang") === null) {

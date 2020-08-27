@@ -39,3 +39,4 @@ Route::group(['middleware' => ['api','isadmin'], 'prefix'=>'admin'], function ($
 });
 
 Route::get('departments/list', 'Backend\DepartmentsController@list')->middleware('api');
+Route::get('site/settings','IndexController@siteSettings')->middleware('api');

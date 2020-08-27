@@ -21,7 +21,7 @@ class AuthController extends Controller
 {
     /**
      * Create instance of AuthController
-     * Make middleware ignore login and register routes
+     * Make middleware ignore login and register Routes
      *
      * @return void
      */
