@@ -13,11 +13,20 @@ class Service extends Model
     {
         return $this->belongsTo(Addon::class);
     }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function extras()
+    {
+        return $this->hasMany(ServiceExtra::class);
     }
 }
