@@ -18,7 +18,8 @@
         "laravel/tinker": "^2.0",
         "predis/predis": "^1.1",
         "propaganistas/laravel-phone": "^4.2",
-        "tymon/jwt-auth": "^1.0"
+        "tymon/jwt-auth": "^1.0",
+        "zgabievi/promocodes": "^2.3"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
