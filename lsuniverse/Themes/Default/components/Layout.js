@@ -1,6 +1,4 @@
 import React from "react";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
 
 
 const Layout = ({children}) => {
@@ -8,9 +6,7 @@ const Layout = ({children}) => {
 
     return (
         <div className={"site-wrap"}>
-                <Navbar/>
                 {children}
-                <Footer/>
         </div>
     );
 };

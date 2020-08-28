@@ -1,7 +1,4 @@
 import React from "react";
-import MainImage from "./MainImage";
-import Section from "./Section";
-import SiteSection from "./SiteSection";
 import { useTranslation } from "react-multi-lang";
 
 const Home = props => {
@@ -9,9 +6,6 @@ const Home = props => {
 
     return (
         <div id="home">
-            <MainImage />
-            <Section />
-            <SiteSection />
         </div>
     );
 };
