@@ -3,6 +3,7 @@ import {useTranslation} from "react-multi-lang";
 import Messages from "../Messages";
 import ReCAPTCHA from "react-google-recaptcha";
 import {useHistory} from "react-router-dom";
+import {_networkPasswordFirstStep} from "../../../../JSScripts/network/Network_PasswordRecover";
 
 const FirstStep = props => {
     const t = useTranslation();
@@ -42,23 +43,15 @@ const FirstStep = props => {
         }
 
 
-        const rawResponse = await fetch("/api/user/password/forget/generate", {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
-
-        const jsonResponse = await rawResponse.json();
+        const req = await _networkPasswordFirstStep(data)
+        const jsonResponse = await req.json();
 
 
-        if (rawResponse.status === 500) {
+        if (req.status === 500) {
             return false;
         }
 
-        if (rawResponse.status !== 200 && rawResponse.status !== 201) {
+        if (req.status !== 200 && req.status !== 201) {
             setError(true);
             setErrorMessages({
                 "failed":

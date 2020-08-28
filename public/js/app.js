@@ -86,6 +86,260 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./lsuniverse/JSScripts/network/Network_LoginUser.js":
+/*!***********************************************************!*\
+  !*** ./lsuniverse/JSScripts/network/Network_LoginUser.js ***!
+  \***********************************************************/
+/*! exports provided: _networkLoginUser */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkLoginUser", function() { return _networkLoginUser; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var _networkLoginUser = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
+    var rawResponse;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return fetch("/api/auth/login", {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+            });
+
+          case 2:
+            rawResponse = _context.sent;
+            return _context.abrupt("return", rawResponse);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function _networkLoginUser(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+
+/***/ "./lsuniverse/JSScripts/network/Network_LogoutUser.js":
+/*!************************************************************!*\
+  !*** ./lsuniverse/JSScripts/network/Network_LogoutUser.js ***!
+  \************************************************************/
+/*! exports provided: _networkLogoutUser */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkLogoutUser", function() { return _networkLogoutUser; });
+var _networkLogoutUser = function _networkLogoutUser() {
+  var rawResponse = fetch("/api/auth/logout", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token")
+    }
+  });
+  return rawResponse;
+};
+
+/***/ }),
+
+/***/ "./lsuniverse/JSScripts/network/Network_PasswordRecover.js":
+/*!*****************************************************************!*\
+  !*** ./lsuniverse/JSScripts/network/Network_PasswordRecover.js ***!
+  \*****************************************************************/
+/*! exports provided: _networkPasswordFirstStep, _networkPasswordSecondStep, _networkPasswordFinalStep */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkPasswordFirstStep", function() { return _networkPasswordFirstStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkPasswordSecondStep", function() { return _networkPasswordSecondStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkPasswordFinalStep", function() { return _networkPasswordFinalStep; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var _networkPasswordFirstStep = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
+    var rawResponse;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return fetch("/api/user/password/forget/generate", {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+            });
+
+          case 2:
+            rawResponse = _context.sent;
+            return _context.abrupt("return", rawResponse);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function _networkPasswordFirstStep(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+var _networkPasswordSecondStep = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(data) {
+    var rawResponse;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return fetch('/api/user/password/forget/check', {
+              method: 'POST',
+              headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+            });
+
+          case 2:
+            rawResponse = _context2.sent;
+            return _context2.abrupt("return", rawResponse);
+
+          case 4:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+
+  return function _networkPasswordSecondStep(_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+var _networkPasswordFinalStep = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(data) {
+    var rawResponse;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.next = 2;
+            return fetch('/api/user/password/forget/change', {
+              method: 'POST',
+              headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+            });
+
+          case 2:
+            rawResponse = _context3.sent;
+            return _context3.abrupt("return", rawResponse);
+
+          case 4:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+
+  return function _networkPasswordFinalStep(_x3) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+
+/***/ "./lsuniverse/JSScripts/network/Network_RegisterUser.js":
+/*!**************************************************************!*\
+  !*** ./lsuniverse/JSScripts/network/Network_RegisterUser.js ***!
+  \**************************************************************/
+/*! exports provided: _networkRegisterUser */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkRegisterUser", function() { return _networkRegisterUser; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var _networkRegisterUser = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
+    var rawResponse;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return fetch("/api/auth/register", {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+            });
+
+          case 2:
+            rawResponse = _context.sent;
+            return _context.abrupt("return", rawResponse);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function _networkRegisterUser(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+
 /***/ "./lsuniverse/JSScripts/network/Network_UserGet.js":
 /*!*********************************************************!*\
   !*** ./lsuniverse/JSScripts/network/Network_UserGet.js ***!
@@ -123,9 +377,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout_user", function() { return logout_user; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var universal_cookie__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! universal-cookie */ "./node_modules/universal-cookie/es6/index.js");
+/* harmony import */ var universal_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! universal-cookie */ "./node_modules/universal-cookie/es6/index.js");
+/* harmony import */ var _network_Network_LogoutUser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../network/Network_LogoutUser */ "./lsuniverse/JSScripts/network/Network_LogoutUser.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -134,7 +387,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-var cookies = new universal_cookie__WEBPACK_IMPORTED_MODULE_2__["default"]();
+var cookies = new universal_cookie__WEBPACK_IMPORTED_MODULE_1__["default"]();
 var time = new Date();
 var cookie_expires_in = 3600;
 function getUserData() {
@@ -258,14 +511,8 @@ function User() {
   return user === undefined ? localStorage.removeItem('token') : user;
 }
 function logout_user() {
-  var logout = fetch("/api/auth/logout", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + localStorage.getItem("token")
-    }
-  });
+  Object(_network_Network_LogoutUser__WEBPACK_IMPORTED_MODULE_2__["_networkLogoutUser"])();
+
   localStorage.removeItem("token");
   cookies.remove('user');
   window.location.href = '/auth';
@@ -701,6 +948,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_google_recaptcha__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-google-recaptcha */ "./node_modules/react-google-recaptcha/lib/esm/index.js");
 /* harmony import */ var _JSScripts_services_Authenticator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../JSScripts/services/Authenticator */ "./lsuniverse/JSScripts/services/Authenticator.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _JSScripts_network_Network_LoginUser__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../JSScripts/network/Network_LoginUser */ "./lsuniverse/JSScripts/network/Network_LoginUser.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -718,6 +966,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -807,7 +1056,7 @@ var Login = function Login(props) {
 
   var _handleSubmit = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
-      var data, rawResponse, jsonResponse;
+      var data, req, jsonResponse;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -843,26 +1092,19 @@ var Login = function Login(props) {
               return _context.abrupt("return", false);
 
             case 11:
-              _context.next = 13;
-              return fetch("api/auth/login", {
-                method: "POST",
-                headers: {
-                  Accept: "application/json",
-                  "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-              });
-
-            case 13:
-              rawResponse = _context.sent;
               loaderStatus(true);
+              _context.next = 14;
+              return Object(_JSScripts_network_Network_LoginUser__WEBPACK_IMPORTED_MODULE_7__["_networkLoginUser"])(data);
+
+            case 14:
+              req = _context.sent;
               _context.next = 17;
-              return rawResponse.json();
+              return req.json();
 
             case 17:
               jsonResponse = _context.sent;
 
-              if (!(rawResponse.status === 500)) {
+              if (!(req.status === 500)) {
                 _context.next = 20;
                 break;
               }
@@ -870,7 +1112,7 @@ var Login = function Login(props) {
               return _context.abrupt("return", false);
 
             case 20:
-              if (!(rawResponse.status !== 200 && rawResponse.status !== 201)) {
+              if (!(req.status !== 200 && req.status !== 201)) {
                 _context.next = 27;
                 break;
               }
@@ -1219,6 +1461,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_multi_lang__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Messages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Messages */ "./lsuniverse/Themes/Default/components/Messages.js");
 /* harmony import */ var react_google_recaptcha__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-google-recaptcha */ "./node_modules/react-google-recaptcha/lib/esm/index.js");
+/* harmony import */ var _JSScripts_network_Network_RegisterUser__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../JSScripts/network/Network_RegisterUser */ "./lsuniverse/JSScripts/network/Network_RegisterUser.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -1236,6 +1479,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -1317,7 +1561,7 @@ var Register = function Register(props) {
 
   var _handleSubmit = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
-      var data, rawResponse, jsonResponse;
+      var data, req, jsonResponse;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -1345,24 +1589,17 @@ var Register = function Register(props) {
               };
               setLoading(true);
               _context.next = 10;
-              return fetch("api/auth/register", {
-                method: "POST",
-                headers: {
-                  Accept: "application/json",
-                  "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-              });
+              return Object(_JSScripts_network_Network_RegisterUser__WEBPACK_IMPORTED_MODULE_5__["_networkRegisterUser"])(data);
 
             case 10:
-              rawResponse = _context.sent;
+              req = _context.sent;
               _context.next = 13;
-              return rawResponse.json();
+              return req.json();
 
             case 13:
               jsonResponse = _context.sent;
 
-              if (!(rawResponse.status === 500)) {
+              if (!(req.status === 500)) {
                 _context.next = 16;
                 break;
               }
@@ -1370,7 +1607,7 @@ var Register = function Register(props) {
               return _context.abrupt("return", false);
 
             case 16:
-              if (!(rawResponse.status !== 200 && rawResponse.status !== 201)) {
+              if (!(req.status !== 200 && req.status !== 201)) {
                 _context.next = 22;
                 break;
               }
@@ -2063,6 +2300,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Messages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Messages */ "./lsuniverse/Themes/Default/components/Messages.js");
 /* harmony import */ var react_google_recaptcha__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-google-recaptcha */ "./node_modules/react-google-recaptcha/lib/esm/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _JSScripts_network_Network_PasswordRecover__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../JSScripts/network/Network_PasswordRecover */ "./lsuniverse/JSScripts/network/Network_PasswordRecover.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2080,6 +2318,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -2137,7 +2376,7 @@ var FinalStep = function FinalStep(props) {
 
   var _handleSubmit = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
-      var data, rawResponse, jsonResponse;
+      var data, req, jsonResponse;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -2162,24 +2401,17 @@ var FinalStep = function FinalStep(props) {
 
             case 6:
               _context.next = 8;
-              return fetch('/api/user/password/forget/change', {
-                method: 'POST',
-                headers: {
-                  "Accept": "application/json",
-                  "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-              });
+              return Object(_JSScripts_network_Network_PasswordRecover__WEBPACK_IMPORTED_MODULE_6__["_networkPasswordFinalStep"])(data);
 
             case 8:
-              rawResponse = _context.sent;
+              req = _context.sent;
               _context.next = 11;
-              return rawResponse.json();
+              return req.json();
 
             case 11:
               jsonResponse = _context.sent;
 
-              if (!(rawResponse.status === 500)) {
+              if (!(req.status === 500)) {
                 _context.next = 14;
                 break;
               }
@@ -2187,7 +2419,7 @@ var FinalStep = function FinalStep(props) {
               return _context.abrupt("return", false);
 
             case 14:
-              if (!(rawResponse.status !== 200 && rawResponse.status !== 201)) {
+              if (!(req.status !== 200 && req.status !== 201)) {
                 _context.next = 18;
                 break;
               }
@@ -2298,6 +2530,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Messages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Messages */ "./lsuniverse/Themes/Default/components/Messages.js");
 /* harmony import */ var react_google_recaptcha__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-google-recaptcha */ "./node_modules/react-google-recaptcha/lib/esm/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _JSScripts_network_Network_PasswordRecover__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../JSScripts/network/Network_PasswordRecover */ "./lsuniverse/JSScripts/network/Network_PasswordRecover.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2315,6 +2548,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -2367,7 +2601,7 @@ var FirstStep = function FirstStep(props) {
 
   var _handleSubmit = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
-      var data, rawResponse, jsonResponse;
+      var data, req, jsonResponse;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -2390,24 +2624,17 @@ var FirstStep = function FirstStep(props) {
 
             case 6:
               _context.next = 8;
-              return fetch("/api/user/password/forget/generate", {
-                method: "POST",
-                headers: {
-                  Accept: "application/json",
-                  "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-              });
+              return Object(_JSScripts_network_Network_PasswordRecover__WEBPACK_IMPORTED_MODULE_6__["_networkPasswordFirstStep"])(data);
 
             case 8:
-              rawResponse = _context.sent;
+              req = _context.sent;
               _context.next = 11;
-              return rawResponse.json();
+              return req.json();
 
             case 11:
               jsonResponse = _context.sent;
 
-              if (!(rawResponse.status === 500)) {
+              if (!(req.status === 500)) {
                 _context.next = 14;
                 break;
               }
@@ -2415,7 +2642,7 @@ var FirstStep = function FirstStep(props) {
               return _context.abrupt("return", false);
 
             case 14:
-              if (!(rawResponse.status !== 200 && rawResponse.status !== 201)) {
+              if (!(req.status !== 200 && req.status !== 201)) {
                 _context.next = 18;
                 break;
               }
@@ -2513,6 +2740,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Messages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Messages */ "./lsuniverse/Themes/Default/components/Messages.js");
 /* harmony import */ var react_google_recaptcha__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-google-recaptcha */ "./node_modules/react-google-recaptcha/lib/esm/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _JSScripts_network_Network_PasswordRecover__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../JSScripts/network/Network_PasswordRecover */ "./lsuniverse/JSScripts/network/Network_PasswordRecover.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2530,6 +2758,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -2583,7 +2812,7 @@ var SecondStep = function SecondStep(props) {
 
   var _handleSubmit = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
-      var data, rawResponse, jsonResponse;
+      var data, req, jsonResponse;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -2606,24 +2835,17 @@ var SecondStep = function SecondStep(props) {
 
             case 6:
               _context.next = 8;
-              return fetch('/api/user/password/forget/check', {
-                method: 'POST',
-                headers: {
-                  "Accept": "application/json",
-                  "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-              });
+              return Object(_JSScripts_network_Network_PasswordRecover__WEBPACK_IMPORTED_MODULE_6__["_networkPasswordSecondStep"])(data);
 
             case 8:
-              rawResponse = _context.sent;
+              req = _context.sent;
               _context.next = 11;
-              return rawResponse.json();
+              return req.json();
 
             case 11:
               jsonResponse = _context.sent;
 
-              if (!(rawResponse.status === 500)) {
+              if (!(req.status === 500)) {
                 _context.next = 14;
                 break;
               }
@@ -2631,7 +2853,7 @@ var SecondStep = function SecondStep(props) {
               return _context.abrupt("return", false);
 
             case 14:
-              if (!(rawResponse.status !== 200 && rawResponse.status !== 201)) {
+              if (!(req.status !== 200 && req.status !== 201)) {
                 _context.next = 18;
                 break;
               }
@@ -2863,7 +3085,8 @@ var AddTicketForm = function AddTicketForm(props) {
                 name: topic,
                 content: topicDesc,
                 department: topicDep
-              };
+              }; // TODO: move that to network side;
+
               _context2.next = 4;
               return fetch('/api/user/tickets/create', {
                 method: 'POST',

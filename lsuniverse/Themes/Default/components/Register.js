@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {useTranslation} from "react-multi-lang";
 import Messages from "./Messages";
 import ReCAPTCHA from "react-google-recaptcha";
+import {_networkRegisterUser} from "../../../JSScripts/network/Network_RegisterUser";
 
 const Register = props => {
     const t = useTranslation();
@@ -55,21 +56,14 @@ const Register = props => {
         };
 
         setLoading(true);
-        const rawResponse = await fetch("api/auth/register", {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
-        const jsonResponse = await rawResponse.json();
+        const req = await _networkRegisterUser(data);
+        const jsonResponse = await req.json();
 
-        if (rawResponse.status === 500) {
+        if (req.status === 500) {
             return false;
         }
 
-        if (rawResponse.status !== 200 && rawResponse.status !== 201) {
+        if (req.status !== 200 && req.status !== 201) {
             setShowForm(true);
             loaderStatus(false);
             setErrorMessages(jsonResponse.errors);

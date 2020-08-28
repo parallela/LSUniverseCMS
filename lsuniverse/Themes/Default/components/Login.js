@@ -5,6 +5,7 @@ import Messages from "./Messages";
 import ReCAPTCHA from "react-google-recaptcha";
 import {UserData} from "../../../JSScripts/services/Authenticator";
 import {useHistory} from "react-router-dom";
+import {_networkLoginUser} from "../../../JSScripts/network/Network_LoginUser";
 
 const Login = props => {
     const [email, setEmail] = useState("");
@@ -68,24 +69,16 @@ const Login = props => {
             return false;
         }
 
-        // TODO: Move all fetch methods to network folder.
-        const rawResponse = await fetch("api/auth/login", {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
 
         loaderStatus(true);
-        const jsonResponse = await rawResponse.json();
+        const req = await _networkLoginUser(data);
+        const jsonResponse = await req.json();
 
-        if(rawResponse.status === 500) {
+        if(req.status === 500) {
             return false;
         }
 
-        if (rawResponse.status !== 200 && rawResponse.status !== 201) {
+        if (req.status !== 200 && req.status !== 201) {
             setError(true);
             setErrorMessages(jsonResponse.errors);
             loaderStatus(false);
