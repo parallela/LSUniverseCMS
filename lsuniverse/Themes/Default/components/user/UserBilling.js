@@ -1,7 +1,7 @@
 import React from "react";
 import {useState} from "react";
 import {useTranslation} from "react-multi-lang";
-import {updateUserCookie, User} from "../../services/Authenticator";
+import {updateUserCookie, User} from "../../../../JSScripts/services/Authenticator";
 import Messages from "../Messages";
 
 const UserBilling = props => {

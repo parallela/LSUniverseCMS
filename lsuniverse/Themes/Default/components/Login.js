@@ -3,7 +3,7 @@ import {useTranslation} from "react-multi-lang";
 import {useState, useEffect} from "react";
 import Messages from "./Messages";
 import ReCAPTCHA from "react-google-recaptcha";
-import {UserData} from "../services/Authenticator";
+import {UserData} from "../../../JSScripts/services/Authenticator";
 import {useHistory} from "react-router-dom";
 
 const Login = props => {
@@ -68,6 +68,7 @@ const Login = props => {
             return false;
         }
 
+        // TODO: Move all fetch methods to network folder.
         const rawResponse = await fetch("api/auth/login", {
             method: "POST",
             headers: {

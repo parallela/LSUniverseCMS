@@ -3,26 +3,24 @@ import ReactDOM from "react-dom";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import Home from "./Home";
 import Auth from "./Auth";
-import User from "./User";
 import {useEffect} from "react";
-import en from "../lang/en.json";
-import bg from "../lang/bg.json";
+import en from "../../../Language/Frontend/lang/en.json";
+import bg from "../../../Language/Frontend/lang/bg.json";
 import {setDefaultLanguage, setTranslations} from "react-multi-lang";
-import {UserData} from "../services/Authenticator";
+// import {UserData} from "../../../JSScripts/services/Authenticator";
+import {_networkUserGet} from "../../../JSScripts/network/Network_UserGet";
 import {AnimatedSwitch, spring} from "react-router-transition";
 import Layout from "./Layout";
 import ChangePassword from "./ChangePassword";
 import Verififaction from "./Verification";
+import User from "./User";
 
 const App = () => {
 
     useEffect(() => {
         setTranslations({en, bg});
         if (localStorage.getItem('token')) {
-            UserData();
-            setInterval(() => {
-                UserData();
-            }, 10000)
+            _networkUserGet();
         }
 
         const setLanguage = () => {

@@ -1,6 +1,6 @@
 import React from "react";
 import UserCard from "./UserCard";
-import {User as UD} from "../services/Authenticator";
+import {User as UD} from "../../../JSScripts/services/Authenticator";
 
 const User = props => {
     const user = UD();

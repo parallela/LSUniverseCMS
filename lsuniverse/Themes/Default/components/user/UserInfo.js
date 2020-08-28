@@ -1,7 +1,7 @@
 import React from "react";
 import {useState, useEffect} from "react";
 import {useTranslation} from "react-multi-lang";
-import {User} from "../../services/Authenticator";
+import {User} from "../../../../JSScripts/services/Authenticator";
 
 const UserInfo = props => {
     const [mailAds , setMailAds] = useState("");

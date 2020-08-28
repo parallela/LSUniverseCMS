@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {Link, useLocation, useHistory} from "react-router-dom";
 import {useTranslation} from "react-multi-lang";
-import {logout_user, User} from "../services/Authenticator";
+import {logout_user, User} from "../../../JSScripts/services/Authenticator";
 
 const Navbar = props => {
     const t = useTranslation();

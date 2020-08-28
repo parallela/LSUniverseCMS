@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {User} from "../../services/Authenticator";
+import {User} from "../../../../JSScripts/services/Authenticator";
 import {useTranslation} from "react-multi-lang/lib";
 
 const TicketAnswers = props => {

@@ -86,6 +86,216 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./lsuniverse/JSScripts/network/Network_UserGet.js":
+/*!*********************************************************!*\
+  !*** ./lsuniverse/JSScripts/network/Network_UserGet.js ***!
+  \*********************************************************/
+/*! exports provided: _networkUserGet */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkUserGet", function() { return _networkUserGet; });
+/* harmony import */ var _services_Authenticator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/Authenticator */ "./lsuniverse/JSScripts/services/Authenticator.js");
+
+var _networkUserGet = function _networkUserGet() {
+  Object(_services_Authenticator__WEBPACK_IMPORTED_MODULE_0__["UserData"])();
+  setInterval(function () {
+    Object(_services_Authenticator__WEBPACK_IMPORTED_MODULE_0__["UserData"])();
+  }, 10000);
+};
+
+/***/ }),
+
+/***/ "./lsuniverse/JSScripts/services/Authenticator.js":
+/*!********************************************************!*\
+  !*** ./lsuniverse/JSScripts/services/Authenticator.js ***!
+  \********************************************************/
+/*! exports provided: getUserData, UserData, updateUserCookie, User, logout_user */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUserData", function() { return getUserData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserData", function() { return UserData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateUserCookie", function() { return updateUserCookie; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "User", function() { return User; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout_user", function() { return logout_user; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var universal_cookie__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! universal-cookie */ "./node_modules/universal-cookie/es6/index.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+var cookies = new universal_cookie__WEBPACK_IMPORTED_MODULE_2__["default"]();
+var time = new Date();
+var cookie_expires_in = 3600;
+function getUserData() {
+  return _getUserData.apply(this, arguments);
+}
+
+function _getUserData() {
+  _getUserData = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+    var rawResponse, jsonResponse;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return fetch("/api/auth/me", {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("token"),
+                Accept: "application/json"
+              }
+            });
+
+          case 2:
+            rawResponse = _context.sent;
+            _context.next = 5;
+            return rawResponse.json();
+
+          case 5:
+            jsonResponse = _context.sent;
+            return _context.abrupt("return", jsonResponse);
+
+          case 7:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _getUserData.apply(this, arguments);
+}
+
+function UserData() {
+  return _UserData.apply(this, arguments);
+}
+
+function _UserData() {
+  _UserData = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+    var data, userData;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return getUserData();
+
+          case 2:
+            data = _context2.sent;
+
+            if (!(data.error == "invalid_auth")) {
+              _context2.next = 7;
+              break;
+            }
+
+            localStorage.removeItem("token");
+            cookies.remove('user');
+            return _context2.abrupt("return", false);
+
+          case 7:
+            userData = JSON.stringify(data);
+            cookies.set('user', userData, {
+              path: '/',
+              sameSite: 'strict',
+              expires: new Date(time.getTime() + cookie_expires_in * 1000)
+            });
+            return _context2.abrupt("return", true);
+
+          case 10:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _UserData.apply(this, arguments);
+}
+
+function updateUserCookie() {
+  return _updateUserCookie.apply(this, arguments);
+}
+
+function _updateUserCookie() {
+  _updateUserCookie = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+    var data;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.next = 2;
+            return getUserData();
+
+          case 2:
+            data = _context3.sent;
+            cookies.set('user', JSON.stringify(data), {
+              path: '/',
+              sameSite: 'strict',
+              expires: new Date(time.getTime() + cookie_expires_in * 1000)
+            });
+
+          case 4:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+  return _updateUserCookie.apply(this, arguments);
+}
+
+function User() {
+  var user = cookies.get('user');
+  return user === undefined ? localStorage.removeItem('token') : user;
+}
+function logout_user() {
+  var logout = fetch("/api/auth/logout", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token")
+    }
+  });
+  localStorage.removeItem("token");
+  cookies.remove('user');
+  window.location.href = '/auth';
+  return true;
+}
+
+/***/ }),
+
+/***/ "./lsuniverse/Language/Frontend/lang/bg.json":
+/*!***************************************************!*\
+  !*** ./lsuniverse/Language/Frontend/lang/bg.json ***!
+  \***************************************************/
+/*! exports provided: home, auth, user, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"home\":{\"nav-home\":\"Home\",\"contacts\":\"Contacts\",\"quick-menu\":\"Quick Menu\",\"all-rights-reserved\":\"All Rights Reserved\",\"register\":\"Register\",\"login\":\"Login\",\"247-support\":\"24/7 SUPPORT\",\"email\":\"Email\",\"live-chat\":\"Live Chat\",\"live-chat-text\":\"Chat With Us Now\",\"template-made\":\"This template is made with\",\"by\":\"by\",\"live\":\"Live chat\",\"auth\":\"Register / Login\",\"forget-password\":\"Forget password\",\"auth_text\":\"Login / Register\",\"remember-me\":\"Remember me\",\"full-name\":\"Full name\",\"password\":\"Password\",\"first_step_forget_password\":\"First step of resetting password\",\"second_step_forget_password\":\"Second step of resseting password\",\"third_step_forget_password\":\"Third step of resseting password\",\"re-password\":\"Re-type Password\",\"confirm\":\"Confirm\",\"please-wait\":\"Please wait...\",\"city\":\"City\",\"region\":\"Region\",\"zipcode\":\"Zipcode\",\"mailing_list\":\"Mail ads\",\"subscribed\":\"Subscribed\",\"unsubscribed\":\"Unsubscribed\"},\"auth\":{\"success\":\"Your account was created successfully. Please confirm your E-Mail address to continue.\",\"login-success\":\"You are logged in, successfully!\",\"reCaptcha\":\"Please confirm reCaptcha to continue!\",\"tooManyAttempts\":\"Too many login attempts, please try again later or reset your password from the buttom link\",\"invalid-email\":\"The email you provided, is not valid\",\"invalid-password\":\"The password lenght must be 8 character long or greater\",\"invalid-repassword\":\"The password you provided is not the same as main password\",\"invalid-name\":\"The name is invalid\",\"field-required\":\"This field is required!\",\"reset-button\":\"Reset password\",\"reset-password-failed\":\"We can't recover your password right now! Please try again later.\",\"reset-password-success\":\"We've send you an email with instructions, how to recover your password!\",\"reset-key\":\"Enter your key from the email\",\"reset-key-valid\":\"Your key is valid, you'll be redirected to reset password page any moment!\",\"reset-key-invalid\":\"Your key is invalid, please make sure you copied it correctly!\",\"password-changed\":\"Password was changed, successfully\",\"password-notchanged\":\"We have a problem with changing your password, please try again later!\",\"account-verified\":\"Account was verified successfuly!\",\"account-verification-failed\":\"Account was not verified, please try again!\"},\"user\":{\"user-info\":\"User Information\",\"user-billing-details\":\"User Billing Details\",\"welcome\":\"Welcome again, \",\"active-services\":\"Active Services\",\"tickets\":\"Tickets\",\"invoices\":\"Invoices\",\"last-tickets\":\"Last Tickets\",\"balance\":\"Balance\",\"user-address-1\":\"Address 1\",\"user-address-2\":\"Address 2\",\"phone\":\"Phone number\"}}");
+
+/***/ }),
+
+/***/ "./lsuniverse/Language/Frontend/lang/en.json":
+/*!***************************************************!*\
+  !*** ./lsuniverse/Language/Frontend/lang/en.json ***!
+  \***************************************************/
+/*! exports provided: home, auth, user, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"home\":{\"nav-home\":\"Home\",\"contacts\":\"Contacts\",\"quick-menu\":\"Quick Menu\",\"all-rights-reserved\":\"All Rights Reserved\",\"register\":\"Register\",\"login\":\"Login\",\"247-support\":\"24/7 SUPPORT\",\"email\":\"Email\",\"live-chat\":\"Live Chat\",\"live-chat-text\":\"Chat With Us Now\",\"template-made\":\"This template is made with\",\"by\":\"by\",\"live\":\"Live chat\",\"auth\":\"Register / Login\",\"forget-password\":\"Forget password\",\"auth_text\":\"Login / Register\",\"remember-me\":\"Remember me\",\"full-name\":\"Full name\",\"password\":\"Password\",\"first_step_forget_password\":\"First step of resetting password\",\"second_step_forget_password\":\"Second step of resseting password\",\"third_step_forget_password\":\"Third step of resseting password\",\"re-password\":\"Re-type Password\",\"confirm\":\"Confirm\",\"please-wait\":\"Please wait...\",\"city\":\"City\",\"region\":\"Region\",\"zipcode\":\"Zipcode\",\"mailing_list\":\"Mail ads\",\"subscribed\":\"Subscribed\",\"unsubscribed\":\"Unsubscribed\",\"submit\":\"Submit\",\"open\":\"Open\",\"closed\":\"Closed\",\"something-wr\":\"Something went wrong! Please try again later...\",\"you\":\"You\",\"reply\":\"Reply\"},\"auth\":{\"success\":\"Your account was created successfully. Please confirm your E-Mail address to continue.\",\"login-success\":\"You are logged in, successfully!\",\"reCaptcha\":\"Please confirm reCaptcha to continue!\",\"tooManyAttempts\":\"Too many login attempts, please try again later or reset your password from the buttom link\",\"invalid-email\":\"The email you provided, is not valid\",\"invalid-password\":\"The password lenght must be 8 character long or greater\",\"invalid-repassword\":\"The password you provided is not the same as main password\",\"invalid-name\":\"The name is invalid\",\"field-required\":\"This field is required!\",\"reset-button\":\"Reset password\",\"reset-password-failed\":\"We can't recover your password right now! Please try again later.\",\"reset-password-success\":\"We've send you an email with instructions, how to recover your password!\",\"reset-key\":\"Enter your key from the email\",\"reset-key-valid\":\"Your key is valid, you'll be redirected to reset password page any moment!\",\"reset-key-invalid\":\"Your key is invalid, please make sure you copied it correctly!\",\"password-changed\":\"Password was changed, successfully\",\"password-notchanged\":\"We have a problem with changing your password, please try again later!\",\"account-verified\":\"Account was verified successfuly!\",\"account-verification-failed\":\"Account was not verified, please try again!\"},\"user\":{\"user-info\":\"User Information\",\"user-billing-details\":\"User Billing Details\",\"welcome\":\"Welcome again, \",\"active-services\":\"Active Services\",\"tickets\":\"Tickets\",\"invoices\":\"Invoices\",\"last-tickets\":\"Last Tickets\",\"balance\":\"Balance\",\"user-address-1\":\"Address 1\",\"user-address-2\":\"Address 2\",\"phone\":\"Phone number\",\"success-updated\":\"Your information was updated successfully!\",\"service-name\":\"Service name\",\"service-price\":\"Service price\",\"service-purchased\":\"Service purchased at\",\"order-id\":\"Order ID\",\"service-expire_at\":\"Service Expire at\",\"ticket-name\":\"Ticket Name\",\"ticket-created\":\"Ticket Created At\",\"ticket-status\":\"Ticket Status\",\"ticket-last-activity\":\"Ticket Last Activity\",\"open-tickets\":\"Open tickets\",\"ticket-topic\":\"Ticket topic\",\"department\":\"For department\",\"select-department\":\"Select department\",\"topic-description\":\"Topic Description:\",\"add-ticket\":\"Add Ticket\",\"ticket-pending\":\"Ticket was successfully added to our queue!\",\"ticket-failed\":\"We can't add your ticket right now! Please try again later.\",\"ticket-answer-problem\":\"We have problem with adding your answer.\",\"action\":\"Action\",\"delete\":\"Delete\"}}");
+
+/***/ }),
+
 /***/ "./lsuniverse/Themes/Default/components/App.js":
 /*!*****************************************************!*\
   !*** ./lsuniverse/Themes/Default/components/App.js ***!
@@ -102,18 +312,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Home */ "./lsuniverse/Themes/Default/components/Home.js");
 /* harmony import */ var _Auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Auth */ "./lsuniverse/Themes/Default/components/Auth.js");
-/* harmony import */ var _User__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./User */ "./lsuniverse/Themes/Default/components/User.js");
-/* harmony import */ var _lang_en_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lang/en.json */ "./lsuniverse/Themes/Default/lang/en.json");
-var _lang_en_json__WEBPACK_IMPORTED_MODULE_6___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../lang/en.json */ "./lsuniverse/Themes/Default/lang/en.json", 1);
-/* harmony import */ var _lang_bg_json__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lang/bg.json */ "./lsuniverse/Themes/Default/lang/bg.json");
-var _lang_bg_json__WEBPACK_IMPORTED_MODULE_7___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../lang/bg.json */ "./lsuniverse/Themes/Default/lang/bg.json", 1);
-/* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-multi-lang */ "./node_modules/react-multi-lang/lib/index.js");
-/* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_multi_lang__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _services_Authenticator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/Authenticator */ "./lsuniverse/Themes/Default/services/Authenticator.js");
-/* harmony import */ var react_router_transition__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-transition */ "./node_modules/react-router-transition/lib/index.js");
-/* harmony import */ var _Layout__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Layout */ "./lsuniverse/Themes/Default/components/Layout.js");
-/* harmony import */ var _ChangePassword__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./ChangePassword */ "./lsuniverse/Themes/Default/components/ChangePassword.js");
-/* harmony import */ var _Verification__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./Verification */ "./lsuniverse/Themes/Default/components/Verification.js");
+/* harmony import */ var _Language_Frontend_lang_en_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../Language/Frontend/lang/en.json */ "./lsuniverse/Language/Frontend/lang/en.json");
+var _Language_Frontend_lang_en_json__WEBPACK_IMPORTED_MODULE_5___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../../../Language/Frontend/lang/en.json */ "./lsuniverse/Language/Frontend/lang/en.json", 1);
+/* harmony import */ var _Language_Frontend_lang_bg_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../Language/Frontend/lang/bg.json */ "./lsuniverse/Language/Frontend/lang/bg.json");
+var _Language_Frontend_lang_bg_json__WEBPACK_IMPORTED_MODULE_6___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../../../Language/Frontend/lang/bg.json */ "./lsuniverse/Language/Frontend/lang/bg.json", 1);
+/* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-multi-lang */ "./node_modules/react-multi-lang/lib/index.js");
+/* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_multi_lang__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _JSScripts_network_Network_UserGet__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../JSScripts/network/Network_UserGet */ "./lsuniverse/JSScripts/network/Network_UserGet.js");
+/* harmony import */ var react_router_transition__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-transition */ "./node_modules/react-router-transition/lib/index.js");
+/* harmony import */ var _Layout__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Layout */ "./lsuniverse/Themes/Default/components/Layout.js");
+/* harmony import */ var _ChangePassword__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./ChangePassword */ "./lsuniverse/Themes/Default/components/ChangePassword.js");
+/* harmony import */ var _Verification__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Verification */ "./lsuniverse/Themes/Default/components/Verification.js");
+/* harmony import */ var _User__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./User */ "./lsuniverse/Themes/Default/components/User.js");
 
 
 
@@ -122,6 +332,7 @@ var _lang_bg_json__WEBPACK_IMPORTED_MODULE_7___namespace = /*#__PURE__*/__webpac
 
 
 
+ // import {UserData} from "../../../JSScripts/services/Authenticator";
 
 
 
@@ -132,16 +343,13 @@ var _lang_bg_json__WEBPACK_IMPORTED_MODULE_7___namespace = /*#__PURE__*/__webpac
 
 var App = function App() {
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_8__["setTranslations"])({
-      en: _lang_en_json__WEBPACK_IMPORTED_MODULE_6__,
-      bg: _lang_bg_json__WEBPACK_IMPORTED_MODULE_7__
+    Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_7__["setTranslations"])({
+      en: _Language_Frontend_lang_en_json__WEBPACK_IMPORTED_MODULE_5__,
+      bg: _Language_Frontend_lang_bg_json__WEBPACK_IMPORTED_MODULE_6__
     });
 
     if (localStorage.getItem('token')) {
-      Object(_services_Authenticator__WEBPACK_IMPORTED_MODULE_9__["UserData"])();
-      setInterval(function () {
-        Object(_services_Authenticator__WEBPACK_IMPORTED_MODULE_9__["UserData"])();
-      }, 10000);
+      Object(_JSScripts_network_Network_UserGet__WEBPACK_IMPORTED_MODULE_8__["_networkUserGet"])();
     }
 
     var setLanguage = function setLanguage() {
@@ -150,7 +358,7 @@ var App = function App() {
           localStorage.setItem("lang", "en");
         }
 
-        Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_8__["setDefaultLanguage"])(localStorage.getItem("lang"));
+        Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_7__["setDefaultLanguage"])(localStorage.getItem("lang"));
       } catch (e) {
         console.log(e);
       }
@@ -167,7 +375,7 @@ var App = function App() {
   };
 
   var bounce = function bounce(val) {
-    return Object(react_router_transition__WEBPACK_IMPORTED_MODULE_10__["spring"])(val, {
+    return Object(react_router_transition__WEBPACK_IMPORTED_MODULE_9__["spring"])(val, {
       stiffness: 330,
       damping: 22
     });
@@ -187,7 +395,7 @@ var App = function App() {
       scale: bounce(1)
     }
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Layout__WEBPACK_IMPORTED_MODULE_11__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_transition__WEBPACK_IMPORTED_MODULE_10__["AnimatedSwitch"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Layout__WEBPACK_IMPORTED_MODULE_10__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_transition__WEBPACK_IMPORTED_MODULE_9__["AnimatedSwitch"], {
     atEnter: bounceTransition.atEnter,
     atLeave: bounceTransition.atLeave,
     atActive: bounceTransition.atActive,
@@ -202,13 +410,13 @@ var App = function App() {
     component: _Auth__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/my",
-    component: _User__WEBPACK_IMPORTED_MODULE_5__["default"]
+    component: _User__WEBPACK_IMPORTED_MODULE_13__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/password/reset",
-    component: _ChangePassword__WEBPACK_IMPORTED_MODULE_12__["default"]
+    component: _ChangePassword__WEBPACK_IMPORTED_MODULE_11__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "/verify",
-    component: _Verification__WEBPACK_IMPORTED_MODULE_13__["default"]
+    component: _Verification__WEBPACK_IMPORTED_MODULE_12__["default"]
   })))));
 };
 
@@ -491,7 +699,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_multi_lang__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Messages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Messages */ "./lsuniverse/Themes/Default/components/Messages.js");
 /* harmony import */ var react_google_recaptcha__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-google-recaptcha */ "./node_modules/react-google-recaptcha/lib/esm/index.js");
-/* harmony import */ var _services_Authenticator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/Authenticator */ "./lsuniverse/Themes/Default/services/Authenticator.js");
+/* harmony import */ var _JSScripts_services_Authenticator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../JSScripts/services/Authenticator */ "./lsuniverse/JSScripts/services/Authenticator.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 
@@ -684,7 +892,7 @@ var Login = function Login(props) {
               setMessage(t("auth.login-success"));
               loaderStatus(false);
               setShowForm(false);
-              Object(_services_Authenticator__WEBPACK_IMPORTED_MODULE_5__["UserData"])();
+              Object(_JSScripts_services_Authenticator__WEBPACK_IMPORTED_MODULE_5__["UserData"])();
               setTimeout(function () {
                 window.location.href = "/";
               }, 1500);
@@ -863,7 +1071,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-multi-lang */ "./node_modules/react-multi-lang/lib/index.js");
 /* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_multi_lang__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _services_Authenticator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/Authenticator */ "./lsuniverse/Themes/Default/services/Authenticator.js");
+/* harmony import */ var _JSScripts_services_Authenticator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../JSScripts/services/Authenticator */ "./lsuniverse/JSScripts/services/Authenticator.js");
 
 
 
@@ -873,12 +1081,12 @@ var Navbar = function Navbar(props) {
   var t = Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_2__["useTranslation"])();
   var settings = window._settings;
   var location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useLocation"])();
-  var user = Object(_services_Authenticator__WEBPACK_IMPORTED_MODULE_3__["User"])();
+  var user = Object(_JSScripts_services_Authenticator__WEBPACK_IMPORTED_MODULE_3__["User"])();
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
   var logo = document.querySelector('meta[name="navbar-logo"]').content;
 
   var Logout = function Logout() {
-    Object(_services_Authenticator__WEBPACK_IMPORTED_MODULE_3__["logout_user"])();
+    Object(_JSScripts_services_Authenticator__WEBPACK_IMPORTED_MODULE_3__["logout_user"])();
   };
 
   var isActive = function isActive(path) {
@@ -1011,7 +1219,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_multi_lang__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Messages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Messages */ "./lsuniverse/Themes/Default/components/Messages.js");
 /* harmony import */ var react_google_recaptcha__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-google-recaptcha */ "./node_modules/react-google-recaptcha/lib/esm/index.js");
-/* harmony import */ var _services_Authenticator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/Authenticator */ "./lsuniverse/Themes/Default/services/Authenticator.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -1029,7 +1236,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -1495,13 +1701,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _UserCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserCard */ "./lsuniverse/Themes/Default/components/UserCard.js");
-/* harmony import */ var _services_Authenticator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/Authenticator */ "./lsuniverse/Themes/Default/services/Authenticator.js");
+/* harmony import */ var _JSScripts_services_Authenticator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../JSScripts/services/Authenticator */ "./lsuniverse/JSScripts/services/Authenticator.js");
 
 
 
 
 var User = function User(props) {
-  var user = Object(_services_Authenticator__WEBPACK_IMPORTED_MODULE_2__["User"])();
+  var user = Object(_JSScripts_services_Authenticator__WEBPACK_IMPORTED_MODULE_2__["User"])();
 
   if (localStorage.getItem('token') === null) {
     window.location.href = "/auth";
@@ -2805,7 +3011,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _services_Authenticator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/Authenticator */ "./lsuniverse/Themes/Default/services/Authenticator.js");
+/* harmony import */ var _JSScripts_services_Authenticator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../JSScripts/services/Authenticator */ "./lsuniverse/JSScripts/services/Authenticator.js");
 /* harmony import */ var react_multi_lang_lib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-multi-lang/lib */ "./node_modules/react-multi-lang/lib/index.js");
 /* harmony import */ var react_multi_lang_lib__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_multi_lang_lib__WEBPACK_IMPORTED_MODULE_3__);
 
@@ -2814,7 +3020,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var TicketAnswers = function TicketAnswers(props) {
-  var Auser = Object(_services_Authenticator__WEBPACK_IMPORTED_MODULE_2__["User"])();
+  var Auser = Object(_JSScripts_services_Authenticator__WEBPACK_IMPORTED_MODULE_2__["User"])();
   var user = props.answer[1].user;
   var answer = props.answer[1];
   var t = Object(react_multi_lang_lib__WEBPACK_IMPORTED_MODULE_3__["useTranslation"])();
@@ -3112,7 +3318,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-multi-lang */ "./node_modules/react-multi-lang/lib/index.js");
 /* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_multi_lang__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _services_Authenticator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/Authenticator */ "./lsuniverse/Themes/Default/services/Authenticator.js");
+/* harmony import */ var _JSScripts_services_Authenticator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../JSScripts/services/Authenticator */ "./lsuniverse/JSScripts/services/Authenticator.js");
 /* harmony import */ var _Messages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Messages */ "./lsuniverse/Themes/Default/components/Messages.js");
 
 
@@ -3139,7 +3345,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var UserBilling = function UserBilling(props) {
-  var user = Object(_services_Authenticator__WEBPACK_IMPORTED_MODULE_3__["User"])();
+  var user = Object(_JSScripts_services_Authenticator__WEBPACK_IMPORTED_MODULE_3__["User"])();
   var userDetails = user.details;
   var t = Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_2__["useTranslation"])();
 
@@ -3261,7 +3467,7 @@ var UserBilling = function UserBilling(props) {
               return _context.abrupt("return", false);
 
             case 15:
-              Object(_services_Authenticator__WEBPACK_IMPORTED_MODULE_3__["updateUserCookie"])();
+              Object(_JSScripts_services_Authenticator__WEBPACK_IMPORTED_MODULE_3__["updateUserCookie"])();
               setTimeout(function () {
                 loaderStatus(false);
               }, 3000);
@@ -3413,7 +3619,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-multi-lang */ "./node_modules/react-multi-lang/lib/index.js");
 /* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_multi_lang__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _services_Authenticator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/Authenticator */ "./lsuniverse/Themes/Default/services/Authenticator.js");
+/* harmony import */ var _JSScripts_services_Authenticator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../JSScripts/services/Authenticator */ "./lsuniverse/JSScripts/services/Authenticator.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -3437,7 +3643,7 @@ var UserInfo = function UserInfo(props) {
       mailAds = _useState2[0],
       setMailAds = _useState2[1];
 
-  var user = Object(_services_Authenticator__WEBPACK_IMPORTED_MODULE_2__["User"])();
+  var user = Object(_JSScripts_services_Authenticator__WEBPACK_IMPORTED_MODULE_2__["User"])();
   var userDetails = user.details;
   var t = Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_1__["useTranslation"])();
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
@@ -3888,195 +4094,6 @@ var UserTickets = function UserTickets(props) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (UserTickets);
-
-/***/ }),
-
-/***/ "./lsuniverse/Themes/Default/lang/bg.json":
-/*!************************************************!*\
-  !*** ./lsuniverse/Themes/Default/lang/bg.json ***!
-  \************************************************/
-/*! exports provided: home, auth, user, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"home\":{\"nav-home\":\"Home\",\"contacts\":\"Contacts\",\"quick-menu\":\"Quick Menu\",\"all-rights-reserved\":\"All Rights Reserved\",\"register\":\"Register\",\"login\":\"Login\",\"247-support\":\"24/7 SUPPORT\",\"email\":\"Email\",\"live-chat\":\"Live Chat\",\"live-chat-text\":\"Chat With Us Now\",\"template-made\":\"This template is made with\",\"by\":\"by\",\"live\":\"Live chat\",\"auth\":\"Register / Login\",\"forget-password\":\"Forget password\",\"auth_text\":\"Login / Register\",\"remember-me\":\"Remember me\",\"full-name\":\"Full name\",\"password\":\"Password\",\"first_step_forget_password\":\"First step of resetting password\",\"second_step_forget_password\":\"Second step of resseting password\",\"third_step_forget_password\":\"Third step of resseting password\",\"re-password\":\"Re-type Password\",\"confirm\":\"Confirm\",\"please-wait\":\"Please wait...\",\"city\":\"City\",\"region\":\"Region\",\"zipcode\":\"Zipcode\",\"mailing_list\":\"Mail ads\",\"subscribed\":\"Subscribed\",\"unsubscribed\":\"Unsubscribed\"},\"auth\":{\"success\":\"Your account was created successfully. Please confirm your E-Mail address to continue.\",\"login-success\":\"You are logged in, successfully!\",\"reCaptcha\":\"Please confirm reCaptcha to continue!\",\"tooManyAttempts\":\"Too many login attempts, please try again later or reset your password from the buttom link\",\"invalid-email\":\"The email you provided, is not valid\",\"invalid-password\":\"The password lenght must be 8 character long or greater\",\"invalid-repassword\":\"The password you provided is not the same as main password\",\"invalid-name\":\"The name is invalid\",\"field-required\":\"This field is required!\",\"reset-button\":\"Reset password\",\"reset-password-failed\":\"We can't recover your password right now! Please try again later.\",\"reset-password-success\":\"We've send you an email with instructions, how to recover your password!\",\"reset-key\":\"Enter your key from the email\",\"reset-key-valid\":\"Your key is valid, you'll be redirected to reset password page any moment!\",\"reset-key-invalid\":\"Your key is invalid, please make sure you copied it correctly!\",\"password-changed\":\"Password was changed, successfully\",\"password-notchanged\":\"We have a problem with changing your password, please try again later!\",\"account-verified\":\"Account was verified successfuly!\",\"account-verification-failed\":\"Account was not verified, please try again!\"},\"user\":{\"user-info\":\"User Information\",\"user-billing-details\":\"User Billing Details\",\"welcome\":\"Welcome again, \",\"active-services\":\"Active Services\",\"tickets\":\"Tickets\",\"invoices\":\"Invoices\",\"last-tickets\":\"Last Tickets\",\"balance\":\"Balance\",\"user-address-1\":\"Address 1\",\"user-address-2\":\"Address 2\",\"phone\":\"Phone number\"}}");
-
-/***/ }),
-
-/***/ "./lsuniverse/Themes/Default/lang/en.json":
-/*!************************************************!*\
-  !*** ./lsuniverse/Themes/Default/lang/en.json ***!
-  \************************************************/
-/*! exports provided: home, auth, user, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"home\":{\"nav-home\":\"Home\",\"contacts\":\"Contacts\",\"quick-menu\":\"Quick Menu\",\"all-rights-reserved\":\"All Rights Reserved\",\"register\":\"Register\",\"login\":\"Login\",\"247-support\":\"24/7 SUPPORT\",\"email\":\"Email\",\"live-chat\":\"Live Chat\",\"live-chat-text\":\"Chat With Us Now\",\"template-made\":\"This template is made with\",\"by\":\"by\",\"live\":\"Live chat\",\"auth\":\"Register / Login\",\"forget-password\":\"Forget password\",\"auth_text\":\"Login / Register\",\"remember-me\":\"Remember me\",\"full-name\":\"Full name\",\"password\":\"Password\",\"first_step_forget_password\":\"First step of resetting password\",\"second_step_forget_password\":\"Second step of resseting password\",\"third_step_forget_password\":\"Third step of resseting password\",\"re-password\":\"Re-type Password\",\"confirm\":\"Confirm\",\"please-wait\":\"Please wait...\",\"city\":\"City\",\"region\":\"Region\",\"zipcode\":\"Zipcode\",\"mailing_list\":\"Mail ads\",\"subscribed\":\"Subscribed\",\"unsubscribed\":\"Unsubscribed\",\"submit\":\"Submit\",\"open\":\"Open\",\"closed\":\"Closed\",\"something-wr\":\"Something went wrong! Please try again later...\",\"you\":\"You\",\"reply\":\"Reply\"},\"auth\":{\"success\":\"Your account was created successfully. Please confirm your E-Mail address to continue.\",\"login-success\":\"You are logged in, successfully!\",\"reCaptcha\":\"Please confirm reCaptcha to continue!\",\"tooManyAttempts\":\"Too many login attempts, please try again later or reset your password from the buttom link\",\"invalid-email\":\"The email you provided, is not valid\",\"invalid-password\":\"The password lenght must be 8 character long or greater\",\"invalid-repassword\":\"The password you provided is not the same as main password\",\"invalid-name\":\"The name is invalid\",\"field-required\":\"This field is required!\",\"reset-button\":\"Reset password\",\"reset-password-failed\":\"We can't recover your password right now! Please try again later.\",\"reset-password-success\":\"We've send you an email with instructions, how to recover your password!\",\"reset-key\":\"Enter your key from the email\",\"reset-key-valid\":\"Your key is valid, you'll be redirected to reset password page any moment!\",\"reset-key-invalid\":\"Your key is invalid, please make sure you copied it correctly!\",\"password-changed\":\"Password was changed, successfully\",\"password-notchanged\":\"We have a problem with changing your password, please try again later!\",\"account-verified\":\"Account was verified successfuly!\",\"account-verification-failed\":\"Account was not verified, please try again!\"},\"user\":{\"user-info\":\"User Information\",\"user-billing-details\":\"User Billing Details\",\"welcome\":\"Welcome again, \",\"active-services\":\"Active Services\",\"tickets\":\"Tickets\",\"invoices\":\"Invoices\",\"last-tickets\":\"Last Tickets\",\"balance\":\"Balance\",\"user-address-1\":\"Address 1\",\"user-address-2\":\"Address 2\",\"phone\":\"Phone number\",\"success-updated\":\"Your information was updated successfully!\",\"service-name\":\"Service name\",\"service-price\":\"Service price\",\"service-purchased\":\"Service purchased at\",\"order-id\":\"Order ID\",\"service-expire_at\":\"Service Expire at\",\"ticket-name\":\"Ticket Name\",\"ticket-created\":\"Ticket Created At\",\"ticket-status\":\"Ticket Status\",\"ticket-last-activity\":\"Ticket Last Activity\",\"open-tickets\":\"Open tickets\",\"ticket-topic\":\"Ticket topic\",\"department\":\"For department\",\"select-department\":\"Select department\",\"topic-description\":\"Topic Description:\",\"add-ticket\":\"Add Ticket\",\"ticket-pending\":\"Ticket was successfully added to our queue!\",\"ticket-failed\":\"We can't add your ticket right now! Please try again later.\",\"ticket-answer-problem\":\"We have problem with adding your answer.\",\"action\":\"Action\",\"delete\":\"Delete\"}}");
-
-/***/ }),
-
-/***/ "./lsuniverse/Themes/Default/services/Authenticator.js":
-/*!*************************************************************!*\
-  !*** ./lsuniverse/Themes/Default/services/Authenticator.js ***!
-  \*************************************************************/
-/*! exports provided: getUserData, UserData, updateUserCookie, User, logout_user */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUserData", function() { return getUserData; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserData", function() { return UserData; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateUserCookie", function() { return updateUserCookie; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "User", function() { return User; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout_user", function() { return logout_user; });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var universal_cookie__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! universal-cookie */ "./node_modules/universal-cookie/es6/index.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-
-
-var cookies = new universal_cookie__WEBPACK_IMPORTED_MODULE_2__["default"]();
-var time = new Date();
-var cookie_expires_in = 3600;
-function getUserData() {
-  return _getUserData.apply(this, arguments);
-}
-
-function _getUserData() {
-  _getUserData = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-    var rawResponse, jsonResponse;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.next = 2;
-            return fetch("/api/auth/me", {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + localStorage.getItem("token"),
-                Accept: "application/json"
-              }
-            });
-
-          case 2:
-            rawResponse = _context.sent;
-            _context.next = 5;
-            return rawResponse.json();
-
-          case 5:
-            jsonResponse = _context.sent;
-            return _context.abrupt("return", jsonResponse);
-
-          case 7:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-  return _getUserData.apply(this, arguments);
-}
-
-function UserData() {
-  return _UserData.apply(this, arguments);
-}
-
-function _UserData() {
-  _UserData = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-    var data, userData;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            _context2.next = 2;
-            return getUserData();
-
-          case 2:
-            data = _context2.sent;
-
-            if (!(data.error == "invalid_auth")) {
-              _context2.next = 7;
-              break;
-            }
-
-            localStorage.removeItem("token");
-            cookies.remove('user');
-            return _context2.abrupt("return", false);
-
-          case 7:
-            userData = JSON.stringify(data);
-            cookies.set('user', userData, {
-              path: '/',
-              sameSite: 'strict',
-              expires: new Date(time.getTime() + cookie_expires_in * 1000)
-            });
-            return _context2.abrupt("return", true);
-
-          case 10:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2);
-  }));
-  return _UserData.apply(this, arguments);
-}
-
-function updateUserCookie() {
-  return _updateUserCookie.apply(this, arguments);
-}
-
-function _updateUserCookie() {
-  _updateUserCookie = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-    var data;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-      while (1) {
-        switch (_context3.prev = _context3.next) {
-          case 0:
-            _context3.next = 2;
-            return getUserData();
-
-          case 2:
-            data = _context3.sent;
-            cookies.set('user', JSON.stringify(data), {
-              path: '/',
-              sameSite: 'strict',
-              expires: new Date(time.getTime() + cookie_expires_in * 1000)
-            });
-
-          case 4:
-          case "end":
-            return _context3.stop();
-        }
-      }
-    }, _callee3);
-  }));
-  return _updateUserCookie.apply(this, arguments);
-}
-
-function User() {
-  var user = cookies.get('user');
-  return user === undefined ? localStorage.removeItem('token') : user;
-}
-function logout_user() {
-  var logout = fetch("/api/auth/logout", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + localStorage.getItem("token")
-    }
-  });
-  localStorage.removeItem("token");
-  cookies.remove('user');
-  window.location.href = '/auth';
-  return true;
-}
 
 /***/ }),
 

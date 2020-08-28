@@ -3,7 +3,6 @@ import {useEffect, useState} from "react";
 import {useTranslation} from "react-multi-lang";
 import Messages from "./Messages";
 import ReCAPTCHA from "react-google-recaptcha";
-import {registerValidation} from "../services/Authenticator";
 
 const Register = props => {
     const t = useTranslation();
