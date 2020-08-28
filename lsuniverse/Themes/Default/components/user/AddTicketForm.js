@@ -4,6 +4,8 @@ import {useTranslation} from "react-multi-lang";
 import Select from "react-select";
 import PropTypes from "prop-types";
 import Messages from "../Messages";
+import {_networkCreateTicket} from "../../../../JSScripts/network/Network_CreateTicket";
+import {_networkGetDepartments} from "../../../../JSScripts/network/Network_GetDepartments";
 
 const AddTicketForm = props => {
     const [departments, setDepartments] = useState([]);
@@ -19,16 +21,8 @@ const AddTicketForm = props => {
     const prepareOptions = [];
 
     const _getDepartments = async () => {
-        const rawResponse = await fetch('/api/departments/list', {
-            method: 'GET',
-            headers: {
-                'Accept': "application/json",
-                'Content-Type': "application/json",
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            }
-        });
-
-        const jsonResponse = await rawResponse.json()
+        const req = await _networkGetDepartments();
+        const jsonResponse = await req.json()
 
         jsonResponse.map((dep) => prepareOptions.push({value: dep.id, label: dep.name}))
         setLoading(false);
@@ -48,26 +42,16 @@ const AddTicketForm = props => {
             content: topicDesc,
             department: topicDep
         }
-        // TODO: move that to network side;
-        const rawResponse = await fetch('/api/user/tickets/create', {
-            method: 'POST',
-            headers: {
-                'Accept': 'applicaiton/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
-            body: JSON.stringify(data)
-        });
 
-
-        const jsonResponse = await rawResponse.json();
+        const req = await _networkCreateTicket(data);
+        const jsonResponse = await req.json();
         setLoading(true);
 
-        if (rawResponse.status === 500) {
+        if (req.status === 500) {
             return false;
         }
 
-        if (rawResponse.status !== 200 && rawResponse.status !== 201) {
+        if (req.status !== 200 && req.status !== 201) {
             setError(true);
             setErrorMessages(jsonResponse.errors);
 

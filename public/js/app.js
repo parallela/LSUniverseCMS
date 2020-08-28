@@ -86,6 +86,258 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./lsuniverse/JSScripts/network/Network_CreateTicket.js":
+/*!**************************************************************!*\
+  !*** ./lsuniverse/JSScripts/network/Network_CreateTicket.js ***!
+  \**************************************************************/
+/*! exports provided: _networkCreateTicket, _networkCreateTicketAnswer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkCreateTicket", function() { return _networkCreateTicket; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkCreateTicketAnswer", function() { return _networkCreateTicketAnswer; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var _networkCreateTicket = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
+    var rawResponse;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return fetch('/api/user/tickets/create', {
+              method: 'POST',
+              headers: {
+                'Accept': 'applicaiton/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+              },
+              body: JSON.stringify(data)
+            });
+
+          case 2:
+            rawResponse = _context.sent;
+            return _context.abrupt("return", rawResponse);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function _networkCreateTicket(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+var _networkCreateTicketAnswer = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(data) {
+    var rawResponse;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return fetch("/api/user/tickets/create/".concat(props.ticketID), {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+              },
+              body: JSON.stringify(data)
+            });
+
+          case 2:
+            rawResponse = _context2.sent;
+            return _context2.abrupt("return", rawResponse);
+
+          case 4:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+
+  return function _networkCreateTicketAnswer(_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+
+/***/ "./lsuniverse/JSScripts/network/Network_GetDepartments.js":
+/*!****************************************************************!*\
+  !*** ./lsuniverse/JSScripts/network/Network_GetDepartments.js ***!
+  \****************************************************************/
+/*! exports provided: _networkGetDepartments */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkGetDepartments", function() { return _networkGetDepartments; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var _networkGetDepartments = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+    var rawResponse;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return fetch('/api/departments/list', {
+              method: 'GET',
+              headers: {
+                'Accept': "application/json",
+                'Content-Type': "application/json",
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+              }
+            });
+
+          case 2:
+            rawResponse = _context.sent;
+            return _context.abrupt("return", rawResponse);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function _networkGetDepartments() {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+
+/***/ "./lsuniverse/JSScripts/network/Network_GetTicketAnswers.js":
+/*!******************************************************************!*\
+  !*** ./lsuniverse/JSScripts/network/Network_GetTicketAnswers.js ***!
+  \******************************************************************/
+/*! exports provided: _networkGetTicketAnswers */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkGetTicketAnswers", function() { return _networkGetTicketAnswers; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var _networkGetTicketAnswers = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(ticket_id) {
+    var rawResponse;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return fetch("/api/user/tickets/show/".concat(ticket_id), {
+              method: 'GET',
+              headers: {
+                'Accept': "application/json",
+                'Content-Type': "application/json",
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+              }
+            });
+
+          case 2:
+            rawResponse = _context.sent;
+            return _context.abrupt("return", rawResponse);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function _networkGetTicketAnswers(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+
+/***/ "./lsuniverse/JSScripts/network/Network_GetUserServices.js":
+/*!*****************************************************************!*\
+  !*** ./lsuniverse/JSScripts/network/Network_GetUserServices.js ***!
+  \*****************************************************************/
+/*! exports provided: _networkGetUserServices */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkGetUserServices", function() { return _networkGetUserServices; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var _networkGetUserServices = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+    var rawResponse;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return fetch('/api/user/services', {
+              method: 'GET',
+              headers: {
+                'Accept': "application/json",
+                'Content-Type': "application/json",
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+              }
+            });
+
+          case 2:
+            rawResponse = _context.sent;
+            return _context.abrupt("return", rawResponse);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function _networkGetUserServices() {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+
 /***/ "./lsuniverse/JSScripts/network/Network_LoginUser.js":
 /*!***********************************************************!*\
   !*** ./lsuniverse/JSScripts/network/Network_LoginUser.js ***!
@@ -334,6 +586,61 @@ var _networkRegisterUser = /*#__PURE__*/function () {
   }));
 
   return function _networkRegisterUser(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+
+/***/ "./lsuniverse/JSScripts/network/Network_UpdateUserBillingInformation.js":
+/*!******************************************************************************!*\
+  !*** ./lsuniverse/JSScripts/network/Network_UpdateUserBillingInformation.js ***!
+  \******************************************************************************/
+/*! exports provided: _networkUpdateUserBillingInformation */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkUpdateUserBillingInformation", function() { return _networkUpdateUserBillingInformation; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var _networkUpdateUserBillingInformation = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
+    var rawResponse;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return fetch('/api/user/update/details', {
+              method: 'POST',
+              headers: {
+                'Accept': 'applicaiton/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+              },
+              body: JSON.stringify(data)
+            });
+
+          case 2:
+            rawResponse = _context.sent;
+            return _context.abrupt("return", rawResponse);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function _networkUpdateUserBillingInformation(_x) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -2953,6 +3260,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _Messages__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Messages */ "./lsuniverse/Themes/Default/components/Messages.js");
+/* harmony import */ var _JSScripts_network_Network_CreateTicket__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../JSScripts/network/Network_CreateTicket */ "./lsuniverse/JSScripts/network/Network_CreateTicket.js");
+/* harmony import */ var _JSScripts_network_Network_GetDepartments__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../JSScripts/network/Network_GetDepartments */ "./lsuniverse/JSScripts/network/Network_GetDepartments.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2970,6 +3279,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
@@ -3024,25 +3335,18 @@ var AddTicketForm = function AddTicketForm(props) {
 
   var _getDepartments = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var rawResponse, jsonResponse;
+      var req, jsonResponse;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch('/api/departments/list', {
-                method: 'GET',
-                headers: {
-                  'Accept': "application/json",
-                  'Content-Type': "application/json",
-                  'Authorization': 'Bearer ' + localStorage.getItem('token')
-                }
-              });
+              return Object(_JSScripts_network_Network_GetDepartments__WEBPACK_IMPORTED_MODULE_7__["_networkGetDepartments"])();
 
             case 2:
-              rawResponse = _context.sent;
+              req = _context.sent;
               _context.next = 5;
-              return rawResponse.json();
+              return req.json();
 
             case 5:
               jsonResponse = _context.sent;
@@ -3075,7 +3379,7 @@ var AddTicketForm = function AddTicketForm(props) {
 
   var _handleSubmit = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(e) {
-      var data, rawResponse, jsonResponse;
+      var data, req, jsonResponse;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -3085,29 +3389,20 @@ var AddTicketForm = function AddTicketForm(props) {
                 name: topic,
                 content: topicDesc,
                 department: topicDep
-              }; // TODO: move that to network side;
-
+              };
               _context2.next = 4;
-              return fetch('/api/user/tickets/create', {
-                method: 'POST',
-                headers: {
-                  'Accept': 'applicaiton/json',
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + localStorage.getItem('token')
-                },
-                body: JSON.stringify(data)
-              });
+              return Object(_JSScripts_network_Network_CreateTicket__WEBPACK_IMPORTED_MODULE_6__["_networkCreateTicket"])(data);
 
             case 4:
-              rawResponse = _context2.sent;
+              req = _context2.sent;
               _context2.next = 7;
-              return rawResponse.json();
+              return req.json();
 
             case 7:
               jsonResponse = _context2.sent;
               setLoading(true);
 
-              if (!(rawResponse.status === 500)) {
+              if (!(req.status === 500)) {
                 _context2.next = 11;
                 break;
               }
@@ -3115,7 +3410,7 @@ var AddTicketForm = function AddTicketForm(props) {
               return _context2.abrupt("return", false);
 
             case 11:
-              if (!(rawResponse.status !== 200 && rawResponse.status !== 201)) {
+              if (!(req.status !== 200 && req.status !== 201)) {
                 _context2.next = 15;
                 break;
               }
@@ -3288,6 +3583,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _css_ticket_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../css/ticket.css */ "./lsuniverse/Themes/Default/components/css/ticket.css");
 /* harmony import */ var _css_ticket_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_css_ticket_css__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _Messages__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Messages */ "./lsuniverse/Themes/Default/components/Messages.js");
+/* harmony import */ var _JSScripts_network_Network_CreateTicket__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../JSScripts/network/Network_CreateTicket */ "./lsuniverse/JSScripts/network/Network_CreateTicket.js");
+/* harmony import */ var _JSScripts_network_Network_GetTicketAnswers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../JSScripts/network/Network_GetTicketAnswers */ "./lsuniverse/JSScripts/network/Network_GetTicketAnswers.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -3305,6 +3602,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
@@ -3350,7 +3649,7 @@ var TicketPage = function TicketPage(props) {
 
   var _handleSubmitTicket = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
-      var data, rawResponse, jsonResponse;
+      var data, req, jsonResponse;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -3359,35 +3658,23 @@ var TicketPage = function TicketPage(props) {
               data = {
                 content: ticketReply
               };
-              _context.next = 4;
-              return fetch("/api/user/tickets/create/".concat(props.ticketID), {
-                method: 'POST',
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + localStorage.getItem('token')
-                },
-                body: JSON.stringify(data)
-              });
+              req = Object(_JSScripts_network_Network_CreateTicket__WEBPACK_IMPORTED_MODULE_7__["_networkCreateTicketAnswer"])(data);
+              _context.next = 5;
+              return req.json();
 
-            case 4:
-              rawResponse = _context.sent;
-              _context.next = 7;
-              return rawResponse.json();
-
-            case 7:
+            case 5:
               jsonResponse = _context.sent;
 
-              if (!(rawResponse.status === 500)) {
-                _context.next = 10;
+              if (!(req.status === 500)) {
+                _context.next = 8;
                 break;
               }
 
               return _context.abrupt("return", false);
 
-            case 10:
-              if (!(rawResponse.status !== 200 && rawResponse.status !== 201)) {
-                _context.next = 17;
+            case 8:
+              if (!(req.status !== 200 && req.status !== 201)) {
+                _context.next = 15;
                 break;
               }
 
@@ -3402,12 +3689,12 @@ var TicketPage = function TicketPage(props) {
 
               return _context.abrupt("return", false);
 
-            case 17:
+            case 15:
               setTicketReply("");
 
               _getAnswers();
 
-            case 19:
+            case 17:
             case "end":
               return _context.stop();
           }
@@ -3426,26 +3713,19 @@ var TicketPage = function TicketPage(props) {
 
   var _getAnswers = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-      var rawResponse;
+      var req;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return fetch("/api/user/tickets/show/".concat(props.ticketID), {
-                method: 'GET',
-                headers: {
-                  'Accept': "application/json",
-                  'Content-Type': "application/json",
-                  'Authorization': 'Bearer ' + localStorage.getItem('token')
-                }
-              });
+              return Object(_JSScripts_network_Network_GetTicketAnswers__WEBPACK_IMPORTED_MODULE_8__["_networkGetTicketAnswers"])(props.ticketID);
 
             case 2:
-              rawResponse = _context2.sent;
+              req = _context2.sent;
               _context2.t0 = setTicket;
               _context2.next = 6;
-              return rawResponse.json();
+              return req.json();
 
             case 6:
               _context2.t1 = _context2.sent;
@@ -3543,6 +3823,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_multi_lang__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _JSScripts_services_Authenticator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../JSScripts/services/Authenticator */ "./lsuniverse/JSScripts/services/Authenticator.js");
 /* harmony import */ var _Messages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Messages */ "./lsuniverse/Themes/Default/components/Messages.js");
+/* harmony import */ var _JSScripts_network_Network_UpdateUserBillingInformation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../JSScripts/network/Network_UpdateUserBillingInformation */ "./lsuniverse/JSScripts/network/Network_UpdateUserBillingInformation.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -3560,6 +3841,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -3637,7 +3919,7 @@ var UserBilling = function UserBilling(props) {
 
   var _handleSubmit = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
-      var data, rawResponse, jsonResponse;
+      var data, req, jsonResponse;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -3653,26 +3935,18 @@ var UserBilling = function UserBilling(props) {
                 'mailing_list': mailList
               };
               _context.next = 4;
-              return fetch('/api/user/update/details', {
-                method: 'POST',
-                headers: {
-                  'Accept': 'applicaiton/json',
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + localStorage.getItem('token')
-                },
-                body: JSON.stringify(data)
-              });
+              return Object(_JSScripts_network_Network_UpdateUserBillingInformation__WEBPACK_IMPORTED_MODULE_5__["_networkUpdateUserBillingInformation"])(data);
 
             case 4:
-              rawResponse = _context.sent;
+              req = _context.sent;
               loaderStatus(true);
               _context.next = 8;
-              return rawResponse.json();
+              return req.json();
 
             case 8:
               jsonResponse = _context.sent;
 
-              if (!(rawResponse.status === 500)) {
+              if (!(req.status === 500)) {
                 _context.next = 11;
                 break;
               }
@@ -3680,7 +3954,7 @@ var UserBilling = function UserBilling(props) {
               return _context.abrupt("return", false);
 
             case 11:
-              if (!(rawResponse.status !== 200 && rawResponse.status !== 201)) {
+              if (!(req.status !== 200 && req.status !== 201)) {
                 _context.next = 15;
                 break;
               }
@@ -3963,6 +4237,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_multi_lang__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_data_table_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-data-table-component */ "./node_modules/react-data-table-component/dist/index.cjs.js");
 /* harmony import */ var react_data_table_component__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_data_table_component__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _JSScripts_network_Network_GetUserServices__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../JSScripts/network/Network_GetUserServices */ "./lsuniverse/JSScripts/network/Network_GetUserServices.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -3986,6 +4261,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var UserServices = function UserServices(props) {
   var t = Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_2__["useTranslation"])();
 
@@ -3996,26 +4272,19 @@ var UserServices = function UserServices(props) {
 
   var _getUserServices = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var rawResponse;
+      var req;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetch('/api/user/services', {
-                method: 'GET',
-                headers: {
-                  'Accept': "application/json",
-                  'Content-Type': "application/json",
-                  'Authorization': 'Bearer ' + localStorage.getItem('token')
-                }
-              });
+              return Object(_JSScripts_network_Network_GetUserServices__WEBPACK_IMPORTED_MODULE_4__["_networkGetUserServices"])();
 
             case 2:
-              rawResponse = _context.sent;
+              req = _context.sent;
               _context.t0 = setData;
               _context.next = 6;
-              return rawResponse.json();
+              return req.json();
 
             case 6:
               _context.t1 = _context.sent;

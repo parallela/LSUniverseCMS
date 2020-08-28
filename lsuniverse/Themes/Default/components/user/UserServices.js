@@ -2,22 +2,15 @@ import React from "react";
 import {useTranslation} from "react-multi-lang";
 import {useState, useEffect} from "react";
 import DataTable from "react-data-table-component";
+import {_networkGetUserServices} from "../../../../JSScripts/network/Network_GetUserServices";
 
 const UserServices = props => {
     const t = useTranslation();
     const [data, setData] = useState([]);
 
     const _getUserServices = async () => {
-        const rawResponse = await fetch('/api/user/services', {
-            method: 'GET',
-            headers: {
-                'Accept': "application/json",
-                'Content-Type': "application/json",
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            }
-        });
-
-        setData(await rawResponse.json());
+        const req = await _networkGetUserServices();
+        setData(await req.json());
     }
 
     useEffect(() => {

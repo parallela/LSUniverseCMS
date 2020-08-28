@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import TicketAnswers from "./TicketAnswers";
 import "../css/ticket.css";
 import Messages from "../Messages";
+import {_networkCreateTicketAnswer} from "../../../../JSScripts/network/Network_CreateTicket";
+import {_networkGetTicketAnswers} from "../../../../JSScripts/network/Network_GetTicketAnswers";
 
 const TicketPage = props => {
     const [ticket, setTicket] = useState([]);
@@ -23,22 +25,14 @@ const TicketPage = props => {
             content: ticketReply
         }
 
-        const rawResponse = await fetch(`/api/user/tickets/create/${props.ticketID}`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
-            body: JSON.stringify(data)
-        });
-        const jsonResponse = await rawResponse.json();
+        const req = _networkCreateTicketAnswer(data);
+        const jsonResponse = await req.json();
 
-        if (rawResponse.status === 500) {
+        if (req.status === 500) {
             return false;
         }
 
-        if (rawResponse.status !== 200 && rawResponse.status !== 201) {
+        if (req.status !== 200 && req.status !== 201) {
             setError(true);
             setErrorMessages(jsonResponse.errors);
             setButtonStatus(false);
@@ -61,16 +55,8 @@ const TicketPage = props => {
 
     const _getAnswers = async () => {
 
-        const rawResponse = await fetch(`/api/user/tickets/show/${props.ticketID}`, {
-            method: 'GET',
-            headers: {
-                'Accept': "application/json",
-                'Content-Type': "application/json",
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            }
-        });
-
-        setTicket(await rawResponse.json());
+        const req = await _networkGetTicketAnswers(props.ticketID)
+        setTicket(await req.json());
         setLoading(false);
 
         scrollToBottom();
