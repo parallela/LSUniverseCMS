@@ -1,1 +1,1 @@
-require('../../lsuniverse/Themes/Default/components/App');
+require('../../lsuniverse/JSScripts/render');

@@ -19,20 +19,28 @@ const App = () => {
 
     useEffect(() => {
         setTranslations({en, bg});
+
+        // If it has token, it probably has user.. :)
         if (localStorage.getItem('token')) {
             _networkUserGet();
         }
 
+        // Set User Language
         const setLanguage = () => {
             try {
+                // Set default item EN
                 if (localStorage.getItem("lang") === null) {
                     localStorage.setItem("lang", "en");
                 }
+
+                // Get user selected language
                 setDefaultLanguage(localStorage.getItem("lang"));
             } catch (e) {
                 console.log(e);
             }
         };
+
+        // Call the function
         setLanguage();
     }, []);
 
@@ -90,6 +98,3 @@ const App = () => {
 
 export default App;
 
-if (document.getElementById("root")) {
-    ReactDOM.render(<App/>, document.getElementById("root"));
-}

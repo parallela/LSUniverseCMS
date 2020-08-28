@@ -668,6 +668,41 @@ var _networkUserGet = function _networkUserGet() {
 
 /***/ }),
 
+/***/ "./lsuniverse/JSScripts/render.js":
+/*!****************************************!*\
+  !*** ./lsuniverse/JSScripts/render.js ***!
+  \****************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Themes_Default_components_App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Themes/Default/components/App */ "./lsuniverse/Themes/Default/components/App.js");
+
+
+/*
+* Use another theme example:
+*
+* import App from "../Themes/YourThemeName/components/MainFile [For example: App]"
+*
+* For any theme you'll make you can use `Default` theme for template.
+* You can change all of the frontend logic and put your custom.
+* "All Good Things are Wild and Free!"
+* - KAPTEN & SON
+*/
+
+
+
+if (document.getElementById("root")) {
+  react_dom__WEBPACK_IMPORTED_MODULE_0___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Themes_Default_components_App__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById("root"));
+}
+
+/***/ }),
+
 /***/ "./lsuniverse/JSScripts/services/Authenticator.js":
 /*!********************************************************!*\
   !*** ./lsuniverse/JSScripts/services/Authenticator.js ***!
@@ -900,23 +935,27 @@ var App = function App() {
     Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_7__["setTranslations"])({
       en: _Language_Frontend_lang_en_json__WEBPACK_IMPORTED_MODULE_5__,
       bg: _Language_Frontend_lang_bg_json__WEBPACK_IMPORTED_MODULE_6__
-    });
+    }); // If it has token, it probably has user.. :)
 
     if (localStorage.getItem('token')) {
       Object(_JSScripts_network_Network_UserGet__WEBPACK_IMPORTED_MODULE_8__["_networkUserGet"])();
-    }
+    } // Set User Language
+
 
     var setLanguage = function setLanguage() {
       try {
+        // Set default item EN
         if (localStorage.getItem("lang") === null) {
           localStorage.setItem("lang", "en");
-        }
+        } // Get user selected language
+
 
         Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_7__["setDefaultLanguage"])(localStorage.getItem("lang"));
       } catch (e) {
         console.log(e);
       }
-    };
+    }; // Call the function
+
 
     setLanguage();
   }, []);
@@ -975,10 +1014,6 @@ var App = function App() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
-
-if (document.getElementById("root")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("root"));
-}
 
 /***/ }),
 
@@ -71346,7 +71381,7 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ../../lsuniverse/Themes/Default/components/App */ "./lsuniverse/Themes/Default/components/App.js");
+__webpack_require__(/*! ../../lsuniverse/JSScripts/render */ "./lsuniverse/JSScripts/render.js");
 
 /***/ }),
 
