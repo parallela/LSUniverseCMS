@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend\Admin;
 
 use App\Category;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategory;
-use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function list()
     {
         $categories = Category::all();
@@ -15,6 +18,10 @@ class CategoriesController extends Controller
         return response()->json($categories, 200);
     }
 
+    /**
+     * @param StoreCategory $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function create(StoreCategory $request)
     {
         $category = Category::create([
@@ -25,6 +32,10 @@ class CategoriesController extends Controller
         return response()->json(['message' => 'Category created successfully'], 200);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function show($id)
     {
         $categories = Category::with('services')->where('id', $id)->firstOrFail();
@@ -32,6 +43,12 @@ class CategoriesController extends Controller
         return response()->json($categories, 200);
     }
 
+    /**
+     * @param StoreCategory $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function update(StoreCategory $request, $id)
     {
         $category = Category::where('id', $id)->firstOrFail();
@@ -45,6 +62,11 @@ class CategoriesController extends Controller
         return response()->json(['message' => 'Category updated.'], 200);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function delete($id)
     {
         $category = Category::where('id', $id)->firstOrFail();
