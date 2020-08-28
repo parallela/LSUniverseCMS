@@ -93,6 +93,11 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(TicketAnswer::class);
     }
+
+    public function categories()
+    {
+        return $this>$this->hasMany(Category::class);
+    }
     /**
      * Helper for creating user forget password token
      *

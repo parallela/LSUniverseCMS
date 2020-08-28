@@ -29,4 +29,9 @@ class Service extends Model
     {
         return $this->hasMany(ServiceExtra::class);
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
