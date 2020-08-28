@@ -1,5 +1,5 @@
-import React from "react";
 import Cookies from "universal-cookie";
+import {_networkLogoutUser} from "../network/Network_LogoutUser";
 
 const cookies = new Cookies();
 const time = new Date();
@@ -44,18 +44,9 @@ export function User() {
 }
 
 export function logout_user() {
-
-    let logout = fetch("/api/auth/logout", {
-        method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + localStorage.getItem("token")
-        }
-    });
+    _networkLogoutUser();
     localStorage.removeItem("token");
     cookies.remove('user');
-
     window.location.href = '/auth';
 
     return true;

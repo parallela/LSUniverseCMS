@@ -3,6 +3,7 @@ import {useTranslation} from "react-multi-lang";
 import Messages from "../Messages";
 import ReCAPTCHA from "react-google-recaptcha";
 import {useHistory} from "react-router-dom";
+import {_networkPasswordSecondStep} from "../../../../JSScripts/network/Network_PasswordRecover";
 
 const SecondStep = props => {
     const t = useTranslation();
@@ -45,23 +46,15 @@ const SecondStep = props => {
         }
 
 
-        const rawResponse = await fetch('/api/user/password/forget/check', {
-            method: 'POST',
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data)
-        });
-
-        const jsonResponse = await rawResponse.json();
+        const req = await _networkPasswordSecondStep(data);
+        const jsonResponse = await req.json();
 
 
-        if (rawResponse.status === 500) {
+        if (req.status === 500) {
             return false;
         }
 
-        if (rawResponse.status !== 200 && rawResponse.status !== 201) {
+        if (req.status !== 200 && req.status !== 201) {
             setErrorMessages({"failed": t('auth.reset-key-invalid')})
             setError(true);
             return false;

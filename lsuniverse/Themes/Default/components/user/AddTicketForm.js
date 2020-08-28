@@ -48,7 +48,7 @@ const AddTicketForm = props => {
             content: topicDesc,
             department: topicDep
         }
-
+        // TODO: move that to network side;
         const rawResponse = await fetch('/api/user/tickets/create', {
             method: 'POST',
             headers: {
@@ -63,7 +63,7 @@ const AddTicketForm = props => {
         const jsonResponse = await rawResponse.json();
         setLoading(true);
 
-        if(rawResponse.status === 500) {
+        if (rawResponse.status === 500) {
             return false;
         }
 
