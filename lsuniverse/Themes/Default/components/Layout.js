@@ -1,13 +1,14 @@
 import React from "react";
-
+import Header from "./Header";
 
 const Layout = ({children}) => {
 
 
     return (
-        <div className={"site-wrap"}>
-                {children}
-        </div>
+        <>
+            <Header/>
+            {children}
+        </>
     );
 };
 export default Layout;
