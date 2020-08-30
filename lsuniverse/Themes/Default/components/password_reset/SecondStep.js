@@ -74,58 +74,7 @@ const SecondStep = props => {
     };
 
     return (
-        <div className="card col-md-6">
-            <div className="card-body">
-                <h5 className="card-title">
-                    {t("home.second_step_forget_password")}
-                </h5>
-                <hr/>
-
-                {error &&
-                Object.entries(errorMessages).map((value, key) => (
-                        <Messages key={key} type={"danger"} message={value[1].toString()}/>
-                    )
-                )}
-
-
-                {message != "" && (
-                    <Messages type={"success"} message={message}/>
-                )}
-
-                <form onSubmit={_handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="email">{t("auth.reset-key")}</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            required
-                            id="key"
-                            onChange={e => {
-                                setKey(e.target.value);
-                            }}
-                            placeholder={t("auth.reset-key")}
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <ReCAPTCHA
-                            sitekey={"6Lc8LL8ZAAAAAAOp8OPeGrbaUnp76x9A2sXM6Uv0"}
-                            onChange={_reCaptchaConfirmation}
-                            onExpired={_reCaptchaCancel}
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <button
-                            type="submit"
-                            className="btn btn-primary btn-outline-default text-white"
-                        >
-                            {t("home.confirm")}
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+        <div></div>
     );
 };
 

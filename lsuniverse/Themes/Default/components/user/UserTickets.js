@@ -46,7 +46,7 @@ const UserTickets = props => {
 
     const _deleteTicket = async (e,ticket_id) => {
         e.preventDefault();
-        
+
         const rawResponse = await fetch(`/api/user/tickets/delete/${ticket_id}`, {
             method: 'POST',
             headers: {
@@ -94,29 +94,7 @@ const UserTickets = props => {
 
     return (
         <div id="ticket_content">
-            {ticketPage !== null &&
-            <div id="display-ticket">
-                <TicketPage ticketID={ticketPage}/>
-            </div>
-            }
-            <div style={{visibility: ticketPage === null ? 'visible' : 'hidden'}} id="tickets">
-                {error != "" && <Messages type={"danger"} message={error}/>}
-                {showTicketModal &&
-                <Modal title={t("user.add-ticket")} body={<AddTicketForm closeModalHandler={_closeModalHandler}/>}
-                       closeModalHandler={_closeModalHandler}/>
-                }
-                <div className="text-left">
-                    <button className="btn btn-success  btn-outline-primary" onClick={() => setShowTicketModal(true)}>
-                        {t("user.add-ticket")}
-                    </button>
 
-                </div>
-                <div className="text-center">
-                    <h3 className="mt-4">Tickets</h3>
-                    <h5>{Object.keys(data).length}</h5>
-                    <DataTable columns={columns} data={data} paginationPerPage={10}/>
-                </div>
-            </div>
         </div>
     )
 }

@@ -10,13 +10,9 @@ const ChangePassword = props => {
 
     return (
         <div id="change_password">
-            <div className="container mt-4 mb-4">
-                <div className="row justify-content-center">
-                    {step == 1 && <FirstStep />}
-                    {step == 2 && <SecondStep />}
-                    {step == 3 && <FinalStep />}
-                </div>
-            </div>
+            {step == 1 && <FirstStep/>}
+            {step == 2 && <SecondStep/>}
+            {step == 3 && <FinalStep/>}
         </div>
     );
 };

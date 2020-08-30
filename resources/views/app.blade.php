@@ -20,9 +20,16 @@
 
     <title>{{ $s['title'] }}</title>
 
+    <link rel="stylesheet" href="{{ asset('css/tailwind.min.css') }}"/>
+
+    <style>
+        .gradient {
+            background: linear-gradient(90deg, #5d5d5d 0%, #63c4c8 100%);
+        }
+    </style>
 
 </head>
-<body>
+<body class="leading-normal tracking-normal text-white gradient">
 <noscript>You need to enable JavaScript to run this app.</noscript>
 <div id="root"></div>
 <script>var _settings = {!! json_encode($s) !!} </script>

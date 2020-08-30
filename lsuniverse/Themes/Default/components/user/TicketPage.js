@@ -66,36 +66,12 @@ const TicketPage = props => {
     }, []);
 
     return (
-        <div id="ticket-page" className="container-fluid">
-            <div className="card mt-2 mb-2 col-md-12" id="tickets_content_display ">
-                {error &&
-                Object.entries(errorMessages).map((value, key) => (
-                        <Messages key={key} type={"danger"} message={value[1].toString()}/>
-                    )
-                )}
-
-                <h5 className="card-title mt-2">{ticket.name}  </h5>
-                <h6 className="text-muted">{ticket.created_at} | {ticket.status == "open" ? t("home.open") : t("home.closed")}</h6>
-                <div className="card-body">
-                    <div className="overflowA" ref={overflowContainerRef}>
-                        {!loading ? Object.entries(ticket.answers).map((ans, id) => <TicketAnswers key={id}
-                                                                                                   answer={ans}/>) :
-                            <i className="fas fa-spinner fa-pulse mb-2 mt-2"></i>}
-                    </div>
-                </div>
-                <hr/>
-                <form onSubmit={_handleSubmitTicket} className="col-md-12  " id="text-area">
-                    <div className="form-group">
-                        <textarea className="form-control" onChange={(e) => setTicketReply(e.target.value)}
-                                  value={ticketReply} id="reply_textarea"/>
-                    </div>
-                    <div className="form-group">
-                        <button className="btn btn-success btn-outline-primary" type="submit"
-                                disabled={!buttonStatus}>{t("home.reply")}
-                        </button>
-                    </div>
-                </form>
-            </div>
+        <div id="ticket-page">
+            {error &&
+            Object.entries(errorMessages).map((value, key) => (
+                    <Messages key={key} type={"danger"} message={value[1].toString()}/>
+                )
+            )}
         </div>
     )
 }

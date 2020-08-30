@@ -33,56 +33,11 @@ const UserCard = props => {
     }, [])
 
     return (
-        <div className="col-md-12 mb-5 mt-4">
-            <div className="card text-center">
-                <div className="card-header">
-                    <ul className="nav nav-tabs card-header-tabs">
-                        <li className="nav-item">
-                            <a className={isActive("main") ? "nav-link active" : "nav-link"} onClick={() => {
-                                _changePage("main")
-                            }} href="#">
-                                {t("user.user-info")}
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className={isActive("details") ? "nav-link active" : "nav-link"} onClick={() => {
-                                _changePage("details")
-                            }} href="#">
-                                {t('user.user-billing-details')}
-                            </a>
-                        </li>
-
-                        <li className="nav-item">
-                            <a className={isActive("services") ? "nav-link active" : "nav-link"} onClick={() => {
-                                _changePage("services")
-                            }} href="#">
-                                {t('user.active-services')}
-                            </a>
-                        </li>
-
-                        <li className="nav-item">
-                            <a className={isActive("tickets") ? "nav-link active" : "nav-link"} onClick={() => {
-                                _changePage('tickets')
-                            }} href="#">
-                                {t('user.tickets')}
-                            </a>
-                        </li>
-
-                        <li className="nav-item">
-                            <a className={isActive('invoices') ? "nav-link active" : "nav-link"} href="#">
-                                {t('user.invoices')}
-                            </a>
-                        </li>
-
-                    </ul>
-                </div>
-                <div className="card-body">
-                    {page == "main" && <UserInfo/>}
-                    {page == "details" && <UserBilling/>}
-                    {page == "services" && <UserServices/>}
-                    {page == "tickets" && <UserTickets/>}
-                </div>
-            </div>
+        <div>
+            {page == "main" && <UserInfo/>}
+            {page == "details" && <UserBilling/>}
+            {page == "services" && <UserServices/>}
+            {page == "tickets" && <UserTickets/>}
         </div>
     );
 };

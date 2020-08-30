@@ -106,7 +106,7 @@ const Login = props => {
     };
 
     return (
-        <div className="col-md-12 col-lg-6 mb-5">
+        <div>
             {error &&
             Object.entries(errorMessages).map((value, key) => (
                     <Messages key={key} type={"danger"} message={value[1].toString()}/>

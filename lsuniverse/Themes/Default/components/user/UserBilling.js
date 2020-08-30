@@ -67,78 +67,13 @@ const UserBilling = props => {
     }
 
     return (
-        <div className="text-center">
+        <div>
             {error &&
             Object.entries(errorMessages).map((value, key) => (
                     <Messages key={key} type={"danger"} message={value[1].toString()}/>
                 )
             )}
             {message !== "" && <Messages type={"success"} message={message}/>}
-
-            <form className="row" onSubmit={_handleSubmit}>
-                <div className="form-group col-md-6">
-                    <label htmlFor="address-1">{t("user.user-address-1")}</label>
-                    <input onChange={e => {
-                        setAddress1(e.target.value)
-                    }} type="text" className="form-control" required id="address-1"
-                           value={address1}/>
-                </div>
-
-                <div className="form-group col-md-6">
-                    <label htmlFor="address-2">{t("user.user-address-2")}</label>
-                    <input onChange={e => {
-                        setAddress2(e.target.value)
-                    }} type="text" className="form-control" required id="address-2"
-                           value={address2}/>
-                </div>
-
-                <div className="form-group col-md-6">
-                    <label htmlFor="phone_number">{t("user.phone")}</label>
-                    <input onChange={e => {
-                        setPhoneNumber(e.target.value)
-                    }} type="text" className="form-control" required id="phone_number"
-                           value={phonenumber}/>
-                </div>
-
-
-                <div className="form-group col-md-6">
-                    <label htmlFor="city">{t("home.city")}</label>
-                    <input onChange={e => setCity(e.target.value)} type="text" className="form-control" required
-                           id="city"
-                           value={city}/>
-                </div>
-
-
-                <div className="form-group col-md-6">
-                    <label htmlFor="region">{t("home.region")}</label>
-                    <input onChange={e => setRegion(e.target.value)} type="text" className="form-control" required
-                           id="region"
-                           value={region}/>
-                </div>
-
-                <div className="form-group col-md-6">
-                    <label htmlFor="zipcode">{t("home.zipcode")}</label>
-                    <input onChange={e => setZipcode(e.target.value)} type="text" className="form-control" required
-                           id="zipcode"
-                           value={zipcode}/>
-                </div>
-
-
-                <div className="form-group col-md-6">
-                    <label htmlFor="mailing">{t("home.mailing_list")}</label>
-                    <select id="mailing" value={mailList} onChange={e => setMailList(e.target.value)}
-                            className="form-control">
-                        <option value="1">Yes</option>
-                        <option value="0">No</option>
-                    </select>
-                </div>
-
-                <div className="form-group col-md-12">
-                    <button type="submit"
-                            className="btn btn-primary btn-outline-default"
-                            disabled={loading}>{t("home.submit")}</button>
-                </div>
-            </form>
         </div>
     )
 }

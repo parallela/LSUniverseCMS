@@ -52,7 +52,7 @@ const UserServices = props => {
 
     return (
         <div className="text-center">
-            <h3 className="mt-4">{t('user.active-services')} </h3>
+            <h3>{t('user.active-services')} </h3>
             <h5>{Object.keys(data).length}</h5>
             <DataTable columns={columns} data={data} pagination={true} paginationPerPage={5}/>
         </div>
