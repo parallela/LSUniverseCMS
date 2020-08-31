@@ -15,7 +15,6 @@ class AddReferenceOnCategoriesTable extends Migration
     {
         Schema::table('categories', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->change();
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

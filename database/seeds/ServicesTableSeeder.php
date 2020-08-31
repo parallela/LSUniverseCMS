@@ -22,7 +22,8 @@ class ServicesTableSeeder extends Seeder
             "price" => 12.00,
             "content" => serialize($array = ["24/7 Uptime", "250GB SSD", "CPU Intel Core I7-7700", "10Gbit/s uplink"]),
             "u_price" => 24.00,
-            "addon_id" => 1
+            "addon_id" => 1,
+            "category_id" => 1
         ]);
     }
 }

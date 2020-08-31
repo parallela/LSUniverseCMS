@@ -26,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        SiteCache::initSettingsCache();
+        $this->app->singleton('LSUniverse\Core\SiteCache', function($app) {
+            return \LSUniverse\Core\SiteCache::initSettingsCache();
+        });
     }
 }
