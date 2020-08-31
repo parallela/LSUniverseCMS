@@ -4,7 +4,7 @@ import React from "react";
 /*
 * Use another theme example:
 *
-* import App from "../Themes/YourThemeName/components/MainFile [For example: App]"
+* import App from "../Themes/YourThemeName/MainFile [For example: App]"
 *
 * For any theme you'll make you can use `Default` theme for template.
 * You can change all of the frontend logic and put your custom.
@@ -12,7 +12,7 @@ import React from "react";
 * - KAPTEN & SON
 */
 
-import App from "../Themes/Default/components/App";
+import App from "../Themes/Default/App";
 
 if (document.getElementById("root")) {
     ReactDOM.render(<App/>, document.getElementById("root"));
