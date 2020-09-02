@@ -8,14 +8,9 @@ use App\Http\Requests\Register;
 use App\Mail\UserVerify;
 use App\User;
 use App\UserVerification;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Validator;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\Exceptions\TokenExpiredException;
-use Tymon\JWTAuth\Exceptions\TokenInvalidException;
-use Tymon\JWTAuth\Facades\JWTAuth;
+
 
 class AuthController extends Controller
 {
@@ -110,6 +105,21 @@ class AuthController extends Controller
     }
 
     /**
+     * respondWithToken
+     *
+     * @param mixed $token
+     * @return void
+     */
+    private function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth('api')->factory()->getTTL() * 60,
+        ]);
+    }
+
+    /**
      * Refresh user token
      *
      * @return void
@@ -117,21 +127,6 @@ class AuthController extends Controller
     public function refresh()
     {
         return $this->respondWithToken(auth()->refresh());
-    }
-
-    /**
-     * respondWithToken
-     *
-     * @param mixed $token
-     * @return void
-     */
-    protected function respondWithToken($token)
-    {
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60,
-        ]);
     }
 
 }

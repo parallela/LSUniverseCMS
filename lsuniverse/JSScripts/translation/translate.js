@@ -17,13 +17,3 @@ export function initTranslator() {
 
 }
 
-export function translator() {
-    /*
-    * Init translator
-    */
-    initTranslator();
-
-    return useTranslation();
-}
-
-

@@ -1,12 +1,15 @@
-import React from "react";
-import {translator} from "../../JSScripts/translation/translate";
-
+import React, {useState, useMemo, useEffect} from "react";
+import Home from "./pages/Home";
+import {useTranslation} from "react-multi-lang";
 
 const App = () => {
-    const t = translator();
+    const t = useTranslation();
+
 
     return (
-        <div>{t("home.nav-home")}</div>
+        <div>
+            <Home/>
+        </div>
     );
 };
 
