@@ -23,6 +23,7 @@ import ReduxThunk from "redux-thunk";
 import allReducers from "./reducers/index";
 import {Provider} from "react-redux";
 import {Action_User} from "./reducers/actions/Action_User";
+import {Action_Categories} from "./reducers/actions/Action_Categories";
 
 if (document.getElementById("root")) {
     /*
@@ -37,7 +38,8 @@ if (document.getElementById("root")) {
      * Store reducer data and dispatch actions
      */
     const mainAppData = createStore(allReducers, applyMiddleware(ReduxThunk))
-    mainAppData.dispatch(Action_User)
+    mainAppData.dispatch(Action_User);
+    mainAppData.dispatch(Action_Categories)
     /*
     *
     * Render the main element

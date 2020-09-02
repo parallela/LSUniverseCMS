@@ -34,6 +34,5 @@
 <!-- Global site settings -->
 <script>var _settings = {!! json_encode($s) !!} </script>
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('assets/js/nav.js')  }}"></script>
 </body>
 </html>

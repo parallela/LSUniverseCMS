@@ -1,7 +1,10 @@
 import React from "react";
 import Logo from "../assets/img/logo.png";
+import {useTranslation} from "react-multi-lang";
 
 const Login = props => {
+    const t = useTranslation();
+
     return (
         <>
             <div className=" flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-8 lg:px-8">
@@ -10,7 +13,7 @@ const Login = props => {
                         <img className="mx-auto h-24 w-auto"
                              src={Logo} alt="Workflow" />
                             <h2 className="mt-6 text-center text-3xl leading-9 font-extrabold text-white">
-                                Sign in to your account
+                                {t("home.login")}
                             </h2>
                     </div>
                     <form className="mt-8" action="#" method="POST">

@@ -1,10 +1,15 @@
 import React from "react";
 import Logo from "../assets/img/logo.png"
+import {useTranslation} from "react-multi-lang";
+import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
 const Navbar = props => {
-    return (
-        <nav id="header" className="fixed w-full z-30 top-0 text-white">
+    const t = useTranslation();
+    const categories = props.categories.data;
 
+    return (
+        <nav id="header" className="fixed w-full z-30 top-0 text-white bg-gray-900">
             <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
 
                 <div className="pl-4 flex items-center">
@@ -29,13 +34,20 @@ const Navbar = props => {
                     id="nav-content">
                     <ul className="list-reset lg:flex justify-end flex-1 items-center">
                         <li className="mr-3">
-                            <a className="inline-block py-2 px-4 text-white font-bold no-underline" href="#">Home</a>
+                            <a className="inline-block py-2 px-4 text-white font-bold no-underline"
+                               href="#">{t("home.nav-home")}</a>
                         </li>
+                        {categories.map((category, key) => (
+                            <li key={key} className="mr-3">
+                                <Link className="inline-block py-2 px-4 text-white font-bold no-underline"
+                                      to={`/page/${category.slug}`}>{category.name}</Link>
+                            </li>
+                        ))}
                     </ul>
-                    <button id="navAction"
-                            className="mx-auto lg:mx-0 hover:underline _bg-light_gray text-white font-bold rounded mt-4 lg:mt-0 py-2 px-8 shadow opacity-75">
-                        <i className="fas fa-user"></i> &nbsp; Client Area
-                    </button>
+                    <Link to={"/login"} id="navAction"
+                          className="mx-auto lg:mx-0 hover:underline _bg-light_gray text-white font-bold rounded mt-4 lg:mt-0 py-2 px-8 shadow opacity-75">
+                        <i className="fas fa-user"></i> &nbsp; {t("home.auth")}
+                    </Link>
                 </div>
             </div>
 
@@ -43,5 +55,10 @@ const Navbar = props => {
         </nav>
     )
 }
+const mapStateToProps = state => {
+    return {
+        categories: state.categories
+    }
+}
 
-export default Navbar;
+export default connect(mapStateToProps)(Navbar)

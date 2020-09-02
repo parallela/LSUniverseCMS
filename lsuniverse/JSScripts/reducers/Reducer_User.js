@@ -6,11 +6,9 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-    console.log(action, state);
-
     switch (action.type) {
         case 'FETCHING_USER':
-            return {...state, loading: true}
+            return {...state, loading: true, fetched: false}
             break;
         case 'USER_FETCHED':
             return {

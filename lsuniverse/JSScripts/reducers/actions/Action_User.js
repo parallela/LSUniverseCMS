@@ -8,6 +8,12 @@ export const Action_User = (dispatch) => {
                 type: 'USER_FETCHED',
                 payload: u
             });
+        }).catch(error => {
+            dispatch({
+               type: 'USER_PROBLEM',
+               payload: error
+            });
         });
+        // TODO: IMPLEMENT THIS IN ACTION
     }
 ;

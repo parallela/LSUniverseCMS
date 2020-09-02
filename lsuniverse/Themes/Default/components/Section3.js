@@ -31,7 +31,7 @@ const Section3 = props => {
                             </div>
                             <div className="flex items-center justify-center">
                                 <button
-                                    className="hover:underline gradient text-white font-bold rounded my-6 py-2 px-8 shadow-lg">
+                                    className="hover:underline _bg-light_gray text-white font-bold rounded my-6 py-2 px-8 shadow-lg">
                                     Sign Up
                                 </button>
                             </div>
@@ -55,7 +55,7 @@ const Section3 = props => {
                             </div>
                             <div className="flex items-center justify-center">
                                 <button
-                                    className="hover:underline gradient text-white font-bold rounded my-6 py-2 px-8 shadow-lg">
+                                    className="hover:underline _bg-light_gray text-white font-bold rounded my-6 py-2 px-8 shadow-lg">
                                     Sign Up
                                 </button>
                             </div>
@@ -79,7 +79,7 @@ const Section3 = props => {
                             </div>
                             <div className="flex items-center justify-center">
                                 <button
-                                    className="hover:underline gradient text-white font-bold rounded my-6 py-2 px-8 shadow-lg">
+                                    className="hover:underline _bg-light_gray text-white font-bold rounded my-6 py-2 px-8 shadow-lg">
                                     Sign Up
                                 </button>
                             </div>

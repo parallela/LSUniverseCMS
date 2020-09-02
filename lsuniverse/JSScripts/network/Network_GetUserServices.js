@@ -10,5 +10,5 @@ export const _networkGetUserServices = async () => {
         }
     });
 
-    return rawResponse;
+    return await rawResponse.json();
 }
