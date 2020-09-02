@@ -1,0 +1,14 @@
+.logo {
+    width: 64px;
+    height: 64px;
+}
+.lsU-gradient {
+    background: linear-gradient(90deg, #1b2541 0%, #1f2a4b 100%);
+}
+
+._bg-light_gray {
+    background-color: #34406c;
+}
+#nav-toggle:hover {
+    background-color: #34406c;
+}

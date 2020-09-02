@@ -18,9 +18,11 @@ import App from "../Themes/Default/App";
 * Our core imports to make app run with all of the data we needed from our api
 */
 import {initTranslator} from "./translation/translate";
-import {createStore} from "redux";
+import {applyMiddleware, createStore} from "redux";
+import ReduxThunk from "redux-thunk";
 import allReducers from "./reducers/index";
 import {Provider} from "react-redux";
+import {Action_User} from "./reducers/actions/Action_User";
 
 if (document.getElementById("root")) {
     /*
@@ -32,12 +34,10 @@ if (document.getElementById("root")) {
     initTranslator();
 
     /*
-     * Store all of the reducer data
-     * Our main storage
+     * Store reducer data and dispatch actions
      */
-    const mainAppData = createStore(allReducers)
-
-
+    const mainAppData = createStore(allReducers, applyMiddleware(ReduxThunk))
+    mainAppData.dispatch(Action_User)
     /*
     *
     * Render the main element

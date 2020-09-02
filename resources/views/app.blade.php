@@ -18,15 +18,22 @@
     <meta name="keywords" content="{{ $s['keywords'] }}"/>
     <meta property="fb:app_id" content="{{ $s['fbapp_id'] }}"/>
 
+
     <title>{{ $s['title'] }}</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+          integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="{{ asset('/assets/css/styles.css') }}"/>
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss/dist/tailwind.min.css">
 </head>
-<body class="">
+<body class="leading-normal tracking-normal text-white bg-gray-900">
 <noscript>You need to enable JavaScript to run this app.</noscript>
 <div id="root"></div>
 
-<!-- TODO: MOVE THIS -->
+<!-- Global site settings -->
 <script>var _settings = {!! json_encode($s) !!} </script>
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('assets/js/nav.js')  }}"></script>
 </body>
 </html>
