@@ -706,7 +706,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-var cookies = new universal_cookie__WEBPACK_IMPORTED_MODULE_1__["default"]();
 var getUser = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
     var req;
@@ -738,7 +737,7 @@ var getUser = /*#__PURE__*/function () {
   };
 }();
 var getToken = function getToken() {
-  return localStorage.getItem('token');
+  return localStorage.getItem('auth_token');
 };
 
 /***/ }),
@@ -1698,10 +1697,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _assets_img_logo_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/img/logo.png */ "./lsuniverse/Themes/Default/assets/img/logo.png");
 /* harmony import */ var _assets_img_logo_png__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_assets_img_logo_png__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-multi-lang */ "./node_modules/react-multi-lang/lib/index.js");
-/* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_multi_lang__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _JSScripts_reducers_actions_Action_Login__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../JSScripts/reducers/actions/Action_Login */ "./lsuniverse/JSScripts/reducers/actions/Action_Login.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-multi-lang */ "./node_modules/react-multi-lang/lib/index.js");
+/* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_multi_lang__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _JSScripts_reducers_actions_Action_Login__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../JSScripts/reducers/actions/Action_Login */ "./lsuniverse/JSScripts/reducers/actions/Action_Login.js");
+/* harmony import */ var _JSScripts_services_Auth__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../JSScripts/services/Auth */ "./lsuniverse/JSScripts/services/Auth.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -1720,8 +1721,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 var Login = function Login(props) {
-  var t = Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_2__["useTranslation"])();
+  var t = Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_3__["useTranslation"])();
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
       _useState2 = _slicedToArray(_useState, 2),
@@ -1750,6 +1753,7 @@ var Login = function Login(props) {
 
   var _handleSubmit = function _handleSubmit(e) {
     e.preventDefault(); // TODO: implementing error messages
+    // TODO: Implement request spamming check with cookies
 
     props.Action_Login(data).then(function (res) {
       return res.json();
@@ -1765,7 +1769,7 @@ var Login = function Login(props) {
     setRequestAmount(requestAmount + 1);
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return !Object(_JSScripts_services_Auth__WEBPACK_IMPORTED_MODULE_6__["getToken"])() ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: " flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-8 lg:px-8"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "max-w-xs w-full"
@@ -1830,11 +1834,16 @@ var Login = function Login(props) {
     fillRule: "evenodd",
     d: "M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z",
     clipRule: "evenodd"
-  }))), "Sign in"))))));
+  }))), "Sign in")))))) // TODO: REDIRECT TO DASHBOARD
+  :
+  /*#__PURE__*/
+  react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
+    to: '/'
+  });
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(null, {
-  Action_Login: _JSScripts_reducers_actions_Action_Login__WEBPACK_IMPORTED_MODULE_4__["Action_Login"]
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(null, {
+  Action_Login: _JSScripts_reducers_actions_Action_Login__WEBPACK_IMPORTED_MODULE_5__["Action_Login"]
 })(Login));
 
 /***/ }),

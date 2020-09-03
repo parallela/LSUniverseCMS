@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import Logo from "../assets/img/logo.png";
+import {Redirect} from "react-router-dom";
 import {useTranslation} from "react-multi-lang";
 import {connect} from "react-redux";
 import {Action_Login} from "../../../JSScripts/reducers/actions/Action_Login";
+import {getToken} from "../../../JSScripts/services/Auth";
 
 const Login = props => {
     const t = useTranslation();
@@ -15,8 +17,14 @@ const Login = props => {
     const _handleSubmit = (e) => {
         e.preventDefault();
         // TODO: implementing error messages
+        // TODO: Implement request spamming check with cookies
         props.Action_Login(data)
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) {
+                    // TODO: Implement this in custom error message field (server error message)
+                    throw new Error(res.statusText);
+                }
+            })
             .then(res => {
                 if (res.errors) {
                     console.log(res.errors)
@@ -24,12 +32,15 @@ const Login = props => {
                     return false;
                 }
                 localStorage.setItem('auth_token', res.access_token);
-            });
+            }).catch(error => {
+            // TODO
+            throw new Error(error)
+        });
         setRequestAmount(requestAmount + 1);
 
     }
 
-    return (
+    return !getToken() ? (
         <>
             <div className=" flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-8 lg:px-8">
                 <div className="max-w-xs w-full">
@@ -85,7 +96,8 @@ const Login = props => {
             </div>
 
         </>
-    );
+        // TODO: REDIRECT TO DASHBOARD
+    ) : <Redirect to={'/'}/>
 }
 
 

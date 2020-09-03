@@ -1,7 +1,6 @@
 import Cookies from "universal-cookie";
 import {_networkUserGet} from "../network/Network_UserGet";
 
-const cookies = new Cookies();
 
 export const getUser = async () => {
     const req = await _networkUserGet();
@@ -9,5 +8,5 @@ export const getUser = async () => {
 }
 
 export const getToken = () => {
-    return localStorage.getItem('token');
+    return localStorage.getItem('auth_token');
 }
