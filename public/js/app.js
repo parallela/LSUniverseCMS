@@ -486,22 +486,7 @@ var loginUser = /*#__PURE__*/function () {
 
 var Action_Login = function Action_Login(data) {
   return function (dispatch) {
-    dispatch({
-      type: "LOGGING_IN_THE_USER"
-    }); // TODO
-    // loginUser().then((res) => {
-    //         const json = res.json();
-    //         if (res.status !== 200 && res.status !== 201) {
-    //             dispatch({type: "LOG_IN_FAILED", payload: json})
-    //             return false;
-    //         }
-    //         return json;
-    //     }
-    // ).then(d => {
-    //     if (d !== false) {
-    //         dispatch({type: "LOG_IN_SUCCESS", payload: d});
-    //     }
-    // })
+    return loginUser(data);
   };
 };
 
@@ -1762,12 +1747,22 @@ var Login = function Login(props) {
     email: email,
     password: password
   };
-  var state = props.login;
 
   var _handleSubmit = function _handleSubmit(e) {
-    e.preventDefault();
-    props.loginUser(data);
-    console.log(state);
+    e.preventDefault(); // TODO: implementing error messages
+
+    props.Action_Login(data).then(function (res) {
+      return res.json();
+    }).then(function (res) {
+      if (res.errors) {
+        console.log(res.errors);
+        setErrors(res.errors);
+        return false;
+      }
+
+      localStorage.setItem('auth_token', res.access_token);
+    });
+    setRequestAmount(requestAmount + 1);
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1838,21 +1833,9 @@ var Login = function Login(props) {
   }))), "Sign in"))))));
 };
 
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    login: state.login
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    loginUser: function loginUser(data) {
-      dispatch(Object(_JSScripts_reducers_actions_Action_Login__WEBPACK_IMPORTED_MODULE_4__["Action_Login"])(data));
-    }
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(Login));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(null, {
+  Action_Login: _JSScripts_reducers_actions_Action_Login__WEBPACK_IMPORTED_MODULE_4__["Action_Login"]
+})(Login));
 
 /***/ }),
 

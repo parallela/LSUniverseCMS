@@ -11,14 +11,21 @@ const Login = props => {
     const [requestAmount, setRequestAmount] = useState(0);
     const [errors, setErrors] = useState([]);
     const data = {email: email, password: password}
-    const state = props.login;
 
     const _handleSubmit = (e) => {
         e.preventDefault();
-
-        props.loginUser(data);
-
-        console.log(state);
+        // TODO: implementing error messages
+        props.Action_Login(data)
+            .then(res => res.json())
+            .then(res => {
+                if (res.errors) {
+                    console.log(res.errors)
+                    setErrors(res.errors);
+                    return false;
+                }
+                localStorage.setItem('auth_token', res.access_token);
+            });
+        setRequestAmount(requestAmount + 1);
 
     }
 
@@ -81,16 +88,5 @@ const Login = props => {
     );
 }
 
-const mapStateToProps = state => ({
-    login: state.login,
-});
 
-const mapDispatchToProps = dispatch => {
-    return {
-        loginUser: (data) => {
-            dispatch(Action_Login(data));
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(null, {Action_Login})(Login);
