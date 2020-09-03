@@ -1,6 +1,6 @@
 const initialState = {
     loading: true,
-    error: null,
+    error: false,
     data: [],
     fetched: false,
 }
@@ -18,7 +18,15 @@ export default (state = initialState, action) => {
                 data: action.payload
             }
             break;
-
+        case 'USER_PROBLEM':
+            return {
+                ...state,
+                loading: false,
+                fetched: true,
+                data: [],
+                error: true
+            }
+            break;
     }
     return state;
 }

@@ -24,6 +24,7 @@ import allReducers from "./reducers/index";
 import {Provider} from "react-redux";
 import {Action_User} from "./reducers/actions/Action_User";
 import {Action_Categories} from "./reducers/actions/Action_Categories";
+import {Action_Login} from "./reducers/actions/Action_Login";
 
 if (document.getElementById("root")) {
     /*

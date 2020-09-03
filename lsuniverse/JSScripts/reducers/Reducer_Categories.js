@@ -2,7 +2,7 @@ import {_networkGetCategories} from "../network/Network_GetCategories";
 
 const initialState = {
     loading: true,
-    error: null,
+    error: false,
     data: [],
     fetched: false,
 }
