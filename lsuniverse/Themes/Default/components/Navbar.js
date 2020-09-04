@@ -45,7 +45,7 @@ const Navbar = props => {
                             </li>
                         ))}
                     </ul>
-                    <Link to={getToken() ? '/dashboard' : '/login'} id="navAction"
+                    <Link to={getToken() ? '/dashboard/index' : '/login'} id="navAction"
                           className="mx-auto lg:mx-0 hover:underline _bg-light_gray text-white font-bold rounded mt-4 lg:mt-0 py-2 px-8 shadow opacity-75">
                         <i className="fas fa-user"></i> &nbsp; {t("home.auth")}
                     </Link>

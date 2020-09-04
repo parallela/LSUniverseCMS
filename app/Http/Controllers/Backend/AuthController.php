@@ -48,6 +48,8 @@ class AuthController extends Controller
                 'token' => md5("$user->id $user->email" . sha1(time())),
             ]);
 
+            // TODO:
+            // If there's no valid credentials in .env file it throws a server error
             Mail::to($user->email)->send(new UserVerify($user));
 
             return response()->json(['message' => 'Created'], 201);

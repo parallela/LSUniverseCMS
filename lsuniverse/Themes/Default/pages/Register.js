@@ -3,24 +3,28 @@ import Logo from "../assets/img/logo.png";
 import {Link, Redirect} from "react-router-dom";
 import {useTranslation} from "react-multi-lang";
 import {connect} from "react-redux";
-import {Action_Login} from "../../../JSScripts/reducers/actions/Action_Login";
+import {Action_Register} from "../../../JSScripts/reducers/actions/Action_Register";
 import {getToken} from "../../../JSScripts/services/Auth";
 import Alert_Message from "../components/alerts/Alert_Message";
 
-const Login = props => {
+const Register = props => {
     const t = useTranslation();
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [rePassword, setRePassword] = useState("");
+
+
     const [errors, setErrors] = useState([]);
     const [serverError, setServerError] = useState([]);
-    const fromUrl = new URLSearchParams(window.location.search).get('redirectTo');
+    const [message, setMessage] = useState([]);
     const [loading, setLoading] = useState(false);
-    const data = {email: email, password: password}
+    const data = {name: name, email: email, password: password, re_password: rePassword}
 
     const _handleSubmit = async (e) => {
         setLoading(true);
         e.preventDefault();
-        const login = props.Action_Login(data)
+        const register = props.Action_Register(data)
             .then(res => {
                 // There's server error here.
                 if (res.status === 500 || res.status >= 511) {
@@ -37,7 +41,7 @@ const Login = props => {
             });
 
         // Await the request
-        const res = await login;
+        const res = await register;
 
         // Check if the request is valid and not return false
         if (res) {
@@ -52,9 +56,9 @@ const Login = props => {
 
                 return false;
             }
-            if (res.access_token) {
-                localStorage.setItem('auth_token', res.access_token)
-                window.location.href = fromUrl !== null ? fromUrl : '/';
+            if (res.message) {
+                setMessage({"success": t("auth.success")});
+                setLoading(false);
 
                 return true;
             } else {
@@ -74,8 +78,9 @@ const Login = props => {
                              src={Logo} alt="Workflow"/>
                         {errors.length !== 0 && <Alert_Message type={"error"} data={errors}/>}
                         {serverError.length !== 0 && <Alert_Message type={"server_error"} data={serverError}/>}
+                        {message.length !== 0 && <Alert_Message type={"success"} data={message}/>}
                         <h2 className="mt-6 text-center text-3xl leading-9 font-extrabold text-white">
-                            {t("home.login")}
+                            {t("home.register-2")}
                         </h2>
                     </div>
                     <form onSubmit={_handleSubmit} className="mt-8" action="#" method="POST">
@@ -87,29 +92,39 @@ const Login = props => {
                                        placeholder="Email address"
                                        onChange={e => setEmail(e.target.value)}/>
                             </div>
+
+                            <div className="mt-2">
+                                <input aria-label="Password" name="name" type="text" required
+                                       className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
+                                       placeholder="Full name"
+                                       onChange={e => setName(e.target.value)} minLength={4}/>
+                            </div>
+
                             <div className="mt-2">
                                 <input aria-label="Password" name="password" type="password" required
                                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
                                        placeholder="Password"
                                        onChange={e => setPassword(e.target.value)} minLength={8}/>
                             </div>
+
+
+                            <div className="mt-2">
+                                <input aria-label="Password" name="re_password" type="password" required
+                                       className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
+                                       placeholder="Confirm password"
+                                       onChange={e => setRePassword(e.target.value)} minLength={8}/>
+                            </div>
                         </div>
 
                         <div className="mt-6 flex items-center justify-between">
                             <div className="text-sm leading-5">
-                                <a href="#"
-                                   className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-                                    {t("auth.reset-button")}
-                                </a>
-                            </div>
-
-                            <div className="text-sm leading-5">
-                                <Link to={'/register'}
+                                <Link to={'/login'}
                                       className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-                                    {t("home.register")}
+                                    {t("home.already-have-account")}
                                 </Link>
                             </div>
                         </div>
+
 
                         <div className="mt-6">
                             <button type="submit"
@@ -123,7 +138,7 @@ const Login = props => {
                     clipRule="evenodd"/>
             </svg>
           </span>
-                                {!loading ? t("home.login") : <i className="fas fa-circle-notch fa-spin"></i>}
+                                {!loading ? t("home.register-2") : <i className="fas fa-circle-notch fa-spin"></i>}
                             </button>
                         </div>
                     </form>
@@ -135,4 +150,4 @@ const Login = props => {
 }
 
 
-export default connect(null, {Action_Login})(Login);
+export default connect(null, {Action_Register})(Register);

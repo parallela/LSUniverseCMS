@@ -1,12 +1,14 @@
 import {combineReducers} from "redux";
 import UserReducer from "./Reducer_User"
 import CategoriesReducer from "./Reducer_Categories";
-import LoginReducer from "./actions/Reducer_Login";
+import LoginReducer from "./Reducer_Login";
+import RegisterReducer from "./Reducer_Register";
 
 const allReducers = combineReducers({
     user: UserReducer,
     categories: CategoriesReducer,
-    login: LoginReducer
+    login: LoginReducer,
+    register: RegisterReducer
 });
 
 export default allReducers;

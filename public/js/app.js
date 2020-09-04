@@ -192,6 +192,60 @@ var _networkLoginUser = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./lsuniverse/JSScripts/network/Network_RegisterUser.js":
+/*!**************************************************************!*\
+  !*** ./lsuniverse/JSScripts/network/Network_RegisterUser.js ***!
+  \**************************************************************/
+/*! exports provided: _networkRegisterUser */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkRegisterUser", function() { return _networkRegisterUser; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var _networkRegisterUser = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
+    var rawResponse;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return fetch("/api/auth/register", {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+            });
+
+          case 2:
+            rawResponse = _context.sent;
+            return _context.abrupt("return", rawResponse);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function _networkRegisterUser(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+
 /***/ "./lsuniverse/JSScripts/network/Network_UserGet.js":
 /*!*********************************************************!*\
   !*** ./lsuniverse/JSScripts/network/Network_UserGet.js ***!
@@ -296,6 +350,118 @@ var initialState = {
         loading: false,
         fetched: false,
         data: []
+      });
+      break;
+  }
+
+  return state;
+});
+
+/***/ }),
+
+/***/ "./lsuniverse/JSScripts/reducers/Reducer_Login.js":
+/*!********************************************************!*\
+  !*** ./lsuniverse/JSScripts/reducers/Reducer_Login.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var initialState = {
+  loading: true,
+  error: false,
+  data: [],
+  fetched: false
+};
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case "LOGGING_IN_USER":
+      return _objectSpread(_objectSpread({}, state), {}, {
+        loading: true
+      });
+      break;
+
+    case "LOG_IN_SUCCESS":
+      return _objectSpread(_objectSpread({}, state), {}, {
+        loading: false,
+        error: null,
+        data: action.payload,
+        fetched: true
+      });
+      break;
+
+    case "LOG_IN_FAILED":
+      return _objectSpread(_objectSpread({}, state), {}, {
+        loading: false,
+        error: true,
+        data: action.payload,
+        fetched: false
+      });
+      break;
+  }
+
+  return state;
+});
+
+/***/ }),
+
+/***/ "./lsuniverse/JSScripts/reducers/Reducer_Register.js":
+/*!***********************************************************!*\
+  !*** ./lsuniverse/JSScripts/reducers/Reducer_Register.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var initialState = {
+  loading: true,
+  error: false,
+  data: [],
+  fetched: false
+};
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case "REGISTERING_USER":
+      return _objectSpread(_objectSpread({}, state), {}, {
+        loading: true
+      });
+      break;
+
+    case "REGISTER_SUCCESS":
+      return _objectSpread(_objectSpread({}, state), {}, {
+        loading: false,
+        error: null,
+        data: action.payload,
+        fetched: true
+      });
+      break;
+
+    case "REGISTER_FAILED":
+      return _objectSpread(_objectSpread({}, state), {}, {
+        loading: false,
+        error: true,
+        data: action.payload,
+        fetched: false
       });
       break;
   }
@@ -492,6 +658,66 @@ var Action_Login = function Action_Login(data) {
 
 /***/ }),
 
+/***/ "./lsuniverse/JSScripts/reducers/actions/Action_Register.js":
+/*!******************************************************************!*\
+  !*** ./lsuniverse/JSScripts/reducers/actions/Action_Register.js ***!
+  \******************************************************************/
+/*! exports provided: Action_Register */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Action_Register", function() { return Action_Register; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _network_Network_RegisterUser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../network/Network_RegisterUser */ "./lsuniverse/JSScripts/network/Network_RegisterUser.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+var registerUser = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
+    var req;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return Object(_network_Network_RegisterUser__WEBPACK_IMPORTED_MODULE_1__["_networkRegisterUser"])(data);
+
+          case 2:
+            req = _context.sent;
+            _context.next = 5;
+            return req;
+
+          case 5:
+            return _context.abrupt("return", _context.sent);
+
+          case 6:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function registerUser(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+var Action_Register = function Action_Register(data) {
+  return function (dispatch) {
+    return registerUser(data);
+  };
+};
+
+/***/ }),
+
 /***/ "./lsuniverse/JSScripts/reducers/actions/Action_User.js":
 /*!**************************************************************!*\
   !*** ./lsuniverse/JSScripts/reducers/actions/Action_User.js ***!
@@ -523,62 +749,6 @@ var Action_User = function Action_User(dispatch) {
 
 /***/ }),
 
-/***/ "./lsuniverse/JSScripts/reducers/actions/Reducer_Login.js":
-/*!****************************************************************!*\
-  !*** ./lsuniverse/JSScripts/reducers/actions/Reducer_Login.js ***!
-  \****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var initialState = {
-  loading: true,
-  error: false,
-  data: [],
-  fetched: false
-};
-/* harmony default export */ __webpack_exports__["default"] = (function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  switch (action.type) {
-    case "LOGGING_IN_USER":
-      return _objectSpread(_objectSpread({}, state), {}, {
-        loading: true
-      });
-      break;
-
-    case "LOG_IN_SUCCESS":
-      return _objectSpread(_objectSpread({}, state), {}, {
-        loading: false,
-        error: null,
-        data: action.payload,
-        fetched: true
-      });
-      break;
-
-    case "LOG_IN_FAILED":
-      return _objectSpread(_objectSpread({}, state), {}, {
-        loading: false,
-        error: true,
-        data: action.payload,
-        fetched: false
-      });
-      break;
-  }
-
-  return state;
-});
-
-/***/ }),
-
 /***/ "./lsuniverse/JSScripts/reducers/index.js":
 /*!************************************************!*\
   !*** ./lsuniverse/JSScripts/reducers/index.js ***!
@@ -591,7 +761,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _Reducer_User__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Reducer_User */ "./lsuniverse/JSScripts/reducers/Reducer_User.js");
 /* harmony import */ var _Reducer_Categories__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Reducer_Categories */ "./lsuniverse/JSScripts/reducers/Reducer_Categories.js");
-/* harmony import */ var _actions_Reducer_Login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./actions/Reducer_Login */ "./lsuniverse/JSScripts/reducers/actions/Reducer_Login.js");
+/* harmony import */ var _Reducer_Login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Reducer_Login */ "./lsuniverse/JSScripts/reducers/Reducer_Login.js");
+/* harmony import */ var _Reducer_Register__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Reducer_Register */ "./lsuniverse/JSScripts/reducers/Reducer_Register.js");
+
 
 
 
@@ -599,7 +771,8 @@ __webpack_require__.r(__webpack_exports__);
 var allReducers = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   user: _Reducer_User__WEBPACK_IMPORTED_MODULE_1__["default"],
   categories: _Reducer_Categories__WEBPACK_IMPORTED_MODULE_2__["default"],
-  login: _actions_Reducer_Login__WEBPACK_IMPORTED_MODULE_3__["default"]
+  login: _Reducer_Login__WEBPACK_IMPORTED_MODULE_3__["default"],
+  register: _Reducer_Register__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (allReducers);
 
@@ -877,7 +1050,7 @@ module.exports = JSON.parse("{\"home\":{\"nav-home\":\"asd\",\"contacts\":\"Cont
 /*! exports provided: home, auth, user, app, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"home\":{\"nav-home\":\"Home\",\"contacts\":\"Contacts\",\"quick-menu\":\"Quick Menu\",\"all-rights-reserved\":\"All Rights Reserved\",\"register\":\"Register\",\"login\":\"Login\",\"247-support\":\"24/7 SUPPORT\",\"email\":\"Email\",\"live-chat\":\"Live Chat\",\"live-chat-text\":\"Chat With Us Now\",\"template-made\":\"This template is made with\",\"by\":\"by\",\"live\":\"Live chat\",\"auth\":\"Client Area\",\"forget-password\":\"Forget password\",\"auth_text\":\"Login / Register\",\"remember-me\":\"Remember me\",\"full-name\":\"Full name\",\"password\":\"Password\",\"first_step_forget_password\":\"First step of resetting password\",\"second_step_forget_password\":\"Second step of resseting password\",\"third_step_forget_password\":\"Third step of resseting password\",\"re-password\":\"Re-type Password\",\"confirm\":\"Confirm\",\"please-wait\":\"Please wait...\",\"city\":\"City\",\"region\":\"Region\",\"zipcode\":\"Zipcode\",\"mailing_list\":\"Mail ads\",\"subscribed\":\"Subscribed\",\"unsubscribed\":\"Unsubscribed\",\"submit\":\"Submit\",\"open\":\"Open\",\"closed\":\"Closed\",\"something-wr\":\"Something went wrong! Please try again later...\",\"you\":\"You\",\"reply\":\"Reply\"},\"auth\":{\"success\":\"Your account was created successfully. Please confirm your E-Mail address to continue.\",\"login-success\":\"You are logged in, successfully!\",\"reCaptcha\":\"Please confirm reCaptcha to continue!\",\"tooManyAttempts\":\"Too many login attempts, please try again later or reset your password from the buttom link\",\"invalid-email\":\"The email you provided, is not valid\",\"invalid-password\":\"The password lenght must be 8 character long or greater\",\"invalid-repassword\":\"The password you provided is not the same as main password\",\"invalid-name\":\"The name is invalid\",\"field-required\":\"This field is required!\",\"reset-button\":\"Reset password\",\"reset-password-failed\":\"We can't recover your password right now! Please try again later.\",\"reset-password-success\":\"We've send you an email with instructions, how to recover your password!\",\"reset-key\":\"Enter your key from the email\",\"reset-key-valid\":\"Your key is valid, you'll be redirected to reset password page any moment!\",\"reset-key-invalid\":\"Your key is invalid, please make sure you copied it correctly!\",\"password-changed\":\"Password was changed, successfully\",\"password-notchanged\":\"We have a problem with changing your password, please try again later!\",\"account-verified\":\"Account was verified successfuly!\",\"account-verification-failed\":\"Account was not verified, please try again!\"},\"user\":{\"user-info\":\"User Information\",\"user-billing-details\":\"User Billing Details\",\"welcome\":\"Welcome again, \",\"active-services\":\"Active Services\",\"tickets\":\"Tickets\",\"invoices\":\"Invoices\",\"last-tickets\":\"Last Tickets\",\"balance\":\"Balance\",\"user-address-1\":\"Address 1\",\"user-address-2\":\"Address 2\",\"phone\":\"Phone number\",\"success-updated\":\"Your information was updated successfully!\",\"service-name\":\"Service name\",\"service-price\":\"Service price\",\"service-purchased\":\"Service purchased at\",\"order-id\":\"Order ID\",\"service-expire_at\":\"Service Expire at\",\"ticket-name\":\"Ticket Name\",\"ticket-created\":\"Ticket Created At\",\"ticket-status\":\"Ticket Status\",\"ticket-last-activity\":\"Ticket Last Activity\",\"open-tickets\":\"Open tickets\",\"ticket-topic\":\"Ticket topic\",\"department\":\"For department\",\"select-department\":\"Select department\",\"topic-description\":\"Topic Description:\",\"add-ticket\":\"Add Ticket\",\"ticket-pending\":\"Ticket was successfully added to our queue!\",\"ticket-failed\":\"We can't add your ticket right now! Please try again later.\",\"ticket-answer-problem\":\"We have problem with adding your answer.\",\"action\":\"Action\",\"delete\":\"Delete\"},\"app\":{\"invalid-response\":\"Invalid response.\"}}");
+module.exports = JSON.parse("{\"home\":{\"nav-home\":\"Home\",\"contacts\":\"Contacts\",\"quick-menu\":\"Quick Menu\",\"all-rights-reserved\":\"All Rights Reserved\",\"register\":\"Don't have an account?\",\"register-2\":\"Register\",\"already-have-account\":\"I've already have an account\",\"login\":\"Login\",\"247-support\":\"24/7 SUPPORT\",\"email\":\"Email\",\"live-chat\":\"Live Chat\",\"live-chat-text\":\"Chat With Us Now\",\"template-made\":\"This template is made with\",\"by\":\"by\",\"live\":\"Live chat\",\"auth\":\"Client Area\",\"forget-password\":\"Forget password\",\"auth_text\":\"Login / Register\",\"remember-me\":\"Remember me\",\"full-name\":\"Full name\",\"password\":\"Password\",\"first_step_forget_password\":\"First step of resetting password\",\"second_step_forget_password\":\"Second step of resseting password\",\"third_step_forget_password\":\"Third step of resseting password\",\"re-password\":\"Re-type Password\",\"confirm\":\"Confirm\",\"please-wait\":\"Please wait...\",\"city\":\"City\",\"region\":\"Region\",\"zipcode\":\"Zipcode\",\"mailing_list\":\"Mail ads\",\"subscribed\":\"Subscribed\",\"unsubscribed\":\"Unsubscribed\",\"submit\":\"Submit\",\"open\":\"Open\",\"closed\":\"Closed\",\"something-wr\":\"Something went wrong! Please try again later...\",\"you\":\"You\",\"reply\":\"Reply\"},\"auth\":{\"success\":\"Your account was created successfully. Please confirm your E-Mail address to continue.\",\"login-success\":\"You are logged in, successfully!\",\"reCaptcha\":\"Please confirm reCaptcha to continue!\",\"tooManyAttempts\":\"Too many login attempts, please try again later or reset your password from the buttom link\",\"invalid-email\":\"The email you provided, is not valid\",\"invalid-password\":\"The password lenght must be 8 character long or greater\",\"invalid-repassword\":\"The password you provided is not the same as main password\",\"invalid-name\":\"The name is invalid\",\"field-required\":\"This field is required!\",\"reset-button\":\"Reset password\",\"reset-password-failed\":\"We can't recover your password right now! Please try again later.\",\"reset-password-success\":\"We've send you an email with instructions, how to recover your password!\",\"reset-key\":\"Enter your key from the email\",\"reset-key-valid\":\"Your key is valid, you'll be redirected to reset password page any moment!\",\"reset-key-invalid\":\"Your key is invalid, please make sure you copied it correctly!\",\"password-changed\":\"Password was changed, successfully\",\"password-notchanged\":\"We have a problem with changing your password, please try again later!\",\"account-verified\":\"Account was verified successfuly!\",\"account-verification-failed\":\"Account was not verified, please try again!\"},\"user\":{\"user-info\":\"User Information\",\"user-billing-details\":\"User Billing Details\",\"welcome\":\"Welcome again, \",\"active-services\":\"Active Services\",\"tickets\":\"Tickets\",\"invoices\":\"Invoices\",\"last-tickets\":\"Last Tickets\",\"balance\":\"Balance\",\"user-address-1\":\"Address 1\",\"user-address-2\":\"Address 2\",\"phone\":\"Phone number\",\"success-updated\":\"Your information was updated successfully!\",\"service-name\":\"Service name\",\"service-price\":\"Service price\",\"service-purchased\":\"Service purchased at\",\"order-id\":\"Order ID\",\"service-expire_at\":\"Service Expire at\",\"ticket-name\":\"Ticket Name\",\"ticket-created\":\"Ticket Created At\",\"ticket-status\":\"Ticket Status\",\"ticket-last-activity\":\"Ticket Last Activity\",\"open-tickets\":\"Open tickets\",\"ticket-topic\":\"Ticket topic\",\"department\":\"For department\",\"select-department\":\"Select department\",\"topic-description\":\"Topic Description:\",\"add-ticket\":\"Add Ticket\",\"ticket-pending\":\"Ticket was successfully added to our queue!\",\"ticket-failed\":\"We can't add your ticket right now! Please try again later.\",\"ticket-answer-problem\":\"We have problem with adding your answer.\",\"action\":\"Action\",\"delete\":\"Delete\"},\"app\":{\"invalid-response\":\"Invalid response.\"}}");
 
 /***/ }),
 
@@ -936,10 +1109,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_multi_lang__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_top_loading_bar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-top-loading-bar */ "./node_modules/react-top-loading-bar/dist/index.modern.js");
-/* harmony import */ var _routes_dashboard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./routes/dashboard */ "./lsuniverse/Themes/Default/routes/dashboard.js");
-/* harmony import */ var _pages_Home__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/Home */ "./lsuniverse/Themes/Default/pages/Home.js");
-/* harmony import */ var _pages_Login__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/Login */ "./lsuniverse/Themes/Default/pages/Login.js");
-/* harmony import */ var _pages_Dashboard_Dashboard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/Dashboard/Dashboard */ "./lsuniverse/Themes/Default/pages/Dashboard/Dashboard.js");
+/* harmony import */ var _pages_Home__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/Home */ "./lsuniverse/Themes/Default/pages/Home.js");
+/* harmony import */ var _pages_Login__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/Login */ "./lsuniverse/Themes/Default/pages/Login.js");
+/* harmony import */ var _pages_Dashboard_Dashboard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/Dashboard/Dashboard */ "./lsuniverse/Themes/Default/pages/Dashboard/Dashboard.js");
+/* harmony import */ var _pages_Register__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/Register */ "./lsuniverse/Themes/Default/pages/Register.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -956,10 +1129,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 /*
 * Pages
  */
+
 
 
 
@@ -991,13 +1164,16 @@ var App = function App(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: '/',
     exact: true,
-    component: _pages_Home__WEBPACK_IMPORTED_MODULE_5__["default"]
+    component: _pages_Home__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: '/login',
-    component: _pages_Login__WEBPACK_IMPORTED_MODULE_6__["default"]
+    component: _pages_Login__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+    path: '/register',
+    component: _pages_Register__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: '/dashboard',
-    component: _pages_Dashboard_Dashboard__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _pages_Dashboard_Dashboard__WEBPACK_IMPORTED_MODULE_6__["default"]
   }))));
 };
 
@@ -1286,7 +1462,7 @@ var Navbar = function Navbar(props) {
       to: "/page/".concat(category.slug)
     }, category.name));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-    to: Object(_JSScripts_services_Auth__WEBPACK_IMPORTED_MODULE_4__["getToken"])() ? '/dashboard' : '/login',
+    to: Object(_JSScripts_services_Auth__WEBPACK_IMPORTED_MODULE_4__["getToken"])() ? '/dashboard/index' : '/login',
     id: "navAction",
     className: "mx-auto lg:mx-0 hover:underline _bg-light_gray text-white font-bold rounded mt-4 lg:mt-0 py-2 px-8 shadow opacity-75"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
@@ -2294,7 +2470,12 @@ var Login = function Login(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
     href: "#",
     className: "font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
-  }, t("auth.reset-button")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, t("auth.reset-button"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "text-sm leading-5"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    to: '/register',
+    className: "font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
+  }, t("home.register")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "mt-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     type: "submit",
@@ -2312,10 +2493,7 @@ var Login = function Login(props) {
     clipRule: "evenodd"
   }))), !loading ? t("home.login") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
     className: "fas fa-circle-notch fa-spin"
-  }))))))) // TODO: REDIRECT TO DASHBOARD
-  :
-  /*#__PURE__*/
-  react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Redirect"], {
+  }))))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Redirect"], {
     to: '/'
   });
 };
@@ -2323,6 +2501,299 @@ var Login = function Login(props) {
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["connect"])(null, {
   Action_Login: _JSScripts_reducers_actions_Action_Login__WEBPACK_IMPORTED_MODULE_6__["Action_Login"]
 })(Login));
+
+/***/ }),
+
+/***/ "./lsuniverse/Themes/Default/pages/Register.js":
+/*!*****************************************************!*\
+  !*** ./lsuniverse/Themes/Default/pages/Register.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _assets_img_logo_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/img/logo.png */ "./lsuniverse/Themes/Default/assets/img/logo.png");
+/* harmony import */ var _assets_img_logo_png__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_assets_img_logo_png__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-multi-lang */ "./node_modules/react-multi-lang/lib/index.js");
+/* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_multi_lang__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _JSScripts_reducers_actions_Action_Register__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../JSScripts/reducers/actions/Action_Register */ "./lsuniverse/JSScripts/reducers/actions/Action_Register.js");
+/* harmony import */ var _JSScripts_services_Auth__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../JSScripts/services/Auth */ "./lsuniverse/JSScripts/services/Auth.js");
+/* harmony import */ var _components_alerts_Alert_Message__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/alerts/Alert_Message */ "./lsuniverse/Themes/Default/components/alerts/Alert_Message.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+
+var Register = function Register(props) {
+  var t = Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_4__["useTranslation"])();
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      name = _useState2[0],
+      setName = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      email = _useState4[0],
+      setEmail = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+      _useState6 = _slicedToArray(_useState5, 2),
+      password = _useState6[0],
+      setPassword = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+      _useState8 = _slicedToArray(_useState7, 2),
+      rePassword = _useState8[0],
+      setRePassword = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState10 = _slicedToArray(_useState9, 2),
+      errors = _useState10[0],
+      setErrors = _useState10[1];
+
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState12 = _slicedToArray(_useState11, 2),
+      serverError = _useState12[0],
+      setServerError = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState14 = _slicedToArray(_useState13, 2),
+      message = _useState14[0],
+      setMessage = _useState14[1];
+
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState16 = _slicedToArray(_useState15, 2),
+      loading = _useState16[0],
+      setLoading = _useState16[1];
+
+  var data = {
+    name: name,
+    email: email,
+    password: password,
+    re_password: rePassword
+  };
+
+  var _handleSubmit = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+      var register, res;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              setLoading(true);
+              e.preventDefault();
+              register = props.Action_Register(data).then(function (res) {
+                // There's server error here.
+                if (res.status === 500 || res.status >= 511) {
+                  setServerError({
+                    "server": res.statusText
+                  });
+                  setTimeout(function () {
+                    setServerError("");
+                  }, 5000);
+                  setLoading(false);
+                  return false;
+                } // If there's no any server errors or etc. We can continue with response as json format
+
+
+                return res.json();
+              }); // Await the request
+
+              _context.next = 5;
+              return register;
+
+            case 5:
+              res = _context.sent;
+
+              if (!res) {
+                _context.next = 19;
+                break;
+              }
+
+              setLoading(false);
+
+              if (!res.errors) {
+                _context.next = 12;
+                break;
+              }
+
+              setErrors(res.errors); // Remove errors after 5 seconds
+
+              setTimeout(function () {
+                setErrors("");
+              }, 5000);
+              return _context.abrupt("return", false);
+
+            case 12:
+              if (!res.message) {
+                _context.next = 18;
+                break;
+              }
+
+              setMessage({
+                "success": t("auth.success")
+              });
+              setLoading(false);
+              return _context.abrupt("return", true);
+
+            case 18:
+              throw new Error(t("app.invalid-response"));
+
+            case 19:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function _handleSubmit(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  return !Object(_JSScripts_services_Auth__WEBPACK_IMPORTED_MODULE_7__["getToken"])() ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: " flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-8 lg:px-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "max-w-xs w-full"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+    className: "mx-auto h-24 w-auto",
+    src: _assets_img_logo_png__WEBPACK_IMPORTED_MODULE_2___default.a,
+    alt: "Workflow"
+  }), errors.length !== 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_alerts_Alert_Message__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    type: "error",
+    data: errors
+  }), serverError.length !== 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_alerts_Alert_Message__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    type: "server_error",
+    data: serverError
+  }), message.length !== 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_alerts_Alert_Message__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    type: "success",
+    data: message
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
+    className: "mt-6 text-center text-3xl leading-9 font-extrabold text-white"
+  }, t("home.register-2"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+    onSubmit: _handleSubmit,
+    className: "mt-8",
+    action: "#",
+    method: "POST"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "hidden",
+    name: "remember",
+    value: "true"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "rounded-md shadow-sm"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    "aria-label": "Email address",
+    name: "email",
+    type: "email",
+    required: true,
+    className: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5",
+    placeholder: "Email address",
+    onChange: function onChange(e) {
+      return setEmail(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "mt-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    "aria-label": "Password",
+    name: "name",
+    type: "text",
+    required: true,
+    className: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5",
+    placeholder: "Full name",
+    onChange: function onChange(e) {
+      return setName(e.target.value);
+    },
+    minLength: 4
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "mt-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    "aria-label": "Password",
+    name: "password",
+    type: "password",
+    required: true,
+    className: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5",
+    placeholder: "Password",
+    onChange: function onChange(e) {
+      return setPassword(e.target.value);
+    },
+    minLength: 8
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "mt-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    "aria-label": "Password",
+    name: "re_password",
+    type: "password",
+    required: true,
+    className: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5",
+    placeholder: "Confirm password",
+    onChange: function onChange(e) {
+      return setRePassword(e.target.value);
+    },
+    minLength: 8
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "mt-6 flex items-center justify-between"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "text-sm leading-5"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    to: '/login',
+    className: "font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
+  }, t("home.already-have-account")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "mt-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    type: "submit",
+    className: "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white _bg-light_gray hover:bg-gray-800 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out",
+    disabled: loading
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+    className: "absolute left-0 inset-y-0 flex items-center pl-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("svg", {
+    className: "h-5 w-5 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150",
+    fill: "currentColor",
+    viewBox: "0 0 20 20"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("path", {
+    fillRule: "evenodd",
+    d: "M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z",
+    clipRule: "evenodd"
+  }))), !loading ? t("home.register-2") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "fas fa-circle-notch fa-spin"
+  }))))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Redirect"], {
+    to: '/'
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["connect"])(null, {
+  Action_Register: _JSScripts_reducers_actions_Action_Register__WEBPACK_IMPORTED_MODULE_6__["Action_Register"]
+})(Register));
 
 /***/ }),
 
