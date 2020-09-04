@@ -70,4 +70,16 @@ class LSUAddonHelper
         return $addons_namespaces;
     }
 
+    /**
+     * @param array $data
+     * @return bool
+     */
+    public static function lsUInsertCustomSettings(array $data)
+    {
+        // TODO: DOC about that
+        self::lsUDatabase('settings')->insert($data);
+
+        return true;
+    }
+
 }

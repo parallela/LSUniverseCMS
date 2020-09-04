@@ -1,5 +1,4 @@
 import React from "react";
-import Logo from "../assets/img/logo.png"
 import {useTranslation} from "react-multi-lang";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
@@ -7,6 +6,7 @@ import {Link} from "react-router-dom";
 const Navbar = props => {
     const t = useTranslation();
     const categories = props.categories.data;
+    const settings = window._settings;
 
     return (
         <nav id="header" className="fixed w-full z-30 top-0 text-white bg-gray-900">
@@ -15,7 +15,7 @@ const Navbar = props => {
                 <div className="pl-4 flex items-center">
                     <a className="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
                        href="#">
-                        <img src={Logo} className="logo"/>
+                        <img src={settings['logo']} className="logo"/>
                     </a>
                 </div>
 

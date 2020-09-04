@@ -92,5 +92,8 @@
         "ticket-answer-problem": "We have problem with adding your answer.",
         "action": "Action",
         "delete": "Delete"
+    },
+    "app": {
+        "invalid-response": "Invalid response."
     }
 }

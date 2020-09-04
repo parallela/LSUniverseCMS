@@ -67,8 +67,8 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
         $verified = User::where('email', $credentials['email'])->first();
 
-        if(empty($verified)) {
-            return response()->json(["errors"=>["auth"=>"We can't find that user, Do you try to register?"]], 403);
+        if (empty($verified)) {
+            return response()->json(["errors" => ["auth" => "We can't find that user, Do you try to register?"]], 403);
         }
 
         if ($verified->verified == 1) {

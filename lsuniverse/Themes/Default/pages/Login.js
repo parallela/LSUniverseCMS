@@ -5,39 +5,63 @@ import {useTranslation} from "react-multi-lang";
 import {connect} from "react-redux";
 import {Action_Login} from "../../../JSScripts/reducers/actions/Action_Login";
 import {getToken} from "../../../JSScripts/services/Auth";
+import Alert_Message from "../components/alerts/Alert_Message";
 
 const Login = props => {
     const t = useTranslation();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [requestAmount, setRequestAmount] = useState(0);
     const [errors, setErrors] = useState([]);
+    const [serverError, setServerError] = useState([]);
+    const [loading, setLoading] = useState(false);
     const data = {email: email, password: password}
 
-    const _handleSubmit = (e) => {
+    const _handleSubmit = async (e) => {
+        setLoading(true);
         e.preventDefault();
-        // TODO: implementing error messages
-        // TODO: Implement request spamming check with cookies
-        props.Action_Login(data)
+        const login = props.Action_Login(data)
             .then(res => {
-                if (!res.ok) {
-                    // TODO: Implement this in custom error message field (server error message)
-                    throw new Error(res.statusText);
-                }
-            })
-            .then(res => {
-                if (res.errors) {
-                    console.log(res.errors)
-                    setErrors(res.errors);
+                // There's server error here.
+                if (res.status === 500 || res.status >= 511) {
+                    setServerError({"server": res.statusText});
+                    setTimeout(() => {
+                        setServerError("");
+                    }, 5000);
+
+                    setLoading(false);
                     return false;
                 }
-                localStorage.setItem('auth_token', res.access_token);
-            }).catch(error => {
-            // TODO
-            throw new Error(error)
-        });
-        setRequestAmount(requestAmount + 1);
+                // If there's no any server errors or etc. We can continue with response as json format
+                return res.json();
+            });
 
+        // Await the request
+        const res = await login;
+
+        // Check if the request is valid and not return false
+        if (res) {
+            setLoading(false);
+            if (res.errors) {
+                setErrors(res.errors);
+
+                // Remove errors after 5 seconds
+                setTimeout(() => {
+                    setErrors("");
+                }, 5000)
+
+                return false;
+            }
+            if (res.access_token) {
+                localStorage.setItem('auth_token', res.access_token)
+                location.reload();
+
+                return true;
+            } else {
+                // The response is not the same as the api suppose to return
+                throw new Error(t("app.invalid-response"));
+            }
+
+        }
     }
 
     return !getToken() ? (
@@ -47,6 +71,8 @@ const Login = props => {
                     <div>
                         <img className="mx-auto h-24 w-auto"
                              src={Logo} alt="Workflow"/>
+                        {errors.length !== 0 && <Alert_Message type={"error"} data={errors}/>}
+                        {serverError.length !== 0 && <Alert_Message type={"server_error"} data={serverError}/>}
                         <h2 className="mt-6 text-center text-3xl leading-9 font-extrabold text-white">
                             {t("home.login")}
                         </h2>
@@ -64,7 +90,7 @@ const Login = props => {
                                 <input aria-label="Password" name="password" type="password" required
                                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
                                        placeholder="Password"
-                                       onChange={e => setPassword(e.target.value)}/>
+                                       onChange={e => setPassword(e.target.value)} minLength={8}/>
                             </div>
                         </div>
 
@@ -79,7 +105,8 @@ const Login = props => {
 
                         <div className="mt-6">
                             <button type="submit"
-                                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white _bg-light_gray hover:bg-gray-800 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white _bg-light_gray hover:bg-gray-800 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+                                    disabled={loading}>
           <span className="absolute left-0 inset-y-0 flex items-center pl-3">
             <svg className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150"
                  fill="currentColor" viewBox="0 0 20 20">
@@ -88,7 +115,7 @@ const Login = props => {
                     clipRule="evenodd"/>
             </svg>
           </span>
-                                Sign in
+                                {!loading ? t("home.login") : <i className="fas fa-circle-notch fa-spin"></i>}
                             </button>
                         </div>
                     </form>
