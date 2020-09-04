@@ -13,6 +13,7 @@ const Login = props => {
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
     const [serverError, setServerError] = useState([]);
+    const fromUrl = new URLSearchParams(window.location.search).get('redirectTo');
     const [loading, setLoading] = useState(false);
     const data = {email: email, password: password}
 
@@ -53,7 +54,7 @@ const Login = props => {
             }
             if (res.access_token) {
                 localStorage.setItem('auth_token', res.access_token)
-                location.reload();
+                window.location.href = fromUrl !== null ? fromUrl : '/';
 
                 return true;
             } else {
@@ -98,7 +99,7 @@ const Login = props => {
                             <div className="text-sm leading-5">
                                 <a href="#"
                                    className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-                                    Forgot your password?
+                                    {t("auth.reset-button")}
                                 </a>
                             </div>
                         </div>

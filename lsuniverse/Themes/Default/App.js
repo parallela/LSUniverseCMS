@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from "react";
 import {useTranslation} from "react-multi-lang";
-import {BrowserRouter as Router, useLocation, Switch, Route} from "react-router-dom";
+import {BrowserRouter as Router, useLocation, Switch, Route, Redirect} from "react-router-dom";
 import LoadingBar from "react-top-loading-bar";
-
+import DashboardRoutes from "./routes/dashboard";
 
 /*
 * Pages
  */
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 const App = props => {
         const t = useTranslation();
@@ -34,6 +35,7 @@ const App = props => {
                         {/*<Route path={'/forgot-password'} component={''}/>*/}
 
                         {/*<Route path={'/main'} component={''}/>*/}
+                        <Route path={'/dashboard'} component={Dashboard}/>
                     </Switch>
                 </Router>
             </>

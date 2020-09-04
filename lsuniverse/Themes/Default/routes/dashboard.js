@@ -1,5 +1,15 @@
-const routes = [
+/*
+ * Frontend application routes
+ */
+
+
+import Index from "../pages/Dashboard/Index";
+
+const DashboardRoutes = [
     {
-        name: "",
+        path: '/index',
+        component: Index
     }
-];
+]
+
+export default DashboardRoutes;

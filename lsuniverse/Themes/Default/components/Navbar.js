@@ -2,12 +2,13 @@ import React from "react";
 import {useTranslation} from "react-multi-lang";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
+import {getToken} from "../../../JSScripts/services/Auth";
 
 const Navbar = props => {
     const t = useTranslation();
     const categories = props.categories.data;
     const settings = window._settings;
-
+//TODO: make mobile version of the navbar
     return (
         <nav id="header" className="fixed w-full z-30 top-0 text-white bg-gray-900">
             <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
@@ -34,8 +35,8 @@ const Navbar = props => {
                     id="nav-content">
                     <ul className="list-reset lg:flex justify-end flex-1 items-center">
                         <li className="mr-3">
-                            <a className="inline-block py-2 px-4 text-white font-bold no-underline"
-                               href="#">{t("home.nav-home")}</a>
+                            <Link to={'/'}
+                                  className="inline-block py-2 px-4 text-white font-bold no-underline">{t("home.nav-home")}</Link>
                         </li>
                         {categories.map((category, key) => (
                             <li key={key} className="mr-3">
@@ -44,7 +45,7 @@ const Navbar = props => {
                             </li>
                         ))}
                     </ul>
-                    <Link to={"/login"} id="navAction"
+                    <Link to={getToken() ? '/dashboard' : '/login'} id="navAction"
                           className="mx-auto lg:mx-0 hover:underline _bg-light_gray text-white font-bold rounded mt-4 lg:mt-0 py-2 px-8 shadow opacity-75">
                         <i className="fas fa-user"></i> &nbsp; {t("home.auth")}
                     </Link>
