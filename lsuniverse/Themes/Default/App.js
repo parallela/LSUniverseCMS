@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Register from "./pages/Register";
+import ForgetPassword from "./pages/ForgetPassword";
 
 const App = props => {
         const t = useTranslation();
@@ -32,7 +33,7 @@ const App = props => {
 
                         <Route path={'/login'} component={Login}/>
                         <Route path={'/register'} component={Register}/>
-                        {/*<Route path={'/forgot-password'} component={''}/>*/}
+                        <Route path={'/forgot-password'} component={ForgetPassword}/>
 
                         {/*<Route path={'/main'} component={''}/>*/}
                         <Route path={'/dashboard'} component={Dashboard}/>

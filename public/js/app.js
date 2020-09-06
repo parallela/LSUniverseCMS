@@ -920,6 +920,24 @@ var getToken = function getToken() {
 
 /***/ }),
 
+/***/ "./lsuniverse/JSScripts/services/Cookies.js":
+/*!**************************************************!*\
+  !*** ./lsuniverse/JSScripts/services/Cookies.js ***!
+  \**************************************************/
+/*! exports provided: getCookie */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCookie", function() { return getCookie; });
+var getCookie = function getCookie(name) {
+  var cookies = "; ".concat(document.cookie);
+  var parts = cookies.split("; ".concat(name, "="));
+  if (parts.length === 2) return parts.pop().split(';').shift();
+};
+
+/***/ }),
+
 /***/ "./lsuniverse/JSScripts/services/RoutersRequireAuth.js":
 /*!*************************************************************!*\
   !*** ./lsuniverse/JSScripts/services/RoutersRequireAuth.js ***!
@@ -1113,6 +1131,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_Login__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/Login */ "./lsuniverse/Themes/Default/pages/Login.js");
 /* harmony import */ var _pages_Dashboard_Dashboard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/Dashboard/Dashboard */ "./lsuniverse/Themes/Default/pages/Dashboard/Dashboard.js");
 /* harmony import */ var _pages_Register__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/Register */ "./lsuniverse/Themes/Default/pages/Register.js");
+/* harmony import */ var _pages_ForgetPassword__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/ForgetPassword */ "./lsuniverse/Themes/Default/pages/ForgetPassword.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -1132,6 +1151,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 /*
 * Pages
  */
+
 
 
 
@@ -1171,6 +1191,9 @@ var App = function App(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: '/register',
     component: _pages_Register__WEBPACK_IMPORTED_MODULE_7__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+    path: '/forgot-password',
+    component: _pages_ForgetPassword__WEBPACK_IMPORTED_MODULE_8__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: '/dashboard',
     component: _pages_Dashboard_Dashboard__WEBPACK_IMPORTED_MODULE_6__["default"]
@@ -2204,6 +2227,182 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps)(Index));
+
+/***/ }),
+
+/***/ "./lsuniverse/Themes/Default/pages/ForgetPassword.js":
+/*!***********************************************************!*\
+  !*** ./lsuniverse/Themes/Default/pages/ForgetPassword.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _JSScripts_services_Auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../JSScripts/services/Auth */ "./lsuniverse/JSScripts/services/Auth.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _assets_img_logo_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../assets/img/logo.png */ "./lsuniverse/Themes/Default/assets/img/logo.png");
+/* harmony import */ var _assets_img_logo_png__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_assets_img_logo_png__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_alerts_Alert_Message__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/alerts/Alert_Message */ "./lsuniverse/Themes/Default/components/alerts/Alert_Message.js");
+/* harmony import */ var _JSScripts_services_Cookies__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../JSScripts/services/Cookies */ "./lsuniverse/JSScripts/services/Cookies.js");
+/* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-multi-lang */ "./node_modules/react-multi-lang/lib/index.js");
+/* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_multi_lang__WEBPACK_IMPORTED_MODULE_7__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+var ForgetPassword = function ForgetPassword(props) {
+  var t = Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_7__["useTranslation"])();
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      errors = _useState2[0],
+      setError = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      serverError = _useState4[0],
+      setServerError = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      message = _useState6[0],
+      setMessage = _useState6[1];
+
+  var cookie = document.cookie;
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      loading = _useState8[0],
+      setLoading = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+      _useState10 = _slicedToArray(_useState9, 2),
+      email = _useState10[0],
+      setEmail = _useState10[1];
+
+  var data = {
+    step: Object(_JSScripts_services_Cookies__WEBPACK_IMPORTED_MODULE_6__["getCookie"])('forget_password_step'),
+    payload: {
+      email: email
+    }
+  };
+
+  var _handleSubmit = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function _handleSubmit() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    var date = new Date(); // Set "password steps" cookie to expire after an hour
+
+    date.setTime(date.getTime() + 1 * 60 * 60 * 1000); // Create step cookie
+
+    document.cookie = "forget_password_step=1; expires=".concat(date.toUTCString());
+  }, []);
+  return !Object(_JSScripts_services_Auth__WEBPACK_IMPORTED_MODULE_2__["getToken"])() ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: " flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-8 lg:px-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "max-w-xs w-full"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+    className: "mx-auto h-24 w-auto",
+    src: _assets_img_logo_png__WEBPACK_IMPORTED_MODULE_4___default.a,
+    alt: "Workflow"
+  }), errors.length !== 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_alerts_Alert_Message__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    type: "error",
+    data: errors
+  }), serverError.length !== 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_alerts_Alert_Message__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    type: "server_error",
+    data: serverError
+  }), message.length !== 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_alerts_Alert_Message__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    type: "success",
+    data: message
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
+    className: "mt-6 text-center text-3xl leading-9 font-extrabold text-white"
+  }, t("home.forget-password"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+    onSubmit: _handleSubmit,
+    className: "mt-8",
+    action: "#",
+    method: "POST"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    type: "hidden",
+    name: "remember",
+    value: "true"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "rounded-md shadow-sm"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    "aria-label": "Email address",
+    name: "email",
+    type: "email",
+    required: true,
+    className: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5",
+    placeholder: "Email address",
+    onChange: function onChange(e) {
+      return setEmail(e.target.value);
+    }
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "mt-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    type: "submit",
+    className: "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white _bg-light_gray hover:bg-gray-800 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out",
+    disabled: loading
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+    className: "absolute left-0 inset-y-0 flex items-center pl-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("svg", {
+    className: "h-5 w-5 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150",
+    fill: "currentColor",
+    viewBox: "0 0 20 20"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("path", {
+    fillRule: "evenodd",
+    d: "M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z",
+    clipRule: "evenodd"
+  }))), !loading ? t("auth.reset-button") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+    className: "fas fa-circle-notch fa-spin"
+  })))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Redirect"], {
+    to: '/'
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ForgetPassword);
 
 /***/ }),
 
