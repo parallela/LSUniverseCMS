@@ -30,9 +30,10 @@ class PasswordController extends Controller
             'email' => 'required|email',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->first()], 400);
-        }
+//        if ($validator->fails()) {
+//            return response()->json(['error' => $validator->errors()->first()], 400);
+//        }
+        // DJEKI TI SI MOITO MOMCHE <3
 
         $email = $request->only('email');
         $user = User::where('email', $email)->first();

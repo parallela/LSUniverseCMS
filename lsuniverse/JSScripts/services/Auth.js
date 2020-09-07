@@ -3,6 +3,7 @@ import {_networkUserGet} from "../network/Network_UserGet";
 
 
 export const getUser = async () => {
+    if (getToken() === null || getToken() === undefined) return false;
     const req = await _networkUserGet();
     if (req.status !== 200) {
         localStorage.removeItem('auth_token');

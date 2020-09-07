@@ -1,34 +1,89 @@
 import React, {useState, useEffect} from "react";
 import {getToken} from "../../../JSScripts/services/Auth";
-import {Link, Redirect} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import Logo from "../assets/img/logo.png";
 import Alert_Message from "../components/alerts/Alert_Message";
 import {getCookie} from "../../../JSScripts/services/Cookies";
 import {useTranslation} from "react-multi-lang";
+import {connect} from "react-redux";
+import {Action_Changepassword} from "../../../JSScripts/reducers/actions/Action_Changepassword";
 
 const ForgetPassword = props => {
     const t = useTranslation();
+    const token = new URLSearchParams(window.location.search).get('token');
+
     const [errors, setError] = useState([]);
     const [serverError, setServerError] = useState([]);
+
     const [message, setMessage] = useState([]);
-    const cookie = document.cookie;
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
-    const data = {step: getCookie('forget_password_step'), payload: {email}};
+    const [password, setPassword] = useState("");
+    const [rePassword, setRePassword] = useState("");
+    const [step, setStep] = useState(1);
+    const date = new Date();
+    const data = {email: email, password: password, re_password: rePassword}
 
-    const _handleSubmit = async () => {
+    const _handleSubmit = async (e) => {
+        e.preventDefault();
+
+        setLoading(true);
+        const change_pw = props.Action_Changepassword(data, step)
+            .then(res => {
+                // There's server error here.
+                if (res.status === 500 || res.status >= 511) {
+                    setServerError({"server": res.statusText});
+                    setTimeout(() => {
+                        setServerError("");
+                    }, 5000);
+
+                    setLoading(false);
+                    return false;
+                }
+                // If there's no any server errors or etc. We can continue with response as json format
+                return res.json();
+            });
+
+        const res = await change_pw;
+
+
+        if (res) {
+            setLoading(false);
+            if (res.errors) {
+                setErrors(res.errors);
+
+                // Remove errors after 5 seconds
+                setTimeout(() => {
+                    setErrors("");
+                }, 5000)
+
+                return false;
+            }
+            if (res.message == "valid") {
+                setStep(2);
+                setMessage({"success-reset-password": t("auth.reset-password-success")})
+
+                return true;
+            } else {
+                // The response is not the same as the api suppose to return
+                throw new Error(t("app.invalid-response"));
+            }
+
+        }
+
 
     }
 
+    // Set "password steps" cookie to expire after an hour
+    date.setTime(date.getTime() + (1 * 60 * 60 * 1000));
+
+
     useEffect(() => {
-        let date = new Date();
-
-        // Set "password steps" cookie to expire after an hour
-        date.setTime(date.getTime() + (1 * 60 * 60 * 1000));
-
         // Create step cookie
-        document.cookie = `forget_password_step=1; expires=${date.toUTCString()}`
+        document.cookie = `forget_password_step=1; expires=${date.toUTCString()}; SameSite=None; Secure`;
 
+
+        setStep(getCookie('forget_password_step'));
     }, [])
 
     return !getToken() ? (
@@ -78,4 +133,4 @@ const ForgetPassword = props => {
     ) : <Redirect to={'/'}/>
 }
 
-export default ForgetPassword
+export default connect(null, {Action_Changepassword})(ForgetPassword);

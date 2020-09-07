@@ -64,7 +64,6 @@ const Login = props => {
 
         }
     }
-
     return !getToken() ? (
         <>
             <div className=" flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-8 lg:px-8">
@@ -97,10 +96,10 @@ const Login = props => {
 
                         <div className="mt-6 flex items-center justify-between">
                             <div className="text-sm leading-5">
-                                <a href="#"
-                                   className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                                <Link to={'/forget-password'}
+                                      className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
                                     {t("auth.reset-button")}
-                                </a>
+                                </Link>
                             </div>
 
                             <div className="text-sm leading-5">

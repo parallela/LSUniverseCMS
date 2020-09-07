@@ -33,7 +33,7 @@ const App = props => {
 
                         <Route path={'/login'} component={Login}/>
                         <Route path={'/register'} component={Register}/>
-                        <Route path={'/forgot-password'} component={ForgetPassword}/>
+                        <Route path={'/forget-password'} component={ForgetPassword}/>
 
                         {/*<Route path={'/main'} component={''}/>*/}
                         <Route path={'/dashboard'} component={Dashboard}/>

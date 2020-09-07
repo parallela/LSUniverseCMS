@@ -136,7 +136,7 @@ body {font-family: 'Muli', sans-serif;}
   <tbody>
     <tr>
       <td style="font-size:6px; line-height:10px; padding:0px 0px 0px 0px;" valign="top" align="center">
-        <img class="max-width" border="0" style="display:block; color:#000000; text-decoration:none; font-family:Helvetica, arial, sans-serif; font-size:16px;" width="150" height="60" alt="" data-proportionally-constrained="true" data-responsive="false" src="http://lsuniversecms.test/images/logo.png" height="27">
+        <img class="max-width" border="0" style="display:block; color:#000000; text-decoration:none; font-family:Helvetica, arial, sans-serif; font-size:16px;" width="85" height="85" alt="" data-proportionally-constrained="true" data-responsive="false" src="{{ asset(env('APP_URL').'/images/logo.png') }}">
       </td>
     </tr>
   </tbody>
@@ -173,10 +173,10 @@ body {font-family: 'Muli', sans-serif;}
           <table border="0" cellpadding="0" cellspacing="0" class="wrapper-mobile" style="text-align:center;">
             <tbody>
               <tr>
-              <td align="center" bgcolor="#ffbe00" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
-<div style="font-family: inherit; text-align: center"><span style="color: #52c8fb; font-size: 18px"><strong>Key &nbsp;</strong></span></div> 
+              <td align="center" bgcolor="#34406c" class="inner-td" style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
+<div style="font-family: inherit; text-align: center"><span style="color: #34406c; font-size: 18px"><strong>Reset link: &nbsp;</strong></span></div>
                   <br />
-                 <input disabled type="text" size="32" value="{{ $key }}"/> 
+                  <a href="{{ env('APP_URL').'/forget-password?token='.$key }}">Click here to reset your password</a>
                  <br />
                  <div style="font-family: inherit; text-align: center">If you don't know what is this, please ignore this email or delete it!</div>
               </td>
@@ -199,7 +199,7 @@ body {font-family: 'Muli', sans-serif;}
             </tr>
           </tbody>
         </table>
-        
+
       </td>
     </tr>
   </tbody>
@@ -237,6 +237,6 @@ body {font-family: 'Muli', sans-serif;}
         </tbody></table>
       </div>
     </center>
-  
+
 
 </body></html>

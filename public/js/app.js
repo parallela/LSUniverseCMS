@@ -192,6 +192,128 @@ var _networkLoginUser = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./lsuniverse/JSScripts/network/Network_PasswordRecover.js":
+/*!*****************************************************************!*\
+  !*** ./lsuniverse/JSScripts/network/Network_PasswordRecover.js ***!
+  \*****************************************************************/
+/*! exports provided: _networkPasswordFirstStep, _networkPasswordSecondStep, _networkPasswordFinalStep */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkPasswordFirstStep", function() { return _networkPasswordFirstStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkPasswordSecondStep", function() { return _networkPasswordSecondStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkPasswordFinalStep", function() { return _networkPasswordFinalStep; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var _networkPasswordFirstStep = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
+    var rawResponse;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return fetch("/api/user/password/forget/generate", {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+            });
+
+          case 2:
+            rawResponse = _context.sent;
+            return _context.abrupt("return", rawResponse);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function _networkPasswordFirstStep(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+var _networkPasswordSecondStep = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(data) {
+    var rawResponse;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return fetch('/api/user/password/forget/check', {
+              method: 'POST',
+              headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+            });
+
+          case 2:
+            rawResponse = _context2.sent;
+            return _context2.abrupt("return", rawResponse);
+
+          case 4:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+
+  return function _networkPasswordSecondStep(_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+var _networkPasswordFinalStep = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(data) {
+    var rawResponse;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.next = 2;
+            return fetch('/api/user/password/forget/change', {
+              method: 'POST',
+              headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+            });
+
+          case 2:
+            rawResponse = _context3.sent;
+            return _context3.abrupt("return", rawResponse);
+
+          case 4:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+
+  return function _networkPasswordFinalStep(_x3) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+
 /***/ "./lsuniverse/JSScripts/network/Network_RegisterUser.js":
 /*!**************************************************************!*\
   !*** ./lsuniverse/JSScripts/network/Network_RegisterUser.js ***!
@@ -356,6 +478,17 @@ var initialState = {
 
   return state;
 });
+
+/***/ }),
+
+/***/ "./lsuniverse/JSScripts/reducers/Reducer_Changepassword.js":
+/*!*****************************************************************!*\
+  !*** ./lsuniverse/JSScripts/reducers/Reducer_Changepassword.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
 
 /***/ }),
 
@@ -598,6 +731,138 @@ var Action_Categories = function Action_Categories(dispatch) {
 
 /***/ }),
 
+/***/ "./lsuniverse/JSScripts/reducers/actions/Action_Changepassword.js":
+/*!************************************************************************!*\
+  !*** ./lsuniverse/JSScripts/reducers/actions/Action_Changepassword.js ***!
+  \************************************************************************/
+/*! exports provided: Action_Changepassword */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Action_Changepassword", function() { return Action_Changepassword; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _network_Network_PasswordRecover__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../network/Network_PasswordRecover */ "./lsuniverse/JSScripts/network/Network_PasswordRecover.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+var FirstStep = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
+    var req;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return Object(_network_Network_PasswordRecover__WEBPACK_IMPORTED_MODULE_1__["_networkPasswordFirstStep"])(data);
+
+          case 2:
+            req = _context.sent;
+            _context.next = 5;
+            return req;
+
+          case 5:
+            return _context.abrupt("return", _context.sent);
+
+          case 6:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function FirstStep(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+var SecondStep = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(data) {
+    var req;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return Object(_network_Network_PasswordRecover__WEBPACK_IMPORTED_MODULE_1__["_networkPasswordSecondStep"])(data);
+
+          case 2:
+            req = _context2.sent;
+            _context2.next = 5;
+            return req;
+
+          case 5:
+            return _context2.abrupt("return", _context2.sent);
+
+          case 6:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+
+  return function SecondStep(_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+var ThirdStep = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(data) {
+    var req;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.next = 2;
+            return Object(_network_Network_PasswordRecover__WEBPACK_IMPORTED_MODULE_1__["_networkPasswordFinalStep"])(data);
+
+          case 2:
+            req = _context3.sent;
+            _context3.next = 5;
+            return req;
+
+          case 5:
+            return _context3.abrupt("return", _context3.sent);
+
+          case 6:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+
+  return function ThirdStep(_x3) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+
+var Action_Changepassword = function Action_Changepassword(data, step) {
+  return function (dispatch) {
+    var method = FirstStep(data);
+
+    switch (step) {
+      case 2:
+        method = SecondStep(data);
+
+      case 3:
+        method = ThirdStep(data);
+    }
+
+    return method;
+  };
+};
+
+/***/ }),
+
 /***/ "./lsuniverse/JSScripts/reducers/actions/Action_Login.js":
 /*!***************************************************************!*\
   !*** ./lsuniverse/JSScripts/reducers/actions/Action_Login.js ***!
@@ -763,6 +1028,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Reducer_Categories__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Reducer_Categories */ "./lsuniverse/JSScripts/reducers/Reducer_Categories.js");
 /* harmony import */ var _Reducer_Login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Reducer_Login */ "./lsuniverse/JSScripts/reducers/Reducer_Login.js");
 /* harmony import */ var _Reducer_Register__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Reducer_Register */ "./lsuniverse/JSScripts/reducers/Reducer_Register.js");
+/* harmony import */ var _Reducer_Changepassword__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Reducer_Changepassword */ "./lsuniverse/JSScripts/reducers/Reducer_Changepassword.js");
+/* harmony import */ var _Reducer_Changepassword__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_Reducer_Changepassword__WEBPACK_IMPORTED_MODULE_5__);
+
 
 
 
@@ -772,7 +1040,8 @@ var allReducers = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   user: _Reducer_User__WEBPACK_IMPORTED_MODULE_1__["default"],
   categories: _Reducer_Categories__WEBPACK_IMPORTED_MODULE_2__["default"],
   login: _Reducer_Login__WEBPACK_IMPORTED_MODULE_3__["default"],
-  register: _Reducer_Register__WEBPACK_IMPORTED_MODULE_4__["default"]
+  register: _Reducer_Register__WEBPACK_IMPORTED_MODULE_4__["default"],
+  changepassword: _Reducer_Changepassword__WEBPACK_IMPORTED_MODULE_5___default.a
 });
 /* harmony default export */ __webpack_exports__["default"] = (allReducers);
 
@@ -886,23 +1155,31 @@ var getUser = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.next = 2;
-            return Object(_network_Network_UserGet__WEBPACK_IMPORTED_MODULE_2__["_networkUserGet"])();
+            if (!(getToken() === null || getToken() === undefined)) {
+              _context.next = 2;
+              break;
+            }
+
+            return _context.abrupt("return", false);
 
           case 2:
+            _context.next = 4;
+            return Object(_network_Network_UserGet__WEBPACK_IMPORTED_MODULE_2__["_networkUserGet"])();
+
+          case 4:
             req = _context.sent;
 
             if (req.status !== 200) {
               localStorage.removeItem('auth_token');
             }
 
-            _context.next = 6;
+            _context.next = 8;
             return req.json();
 
-          case 6:
+          case 8:
             return _context.abrupt("return", _context.sent);
 
-          case 7:
+          case 9:
           case "end":
             return _context.stop();
         }
@@ -1192,7 +1469,7 @@ var App = function App(props) {
     path: '/register',
     component: _pages_Register__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-    path: '/forgot-password',
+    path: '/forget-password',
     component: _pages_ForgetPassword__WEBPACK_IMPORTED_MODULE_8__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: '/dashboard',
@@ -2251,6 +2528,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _JSScripts_services_Cookies__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../JSScripts/services/Cookies */ "./lsuniverse/JSScripts/services/Cookies.js");
 /* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-multi-lang */ "./node_modules/react-multi-lang/lib/index.js");
 /* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_multi_lang__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _JSScripts_reducers_actions_Action_Changepassword__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../JSScripts/reducers/actions/Action_Changepassword */ "./lsuniverse/JSScripts/reducers/actions/Action_Changepassword.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2277,8 +2556,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 var ForgetPassword = function ForgetPassword(props) {
   var t = Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_7__["useTranslation"])();
+  var token = new URLSearchParams(window.location.search).get('token');
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -2295,8 +2577,6 @@ var ForgetPassword = function ForgetPassword(props) {
       message = _useState6[0],
       setMessage = _useState6[1];
 
-  var cookie = document.cookie;
-
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState8 = _slicedToArray(_useState7, 2),
       loading = _useState8[0],
@@ -2307,19 +2587,94 @@ var ForgetPassword = function ForgetPassword(props) {
       email = _useState10[0],
       setEmail = _useState10[1];
 
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+      _useState12 = _slicedToArray(_useState11, 2),
+      password = _useState12[0],
+      setPassword = _useState12[1];
+
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
+      _useState14 = _slicedToArray(_useState13, 2),
+      rePassword = _useState14[0],
+      setRePassword = _useState14[1];
+
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(1),
+      _useState16 = _slicedToArray(_useState15, 2),
+      step = _useState16[0],
+      setStep = _useState16[1];
+
+  var date = new Date();
   var data = {
-    step: Object(_JSScripts_services_Cookies__WEBPACK_IMPORTED_MODULE_6__["getCookie"])('forget_password_step'),
-    payload: {
-      email: email
-    }
+    email: email,
+    password: password,
+    re_password: rePassword
   };
 
   var _handleSubmit = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+      var change_pw, res;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              e.preventDefault();
+              setLoading(true);
+              change_pw = props.Action_Changepassword(data, step).then(function (res) {
+                // There's server error here.
+                if (res.status === 500 || res.status >= 511) {
+                  setServerError({
+                    "server": res.statusText
+                  });
+                  setTimeout(function () {
+                    setServerError("");
+                  }, 5000);
+                  setLoading(false);
+                  return false;
+                } // If there's no any server errors or etc. We can continue with response as json format
+
+
+                return res.json();
+              });
+              _context.next = 5;
+              return change_pw;
+
+            case 5:
+              res = _context.sent;
+
+              if (!res) {
+                _context.next = 19;
+                break;
+              }
+
+              setLoading(false);
+
+              if (!res.errors) {
+                _context.next = 12;
+                break;
+              }
+
+              setErrors(res.errors); // Remove errors after 5 seconds
+
+              setTimeout(function () {
+                setErrors("");
+              }, 5000);
+              return _context.abrupt("return", false);
+
+            case 12:
+              if (!(res.message == "valid")) {
+                _context.next = 18;
+                break;
+              }
+
+              setStep(2);
+              setMessage({
+                "success-reset-password": t("auth.reset-password-success")
+              });
+              return _context.abrupt("return", true);
+
+            case 18:
+              throw new Error(t("app.invalid-response"));
+
+            case 19:
             case "end":
               return _context.stop();
           }
@@ -2327,17 +2682,17 @@ var ForgetPassword = function ForgetPassword(props) {
       }, _callee);
     }));
 
-    return function _handleSubmit() {
+    return function _handleSubmit(_x) {
       return _ref.apply(this, arguments);
     };
-  }();
+  }(); // Set "password steps" cookie to expire after an hour
 
+
+  date.setTime(date.getTime() + 1 * 60 * 60 * 1000);
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    var date = new Date(); // Set "password steps" cookie to expire after an hour
-
-    date.setTime(date.getTime() + 1 * 60 * 60 * 1000); // Create step cookie
-
-    document.cookie = "forget_password_step=1; expires=".concat(date.toUTCString());
+    // Create step cookie
+    document.cookie = "forget_password_step=1; expires=".concat(date.toUTCString(), "; SameSite=None; Secure");
+    setStep(Object(_JSScripts_services_Cookies__WEBPACK_IMPORTED_MODULE_6__["getCookie"])('forget_password_step'));
   }, []);
   return !Object(_JSScripts_services_Auth__WEBPACK_IMPORTED_MODULE_2__["getToken"])() ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: " flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-8 lg:px-8"
@@ -2402,7 +2757,9 @@ var ForgetPassword = function ForgetPassword(props) {
   });
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (ForgetPassword);
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_8__["connect"])(null, {
+  Action_Changepassword: _JSScripts_reducers_actions_Action_Changepassword__WEBPACK_IMPORTED_MODULE_9__["Action_Changepassword"]
+})(ForgetPassword));
 
 /***/ }),
 
@@ -2666,8 +3023,8 @@ var Login = function Login(props) {
     className: "mt-6 flex items-center justify-between"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "text-sm leading-5"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-    href: "#",
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    to: '/forget-password',
     className: "font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
   }, t("auth.reset-button"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "text-sm leading-5"
