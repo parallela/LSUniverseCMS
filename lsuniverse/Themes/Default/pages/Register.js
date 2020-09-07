@@ -84,7 +84,6 @@ const Register = props => {
                         </h2>
                     </div>
                     <form onSubmit={_handleSubmit} className="mt-8" action="#" method="POST">
-                        <input type="hidden" name="remember" value="true"/>
                         <div className="rounded-md shadow-sm">
                             <div>
                                 <input aria-label="Email address" name="email" type="email" required

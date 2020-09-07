@@ -47,22 +47,6 @@ class PasswordController extends Controller
     }
 
     /**
-     * forget
-     *
-     * @param mixed $request
-     * @return void
-     */
-    public function forget_valid(Request $request)
-    {
-        $token_input = $request->only('token');
-        $token = DB::table('forget_passwords')->where('reset_token', $token_input)->first();
-        if ($token !== null) {
-            return response()->json(['message' => 'token_valid']);
-        }
-        return response()->json(['errors' => ['inv_token' => 'invalid_token']], 400);
-    }
-
-    /**
      * change_forget_password
      *
      * @param mixed $request
@@ -75,11 +59,10 @@ class PasswordController extends Controller
             'password' => ['required', 'regex:/^(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/'],
             're_password' => ['required', 'same:password'],
         ]);
-
-//        if ($validator->fails()) {
-//            return response()->json(['error' => $validator->errors()->first()], 400);
-//        }
-// DJeki e tuka
+// DJKEI FIX THAT MY BOY <3 U KNOW I LOVE YOU <3
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first()], 400);
+        }
         $user_data = User::userByForgetPasswordToken($request->input('token'))->first();
 
         if ($user_data === null) {

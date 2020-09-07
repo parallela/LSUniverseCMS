@@ -11,23 +11,11 @@ const FirstStep = async (data) => {
 
 
 const SecondStep = async (data) => {
-    const req = await _networkPasswordSecondStep(data);
-    return await req;
-}
-
-const ThirdStep = async (data) => {
     const req = await _networkPasswordFinalStep(data);
     return await req;
 }
 
-export const Action_Changepassword = (data, step) => dispatch => {
-    let method = FirstStep(data);
-    switch (step) {
-        case 2:
-            method = SecondStep(data);
-        case 3:
-            method = ThirdStep(data);
-    }
 
-    return method;
+export const Action_Changepassword = (data, step) => dispatch => {
+    return step===2 ? SecondStep(data) : FirstStep(data);
 }

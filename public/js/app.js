@@ -196,13 +196,12 @@ var _networkLoginUser = /*#__PURE__*/function () {
 /*!*****************************************************************!*\
   !*** ./lsuniverse/JSScripts/network/Network_PasswordRecover.js ***!
   \*****************************************************************/
-/*! exports provided: _networkPasswordFirstStep, _networkPasswordSecondStep, _networkPasswordFinalStep */
+/*! exports provided: _networkPasswordFirstStep, _networkPasswordFinalStep */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkPasswordFirstStep", function() { return _networkPasswordFirstStep; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkPasswordSecondStep", function() { return _networkPasswordSecondStep; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkPasswordFinalStep", function() { return _networkPasswordFinalStep; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -245,7 +244,7 @@ var _networkPasswordFirstStep = /*#__PURE__*/function () {
     return _ref.apply(this, arguments);
   };
 }();
-var _networkPasswordSecondStep = /*#__PURE__*/function () {
+var _networkPasswordFinalStep = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(data) {
     var rawResponse;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
@@ -253,7 +252,7 @@ var _networkPasswordSecondStep = /*#__PURE__*/function () {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
-            return fetch('/api/user/password/forget/check', {
+            return fetch('/api/user/password/forget/change', {
               method: 'POST',
               headers: {
                 "Accept": "application/json",
@@ -274,41 +273,8 @@ var _networkPasswordSecondStep = /*#__PURE__*/function () {
     }, _callee2);
   }));
 
-  return function _networkPasswordSecondStep(_x2) {
+  return function _networkPasswordFinalStep(_x2) {
     return _ref2.apply(this, arguments);
-  };
-}();
-var _networkPasswordFinalStep = /*#__PURE__*/function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(data) {
-    var rawResponse;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-      while (1) {
-        switch (_context3.prev = _context3.next) {
-          case 0:
-            _context3.next = 2;
-            return fetch('/api/user/password/forget/change', {
-              method: 'POST',
-              headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify(data)
-            });
-
-          case 2:
-            rawResponse = _context3.sent;
-            return _context3.abrupt("return", rawResponse);
-
-          case 4:
-          case "end":
-            return _context3.stop();
-        }
-      }
-    }, _callee3);
-  }));
-
-  return function _networkPasswordFinalStep(_x3) {
-    return _ref3.apply(this, arguments);
   };
 }();
 
@@ -791,7 +757,7 @@ var SecondStep = /*#__PURE__*/function () {
         switch (_context2.prev = _context2.next) {
           case 0:
             _context2.next = 2;
-            return Object(_network_Network_PasswordRecover__WEBPACK_IMPORTED_MODULE_1__["_networkPasswordSecondStep"])(data);
+            return Object(_network_Network_PasswordRecover__WEBPACK_IMPORTED_MODULE_1__["_networkPasswordFinalStep"])(data);
 
           case 2:
             req = _context2.sent;
@@ -814,50 +780,9 @@ var SecondStep = /*#__PURE__*/function () {
   };
 }();
 
-var ThirdStep = /*#__PURE__*/function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(data) {
-    var req;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-      while (1) {
-        switch (_context3.prev = _context3.next) {
-          case 0:
-            _context3.next = 2;
-            return Object(_network_Network_PasswordRecover__WEBPACK_IMPORTED_MODULE_1__["_networkPasswordFinalStep"])(data);
-
-          case 2:
-            req = _context3.sent;
-            _context3.next = 5;
-            return req;
-
-          case 5:
-            return _context3.abrupt("return", _context3.sent);
-
-          case 6:
-          case "end":
-            return _context3.stop();
-        }
-      }
-    }, _callee3);
-  }));
-
-  return function ThirdStep(_x3) {
-    return _ref3.apply(this, arguments);
-  };
-}();
-
 var Action_Changepassword = function Action_Changepassword(data, step) {
   return function (dispatch) {
-    var method = FirstStep(data);
-
-    switch (step) {
-      case 2:
-        method = SecondStep(data);
-
-      case 3:
-        method = ThirdStep(data);
-    }
-
-    return method;
+    return step === 2 ? SecondStep(data) : FirstStep(data);
   };
 };
 
@@ -2565,7 +2490,7 @@ var ForgetPassword = function ForgetPassword(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = _slicedToArray(_useState, 2),
       errors = _useState2[0],
-      setError = _useState2[1];
+      setErrors = _useState2[1];
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -2606,7 +2531,8 @@ var ForgetPassword = function ForgetPassword(props) {
   var data = {
     email: email,
     password: password,
-    re_password: rePassword
+    re_password: rePassword,
+    token: token
   };
 
   var _handleSubmit = /*#__PURE__*/function () {
@@ -2641,7 +2567,7 @@ var ForgetPassword = function ForgetPassword(props) {
               res = _context.sent;
 
               if (!res) {
-                _context.next = 19;
+                _context.next = 18;
                 break;
               }
 
@@ -2660,21 +2586,32 @@ var ForgetPassword = function ForgetPassword(props) {
               return _context.abrupt("return", false);
 
             case 12:
-              if (!(res.message == "valid")) {
-                _context.next = 18;
+              if (!(res.message == "valid" || res.message == "success")) {
+                _context.next = 17;
                 break;
               }
 
-              setStep(2);
-              setMessage({
-                "success-reset-password": t("auth.reset-password-success")
-              });
+              // Check current step
+              if (step === 2) {
+                setMessage({
+                  "success-reset-password": t("auth.password-changed")
+                }); // Redirect to login page after 3 seconds
+
+                setTimeout(function () {
+                  window.location.href = '/login';
+                }, 3000);
+              } else {
+                setMessage({
+                  "success-send-email": t("auth.reset-password-success")
+                });
+              }
+
               return _context.abrupt("return", true);
 
-            case 18:
+            case 17:
               throw new Error(t("app.invalid-response"));
 
-            case 19:
+            case 18:
             case "end":
               return _context.stop();
           }
@@ -2685,15 +2622,11 @@ var ForgetPassword = function ForgetPassword(props) {
     return function _handleSubmit(_x) {
       return _ref.apply(this, arguments);
     };
-  }(); // Set "password steps" cookie to expire after an hour
+  }();
 
-
-  date.setTime(date.getTime() + 1 * 60 * 60 * 1000);
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    // Create step cookie
-    document.cookie = "forget_password_step=1; expires=".concat(date.toUTCString(), "; SameSite=None; Secure");
-    setStep(Object(_JSScripts_services_Cookies__WEBPACK_IMPORTED_MODULE_6__["getCookie"])('forget_password_step'));
-  }, []);
+    token ? setStep(2) : setStep(1);
+  }, [token]);
   return !Object(_JSScripts_services_Auth__WEBPACK_IMPORTED_MODULE_2__["getToken"])() ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: " flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-8 lg:px-8"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -2718,13 +2651,11 @@ var ForgetPassword = function ForgetPassword(props) {
     className: "mt-8",
     action: "#",
     method: "POST"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-    type: "hidden",
-    name: "remember",
-    value: "true"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "rounded-md shadow-sm"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+  }, step === 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "firstStep"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
     "aria-label": "Email address",
     name: "email",
     type: "email",
@@ -2734,7 +2665,35 @@ var ForgetPassword = function ForgetPassword(props) {
     onChange: function onChange(e) {
       return setEmail(e.target.value);
     }
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })), step === 2 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "secondStep"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "mt-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    "aria-label": "password",
+    name: "password",
+    type: "password",
+    required: true,
+    className: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5",
+    minLength: 8,
+    placeholder: "Repeat the new password",
+    onChange: function onChange(e) {
+      return setPassword(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "mt-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+    "aria-label": "password",
+    name: "repassword",
+    type: "password",
+    required: true,
+    className: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5",
+    minLength: 8,
+    placeholder: "Repeat the new password",
+    onChange: function onChange(e) {
+      return setRePassword(e.target.value);
+    }
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "mt-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
     type: "submit",
@@ -3262,11 +3221,7 @@ var Register = function Register(props) {
     className: "mt-8",
     action: "#",
     method: "POST"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-    type: "hidden",
-    name: "remember",
-    value: "true"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "rounded-md shadow-sm"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
     "aria-label": "Email address",
