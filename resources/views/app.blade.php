@@ -32,7 +32,18 @@
 <div id="root"></div>
 
 <!-- Global site settings -->
-<script>var _settings = {!! json_encode($s) !!} </script>
+@section('scripts')
+<script>
+    var _settings = {!! json_encode($s) !!}
+    var _env = {
+        GLOBAL_URL: '{{ env('APP_URL') }}',
+        CDN_ENDPOINT: '{{ env('CDN_URL') }}',
+    }
+    var _apiRoutes = {!! json_encode($api_routers) !!}
+</script>
+@show
+
+
 <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

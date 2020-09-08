@@ -1,7 +1,8 @@
 import {getToken} from "../services/Auth";
+import {getRoute} from "../services/Route";
 
 export const _networkCreateTicket = async (data) => {
-    const rawResponse = await fetch('/api/user/tickets/create', {
+    const rawResponse = await fetch(getRoute('create_user_ticket'), {
         method: 'POST',
         headers: {
             'Accept': 'applicaiton/json',
@@ -14,8 +15,8 @@ export const _networkCreateTicket = async (data) => {
     return rawResponse;
 }
 
-export const _networkCreateTicketAnswer = async (data) => {
-    const rawResponse = await fetch(`/api/user/tickets/create/${props.ticketID}`, {
+export const _networkCreateTicketAnswer = async (data, id) => {
+    const rawResponse = await fetch(getRoute('create_user_ticket_answer', {id: id}), {
         method: 'POST',
         headers: {
             'Accept': 'application/json',

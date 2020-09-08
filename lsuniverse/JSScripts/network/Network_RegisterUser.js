@@ -1,5 +1,7 @@
+import {getRoute} from "../services/Route";
+
 export const _networkRegisterUser = async (data) => {
-    const rawResponse = await fetch("/api/auth/register", {
+    const rawResponse = await fetch(getRoute('register'), {
         method: "POST",
         headers: {
             Accept: "application/json",

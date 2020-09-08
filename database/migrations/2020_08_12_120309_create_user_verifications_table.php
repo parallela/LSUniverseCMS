@@ -20,7 +20,7 @@ class CreateUserVerificationsTable extends Migration
             $table->timestamps();
         });
         Schema::table('user_verifications', function(Blueprint $table) {
-                $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+                $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
         });
     }
 

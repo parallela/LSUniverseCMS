@@ -25,26 +25,26 @@ Route::group(['middleware' => 'api', 'prefix' => 'user'], function ($router) {
     Route::post('password/change', 'Backend\PasswordController@change_password')->name('change_password');
 
    Route::group(['middleware'=>'api', 'prefix'=>'update'] , function ($router) {
-      Route::post('/details', 'Backend\UserController@update_user_details');
+      Route::post('/details', 'Backend\UserController@update_user_details')->name('user_details');
    });
 
    Route::group(['middleware'=>'api', 'prefix'=>'tickets'], function ($router) {
-      Route::post('/create', 'Backend\TicketsController@create');
-      Route::post('/delete/{id}', 'Backend\TicketsController@delete');
-      Route::post('/update/{id}', 'Backend\TicketsController@update');
-      Route::post('/create/{id}', 'Backend\TicketsController@add_answer');
-      Route::get('/show/{id}', 'Backend\TicketsController@show');
-      Route::get('/', 'Backend\TicketsController@list');
+      Route::post('/create', 'Backend\TicketsController@create')->name('create_user_ticket');
+      Route::post('/delete/{id}', 'Backend\TicketsController@delete')->name('delete_user_ticket');
+      Route::post('/update/{id}', 'Backend\TicketsController@update')->name('update_user_ticket');
+      Route::post('/create/{id}', 'Backend\TicketsController@add_answer')->name('create_user_ticket_answer');
+      Route::get('/show/{id}', 'Backend\TicketsController@show')->name('show_user_ticket');
+      Route::get('/', 'Backend\TicketsController@list')->name('get_user_tickets');
 
    });
 
-   Route::get('services', 'Backend\UserController@get_user_services');
+   Route::get('services', 'Backend\UserController@get_user_services')->name('get_user_services');
 });
 Route::group(['middleware' => ['api','isadmin'], 'prefix'=>'admin'], function ($router) {
-    Route::post('addons/create', 'Backend\Admin\AddonController@create');
-    Route::get('addons/list', 'Backend\Admin\AddonController@list');
+    Route::post('addons/create', 'Backend\Admin\AddonController@create')->name('create_addon');
+    Route::get('addons/list', 'Backend\Admin\AddonController@list')->name('show_addons');
 });
 
-Route::get('departments/list', 'Backend\DepartmentsController@list')->middleware('api');
-Route::get('site/settings','IndexController@siteSettings')->middleware('api');
-Route::get('site/categories', 'Backend\CategoriesController@list');
+Route::get('departments/list', 'Backend\DepartmentsController@list')->middleware('api')->name('site_departments');
+Route::get('site/settings','IndexController@siteSettings')->middleware('api')->name('site_settings');
+Route::get('site/categories', 'Backend\CategoriesController@list')->name('site_categories');

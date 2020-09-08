@@ -138,7 +138,7 @@ class User extends Authenticatable implements JWTSubject
 
         $user = DB::table('forget_passwords')
             ->where('reset_token', $token)
-            ->join('users', 'users.id', '=', 'forget_passwords.user_id');
+            ->join('user', 'user.id', '=', 'forget_passwords.user_id');
 
         if ($token === null) {
             throw new Exception('Invalid token on userByForgetPasswordToken function');

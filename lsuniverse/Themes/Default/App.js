@@ -11,6 +11,8 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Register from "./pages/Register";
 import ForgetPassword from "./pages/ForgetPassword";
+import VerifyUser from "./misc/VerifyUser";
+import {getRoute} from "../../JSScripts/services/Route";
 
 const App = props => {
         const t = useTranslation();
@@ -34,8 +36,8 @@ const App = props => {
                         <Route path={'/login'} component={Login}/>
                         <Route path={'/register'} component={Register}/>
                         <Route path={'/forget-password'} component={ForgetPassword}/>
+                        <Route path={'/verify'} component={VerifyUser}/>
 
-                        {/*<Route path={'/main'} component={''}/>*/}
                         <Route path={'/dashboard'} component={Dashboard}/>
                     </Switch>
                 </Router>

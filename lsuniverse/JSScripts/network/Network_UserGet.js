@@ -1,7 +1,8 @@
 import {getToken} from "../services/Auth";
+import {getRoute} from "../services/Route";
 
 export const _networkUserGet = async () => {
-    const rawResponse = await fetch('/api/auth/me', {
+    const rawResponse = await fetch(getRoute('me'), {
         method: "GET",
         headers: {
             "Accept": "application/json",

@@ -32,6 +32,6 @@ class VerificationController extends Controller
             return response()->json(['errors'=>["inv_val_token"=>'Invalid validation token']], 400);
         }
 
-        return response()->json(['message' => 'Verified']);
+        return response()->json(['message' => 'verified']);
     }
 }

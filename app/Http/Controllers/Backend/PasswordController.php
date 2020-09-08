@@ -74,7 +74,7 @@ class PasswordController extends Controller
         }
 
         User::userByForgetPasswordToken($request->input('token'))->update([
-            'users.password' => Hash::make($request->input('password')),
+            'user.password' => Hash::make($request->input('password')),
         ]);
         DB::table('forget_passwords')->where('reset_token', $request->input('token'))->delete();
 

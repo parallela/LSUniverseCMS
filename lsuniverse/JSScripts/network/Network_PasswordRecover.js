@@ -1,5 +1,7 @@
+import {getRoute} from "../services/Route";
+
 export const _networkPasswordFirstStep = async (data) => {
-    const rawResponse = await fetch("/api/user/password/forget/generate", {
+    const rawResponse = await fetch(getRoute('forget_generate'), {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -10,7 +12,7 @@ export const _networkPasswordFirstStep = async (data) => {
     return rawResponse;
 }
 export const _networkPasswordFinalStep = async (data) => {
-    const rawResponse = await fetch('/api/user/password/forget/change', {
+    const rawResponse = await fetch(getRoute('forget_change'), {
         method: 'POST',
         headers: {
             "Accept": "application/json",

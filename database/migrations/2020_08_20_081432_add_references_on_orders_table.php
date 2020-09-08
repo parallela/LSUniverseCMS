@@ -15,7 +15,7 @@ class AddReferencesOnOrdersTable extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
         });
     }
 

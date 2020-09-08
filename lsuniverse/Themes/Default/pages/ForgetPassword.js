@@ -59,7 +59,7 @@ const ForgetPassword = props => {
 
                 return false;
             }
-            if (res.message == "valid" || res.message == "success") {
+            if (res.message === "valid" || res.message === "success") {
                 // Check current step
                 if (step === 2) {
                     setMessage({"success-reset-password": t("auth.password-changed")})
