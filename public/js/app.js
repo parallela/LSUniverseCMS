@@ -1690,6 +1690,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _JSScripts_services_Auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../JSScripts/services/Auth */ "./lsuniverse/JSScripts/services/Auth.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -1699,7 +1711,21 @@ __webpack_require__.r(__webpack_exports__);
 var Navbar = function Navbar(props) {
   var t = Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_1__["useTranslation"])();
   var categories = props.categories.data;
-  var settings = window._settings; //TODO: make mobile version of the navbar
+  var settings = window._settings; // State of mobile navbar
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
+      _useState2 = _slicedToArray(_useState, 2),
+      hidden = _useState2[0],
+      setHidden = _useState2[1];
+
+  var _turnOnMobileNavbar = function _turnOnMobileNavbar(e) {
+    setHidden(false);
+
+    if (!hidden) {
+      setHidden(true);
+    }
+  }; //TODO: make mobile version of the navbar
+
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
     id: "header",
@@ -1718,15 +1744,19 @@ var Navbar = function Navbar(props) {
     className: "block lg:hidden pr-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     id: "nav-toggle",
-    className: "flex items-center p-1"
+    className: "flex items-center p-1",
+    onClick: _turnOnMobileNavbar
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
     className: "fill-current h-6 w-6",
     viewBox: "0 0 20 20",
     xmlns: "http://www.w3.org/2000/svg"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("title", null, "Menu"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("title", null, "Menu"), hidden && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     d: "M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"
+  }), !hidden && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    fill: "#fffff",
+    d: "M15.898,4.045c-0.271-0.272-0.713-0.272-0.986,0l-4.71,4.711L5.493,4.045c-0.272-0.272-0.714-0.272-0.986,0s-0.272,0.714,0,0.986l4.709,4.711l-4.71,4.711c-0.272,0.271-0.272,0.713,0,0.986c0.136,0.136,0.314,0.203,0.492,0.203c0.179,0,0.357-0.067,0.493-0.203l4.711-4.711l4.71,4.711c0.137,0.136,0.314,0.203,0.494,0.203c0.178,0,0.355-0.067,0.492-0.203c0.273-0.273,0.273-0.715,0-0.986l-4.711-4.711l4.711-4.711C16.172,4.759,16.172,4.317,15.898,4.045z"
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-white lg:bg-transparent text-white p-4 lg:p-0 z-20",
+    className: "w-full flex-grow lg:flex lg:items-center lg:w-auto lg:block mt-2 ".concat(hidden ? 'hidden' : '', " lg:mt-0 lg:bg-transparent text-white p-4 lg:p-0 z-20"),
     id: "nav-content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "list-reset lg:flex justify-end flex-1 items-center"
@@ -1738,7 +1768,7 @@ var Navbar = function Navbar(props) {
   }, t("home.nav-home"))), categories.map(function (category, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
       key: key,
-      className: "mr-3"
+      className: "mr-3 lg:mb-0 mb-4"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
       className: "inline-block py-2 px-4 text-white font-bold no-underline",
       to: "/page/".concat(category.slug)
@@ -1746,7 +1776,7 @@ var Navbar = function Navbar(props) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: Object(_JSScripts_services_Auth__WEBPACK_IMPORTED_MODULE_4__["getToken"])() ? '/dashboard/index' : '/login',
     id: "navAction",
-    className: "mx-auto lg:mx-0 hover:underline _bg-light_gray text-white font-bold rounded mt-4 lg:mt-0 py-2 px-8 shadow opacity-75"
+    className: "mx-auto lg:mx-0 hover:underline _bg-light_gray text-white font-bold rounded mt-24 lg:mt-0 py-2 px-8 shadow opacity-75"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "fas fa-user"
   }), " \xA0 ", t("home.auth")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
