@@ -19,12 +19,11 @@ import App from "../Themes/Default/App";
 */
 import {initTranslator} from "./translation/translate";
 import {applyMiddleware, createStore} from "redux";
-import ReduxThunk from "redux-thunk";
+import thunk from "redux-thunk";
 import allReducers from "./reducers/index";
 import {Provider} from "react-redux";
-import {Action_User} from "./reducers/actions/Action_User";
+import {Action_GetUserCounters, Action_User} from "./reducers/actions/Action_User";
 import {Action_Categories} from "./reducers/actions/Action_Categories";
-import {Action_Login} from "./reducers/actions/Action_Login";
 
 if (document.getElementById("root")) {
     /*
@@ -38,7 +37,7 @@ if (document.getElementById("root")) {
     /*
      * Store reducer data and dispatch actions
      */
-    const mainAppData = createStore(allReducers, applyMiddleware(ReduxThunk))
+    const mainAppData = createStore(allReducers, applyMiddleware(thunk))
     mainAppData.dispatch(Action_User);
     mainAppData.dispatch(Action_Categories)
     /*

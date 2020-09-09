@@ -17,7 +17,6 @@ const Navbar = props => {
             setHidden(true);
         }
     }
-//TODO: make mobile version of the navbar
     return (
         <nav id="header" className="fixed w-full z-30 top-0 text-white bg-gray-900">
             <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">

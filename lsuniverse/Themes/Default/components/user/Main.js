@@ -4,6 +4,7 @@ import {useTranslation} from "react-multi-lang";
 const Main = props => {
     const t = useTranslation();
     const userData = props.userData;
+    const counters = props.userCounters;
 
     return (
         <div className="flex-1">
@@ -23,8 +24,9 @@ const Main = props => {
                                 </svg>
                             </div>
                             <div className="px-2">
-                                <span className="text-gray-700 font-bold">2 Active Services.</span>
-                                <span className="text-gray-700 text-sm block">1 expiring soon.</span>
+                                <span
+                                    className="text-gray-700 font-bold">{counters.services} {t('user.active-services')}</span>
+                                <span className="text-gray-700 text-sm block">{t('home.click-to-open')}.</span>
                             </div>
                         </div>
                     </div>
@@ -39,8 +41,9 @@ const Main = props => {
                                 </svg>
                             </div>
                             <div className="px-2">
-                                <span className="text-gray-700 font-bold">1 Open ticket.</span>
-                                <span className="text-gray-700 text-sm block">Click to open.</span>
+                                <span
+                                    className="text-gray-700 font-bold">{counters.tickets} {t('user.open-tickets')} </span>
+                                <span className="text-gray-700 text-sm block">{t('home.click-to-open')}.</span>
                             </div>
                         </div>
                     </div>
@@ -55,13 +58,13 @@ const Main = props => {
                                 </svg>
                             </div>
                             <div className="px-2">
-                                <span className="text-gray-700 font-bold">1 Open ticket.</span>
-                                <span className="text-gray-700 text-sm block">Click to open.</span>
+                                <span className="text-gray-700 font-bold">TODO {t('user.invoices')}</span>
+                                <span className="text-gray-700 text-sm block">{t('home.click-to-open')}.</span>
                             </div>
                         </div>
                     </div>
                     <div className="flex flex-wrap w-full md:w-1/3 px-2">
-                        <div className="w-full font-bold my-4">Recent Invoices</div>
+                        <div className="w-full font-bold my-4">{t('home.recent')} {t('user.active-services')}</div>
                         <div className="flex flex-wrap w-full rounded bg-white shadow-md p-2">
                             <ul className="text-gray-700 text-sm w-full">
                                 <li className="my-2 border-b-2 ">Lorem, ipsum dolor.</li>
@@ -73,7 +76,7 @@ const Main = props => {
                         </div>
                     </div>
                     <div className="flex flex-wrap w-full md:w-1/3 px-2">
-                        <div className="w-full font-bold my-4">Recent Tickets</div>
+                        <div className="w-full font-bold my-4">{t('home.recent')} {t('user.tickets')}</div>
                         <div className="flex flex-wrap w-full rounded bg-white shadow-md p-2">
                             <ul className="text-gray-700 text-sm w-full">
                                 <li className="my-2 border-b-2 ">Lorem, ipsum dolor.</li>
@@ -85,7 +88,7 @@ const Main = props => {
                         </div>
                     </div>
                     <div className="flex flex-wrap w-full md:w-1/3 px-2">
-                        <div className="w-full font-bold my-4">Recent Invoices</div>
+                        <div className="w-full font-bold my-4">{t('home.recent')} {t('user.invoices')}</div>
                         <div className="flex flex-wrap w-full rounded bg-white shadow-md p-2">
                             <ul className="text-gray-700 text-sm w-full">
                                 <li className="my-2 border-b-2 ">Lorem, ipsum dolor.</li>

@@ -1,8 +1,8 @@
 import {getToken} from "../services/Auth";
 import {getRoute} from "../services/Route";
 
-export const _networkGetTicketAnswers = async (id) => {
-    const rawResponse = await fetch(getRoute('show_user_ticket', {id: id}), {
+export const _networkGetUserTickets = async () => {
+    const rawResponse = await fetch(getRoute('get_user_tickets'), {
         method: 'GET',
         headers: {
             'Accept': "application/json",
