@@ -2,22 +2,22 @@
 
 namespace LSUniverse\Core;
 
-class Routers extends \Route
+class Routers
 {
     /**
      * @return \Illuminate\Routing\Route[]
      */
     public static function getApiRoutes()
     {
-        $routes = self::getRoutes()->get();
+        $routes = \Route::getRoutes();
         $api_routes = [];
-
-        for ($i = 0; $i < count($routes); $i++) {
-            if (substr($routes[$i]->uri(), 0, 3) === "api") {
-                $api_routes[$routes[$i]->getName()] = env('APP_URL').'/'.$routes[$i]->uri();
+        // Loop through all of the routes
+        foreach ($routes as $route) {
+            // Check if its API route
+            if (substr($route->uri(), 0, 3) === "api") {
+                $api_routes[$route->getName()] = env('APP_URL') . '/' . $route->uri();
             }
         }
-
         return $api_routes;
     }
 }

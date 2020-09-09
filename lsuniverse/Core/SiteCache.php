@@ -26,19 +26,4 @@ class SiteCache
         return true;
     }
 
-    /**
-     * @return bool
-     */
-    static public function initRoutersCache()
-    {
-        Cache::remember('api_routes', now()->addHour(1), function () {
-            $routes = Routers::getApiRoutes();
-
-
-            return $routes;
-        });
-
-
-        return true;
-    }
 }
