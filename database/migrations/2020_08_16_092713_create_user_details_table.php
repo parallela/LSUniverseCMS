@@ -25,7 +25,7 @@ class CreateUserDetailsTable extends Migration
             $table->boolean('mailing_list')->default(0);
         });
         Schema::table('user_details', function(Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

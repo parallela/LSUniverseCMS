@@ -15,7 +15,7 @@ class AddReferencesToTicketAnswersTable extends Migration
     {
         Schema::table('ticket_answers', function (Blueprint $table) {
             $table->foreign('ticket_id')->references('id')->on('tickets')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

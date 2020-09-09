@@ -23,7 +23,7 @@ class CreateTicketsTable extends Migration
         });
 
         Schema::table('tickets', function (Blueprint $table) {
-           $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
+           $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

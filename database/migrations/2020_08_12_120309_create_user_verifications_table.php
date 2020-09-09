@@ -19,8 +19,8 @@ class CreateUserVerificationsTable extends Migration
             $table->string('token');
             $table->timestamps();
         });
-        Schema::table('user_verifications', function(Blueprint $table) {
-                $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
+        Schema::table('user_verifications', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
