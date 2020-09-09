@@ -5,6 +5,7 @@ const Main = props => {
     const t = useTranslation();
     const userData = props.userData;
     const counters = props.userCounters;
+    const userAltData = props.userAltData;
 
     return (
         <div className="flex-1">
@@ -67,11 +68,16 @@ const Main = props => {
                         <div className="w-full font-bold my-4">{t('home.recent')} {t('user.active-services')}</div>
                         <div className="flex flex-wrap w-full rounded bg-white shadow-md p-2">
                             <ul className="text-gray-700 text-sm w-full">
-                                <li className="my-2 border-b-2 ">Lorem, ipsum dolor.</li>
-                                <li className="my-2 border-b-2 ">Lorem, ipsum dolor.</li>
-                                <li className="my-2 border-b-2 ">Lorem, ipsum dolor.</li>
-                                <li className="my-2 border-b-2 ">Lorem, ipsum dolor.</li>
-                                <li className="my-2">Lorem, ipsum dolor.</li>
+                                {userAltData.services.length === 0 ? (<li>No active services</li>) : null}
+                                {/*TODO: wrap that in link tag
+                                         ZA DJEKI: PREDI DA PRAVISH KAKVITO I DA E PROMENI
+                                         PUSNI npm run watch za da se obnovqt failovete zashtoto inache nqma da baca <3
+                                         - Lubomir
+                                */}
+                                {userAltData.services.map((ticket, key) => (
+                                    <li key={key} className="my-2 border-b-2 ">{ticket.name}</li>
+                                ))}
+
                             </ul>
                         </div>
                     </div>
@@ -79,11 +85,11 @@ const Main = props => {
                         <div className="w-full font-bold my-4">{t('home.recent')} {t('user.tickets')}</div>
                         <div className="flex flex-wrap w-full rounded bg-white shadow-md p-2">
                             <ul className="text-gray-700 text-sm w-full">
-                                <li className="my-2 border-b-2 ">Lorem, ipsum dolor.</li>
-                                <li className="my-2 border-b-2 ">Lorem, ipsum dolor.</li>
-                                <li className="my-2 border-b-2 ">Lorem, ipsum dolor.</li>
-                                <li className="my-2 border-b-2 ">Lorem, ipsum dolor.</li>
-                                <li className="my-2">Lorem, ipsum dolor.</li>
+                                {userAltData.tickets.length === 0 ? (<li>No recent tickets</li>) : null}
+                                {/*TODO: wrap that in link tag */}
+                                {userAltData.tickets.map((ticket, key) => (
+                                    <li key={key} className="my-2 border-b-2 ">{ticket.name}</li>
+                                ))}
                             </ul>
                         </div>
                     </div>

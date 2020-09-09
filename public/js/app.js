@@ -2541,6 +2541,7 @@ var Main = function Main(props) {
   var t = Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_1__["useTranslation"])();
   var userData = props.userData;
   var counters = props.userCounters;
+  var userAltData = props.userAltData;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "flex-1"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2626,17 +2627,12 @@ var Main = function Main(props) {
     className: "flex flex-wrap w-full rounded bg-white shadow-md p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "text-gray-700 text-sm w-full"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "my-2 border-b-2 "
-  }, "Lorem, ipsum dolor."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "my-2 border-b-2 "
-  }, "Lorem, ipsum dolor."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "my-2 border-b-2 "
-  }, "Lorem, ipsum dolor."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "my-2 border-b-2 "
-  }, "Lorem, ipsum dolor."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "my-2"
-  }, "Lorem, ipsum dolor.")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, userAltData.services.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "No active services") : null, userAltData.services.map(function (ticket, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: key,
+      className: "my-2 border-b-2 "
+    }, ticket.name);
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "flex flex-wrap w-full md:w-1/3 px-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-full font-bold my-4"
@@ -2644,17 +2640,12 @@ var Main = function Main(props) {
     className: "flex flex-wrap w-full rounded bg-white shadow-md p-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "text-gray-700 text-sm w-full"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "my-2 border-b-2 "
-  }, "Lorem, ipsum dolor."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "my-2 border-b-2 "
-  }, "Lorem, ipsum dolor."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "my-2 border-b-2 "
-  }, "Lorem, ipsum dolor."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "my-2 border-b-2 "
-  }, "Lorem, ipsum dolor."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "my-2"
-  }, "Lorem, ipsum dolor.")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, userAltData.tickets.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "No recent tickets") : null, userAltData.tickets.map(function (ticket, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: key,
+      className: "my-2 border-b-2 "
+    }, ticket.name);
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "flex flex-wrap w-full md:w-1/3 px-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-full font-bold my-4"
@@ -2995,6 +2986,7 @@ var Index = function Index(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "flex flex-wrap flex-col-reverse md:flex-row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_user_Sidebar__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_user_Main__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    userAltData: userAltData,
     userData: userData,
     userCounters: {
       tickets: ticketsCounter,

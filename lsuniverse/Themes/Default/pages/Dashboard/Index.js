@@ -32,7 +32,7 @@ const Index = props => {
             <div className="container mx-auto mt-6 mb-48">
                 <div className="flex flex-wrap flex-col-reverse md:flex-row">
                     <Sidebar/>
-                    <Main userData={userData} userCounters={{tickets: ticketsCounter, services: servicesCounter}}/>
+                    <Main userAltData={userAltData} userData={userData} userCounters={{tickets: ticketsCounter, services: servicesCounter}}/>
                 </div>
 
             </div>
