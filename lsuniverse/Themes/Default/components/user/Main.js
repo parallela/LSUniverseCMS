@@ -1,5 +1,7 @@
 import React from "react";
 import {useTranslation} from "react-multi-lang";
+import {Link} from "react-router-dom";
+import PropTypes from "prop-types";
 
 const Main = props => {
     const t = useTranslation();
@@ -69,8 +71,12 @@ const Main = props => {
                         <div className="flex flex-wrap w-full rounded bg-white shadow-md p-2">
                             <ul className="text-gray-700 text-sm w-full">
                                 {userAltData.services.length === 0 ? (<li>No active services</li>) : null}
-                                {userAltData.services.map((ticket, key) => (
-                                    <li key={key} className="my-2 border-b-2 ">{ticket.name}</li>
+                                {userAltData.services.map((service, key) => (
+                                    <li key={key} className="my-2 border-b-2 ">
+                                        <Link to={`/dashboard/services/${service.id}`}>>
+                                            {service.name}
+                                        </Link>
+                                    </li>
                                 ))}
                             </ul>
                         </div>
@@ -82,7 +88,8 @@ const Main = props => {
                                 {userAltData.tickets.length === 0 ? (<li>No recent tickets</li>) : null}
                                 {/*TODO: wrap that in link tag */}
                                 {userAltData.tickets.map((ticket, key) => (
-                                    <li key={key} className="my-2 border-b-2 ">{ticket.name}</li>
+                                    <li key={key} className="my-2 border-b-2 "><Link
+                                        to={`/dashboard/tickets/${ticket.id}`}>{ticket.name}</Link></li>
                                 ))}
                             </ul>
                         </div>
@@ -107,3 +114,9 @@ const Main = props => {
 }
 
 export default Main;
+
+Main.propTypes = {
+    userData: PropTypes.any.isRequired,
+    userCounters: PropTypes.any.isRequired,
+    userAltData: PropTypes.any.isRequired
+}

@@ -23,8 +23,6 @@ const Index = props => {
         if (!props.userAltData.loading) {
             setTicketsCounter(userAltData.tickets.length);
             setServicesCounter(userAltData.services.length);
-        } else {
-            dispatch(Action_GetUserAltData);
         }
     }, [props.userAltData.loading]);
 

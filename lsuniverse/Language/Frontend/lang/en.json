@@ -78,6 +78,7 @@
         "success-updated": "Your information was updated successfully!",
         "service-name": "Service name",
         "service-price": "Service price",
+        "ticket-amount": "You have {ticket_number} tickets",
         "service-purchased": "Service purchased at",
         "order-id": "Order ID",
         "service-expire_at": "Service Expire at",
