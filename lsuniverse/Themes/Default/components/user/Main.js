@@ -64,24 +64,18 @@ const Main = props => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-wrap w-full md:w-1/3 px-2">
+                    <div className="flex flex-col flex-wrap w-full md:w-1/3 px-2">
                         <div className="w-full font-bold my-4">{t('home.recent')} {t('user.active-services')}</div>
                         <div className="flex flex-wrap w-full rounded bg-white shadow-md p-2">
                             <ul className="text-gray-700 text-sm w-full">
                                 {userAltData.services.length === 0 ? (<li>No active services</li>) : null}
-                                {/*TODO: wrap that in link tag
-                                         ZA DJEKI: PREDI DA PRAVISH KAKVITO I DA E PROMENI
-                                         PUSNI npm run watch za da se obnovqt failovete zashtoto inache nqma da baca <3
-                                         - Lubomir
-                                */}
                                 {userAltData.services.map((ticket, key) => (
                                     <li key={key} className="my-2 border-b-2 ">{ticket.name}</li>
                                 ))}
-
                             </ul>
                         </div>
                     </div>
-                    <div className="flex flex-wrap w-full md:w-1/3 px-2">
+                    <div className="flex flex-wrap flex-col w-full md:w-1/3 px-2">
                         <div className="w-full font-bold my-4">{t('home.recent')} {t('user.tickets')}</div>
                         <div className="flex flex-wrap w-full rounded bg-white shadow-md p-2">
                             <ul className="text-gray-700 text-sm w-full">
@@ -93,7 +87,7 @@ const Main = props => {
                             </ul>
                         </div>
                     </div>
-                    <div className="flex flex-wrap w-full md:w-1/3 px-2">
+                    <div className="flex flex-wrap w-full flex-col md:w-1/3 px-2">
                         <div className="w-full font-bold my-4">{t('home.recent')} {t('user.invoices')}</div>
                         <div className="flex flex-wrap w-full rounded bg-white shadow-md p-2">
                             <ul className="text-gray-700 text-sm w-full">

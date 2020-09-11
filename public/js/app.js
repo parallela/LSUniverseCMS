@@ -2620,7 +2620,7 @@ var Main = function Main(props) {
   }, "TODO ", t('user.invoices')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "text-gray-700 text-sm block"
   }, t('home.click-to-open'), ".")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "flex flex-wrap w-full md:w-1/3 px-2"
+    className: "flex flex-col flex-wrap w-full md:w-1/3 px-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-full font-bold my-4"
   }, t('home.recent'), " ", t('user.active-services')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2633,7 +2633,7 @@ var Main = function Main(props) {
       className: "my-2 border-b-2 "
     }, ticket.name);
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "flex flex-wrap w-full md:w-1/3 px-2"
+    className: "flex flex-wrap flex-col w-full md:w-1/3 px-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-full font-bold my-4"
   }, t('home.recent'), " ", t('user.tickets')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2646,7 +2646,7 @@ var Main = function Main(props) {
       className: "my-2 border-b-2 "
     }, ticket.name);
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "flex flex-wrap w-full md:w-1/3 px-2"
+    className: "flex flex-wrap w-full flex-col md:w-1/3 px-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-full font-bold my-4"
   }, t('home.recent'), " ", t('user.invoices')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
