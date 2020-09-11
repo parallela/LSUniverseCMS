@@ -9,15 +9,17 @@ const Dashboard = () => {
             <RoutersRequireAuth path={'/dashboard'}>
                 {DashboardRoutes.map((route, key) => {
                     return route.component ? (
+
                         <Route
                             key={key}
                             exact={true}
                             path={`/dashboard${route.path}`}
                             render={props => <route.component {...props} />}
                         />
+
                     ) : null
                 })}
-                <Redirect to={'/dashboard/index'} />
+                <Redirect to={'/dashboard/index'}/>
             </RoutersRequireAuth>
         </Switch>
     )

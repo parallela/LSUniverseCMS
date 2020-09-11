@@ -1,8 +1,19 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Logo from "../assets/img/logo.png";
-import {useTranslation} from "react-multi-lang";
+import LoadingStrings from "../misc/LoadingStrings";
 
 const Loading = props => {
+    const [string, setString] = useState("");
+    const getRandomInt = (min, max) => {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min
+    }
+
+    useEffect(() => {
+        setString(LoadingStrings[getRandomInt(0, LoadingStrings.length)]);
+    }, [])
+
 
     return (
         <>
@@ -15,7 +26,7 @@ const Loading = props => {
                             <i className="fa-3x fas fa-circle-notch fa-spin"></i>
 
                         </h2>
-                        <p className="text-center">Loading...</p>
+                        <p className="text-center">{string}</p>
                     </div>
                 </div>
             </div>

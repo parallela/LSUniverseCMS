@@ -5,6 +5,7 @@ import {connect, useDispatch} from "react-redux"
 import Sidebar from "../../components/user/Sidebar";
 import Main from "../../components/user/Main";
 import {Action_GetUserAltData} from "../../../../JSScripts/reducers/actions/Action_User";
+import UserLayout from "../../containers/UserLayout";
 
 const Index = props => {
     const t = useTranslation()
@@ -29,13 +30,10 @@ const Index = props => {
 
     return (
         <HomeLayout>
-            <div className="container mx-auto mt-6 mb-48">
-                <div className="flex flex-wrap flex-col-reverse md:flex-row">
-                    <Sidebar/>
-                    <Main userAltData={userAltData} userData={userData} userCounters={{tickets: ticketsCounter, services: servicesCounter}}/>
-                </div>
-
-            </div>
+            <UserLayout>
+                <Main userAltData={userAltData} userData={userData}
+                      userCounters={{tickets: ticketsCounter, services: servicesCounter}}/>
+            </UserLayout>
         </HomeLayout>
     );
 }

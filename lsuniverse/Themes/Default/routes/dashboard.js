@@ -4,11 +4,18 @@
 
 
 import Index from "../pages/Dashboard/Index";
-
+import Tickets from "../pages/Dashboard/Tickets";
+// TODO: Make multilang route names
 const DashboardRoutes = [
     {
         path: '/index',
-        component: Index
+        component: Index,
+        name: "Home"
+    },
+    {
+        path: '/tickets',
+        component: Tickets,
+        name: "Tickets"
     }
 ]
 
