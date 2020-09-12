@@ -60,6 +60,7 @@
         "reset-key-invalid": "Your key is invalid, please make sure you copied it correctly!",
         "password-changed": "Password was changed, successfully",
         "password-notchanged": "We have a problem with changing your password, please try again later!",
+        "logout": "Logout",
         "account-verified": "Account was verified successfuly!",
         "account-verification-failed": "Account was not verified, please try again!"
     },
@@ -70,6 +71,8 @@
         "active-services": "Active Services",
         "tickets": "Tickets",
         "invoices": "Invoices",
+        "ticket-answers": "Ticket answers",
+        "no-ticket-replies": "There's no current replies",
         "last-tickets": "Last Tickets",
         "balance": "Balance",
         "user-address-1": "Address 1",

@@ -1,5 +1,9 @@
 const mix = require('laravel-mix');
 
+ /*
+  * Add tailwindcss framework to our components
+  */
+require('mix-tailwindcss')
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,4 +15,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.react('resources/js/app.js', 'public/js');
+mix
+    .react('resources/js/app.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css')
+    .tailwind()
+;

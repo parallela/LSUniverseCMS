@@ -24,8 +24,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
           integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
           crossorigin="anonymous"/>
-    <link rel="stylesheet" href="{{ asset('/assets/css/styles.css') }}"/>
-    <link rel="stylesheet" href="https://unpkg.com/tailwindcss/dist/tailwind.min.css">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}" type="text/css">
 </head>
 <body class="leading-normal tracking-normal text-white bg-gray-900">
 <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -33,14 +32,14 @@
 
 <!-- Global site settings -->
 @section('scripts')
-<script>
-    var _settings = {!! json_encode($s) !!}
-    var _env = {
-        GLOBAL_URL: '{{ env('APP_URL') }}',
-        CDN_ENDPOINT: '{{ env('CDN_URL') }}',
-    }
-    var _apiRoutes = {!! json_encode($api_routers) !!}
-</script>
+    <script>
+        var _settings = {!! json_encode($s) !!}
+        var _env = {
+            GLOBAL_URL: '{{ env('APP_URL') }}',
+            CDN_ENDPOINT: '{{ env('CDN_URL') }}',
+        }
+        var _apiRoutes = {!! json_encode($api_routers) !!}
+    </script>
 @show
 
 

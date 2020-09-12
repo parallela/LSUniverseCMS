@@ -23,14 +23,18 @@ const Sidebar = props => {
                         <hr/>
                         <div className="mt-2">
                             <ul className="flex-row space-y-2">
-                                {DashboardRoutes.map((route, key) => (
-                                    <li className="flex-1 mr-2" key={key}>
-                                        <Link to={`/dashboard${route.path}`}
-                                              className={`text-center block border border-gray-800 ${isActive(`/dashboard${route.path}`)} rounded py-2 px-4 text-white`}>
-                                            {route.name}
-                                        </Link>
-                                    </li>
-                                ))}
+                                {DashboardRoutes.map((route, key) => {
+                                    if (route.show) {
+                                        return (
+                                            <li className="flex-1 mr-2" key={key}>
+                                                <Link to={`/dashboard${route.path}`}
+                                                      className={`text-center block border border-gray-800 ${isActive(`/dashboard${route.path}`)} rounded py-2 px-4 text-white`}>
+                                                    {route.name}
+                                                </Link>
+                                            </li>
+                                        )
+                                    }
+                                })}
                             </ul>
                         </div>
                     </div>

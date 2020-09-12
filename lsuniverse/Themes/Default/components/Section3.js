@@ -14,7 +14,7 @@ const Section3 = props => {
 
 
                 <div className="flex flex-col sm:flex-row justify-center pt-12 my-12 sm:my-4">
-
+                    {/*TODO: */}
                     <div
                         className="flex flex-col w-5/6 lg:w-1/4 mx-auto lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4">
                         <div className="flex-1 bg-white text-gray-600 rounded-t rounded-b-none overflow-hidden shadow">

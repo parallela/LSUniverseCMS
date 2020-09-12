@@ -1,6 +1,6 @@
 import React from "react";
 import {useTranslation} from "react-multi-lang";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import PropTypes from "prop-types";
 
 const Main = props => {
@@ -9,11 +9,17 @@ const Main = props => {
     const counters = props.userCounters;
     const userAltData = props.userAltData;
 
+    const Logout = () => {
+        localStorage.removeItem('auth_token')
+        window.location.href = window._env.GLOBAL_URL;
+    }
+
     return (
         <div className="flex-1">
             <div
                 className="rounded overflow-hidden shadow-lg p-4 flex flex-col justify-between leading-normal">
-                <div className="font-bold text-xl mb-2 mt-2">{t("user.welcome")} {userData.name}</div>
+                <div className="font-bold text-xl mb-2 mt-2">{t("user.welcome")} {userData.name} </div>
+                <span className="text-sm mb-4"><a onClick={Logout} href={"#"}>{t("auth.logout")}</a></span>
                 <hr/>
                 <div className="flex flex-wrap justify-between my-8">
                     <div className="flex flex-wrap w-1/2 md:w-1/3 px-2">
