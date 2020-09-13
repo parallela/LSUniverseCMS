@@ -2688,7 +2688,7 @@ var Main = function Main(props) {
       key: key,
       className: "my-2 border-b-2 "
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-      to: "/dashboard/tickets/".concat(ticket.id)
+      to: "/dashboard/ticket/".concat(ticket.id)
     }, ticket.name));
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "flex flex-wrap w-full flex-col md:w-1/3 px-2"
@@ -3180,7 +3180,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var TicketAnswers = function TicketAnswers(props) {
-  var messageDivBox = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
   var t = Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_1__["useTranslation"])();
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
@@ -3198,20 +3197,24 @@ var TicketAnswers = function TicketAnswers(props) {
   var _useParams = Object(react_router__WEBPACK_IMPORTED_MODULE_4__["useParams"])(),
       id = _useParams.id;
 
+  var messageDivBox = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+
+  var scrollToBottom = function scrollToBottom() {
+    // Scroll into the last reply
+    if (messageDivBox.current !== null) {
+      messageDivBox.current.scrollTop = messageDivBox.current.scrollHeight;
+    }
+
+    return true;
+  };
+
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     if (!props.userAltData.loading) {
       setTicket(props.userAltData.data.tickets.filter(function (t) {
         return t.id === parseInt(id);
       })[0]);
-    } // Scroll into the last reply
-
-
-    if (messageDivBox.current !== undefined) {
-      messageDivBox.current.scrollIntoView({
-        behavior: "smooth"
-      });
     }
-  }, [props.userAltData.loading, messageDivBox.current]);
+  }, [props.userAltData.loading]);
 
   var _handleSubmit = function _handleSubmit(e) {
     e.preventDefault();
@@ -3225,7 +3228,8 @@ var TicketAnswers = function TicketAnswers(props) {
     className: "font-bold text-xl mb-2 mt-2"
   }, t('user.ticket-answers'), ": ", ticket.name, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "overflow-auto h-56",
-    ref: messageDivBox
+    ref: messageDivBox,
+    onLoad: scrollToBottom
   }, ticket.answers === undefined || ticket.answers.length === 0 ? t("user.no-ticket-replies") : ticket.answers.map(function (ans, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "flex flex-wrap space-x-2 my-2",

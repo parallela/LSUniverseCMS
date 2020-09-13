@@ -6,23 +6,27 @@ import {useParams} from "react-router";
 import {connect} from "react-redux";
 
 const TicketAnswers = props => {
-    const messageDivBox = useRef();
     const t = useTranslation();
     const [reply, setReply] = useState("");
     const [ticket, setTicket] = useState([]);
 
     const user = props.user.data
     const {id} = useParams();
+    const messageDivBox = useRef(null);
+
+    const scrollToBottom = () => {
+        // Scroll into the last reply
+        if (messageDivBox.current !== null) {
+            messageDivBox.current.scrollTop = messageDivBox.current.scrollHeight;
+        }
+        return true;
+    }
 
     useEffect(() => {
         if (!props.userAltData.loading) {
             setTicket(props.userAltData.data.tickets.filter(t => t.id === parseInt(id))[0])
         }
-        // Scroll into the last reply
-        if (messageDivBox.current !== undefined) {
-            messageDivBox.current.scrollIntoView({behavior: "smooth"});
-        }
-    }, [props.userAltData.loading, messageDivBox.current]);
+    }, [props.userAltData.loading]);
 
     const _handleSubmit = e => {
         e.preventDefault();
@@ -39,7 +43,7 @@ const TicketAnswers = props => {
                             {t('user.ticket-answers')}: {ticket.name} <br/>
                         </div>
                         <hr/>
-                        <div className="overflow-auto h-56" ref={messageDivBox}>
+                        <div className="overflow-auto h-56" ref={messageDivBox} onLoad={scrollToBottom}>
                             {(ticket.answers === undefined || ticket.answers.length === 0) ? (t("user.no-ticket-replies")) : ticket.answers.map((ans, key) => (
                                 <div className="flex flex-wrap space-x-2 my-2" key={key}>
                                     <div className="max-w-full w-full lg:max-w-full">

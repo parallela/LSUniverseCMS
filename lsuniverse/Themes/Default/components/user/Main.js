@@ -95,7 +95,7 @@ const Main = props => {
                                 {/*TODO: wrap that in link tag */}
                                 {userAltData.tickets.map((ticket, key) => (
                                     <li key={key} className="my-2 border-b-2 "><Link
-                                        to={`/dashboard/tickets/${ticket.id}`}>{ticket.name}</Link></li>
+                                        to={`/dashboard/ticket/${ticket.id}`}>{ticket.name}</Link></li>
                                 ))}
                             </ul>
                         </div>
