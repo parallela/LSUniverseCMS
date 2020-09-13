@@ -1,5 +1,101 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
 
+/***/ "./lsuniverse/JSScripts/network/Network_CreateTicket.js":
+/*!**************************************************************!*\
+  !*** ./lsuniverse/JSScripts/network/Network_CreateTicket.js ***!
+  \**************************************************************/
+/*! exports provided: _networkCreateTicket, _networkCreateTicketAnswer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkCreateTicket", function() { return _networkCreateTicket; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_networkCreateTicketAnswer", function() { return _networkCreateTicketAnswer; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _services_Auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/Auth */ "./lsuniverse/JSScripts/services/Auth.js");
+/* harmony import */ var _services_Route__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/Route */ "./lsuniverse/JSScripts/services/Route.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+var _networkCreateTicket = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
+    var rawResponse;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return fetch(Object(_services_Route__WEBPACK_IMPORTED_MODULE_2__["getRoute"])('create_user_ticket'), {
+              method: 'POST',
+              headers: {
+                'Accept': 'applicaiton/json',
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer ".concat(Object(_services_Auth__WEBPACK_IMPORTED_MODULE_1__["getToken"])())
+              },
+              body: JSON.stringify(data)
+            });
+
+          case 2:
+            rawResponse = _context.sent;
+            return _context.abrupt("return", rawResponse);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function _networkCreateTicket(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+var _networkCreateTicketAnswer = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(data, id) {
+    var rawResponse;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return fetch(Object(_services_Route__WEBPACK_IMPORTED_MODULE_2__["getRoute"])('create_user_ticket_answer', {
+              id: id
+            }), {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer ".concat(Object(_services_Auth__WEBPACK_IMPORTED_MODULE_1__["getToken"])())
+              },
+              body: JSON.stringify(data)
+            });
+
+          case 2:
+            rawResponse = _context2.sent;
+            return _context2.abrupt("return", rawResponse);
+
+          case 4:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+
+  return function _networkCreateTicketAnswer(_x2, _x3) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+
 /***/ "./lsuniverse/JSScripts/network/Network_LoginUser.js":
 /*!***********************************************************!*\
   !*** ./lsuniverse/JSScripts/network/Network_LoginUser.js ***!
@@ -408,6 +504,66 @@ var registerUser = /*#__PURE__*/function () {
 var Action_Register = function Action_Register(data) {
   return function (dispatch) {
     return registerUser(data);
+  };
+};
+
+/***/ }),
+
+/***/ "./lsuniverse/JSScripts/reducers/actions/Action_Tickets.js":
+/*!*****************************************************************!*\
+  !*** ./lsuniverse/JSScripts/reducers/actions/Action_Tickets.js ***!
+  \*****************************************************************/
+/*! exports provided: Action_CreateTicket */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Action_CreateTicket", function() { return Action_CreateTicket; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _network_Network_CreateTicket__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../network/Network_CreateTicket */ "./lsuniverse/JSScripts/network/Network_CreateTicket.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+var createTicket = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data, id) {
+    var req;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return Object(_network_Network_CreateTicket__WEBPACK_IMPORTED_MODULE_1__["_networkCreateTicketAnswer"])(data, id);
+
+          case 2:
+            req = _context.sent;
+            _context.next = 5;
+            return req;
+
+          case 5:
+            return _context.abrupt("return", _context.sent);
+
+          case 6:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function createTicket(_x, _x2) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+var Action_CreateTicket = function Action_CreateTicket(data, id) {
+  return function (dispatch) {
+    return createTicket(data, id);
   };
 };
 
@@ -1927,14 +2083,25 @@ var mapStateToProps = function mapStateToProps(state) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-multi-lang */ "./node_modules/react-multi-lang/lib/index.js");
-/* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_multi_lang__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _containers_UserLayout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../containers/UserLayout */ "./lsuniverse/Themes/Default/containers/UserLayout.js");
-/* harmony import */ var _containers_HomeLayout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../containers/HomeLayout */ "./lsuniverse/Themes/Default/containers/HomeLayout.js");
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-multi-lang */ "./node_modules/react-multi-lang/lib/index.js");
+/* harmony import */ var react_multi_lang__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_multi_lang__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _containers_UserLayout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../containers/UserLayout */ "./lsuniverse/Themes/Default/containers/UserLayout.js");
+/* harmony import */ var _containers_HomeLayout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../containers/HomeLayout */ "./lsuniverse/Themes/Default/containers/HomeLayout.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _JSScripts_reducers_actions_Action_Tickets__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../JSScripts/reducers/actions/Action_Tickets */ "./lsuniverse/JSScripts/reducers/actions/Action_Tickets.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _components_alerts_Alert_Message__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/alerts/Alert_Message */ "./lsuniverse/Themes/Default/components/alerts/Alert_Message.js");
+/* harmony import */ var _JSScripts_reducers_actions_Action_User__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../JSScripts/reducers/actions/Action_User */ "./lsuniverse/JSScripts/reducers/actions/Action_User.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -1954,25 +2121,42 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var TicketAnswers = function TicketAnswers(props) {
-  var t = Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_1__["useTranslation"])();
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+
+
+var TicketAnswers = function TicketAnswers(props) {
+  var t = Object(react_multi_lang__WEBPACK_IMPORTED_MODULE_2__["useTranslation"])();
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(""),
       _useState2 = _slicedToArray(_useState, 2),
       reply = _useState2[0],
       setReply = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState4 = _slicedToArray(_useState3, 2),
       ticket = _useState4[0],
       setTicket = _useState4[1];
 
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      errors = _useState6[0],
+      setErrors = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      serverError = _useState8[0],
+      setServerError = _useState8[1];
+
+  var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_7__["useDispatch"])();
+  var data = {
+    content: reply
+  };
   var user = props.user.data;
 
-  var _useParams = Object(react_router__WEBPACK_IMPORTED_MODULE_4__["useParams"])(),
+  var _useParams = Object(react_router__WEBPACK_IMPORTED_MODULE_5__["useParams"])(),
       id = _useParams.id;
 
-  var messageDivBox = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  var messageDivBox = Object(react__WEBPACK_IMPORTED_MODULE_1__["useRef"])(null);
 
   var scrollToBottom = function scrollToBottom() {
     // Scroll into the last reply
@@ -1983,7 +2167,7 @@ var TicketAnswers = function TicketAnswers(props) {
     return true;
   };
 
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     if (!props.userAltData.loading) {
       setTicket(props.userAltData.data.tickets.filter(function (t) {
         return t.id === parseInt(id);
@@ -1991,54 +2175,132 @@ var TicketAnswers = function TicketAnswers(props) {
     }
   }, [props.userAltData.loading]);
 
-  var _handleSubmit = function _handleSubmit(e) {
-    e.preventDefault();
-  };
+  var _handleSubmit = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(e) {
+      var create_ticket, res;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              e.preventDefault();
+              create_ticket = props.Action_CreateTicket(data, ticket.id).then(function (res) {
+                // There's server error here.
+                if (res.status === 500 || res.status >= 511) {
+                  setServerError({
+                    "server": res.statusText
+                  });
+                  setTimeout(function () {
+                    setServerError("");
+                  }, 5000);
+                  return false;
+                } // If there's no any server errors or etc. We can continue with response as json format
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_HomeLayout__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_UserLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+
+                return res.json();
+              });
+              _context.next = 4;
+              return create_ticket;
+
+            case 4:
+              res = _context.sent;
+
+              if (!res) {
+                _context.next = 17;
+                break;
+              }
+
+              if (!res.errors) {
+                _context.next = 10;
+                break;
+              }
+
+              setErrors(res.errors); // Remove errors after 5 seconds
+
+              setTimeout(function () {
+                setErrors("");
+              }, 5000);
+              return _context.abrupt("return", false);
+
+            case 10:
+              if (!res.message) {
+                _context.next = 16;
+                break;
+              }
+
+              setReply("");
+              dispatch(_JSScripts_reducers_actions_Action_User__WEBPACK_IMPORTED_MODULE_9__["Action_GetUserAltData"]);
+              return _context.abrupt("return", true);
+
+            case 16:
+              throw new Error(t("app.invalid-response"));
+
+            case 17:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function _handleSubmit(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_containers_HomeLayout__WEBPACK_IMPORTED_MODULE_4__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_containers_UserLayout__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "flex-1"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "rounded  shadow-lg p-4 flex flex-col justify-between leading-normal"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "font-bold text-xl mb-2 mt-2"
-  }, t('user.ticket-answers'), ": ", ticket.name, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, t('user.ticket-answers'), ": ", ticket.name, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), errors.length !== 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_alerts_Alert_Message__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    type: "error",
+    data: errors
+  }), serverError.length !== 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_alerts_Alert_Message__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    type: "server_error",
+    data: serverError
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "overflow-auto h-56",
     ref: messageDivBox,
     onLoad: scrollToBottom
   }, ticket.answers === undefined || ticket.answers.length === 0 ? t("user.no-ticket-replies") : ticket.answers.map(function (ans, key) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "flex flex-wrap space-x-2 my-2",
       key: key
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "max-w-full w-full lg:max-w-full"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "mb-8"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
       className: "text-gray-700 text-base"
-    }, ans.content)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, ans.content)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "flex mb-2 mt-4"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
       className: "w-10 h-10 rounded-full mr-4",
       src: "https://www.gravatar.com/avatar/".concat(user.email),
       alt: "Avatar of ".concat(user.name)
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "text-sm"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
       className: "text-gray-900 leading-none"
-    }, user.id === ans.user_id ? user.name : ans.user.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    }, user.id === ans.user_id ? user.name : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+      className: "text-red-400"
+    }, ans.user.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
       className: "text-gray-600"
     }, ans.created_at))))));
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "mt-2 mb-2 lg:min-w-full text-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
-    className: "w-full text-black",
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+    className: "w-full text-black resize-y border rounded focus:outline-none focus:shadow-outline",
     onChange: function onChange(e) {
       return setReply(e.target.value);
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-2 mb-2 rounded-full"
+    },
+    value: reply
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    onClick: _handleSubmit,
+    className: "bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 mt-2 mb-2 rounded-full"
   }, t("home.reply")))))));
 };
 
@@ -2049,7 +2311,9 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["connect"])(mapStateToProps)(TicketAnswers));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_7__["connect"])(mapStateToProps, {
+  Action_CreateTicket: _JSScripts_reducers_actions_Action_Tickets__WEBPACK_IMPORTED_MODULE_6__["Action_CreateTicket"]
+})(TicketAnswers));
 
 /***/ }),
 

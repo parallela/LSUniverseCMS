@@ -1003,7 +1003,9 @@ __webpack_require__.r(__webpack_exports__);
 */
 // THEME:
 
-var App = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.lazy(function () {
+var App = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.lazy(
+/* webpackChunkName: "MainApp" */
+function () {
   return __webpack_require__("./lsuniverse/Themes lazy recursive ^\\.\\/.*\\/App$")("./".concat(window._env['THEME'], "/App"));
 });
 /*

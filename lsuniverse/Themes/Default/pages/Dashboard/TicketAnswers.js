@@ -3,12 +3,19 @@ import {useTranslation} from "react-multi-lang";
 import UserLayout from "../../containers/UserLayout";
 import HomeLayout from "../../containers/HomeLayout";
 import {useParams} from "react-router";
-import {connect} from "react-redux";
+import {Action_CreateTicket} from "../../../../JSScripts/reducers/actions/Action_Tickets";
+import {connect, useDispatch} from "react-redux";
+import Alert_Message from "../../components/alerts/Alert_Message";
+import {Action_GetUserAltData} from "../../../../JSScripts/reducers/actions/Action_User";
 
 const TicketAnswers = props => {
     const t = useTranslation();
     const [reply, setReply] = useState("");
     const [ticket, setTicket] = useState([]);
+    const [errors, setErrors] = useState([]);
+    const [serverError, setServerError] = useState([]);
+    const dispatch = useDispatch();
+    const data = {content: reply};
 
     const user = props.user.data
     const {id} = useParams();
@@ -28,8 +35,48 @@ const TicketAnswers = props => {
         }
     }, [props.userAltData.loading]);
 
-    const _handleSubmit = e => {
+    const _handleSubmit = async (e) => {
         e.preventDefault();
+        const create_ticket = props.Action_CreateTicket(data, ticket.id)
+            .then(res => {
+                // There's server error here.
+                if (res.status === 500 || res.status >= 511) {
+                    setServerError({"server": res.statusText});
+                    setTimeout(() => {
+                        setServerError("");
+                    }, 5000);
+
+                    return false;
+                }
+                // If there's no any server errors or etc. We can continue with response as json format
+                return res.json();
+            });
+
+        const res = await create_ticket;
+
+
+        if (res) {
+            if (res.errors) {
+                setErrors(res.errors);
+
+                // Remove errors after 5 seconds
+                setTimeout(() => {
+                    setErrors("");
+                }, 5000)
+
+                return false;
+            }
+            if (res.message) {
+                setReply("");
+                dispatch(Action_GetUserAltData);
+
+                return true;
+            } else {
+                // The response is not the same as the api suppose to return
+                throw new Error(t("app.invalid-response"));
+            }
+
+        }
     }
 
     return (
@@ -43,6 +90,8 @@ const TicketAnswers = props => {
                             {t('user.ticket-answers')}: {ticket.name} <br/>
                         </div>
                         <hr/>
+                        {errors.length !== 0 && <Alert_Message type={"error"} data={errors}/>}
+                        {serverError.length !== 0 && <Alert_Message type={"server_error"} data={serverError}/>}
                         <div className="overflow-auto h-56" ref={messageDivBox} onLoad={scrollToBottom}>
                             {(ticket.answers === undefined || ticket.answers.length === 0) ? (t("user.no-ticket-replies")) : ticket.answers.map((ans, key) => (
                                 <div className="flex flex-wrap space-x-2 my-2" key={key}>
@@ -60,7 +109,7 @@ const TicketAnswers = props => {
                                                      src={`https://www.gravatar.com/avatar/${user.email}`}
                                                      alt={`Avatar of ${user.name}`}/>
                                                 <div className="text-sm">
-                                                    <p className="text-gray-900 leading-none">{user.id === ans.user_id ? user.name : ans.user.name}</p>
+                                                    <p className="text-gray-900 leading-none">{user.id === ans.user_id ? user.name : (<span className="text-red-400">{ans.user.name}</span> )}</p>
                                                     <p className="text-gray-600">{ans.created_at}</p>
                                                 </div>
                                             </div>
@@ -71,8 +120,9 @@ const TicketAnswers = props => {
                         </div>
                         <hr/>
                         <div className="mt-2 mb-2 lg:min-w-full text-center">
-                            <textarea className="w-full text-black" onChange={e => setReply(e.target.value)}/>
-                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-2 mb-2 rounded-full">
+                            <textarea className="w-full text-black resize-y border rounded focus:outline-none focus:shadow-outline" onChange={e => setReply(e.target.value)} value={reply}/>
+                            <button onClick={_handleSubmit}
+                                    className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 mt-2 mb-2 rounded-full">
                                 {t("home.reply")}
                             </button>
                         </div>
@@ -91,4 +141,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(TicketAnswers);
+export default connect(mapStateToProps, {Action_CreateTicket})(TicketAnswers);

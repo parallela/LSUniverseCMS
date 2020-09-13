@@ -103,7 +103,7 @@ class TicketsController extends Controller
             'updated_at' => Carbon::now()
         ]);
 
-        $lastTicketAnswer = $ticket->answers()->latest()->first();
+        $lastTicketAnswer = collect($ticket->answers()->where('user_id', \auth()->user()->id)->get())->last();
         if ($lastTicketAnswer->created_at->diffInMinutes() < 1) {
             return response()->json(['errors' => ['delay' => 'Please wait 1 minute, before another reply.']], 400);
         }

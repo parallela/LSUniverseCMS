@@ -30,3 +30,5 @@ x - finished
 [  ] Domain Resolver
 [  ] Add custom fields on clients profile area
 [  ] Calendar
+[  ] Virtual Balance
+[  ] User roles
