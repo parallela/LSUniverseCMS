@@ -87,6 +87,11 @@ class SettingsTableSeeder extends Seeder
             [
                 "key" => "description",
                 "value" => "Describe your company"
+            ],
+            [
+                "key" => "theme",
+                "value" =>
+                    "Default"
             ]
         ]);
     }

@@ -70,8 +70,11 @@ const TicketAnswers = props => {
                             ))}
                         </div>
                         <hr/>
-                        <div className="mt-2 mb-2 lg:min-w-full">
+                        <div className="mt-2 mb-2 lg:min-w-full text-center">
                             <textarea className="w-full text-black" onChange={e => setReply(e.target.value)}/>
+                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-2 mb-2 rounded-full">
+                                {t("home.reply")}
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[0],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[13],{
 
 /***/ "./lsuniverse/JSScripts/network/Network_LoginUser.js":
 /*!***********************************************************!*\
@@ -2031,15 +2031,13 @@ var TicketAnswers = function TicketAnswers(props) {
       className: "text-gray-600"
     }, ans.created_at))))));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "mt-2 mb-2 lg:min-w-full text-center"
+    className: "mt-2 mb-2 lg:min-w-full"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
     className: "w-full text-black",
     onChange: function onChange(e) {
       return setReply(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-2 mb-2 rounded-full"
-  }, t("home.reply")))))));
+  }))))));
 };
 
 var mapStateToProps = function mapStateToProps(state) {

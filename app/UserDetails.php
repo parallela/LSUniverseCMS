@@ -14,7 +14,9 @@ class UserDetails extends Model
         'region',
         'zipcode',
         'mailing_list',
-        'user_id'
+        'user_id',
+        'security_question',
+        'security_question_answer'
     ];
 
     /**

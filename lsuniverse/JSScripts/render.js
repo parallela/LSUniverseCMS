@@ -1,18 +1,17 @@
 import ReactDOM from "react-dom";
-import React from "react";
+import React, {Suspense} from "react";
 
 /*
 * Use another theme example:
 *
-* import App from "../Themes/YourThemeName/MainFile [For example: App]"
 *
-* For any theme you'll make you can use `Default` theme for template.
+* For any theme you'll make, you can use `Default` for template.
 * You can change all of the frontend logic and put your custom.
 * "All Good Things are Wild and Free!"
 * - KAPTEN & SON
 */
 // THEME:
-import App from "../Themes/Default/App";
+const App = React.lazy(() => import(`../Themes/${window._env['THEME']}/App`));
 
 /*
 * Our core imports to make app run with all of the data we needed from our api
@@ -24,6 +23,7 @@ import allReducers from "./reducers/index";
 import {Provider} from "react-redux";
 import {Action_User} from "./reducers/actions/Action_User";
 import {Action_Categories} from "./reducers/actions/Action_Categories";
+import Loading from "../Themes/Default/components/Loading";
 
 if (document.getElementById("root")) {
     /*
@@ -46,8 +46,10 @@ if (document.getElementById("root")) {
     *
     */
     ReactDOM.render(
-        <Provider store={mainAppData}>
-            <App/>
-        </Provider>
+        <Suspense fallback={<Loading/>}>
+            <Provider store={mainAppData}>
+                <App/>
+            </Provider>
+        </Suspense>
         , document.getElementById("root"));
 }

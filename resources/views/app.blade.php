@@ -37,6 +37,7 @@
         var _env = {
             GLOBAL_URL: '{{ env('APP_URL') }}',
             CDN_ENDPOINT: '{{ env('CDN_URL') }}',
+            THEME: '{{ $s['theme'] }}'
         }
         var _apiRoutes = {!! json_encode($api_routers) !!}
     </script>

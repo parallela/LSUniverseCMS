@@ -10,7 +10,7 @@ x - finished
 ~~~~
 [  ] Domain registration
 [  ] Module pages
-[  ] Themes changed in admin panel 
+[x] Themes changed in admin panel 
 [  ] Network Status
 [  ] Billing details
 [  ] Security question
