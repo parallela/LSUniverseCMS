@@ -6,6 +6,7 @@
 import Index from "../pages/Dashboard/Index";
 import Tickets from "../pages/Dashboard/Tickets";
 import TicketAnswers from "../pages/Dashboard/TicketAnswers";
+import Billing from "../pages/Dashboard/Billling";
 // TODO: Make multilang route names
 const DashboardRoutes = [
     {
@@ -25,6 +26,12 @@ const DashboardRoutes = [
         component: TicketAnswers,
         name: "Show ticket",
         static: false,
+    },
+    {
+        path: '/billing',
+        component: Billing,
+        name: "Billing details",
+        show: true
     }
 
 ]

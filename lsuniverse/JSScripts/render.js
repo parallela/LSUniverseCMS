@@ -11,7 +11,7 @@ import React, {Suspense} from "react";
 * - KAPTEN & SON
 */
 // THEME:
-const App = React.lazy(/* webpackChunkName: "MainApp" */() => import(`../Themes/${window._env['THEME']}/App`));
+const App = React.lazy(() => import(/* webpackChunkName: "MainApp" */`../Themes/${window._env['THEME']}/App`));
 
 /*
 * Our core imports to make app run with all of the data we needed from our api

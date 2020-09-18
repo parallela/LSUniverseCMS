@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"vendors~MainApp0":"vendors~MainApp0","MainApp0":"MainApp0"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -1003,9 +1003,7 @@ __webpack_require__.r(__webpack_exports__);
 */
 // THEME:
 
-var App = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.lazy(
-/* webpackChunkName: "MainApp" */
-function () {
+var App = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.lazy(function () {
   return __webpack_require__("./lsuniverse/Themes lazy recursive ^\\.\\/.*\\/App$")("./".concat(window._env['THEME'], "/App"));
 });
 /*
@@ -1266,8 +1264,8 @@ var defaultLanguage = "en";
 var map = {
 	"./Default/App": [
 		"./lsuniverse/Themes/Default/App.js",
-		1,
-		0
+		"vendors~MainApp0",
+		"MainApp0"
 	]
 };
 function webpackAsyncContext(req) {
