@@ -11,10 +11,10 @@ import React, {Suspense} from "react";
 * - KAPTEN & SON
 */
 // THEME:
-const App = React.lazy(() => import(/* webpackChunkName: "MainApp" */`../Themes/${window._env['THEME']}/App`));
+const App = React.lazy(() => import(/* webpackChunkName: "LSUniverseChunk" */`../Themes/${window._env['THEME']}/App`));
 
 /*
-* Our core imports to make app run with all of the data we needed from our api
+* Our core imports to make app run with all of the data we need from our api
 */
 import {initTranslator} from "./translation/translate";
 import {applyMiddleware, createStore} from "redux";

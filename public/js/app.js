@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"vendors~MainApp0":"vendors~MainApp0","MainApp0":"MainApp0"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"vendors~LSUniverseChunk0":"vendors~LSUniverseChunk0","LSUniverseChunk0":"LSUniverseChunk0"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -1007,7 +1007,7 @@ var App = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.lazy(functio
   return __webpack_require__("./lsuniverse/Themes lazy recursive ^\\.\\/.*\\/App$")("./".concat(window._env['THEME'], "/App"));
 });
 /*
-* Our core imports to make app run with all of the data we needed from our api
+* Our core imports to make app run with all of the data we need from our api
 */
 
 
@@ -1264,8 +1264,8 @@ var defaultLanguage = "en";
 var map = {
 	"./Default/App": [
 		"./lsuniverse/Themes/Default/App.js",
-		"vendors~MainApp0",
-		"MainApp0"
+		"vendors~LSUniverseChunk0",
+		"LSUniverseChunk0"
 	]
 };
 function webpackAsyncContext(req) {

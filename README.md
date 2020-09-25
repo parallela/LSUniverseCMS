@@ -8,6 +8,7 @@ x - finished
 
 [  ] - not finished 
 ~~~~
+[  ] Fixing module[id] not found
 [  ] Domain registration
 [  ] Module pages
 [x] Themes changed in admin panel 
