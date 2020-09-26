@@ -5,15 +5,30 @@ import UserLayout from "../../containers/UserLayout";
 import {useTranslation} from "react-multi-lang";
 
 const Billing = props => {
-    const [loading, setLoading] = useState(false);
-    const user = props.user.data;
-    const details = props.user.data.details;
+    const [loading, setLoading] = useState(true);
+
+    // Inputs
+    const [address1, setAddress1] = useState("");
+    const [address2, setAddress2] = useState("");
+    const [phone, setPhone] = useState("");
+    const [city, setCity] = useState("");
+    const [region, setRegion] = useState("");
+    const [zipcode, setZipCode] = useState("");
+    const [mailinglist, setMailingList] = useState("");
+    const [securityQuestion, setSecurityQuestion] = useState("");
+    const [securityQuestionAns, setSecurityQuestionAns] = useState("");
+
 
     const t = useTranslation();
 
-    // Dont needed in the moment
-    // useEffect(() => {
-    // }, [])
+    useEffect(() => {
+        if (!props.user.loading) {
+            setLoading(false);
+            const details = props.user.data.details;
+
+            setAddress1(details.street_address_1);
+        }
+    }, [props.user.loading])
 
     return (
         <HomeLayout>
@@ -25,6 +40,7 @@ const Billing = props => {
                             {t('user.user-billing-details')} <br/>
                         </div>
                         <hr/>
+                        {!loading &&
                         <div className="flex flex-wrap space-x-2 my-8">
                             <div className="flex flex-wrap -mx-3 mb-6">
                                 <div className="w-full md:w-64 px-3 mb-6 md:mb-0">
@@ -35,7 +51,8 @@ const Billing = props => {
                                     </label>
                                     <input
                                         className="appearance-none block w-full bg-gray-200 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                        id="detail1" type="text" placeholder=""/>
+                                        id="detail1" type="text" placeholder="" value={address1}
+                                        onChange={e => setAddress1(e.target.value)}/>
                                 </div>
 
                                 <div className="w-full md:w-64 px-3 mb-6 md:mb-0">
@@ -95,8 +112,33 @@ const Billing = props => {
                                         className="appearance-none block w-full bg-gray-200 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                                         id="detail6" type="text" placeholder=""/>
                                 </div>
+
+
+                                <div className="w-full md:w-64 px-3 mb-6 md:mb-0">
+                                    <label
+                                        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                        htmlFor="grid-first-name">
+                                        {t("user.security-question")}
+                                    </label>
+                                    <input
+                                        className="appearance-none block w-full bg-gray-200 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                        id="detail7" type="text" placeholder=""/>
+                                </div>
+                                {/*TODO: Forget password with security questions */}
+                                <div className="w-full md:w-64 px-3 mb-6 md:mb-0">
+                                    <label
+                                        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                        htmlFor="grid-first-name">
+                                        {t("user.security-question-answer")}
+                                    </label>
+                                    <input
+                                        className="appearance-none block w-full bg-gray-200 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                                        id="detail7" type="text" placeholder=""/>
+                                </div>
+
                             </div>
                         </div>
+                        }
                     </div>
                 </div>
             </UserLayout>

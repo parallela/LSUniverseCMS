@@ -7,12 +7,15 @@ redis 2.5+
 x - finished
 
 [  ] - not finished 
+
+s - Still not fixed
 ~~~~
-[  ] Fixing module[id] not found
+[s] Fixing module[id] not found
 [  ] Domain registration
 [  ] Module pages
 [x] Themes changed in admin panel 
 [  ] Network Status
+[  ] Security Questions on forget password
 [  ] Billing details
 [  ] Security question
 [  ] Administrator panel

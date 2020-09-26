@@ -10,7 +10,6 @@ import React, {Suspense} from "react";
 * "All Good Things are Wild and Free!"
 * - KAPTEN & SON
 */
-// THEME:
 const App = React.lazy(() => import(/* webpackChunkName: "LSUniverseChunk" */`../Themes/${window._env['THEME']}/App`));
 
 /*

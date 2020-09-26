@@ -84,6 +84,8 @@
         "ticket-amount": "You have {ticket_number} tickets",
         "service-purchased": "Service purchased at",
         "order-id": "Order ID",
+        "security-question": "Security Question",
+        "security-question-answer": "Security Question Answer",
         "service-expire_at": "Service Expire at",
         "ticket-name": "Ticket Name",
         "ticket-created": "Ticket Created At",

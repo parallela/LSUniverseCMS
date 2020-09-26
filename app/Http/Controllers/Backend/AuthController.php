@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
+    // TODO: make user details to be entered in register form;
+
     /**
      * Create instance of AuthController
      * Make middleware ignore login and register Routes
