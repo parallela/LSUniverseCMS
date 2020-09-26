@@ -4,6 +4,7 @@
 /*!**************************************************************!*\
   !*** ./lsuniverse/JSScripts/network/Network_CreateTicket.js ***!
   \**************************************************************/
+/*! exports provided: _networkCreateTicket, _networkCreateTicketAnswer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -99,6 +100,7 @@ var _networkCreateTicketAnswer = /*#__PURE__*/function () {
 /*!***********************************************************!*\
   !*** ./lsuniverse/JSScripts/network/Network_LoginUser.js ***!
   \***********************************************************/
+/*! exports provided: _networkLoginUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -154,6 +156,7 @@ var _networkLoginUser = /*#__PURE__*/function () {
 /*!*****************************************************************!*\
   !*** ./lsuniverse/JSScripts/network/Network_PasswordRecover.js ***!
   \*****************************************************************/
+/*! exports provided: _networkPasswordFirstStep, _networkPasswordFinalStep */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -243,6 +246,7 @@ var _networkPasswordFinalStep = /*#__PURE__*/function () {
 /*!**************************************************************!*\
   !*** ./lsuniverse/JSScripts/network/Network_RegisterUser.js ***!
   \**************************************************************/
+/*! exports provided: _networkRegisterUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -298,6 +302,7 @@ var _networkRegisterUser = /*#__PURE__*/function () {
 /*!************************************************************************!*\
   !*** ./lsuniverse/JSScripts/reducers/actions/Action_Changepassword.js ***!
   \************************************************************************/
+/*! exports provided: Action_Changepassword */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -388,6 +393,7 @@ var Action_Changepassword = function Action_Changepassword(data, step) {
 /*!***************************************************************!*\
   !*** ./lsuniverse/JSScripts/reducers/actions/Action_Login.js ***!
   \***************************************************************/
+/*! exports provided: Action_Login */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -447,6 +453,7 @@ var Action_Login = function Action_Login(data) {
 /*!******************************************************************!*\
   !*** ./lsuniverse/JSScripts/reducers/actions/Action_Register.js ***!
   \******************************************************************/
+/*! exports provided: Action_Register */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -506,6 +513,7 @@ var Action_Register = function Action_Register(data) {
 /*!*****************************************************************!*\
   !*** ./lsuniverse/JSScripts/reducers/actions/Action_Tickets.js ***!
   \*****************************************************************/
+/*! exports provided: Action_CreateTicket */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -565,6 +573,7 @@ var Action_CreateTicket = function Action_CreateTicket(data, id) {
 /*!**************************************************!*\
   !*** ./lsuniverse/JSScripts/services/Cookies.js ***!
   \**************************************************/
+/*! exports provided: getCookie */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -582,6 +591,7 @@ var getCookie = function getCookie(name) {
 /*!*************************************************************!*\
   !*** ./lsuniverse/JSScripts/services/RoutersRequireAuth.js ***!
   \*************************************************************/
+/*! exports provided: RoutersRequireAuth, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -662,6 +672,7 @@ var RoutersRequireAuth = function RoutersRequireAuth(_ref) {
 /*!******************************************!*\
   !*** ./lsuniverse/Themes/Default/App.js ***!
   \******************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -760,6 +771,7 @@ var App = function App(props) {
 /*!***********************************************************!*\
   !*** ./lsuniverse/Themes/Default/assets/img/database.png ***!
   \***********************************************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
 module.exports = "/images/database.png?b98ba5c0e5491ca95d40c92d36eaac38";
@@ -770,6 +782,7 @@ module.exports = "/images/database.png?b98ba5c0e5491ca95d40c92d36eaac38";
 /*!****************************************************************!*\
   !*** ./lsuniverse/Themes/Default/assets/img/what-we-offer.png ***!
   \****************************************************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
 module.exports = "/images/what-we-offer.png?09b07f381b297ad2c230a5845bec745d";
@@ -780,6 +793,7 @@ module.exports = "/images/what-we-offer.png?09b07f381b297ad2c230a5845bec745d";
 /*!***************************************************************!*\
   !*** ./lsuniverse/Themes/Default/assets/img/world-points.png ***!
   \***************************************************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
 module.exports = "/images/world-points.png?dfa35e0480fedef15e0c3631c3525709";
@@ -790,6 +804,7 @@ module.exports = "/images/world-points.png?dfa35e0480fedef15e0c3631c3525709";
 /*!********************************************************!*\
   !*** ./lsuniverse/Themes/Default/components/Footer.js ***!
   \********************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -877,6 +892,7 @@ var Footer = function Footer(props) {
 /*!*********************************************************!*\
   !*** ./lsuniverse/Themes/Default/components/Heading.js ***!
   \*********************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -914,6 +930,7 @@ var Heading = function Heading(props) {
 /*!********************************************************!*\
   !*** ./lsuniverse/Themes/Default/components/Navbar.js ***!
   \********************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1032,6 +1049,7 @@ var mapStateToProps = function mapStateToProps(state) {
 /*!**************************************************************!*\
   !*** ./lsuniverse/Themes/Default/components/SVGSepartor2.js ***!
   \**************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1084,6 +1102,7 @@ var SVGSepartor2 = function SVGSepartor2(props) {
 /*!*************************************************************!*\
   !*** ./lsuniverse/Themes/Default/components/SVGSeprator.js ***!
   \*************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1135,6 +1154,7 @@ var SVGSepartor = function SVGSepartor(props) {
 /*!**********************************************************!*\
   !*** ./lsuniverse/Themes/Default/components/Section1.js ***!
   \**********************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1203,6 +1223,7 @@ var Section1 = function Section1(props) {
 /*!**********************************************************!*\
   !*** ./lsuniverse/Themes/Default/components/Section2.js ***!
   \**********************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1290,6 +1311,7 @@ var Section2 = function Section2(props) {
 /*!**********************************************************!*\
   !*** ./lsuniverse/Themes/Default/components/Section3.js ***!
   \**********************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1394,6 +1416,7 @@ var Section3 = function Section3(props) {
 /*!**********************************************************************!*\
   !*** ./lsuniverse/Themes/Default/components/alerts/Alert_Message.js ***!
   \**********************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1471,6 +1494,7 @@ Alert_Message.propTypes = {
 /*!***********************************************************!*\
   !*** ./lsuniverse/Themes/Default/components/user/Main.js ***!
   \***********************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1644,6 +1668,7 @@ Main.propTypes = {
 /*!**************************************************************!*\
   !*** ./lsuniverse/Themes/Default/components/user/Sidebar.js ***!
   \**************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1707,6 +1732,7 @@ var Sidebar = function Sidebar(props) {
 /*!************************************************************!*\
   !*** ./lsuniverse/Themes/Default/containers/HomeLayout.js ***!
   \************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1763,6 +1789,7 @@ var HomeLayout = function HomeLayout(_ref) {
 /*!************************************************************!*\
   !*** ./lsuniverse/Themes/Default/containers/UserLayout.js ***!
   \************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1798,6 +1825,7 @@ var UserLayout = function UserLayout(_ref) {
 /*!******************************************************!*\
   !*** ./lsuniverse/Themes/Default/misc/VerifyUser.js ***!
   \******************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1907,6 +1935,7 @@ var VerifyUser = function VerifyUser(props) {
 /*!***************************************************************!*\
   !*** ./lsuniverse/Themes/Default/pages/Dashboard/Billling.js ***!
   \***************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1994,6 +2023,14 @@ var Billing = function Billing(props) {
       setLoading(false);
       var details = props.user.data.details;
       setAddress1(details.street_address_1);
+      setAddress2(details.street_address_2);
+      setPhone(details.phone_number);
+      setCity(details.city);
+      setRegion(details.region);
+      setZipCode(details.zipcode);
+      setMailingList(details.mailing_list);
+      setSecurityQuestion(details.security_question);
+      setSecurityQuestionAns(details.security_question_answer);
     }
   }, [props.user.loading]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_HomeLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_containers_UserLayout__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2029,7 +2066,11 @@ var Billing = function Billing(props) {
     className: "appearance-none block w-full bg-gray-200 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white",
     id: "detail2",
     type: "text",
-    placeholder: ""
+    placeholder: "",
+    value: address2,
+    onChange: function onChange(e) {
+      return setAddress2(e.target.value);
+    }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-full md:w-64 px-3 mb-6 md:mb-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -2039,7 +2080,11 @@ var Billing = function Billing(props) {
     className: "appearance-none block w-full bg-gray-200 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white",
     id: "detail3",
     type: "text",
-    placeholder: ""
+    placeholder: "",
+    value: city,
+    onChange: function onChange(e) {
+      return setCity(e.target.value);
+    }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-full md:w-64 px-3 mb-6 md:mb-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -2049,7 +2094,11 @@ var Billing = function Billing(props) {
     className: "appearance-none block w-full bg-gray-200 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white",
     id: "detail4",
     type: "text",
-    placeholder: ""
+    placeholder: "",
+    value: phone,
+    onChange: function onChange(e) {
+      return setPhone(e.target.value);
+    }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-full md:w-64 px-3 mb-6 md:mb-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -2059,7 +2108,11 @@ var Billing = function Billing(props) {
     className: "appearance-none block w-full bg-gray-200 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white",
     id: "detail5",
     type: "text",
-    placeholder: ""
+    placeholder: "",
+    value: region,
+    onChange: function onChange(e) {
+      return setRegion(e.target.value);
+    }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-full md:w-64 px-3 mb-6 md:mb-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -2069,7 +2122,11 @@ var Billing = function Billing(props) {
     className: "appearance-none block w-full bg-gray-200 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white",
     id: "detail6",
     type: "text",
-    placeholder: ""
+    placeholder: "",
+    value: zipcode,
+    onChange: function onChange(e) {
+      return setZipCode(e.target.value);
+    }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-full md:w-64 px-3 mb-6 md:mb-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -2079,7 +2136,11 @@ var Billing = function Billing(props) {
     className: "appearance-none block w-full bg-gray-200 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white",
     id: "detail7",
     type: "text",
-    placeholder: ""
+    placeholder: "",
+    value: securityQuestion,
+    onChange: function onChange(e) {
+      return setSecurityQuestion(e.target.value);
+    }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "w-full md:w-64 px-3 mb-6 md:mb-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -2089,7 +2150,11 @@ var Billing = function Billing(props) {
     className: "appearance-none block w-full bg-gray-200 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white",
     id: "detail7",
     type: "text",
-    placeholder: ""
+    placeholder: "",
+    value: securityQuestionAns,
+    onChange: function onChange(e) {
+      return setSecurityQuestionAns(e.target.value);
+    }
   }))))))));
 };
 
@@ -2107,6 +2172,7 @@ var mapStateToProps = function mapStateToProps(state) {
 /*!****************************************************************!*\
   !*** ./lsuniverse/Themes/Default/pages/Dashboard/Dashboard.js ***!
   \****************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2161,6 +2227,7 @@ var Dashboard = function Dashboard() {
 /*!************************************************************!*\
   !*** ./lsuniverse/Themes/Default/pages/Dashboard/Index.js ***!
   \************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2248,6 +2315,7 @@ var mapStateToProps = function mapStateToProps(state) {
 /*!********************************************************************!*\
   !*** ./lsuniverse/Themes/Default/pages/Dashboard/TicketAnswers.js ***!
   \********************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2490,6 +2558,7 @@ var mapStateToProps = function mapStateToProps(state) {
 /*!**************************************************************!*\
   !*** ./lsuniverse/Themes/Default/pages/Dashboard/Tickets.js ***!
   \**************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2593,6 +2662,7 @@ var mapStateToProps = function mapStateToProps(state) {
 /*!***********************************************************!*\
   !*** ./lsuniverse/Themes/Default/pages/ForgetPassword.js ***!
   \***********************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2882,6 +2952,7 @@ var ForgetPassword = function ForgetPassword(props) {
 /*!*************************************************!*\
   !*** ./lsuniverse/Themes/Default/pages/Home.js ***!
   \*************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2926,6 +2997,7 @@ var mapStateToProps = function mapStateToProps(state) {
 /*!**************************************************!*\
   !*** ./lsuniverse/Themes/Default/pages/Login.js ***!
   \**************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3177,6 +3249,7 @@ var Login = function Login(props) {
 /*!*****************************************************!*\
   !*** ./lsuniverse/Themes/Default/pages/Register.js ***!
   \*****************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3465,6 +3538,7 @@ var Register = function Register(props) {
 /*!*******************************************************!*\
   !*** ./lsuniverse/Themes/Default/routes/dashboard.js ***!
   \*******************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

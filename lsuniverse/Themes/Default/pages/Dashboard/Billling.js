@@ -27,6 +27,14 @@ const Billing = props => {
             const details = props.user.data.details;
 
             setAddress1(details.street_address_1);
+            setAddress2(details.street_address_2);
+            setPhone(details.phone_number);
+            setCity(details.city);
+            setRegion(details.region);
+            setZipCode(details.zipcode);
+            setMailingList(details.mailing_list);
+            setSecurityQuestion(details.security_question);
+            setSecurityQuestionAns(details.security_question_answer);
         }
     }, [props.user.loading])
 
@@ -63,7 +71,8 @@ const Billing = props => {
                                     </label>
                                     <input
                                         className="appearance-none block w-full bg-gray-200 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                        id="detail2" type="text" placeholder=""/>
+                                        id="detail2" type="text" placeholder="" value={address2}
+                                        onChange={e => setAddress2(e.target.value)}/>
                                 </div>
 
                                 <div className="w-full md:w-64 px-3 mb-6 md:mb-0">
@@ -74,7 +83,8 @@ const Billing = props => {
                                     </label>
                                     <input
                                         className="appearance-none block w-full bg-gray-200 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                        id="detail3" type="text" placeholder=""/>
+                                        id="detail3" type="text" placeholder="" value={city}
+                                        onChange={e => setCity(e.target.value)}/>
                                 </div>
 
 
@@ -86,7 +96,8 @@ const Billing = props => {
                                     </label>
                                     <input
                                         className="appearance-none block w-full bg-gray-200 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                        id="detail4" type="text" placeholder=""/>
+                                        id="detail4" type="text" placeholder="" value={phone}
+                                        onChange={e => setPhone(e.target.value)}/>
                                 </div>
 
 
@@ -98,7 +109,8 @@ const Billing = props => {
                                     </label>
                                     <input
                                         className="appearance-none block w-full bg-gray-200 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                        id="detail5" type="text" placeholder=""/>
+                                        id="detail5" type="text" placeholder="" value={region}
+                                        onChange={e => setRegion(e.target.value)}/>
                                 </div>
 
 
@@ -110,7 +122,8 @@ const Billing = props => {
                                     </label>
                                     <input
                                         className="appearance-none block w-full bg-gray-200 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                        id="detail6" type="text" placeholder=""/>
+                                        id="detail6" type="text" placeholder="" value={zipcode}
+                                        onChange={e => setZipCode(e.target.value)}/>
                                 </div>
 
 
@@ -122,7 +135,8 @@ const Billing = props => {
                                     </label>
                                     <input
                                         className="appearance-none block w-full bg-gray-200 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                        id="detail7" type="text" placeholder=""/>
+                                        id="detail7" type="text" placeholder="" value={securityQuestion}
+                                        onChange={e => setSecurityQuestion(e.target.value)}/>
                                 </div>
                                 {/*TODO: Forget password with security questions */}
                                 <div className="w-full md:w-64 px-3 mb-6 md:mb-0">
@@ -133,7 +147,8 @@ const Billing = props => {
                                     </label>
                                     <input
                                         className="appearance-none block w-full bg-gray-200 text-gray-700  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                        id="detail7" type="text" placeholder=""/>
+                                        id="detail7" type="text" placeholder="" value={securityQuestionAns}
+                                        onChange={e => setSecurityQuestionAns(e.target.value)}/>
                                 </div>
 
                             </div>
